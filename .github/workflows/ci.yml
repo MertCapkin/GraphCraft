@@ -1,0 +1,95 @@
+name: GraphStack CI
+
+on:
+  push:
+    branches: [main, dev]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    name: Validate GraphStack files
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Check bash syntax — board.sh
+        run: bash -n scripts/board.sh
+
+      - name: Check bash syntax — install.sh
+        run: bash -n install.sh
+
+      - name: Check bash syntax — post-commit hook
+        run: bash -n scripts/post-commit
+
+      - name: Verify required skill files exist
+        run: |
+          files=(
+            "skills/architect/ARCHITECT.md"
+            "skills/builder/BUILDER.md"
+            "skills/reviewer/REVIEWER.md"
+            "skills/qa/QA.md"
+            "skills/ship/SHIP.md"
+            "skills/bootstrapper/BOOTSTRAPPER.md"
+            "orchestrator/ORCHESTRATOR.md"
+            "orchestrator/TOKEN_OPTIMIZER.md"
+            ".cursor/rules/graphstack.mdc"
+            "handoff/BRIEF.md"
+            "handoff/REVIEW.md"
+            "handoff/BOOTSTRAP.md"
+            "handoff/board/README.md"
+            "handoff/board/todo/example-task.json"
+            "docs/CURSOR_PROMPTS.md"
+            "install.sh"
+            "scripts/board.sh"
+            "scripts/post-commit"
+          )
+          missing=0
+          for f in "${files[@]}"; do
+            if [ ! -f "$f" ]; then
+              echo "❌ Missing: $f"
+              missing=$((missing + 1))
+            else
+              echo "✅ $f"
+            fi
+          done
+          if [ $missing -gt 0 ]; then
+            echo ""
+            echo "$missing required file(s) missing. CI failed."
+            exit 1
+          fi
+
+      - name: Validate example task JSON
+        run: |
+          python3 -c "
+          import json
+          with open('handoff/board/todo/example-task.json') as f:
+              d = json.load(f)
+          required = ['id','title','status','assigned_to','created_at']
+          for k in required:
+              assert k in d, f'Missing key: {k}'
+          print('✅ example-task.json valid')
+          "
+
+      - name: Board smoke test
+        run: |
+          bash scripts/board.sh status
+          bash scripts/board.sh new ci-test-task CI smoke test task
+          bash scripts/board.sh claim ci-test-task builder
+          bash scripts/board.sh status
+          bash scripts/board.sh complete ci-test-task
+          bash scripts/board.sh status
+          rm -f handoff/board/done/ci-test-task.json
+          echo "✅ Board lifecycle: todo → doing → done ✓"
+
+      - name: Check markdown files are not empty
+        run: |
+          for f in skills/**/*.md orchestrator/*.md; do
+            lines=$(wc -l < "$f")
+            if [ "$lines" -lt 10 ]; then
+              echo "⚠️  $f seems too short ($lines lines)"
+            fi
+          done
+          echo "✅ Markdown size check complete"

@@ -1,0 +1,62 @@
+name: Bug report
+description: Role behaved unexpectedly or a script failed
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting. Please fill in as much as you can.
+
+  - type: dropdown
+    id: ai-tool
+    attributes:
+      label: AI tool
+      options:
+        - Cursor
+        - Claude Code
+        - VS Code Copilot
+        - GitHub Copilot CLI
+        - Aider
+        - Other
+    validations:
+      required: true
+
+  - type: dropdown
+    id: role
+    attributes:
+      label: Which role or file had the issue?
+      options:
+        - Orchestrator
+        - Bootstrapper
+        - Architect
+        - Builder
+        - Reviewer
+        - QA
+        - Ship
+        - board.sh
+        - install.sh
+        - post-commit hook
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect to happen?
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: What actually happened?
+      description: Paste the AI output or terminal error if relevant.
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional context
+      description: Project type, codebase size, anything else relevant.

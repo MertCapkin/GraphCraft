@@ -1,0 +1,56 @@
+# GraphStack — .gitignore
+
+# OS
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# Editor
+.vscode/
+.idea/
+*.code-workspace
+
+# Python (graphify)
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# Node
+node_modules/
+.npm/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Secrets — never commit these
+.env
+.env.*
+*.pem
+*.key
+
+# ── GraphStack-specific ───────────────────────────────────
+
+# graphify-out: COMMIT this in your projects (it's the knowledge graph)
+# But exclude the visual HTML in CI if it's large:
+# graphify-out/graph.html
+
+# handoff files: COMMIT these (they are the shared state)
+# handoff/
+
+# Do NOT ignore:
+# - handoff/board/
+# - handoff/BRIEF.md
+# - handoff/REVIEW.md
+# - handoff/STATE.md
+# - handoff/BOOTSTRAP.md
+# - graphify-out/GRAPH_REPORT.md
+# - graphify-out/graph.json
+
+# Test artifacts (board smoke test leftovers)
+handoff/board/todo/smoke-*.json
+handoff/board/doing/smoke-*.json
+handoff/board/done/smoke-*.json

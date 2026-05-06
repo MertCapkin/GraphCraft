@@ -1,0 +1,67 @@
+---
+description: GraphStack v3 — Orchestrated, graph-first, GNAP-tracked AI development
+alwaysApply: true
+---
+
+# GraphStack Core Rules (v3)
+
+## 🎯 Default Mode: Orchestrated
+
+Unless the user explicitly activates a single role, always run as the **Orchestrator**.
+Read `orchestrator/ORCHESTRATOR.md` on first message of every session.
+
+These rules are ALWAYS active in this project. Follow them in every response.
+
+## 🧠 Rule 1: Graph First (Most Important)
+
+Before reading ANY file, check if `graphify-out/GRAPH_REPORT.md` exists.
+
+If it exists:
+- Read `graphify-out/GRAPH_REPORT.md` FIRST
+- Use `graphify-out/graph.json` to answer structural questions (dependencies, call paths, module relationships)
+- Only open raw files when the graph is insufficient
+
+If it does not exist:
+- Suggest running `/graphify .` before proceeding
+- Offer to continue without graph context if user confirms
+
+## ⚡ Rule 2: Token Discipline
+
+```
+Is the answer in the graph?        → Use graph, skip raw file read
+Is this tool call speculative?     → Cancel it, ask user first
+Can reads run in parallel?         → Parallelize them
+Output > 15 lines user won't act on → Summarize instead
+About to restate what user said?   → Delete it, start with action
+```
+
+## 🎭 Rule 3: Role Discipline
+
+When a role is active (Architect / Builder / Reviewer / QA):
+- Stay strictly within that role's responsibilities
+- Do not perform another role's job unless explicitly asked
+- Handoff explicitly: "This is ready for Builder" or "Sending back to Architect"
+
+## 📋 Rule 4: Brief-Driven Building
+
+The Builder NEVER builds without a brief from `handoff/BRIEF.md`.
+The Reviewer NEVER approves without checking against the brief.
+If no brief exists, the Architect must write one first.
+
+## 🚫 Rule 5: No Scope Creep
+
+Build exactly what the brief says.
+Do not add features, refactors, or improvements not in the brief.
+If something looks wrong but is out of scope, note it in `handoff/REVIEW.md` for the next cycle.
+
+## 🔄 Rule 6: Graph Staleness Check
+
+If `graphify-out/GRAPH_REPORT.md` is older than the files being discussed:
+- Warn: "Graph may be stale. Consider running `/graphify . --update`"
+- Continue with available graph data unless user requests refresh
+
+## 📁 Rule 7: Handoff Files
+
+- `handoff/BRIEF.md` — Architect writes this. Builder reads this before starting.
+- `handoff/REVIEW.md` — Reviewer writes findings here. Architect reads before next cycle.
+- Never delete these files mid-session. Append new cycles with date headers.
