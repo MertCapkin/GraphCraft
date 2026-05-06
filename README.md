@@ -223,8 +223,6 @@ your-project/
 ├── scripts/
 │   ├── board.sh                          ← GNAP task board manager
 │   └── post-commit                       ← smart graph update hook
-└── docs/
-    └── CURSOR_PROMPTS.md                 ← all prompt templates
 ```
 
 ---
@@ -322,22 +320,74 @@ Orchestrator reads `handoff/STATE.md` and `handoff/board/doing/` and picks up ex
 
 ---
 
-## Manual Role Activation
+## All Prompts
 
-For specific tasks without the full lifecycle:
-
+### Standard session
 ```
-# Plan only
+Read orchestrator/ORCHESTRATOR.md and follow it exactly.
+[What you want to build or fix — any language]
+```
+
+### New project from scratch
+```
+Read orchestrator/ORCHESTRATOR.md and follow it exactly.
+This is a new project with no existing codebase.
+I want to build [describe your idea].
+Tech stack: [language, framework, database].
+```
+
+### Resume a previous session
+```
+Read orchestrator/ORCHESTRATOR.md and follow it exactly.
+Resume from last session.
+```
+
+### Manual role activation (advanced)
+
+Use these when you want a single role without the full lifecycle:
+
+**Architect** — plan and scope only, no building
+```
 Read .cursor/skills/architect/ARCHITECT.md and follow it exactly.
 Read orchestrator/TOKEN_OPTIMIZER.md for token rules.
-
-# Review existing code
-Read .cursor/skills/reviewer/REVIEWER.md and follow it exactly.
-Read orchestrator/TOKEN_OPTIMIZER.md for token rules.
-Review the diff in [filename].
+[What you want to plan]
 ```
 
-See `docs/CURSOR_PROMPTS.md` for all templates.
+**Builder** — build directly from an existing brief
+```
+Read .cursor/skills/builder/BUILDER.md and follow it exactly.
+Read orchestrator/TOKEN_OPTIMIZER.md for token rules.
+Brief is in handoff/BRIEF.md. Start building.
+```
+
+**Reviewer** — review existing code or a diff
+```
+Read .cursor/skills/reviewer/REVIEWER.md and follow it exactly.
+Read orchestrator/TOKEN_OPTIMIZER.md for token rules.
+Review the changes in [filename or "the last git diff"].
+```
+
+**QA** — trace and verify a specific feature
+```
+Read .cursor/skills/qa/QA.md and follow it exactly.
+Read orchestrator/TOKEN_OPTIMIZER.md for token rules.
+Trace and verify [feature name].
+```
+
+**Ship** — run pre-deploy checklist
+```
+Read .cursor/skills/ship/SHIP.md and follow it exactly.
+Run the pre-ship checklist for task [task-id].
+```
+
+**Bootstrapper** — decompose an idea into a module plan only
+```
+Read .cursor/skills/bootstrapper/BOOTSTRAPPER.md and follow it exactly.
+Read orchestrator/TOKEN_OPTIMIZER.md for token rules.
+[Describe your project idea]
+```
+
+> **Note:** `.cursor/rules/graphstack.mdc` is loaded automatically by Cursor on every session. You never need to reference it manually.
 
 ---
 
