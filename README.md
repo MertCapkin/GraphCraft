@@ -14,119 +14,6 @@ One prompt starts the entire lifecycle — from blank repo to production.
 
 ---
 
-## ⚡ Start in Cursor — 3 Steps
-
-```bash
-# 1. Install GraphStack into your project
-git clone https://github.com/MertCapkin/graphstack /tmp/graphstack
-bash /tmp/graphstack/install.sh
-
-# 2. Build the knowledge graph (run once in Cursor)
-/graphify .
-
-# 3. Paste this into a new Cursor chat — replace the last line with your task
-```
-
-```
-Read orchestrator/ORCHESTRATOR.md and follow it exactly.
-Add authentication to the API.
-```
-
-> **New project with no code yet?**
-> ```
-> Read orchestrator/ORCHESTRATOR.md and follow it exactly.
-> This is a new project. I want to build [describe your idea]. Tech: [stack].
-> ```
-
-That's it. GraphStack handles the rest — planning, building, reviewing, testing, shipping.
-
----
-
-## What Is GraphStack?
-
-GraphStack combines two ideas into one installable system:
-
-**[Graphify](https://github.com/safishamsi/graphify)** builds a queryable knowledge graph of your codebase. Every AI query navigates that compact map instead of re-reading raw files from scratch.
-
-**Role-based orchestration** drives a structured lifecycle: Bootstrapper → Architect → Builder → Reviewer → QA → Ship. A central Orchestrator manages all transitions automatically. You never switch roles manually.
-
-> You write one prompt. GraphStack runs the full cycle.
-
----
-
-## The Problem
-
-Without GraphStack, every AI coding session looks like this:
-
-```
-You:  "Add rate limiting to login."
-AI:   reads login.ts... reads session.ts... reads crypto.ts... reads types.ts...
-      (4 files, ~3 000 tokens — before writing a single line)
-
-You:  "Now add tests."
-AI:   reads login.ts again... reads session.ts again...
-      (same files, same cost, zero memory)
-```
-
-Problems:
-- **Token waste** — AI re-reads your codebase on every query
-- **No structure** — planning, coding, reviewing blur together
-- **No memory** — closing Cursor means starting from zero
-- **No audit trail** — impossible to know what was decided and why
-
----
-
-## The Solution
-
-```
-Step 1 — once:
-  /graphify .  →  graphify-out/GRAPH_REPORT.md + graph.json
-
-Step 2 — every session (one prompt):
-  "Read orchestrator/ORCHESTRATOR.md. Add rate limiting to login."
-
-  [ARCHITECT]   reads graph (not raw files) → scopes change → writes BRIEF.md
-       ↓ auto
-  [BUILDER]     reads brief → queries graph for deps → builds exactly the brief
-       ↓ auto
-  [REVIEWER]    checks criteria → inspects graph neighbors for side effects
-       ↓ auto   (loops to Builder if rejected, max 3×)
-  [QA]          traces call path through graph → verifies behavior
-       ↓ auto
-  [SHIP]        checklist → graph update → commit message → closes board task
-```
-
-**Zero manual role switching. Zero repeated file reads. Full git audit trail.**
-
----
-
-## Bootstrap Mode — Start from Zero
-
-No code yet? GraphStack handles that too.
-
-```
-"Read orchestrator/ORCHESTRATOR.md.
- New project: REST API for task management. TypeScript, Express, PostgreSQL."
-
-  [BOOTSTRAPPER]  analyzes idea → decomposes into modules → orders by dependency
-                  → writes BOOTSTRAP.md (the memory across all cycles)
-                  → writes Cycle 1 brief
-       ↓ auto
-  [BUILDER → REVIEWER → QA → SHIP]   Cycle 1 (auth module)
-       ↓
-  run /graphify .                    ← first graph from real code
-       ↓
-  [BOOTSTRAPPER]  reads new graph → writes Cycle 2 brief with real knowledge
-       ↓ auto
-  [BUILDER → REVIEWER → QA → SHIP]   Cycle 2 (data models)
-       ↓
-  run /graphify --update  →  next cycle  →  ...
-```
-
-Each brief is written with knowledge of what was **actually built** — not just planned. The graph grows with the project.
-
----
-
 ## Quick Start
 
 ### Step 1 — Install prerequisites
@@ -229,6 +116,91 @@ Tech stack: [language, framework, database].
 ```
 
 GraphStack handles everything from here — planning, building, reviewing, testing, shipping.
+
+---
+
+## What Is GraphStack?
+
+GraphStack combines two ideas into one installable system:
+
+**[Graphify](https://github.com/safishamsi/graphify)** builds a queryable knowledge graph of your codebase. Every AI query navigates that compact map instead of re-reading raw files from scratch.
+
+**Role-based orchestration** drives a structured lifecycle: Bootstrapper → Architect → Builder → Reviewer → QA → Ship. A central Orchestrator manages all transitions automatically. You never switch roles manually.
+
+> You write one prompt. GraphStack runs the full cycle.
+
+---
+
+## The Problem
+
+Without GraphStack, every AI coding session looks like this:
+
+```
+You:  "Add rate limiting to login."
+AI:   reads login.ts... reads session.ts... reads crypto.ts... reads types.ts...
+      (4 files, ~3 000 tokens — before writing a single line)
+
+You:  "Now add tests."
+AI:   reads login.ts again... reads session.ts again...
+      (same files, same cost, zero memory)
+```
+
+Problems:
+- **Token waste** — AI re-reads your codebase on every query
+- **No structure** — planning, coding, reviewing blur together
+- **No memory** — closing Cursor means starting from zero
+- **No audit trail** — impossible to know what was decided and why
+
+---
+
+## The Solution
+
+```
+Step 1 — once:
+  /graphify .  →  graphify-out/GRAPH_REPORT.md + graph.json
+
+Step 2 — every session (one prompt):
+  "Read orchestrator/ORCHESTRATOR.md. Add rate limiting to login."
+
+  [ARCHITECT]   reads graph (not raw files) → scopes change → writes BRIEF.md
+       ↓ auto
+  [BUILDER]     reads brief → queries graph for deps → builds exactly the brief
+       ↓ auto
+  [REVIEWER]    checks criteria → inspects graph neighbors for side effects
+       ↓ auto   (loops to Builder if rejected, max 3×)
+  [QA]          traces call path through graph → verifies behavior
+       ↓ auto
+  [SHIP]        checklist → graph update → commit message → closes board task
+```
+
+**Zero manual role switching. Zero repeated file reads. Full git audit trail.**
+
+---
+
+## Bootstrap Mode — Start from Zero
+
+No code yet? GraphStack handles that too.
+
+```
+"Read orchestrator/ORCHESTRATOR.md.
+ New project: REST API for task management. TypeScript, Express, PostgreSQL."
+
+  [BOOTSTRAPPER]  analyzes idea → decomposes into modules → orders by dependency
+                  → writes BOOTSTRAP.md (the memory across all cycles)
+                  → writes Cycle 1 brief
+       ↓ auto
+  [BUILDER → REVIEWER → QA → SHIP]   Cycle 1 (auth module)
+       ↓
+  run /graphify .                    ← first graph from real code
+       ↓
+  [BOOTSTRAPPER]  reads new graph → writes Cycle 2 brief with real knowledge
+       ↓ auto
+  [BUILDER → REVIEWER → QA → SHIP]   Cycle 2 (data models)
+       ↓
+  run /graphify --update  →  next cycle  →  ...
+```
+
+Each brief is written with knowledge of what was **actually built** — not just planned. The graph grows with the project.
 
 ---
 
