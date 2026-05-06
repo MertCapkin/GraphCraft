@@ -36,7 +36,7 @@ graphify cursor install
 ```
 Verify it worked:
 ```bash
-graphify --version
+pip show graphifyy
 ```
 
 If `graphify` is not found after install, try:
