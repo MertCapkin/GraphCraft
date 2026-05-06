@@ -30,7 +30,10 @@ git --version       # any recent version is fine
 ```bash
 pip install graphifyy
 ```
-
+After, for cursor:
+```bash
+graphify cursor install
+```
 Verify it worked:
 ```bash
 graphify --version
