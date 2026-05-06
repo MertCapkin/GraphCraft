@@ -53,13 +53,25 @@ python3 -m graphify --version
 
 ### Step 2 — Install GraphStack into your project
 
-Navigate to your project folder and run:
+#### macOS / Linux
 
 ```bash
 git clone https://github.com/MertCapkin/graphstack /tmp/graphstack
-cd your-project
+cd /path/to/your-project
 bash /tmp/graphstack/install.sh
 ```
+
+#### Windows (önerilen: Git Bash)
+PowerShell’de /tmp ve bash yoktur; kurulum script’i bash bekler. Git for Windows ile gelen Git Bash kullan.
+
+Git Bash’i aç (Başlat menüsünde “Git Bash”).
+Aşağıdakileri sırayla çalıştır (your-project yolunu kendi projenle değiştir):
+```bash
+git clone https://github.com/MertCapkin/graphstack /tmp/graphstack
+cd "/c/Users/YOUR_USERNAME/path/to/your-project"
+bash /tmp/graphstack/install.sh .
+```
+
 
 This copies all GraphStack files into your project:
 - `.cursor/rules/graphstack.mdc` — Cursor loads this automatically on every session
