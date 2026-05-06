@@ -21,7 +21,7 @@ One prompt starts the entire lifecycle — from blank repo to production.
 **Python 3.8+** and **Git** are required. Check if you have them:
 
 ```bash
-python3 --version   # need 3.8 or higher
+py -3 --version   # need 3.8 or higher
 git --version       # any recent version is fine
 ```
 
