@@ -129,15 +129,41 @@ Each brief is written with knowledge of what was **actually built** — not just
 
 ## Quick Start
 
-### Prerequisites
+### Step 1 — Install prerequisites
+
+**Python 3.8+** and **Git** are required. Check if you have them:
 
 ```bash
-pip install graphifyy   # the knowledge graph engine
-python3 --version       # 3.8+ required (for board.sh)
-git --version           # required for audit trail
+python3 --version   # need 3.8 or higher
+git --version       # any recent version is fine
 ```
 
-### Install
+**Install Graphify** — the knowledge graph engine GraphStack is built on:
+
+```bash
+pip install graphifyy
+```
+
+Verify it worked:
+```bash
+graphify --version
+```
+
+If `graphify` is not found after install, try:
+```bash
+pip install graphifyy --user
+# then add ~/.local/bin to your PATH, or use:
+python3 -m graphify --version
+```
+
+> Graphify runs **entirely locally** — no API calls, no data sent anywhere.
+> It uses tree-sitter to parse your code and builds the graph on your machine.
+
+---
+
+### Step 2 — Install GraphStack into your project
+
+Navigate to your project folder and run:
 
 ```bash
 git clone https://github.com/MertCapkin/graphstack /tmp/graphstack
@@ -145,15 +171,50 @@ cd your-project
 bash /tmp/graphstack/install.sh
 ```
 
-### Build the graph
+This copies all GraphStack files into your project:
+- `.cursor/rules/graphstack.mdc` — Cursor loads this automatically on every session
+- `orchestrator/`, `skills/`, `handoff/`, `scripts/` — the full workflow system
 
-Open Cursor in your project:
+The install script is non-destructive: it won't overwrite existing `handoff/BRIEF.md` or `handoff/REVIEW.md` if they already exist.
+
+---
+
+### Step 3 — Build the knowledge graph
+
+Open your project in Cursor. In the chat, type:
+
 ```
 /graphify .
 ```
 
-### Start working — one prompt
+What happens:
+- Graphify scans all source files (25 languages supported)
+- Builds a dependency graph using tree-sitter (local, no API)
+- Creates three files in `graphify-out/`:
+  - `GRAPH_REPORT.md` — human-readable architecture summary
+  - `graph.json` — machine-queryable full graph
+  - `graph.html` — visual explorer, open in browser
 
+**How long does it take?**
+
+| Codebase size | Time |
+|---|---|
+| < 50 files | ~5 seconds |
+| 50–200 files | ~15–30 seconds |
+| 200–500 files | ~1–2 minutes |
+| 500+ files | ~3–5 minutes |
+
+Run this once. After that, use `/graphify --update` — it only re-scans changed files and takes a few seconds.
+
+**New project with no code yet?** Skip this step — GraphStack's Bootstrap Mode handles it. Just go to Step 4.
+
+---
+
+### Step 4 — Start working
+
+Open a **new Cursor chat** and paste one of these:
+
+**Existing codebase:**
 ```
 Read orchestrator/ORCHESTRATOR.md and follow it exactly.
 [Describe what you want to build or fix]
@@ -162,9 +223,12 @@ Read orchestrator/ORCHESTRATOR.md and follow it exactly.
 **New project from scratch:**
 ```
 Read orchestrator/ORCHESTRATOR.md and follow it exactly.
-This is a new project. I want to build [describe your idea].
+This is a new project with no existing codebase.
+I want to build [describe your idea].
 Tech stack: [language, framework, database].
 ```
+
+GraphStack handles everything from here — planning, building, reviewing, testing, shipping.
 
 ---
 
