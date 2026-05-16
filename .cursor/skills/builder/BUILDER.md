@@ -23,11 +23,11 @@ When activated, execute this sequence exactly:
    b. Check handoff/board/todo/ — find the task whose title matches the brief
       → If exactly 1 match: claim it automatically
       → If 0 matches: create one on the fly:
-          bash scripts/board.sh new [brief-slug] [brief objective]
+          python -m graphstack board new [brief-slug] [brief objective]
       → If 2+ matches: list them and ask user which to claim
 
 4. Claim the task:
-   bash scripts/board.sh claim <task-id> builder
+   python -m graphstack board claim <task-id> builder
 
 5. Report:
    "Graph loaded. Brief loaded. Board task claimed: [task-id]

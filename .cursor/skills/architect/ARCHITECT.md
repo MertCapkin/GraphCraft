@@ -127,7 +127,7 @@ When brief is ready:
 1. Write `handoff/BRIEF.md`
 2. Create the GNAP board task:
    ```bash
-   bash scripts/board.sh new <task-id> "<objective one-liner>"
+   python -m graphstack board new <task-id> "<objective one-liner>"
    ```
 3. Announce:
 ```

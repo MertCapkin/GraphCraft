@@ -207,7 +207,7 @@ Graphify runs locally (tree-sitter, no API calls) so it has no token cost. But:
 
 ```bash
 # Force update now (run in Cursor or terminal)
-/graphify . --update
+/graphify --update
 
 # Check graph age
 ls -la graphify-out/GRAPH_REPORT.md

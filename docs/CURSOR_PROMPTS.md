@@ -1,4 +1,4 @@
-# GraphStack v3 — Cursor Prompts & Setup Guide
+# GraphStack v4 — Cursor Prompts & Setup Guide
 
 ---
 
@@ -6,11 +6,24 @@
 
 ### Adım 1 — GraphStack'i projeye yükle
 
-Terminalden (projenin kök dizininde):
+Terminalden (projenin kök dizininde). İşletim sistemine göre üç eşdeğer yol var:
 
+**macOS / Linux (bash):**
 ```bash
 git clone https://github.com/MertCapkin/graphstack /tmp/graphstack
 bash /tmp/graphstack/install.sh
+```
+
+**Windows (PowerShell — Git Bash gerekmez):**
+```powershell
+git clone https://github.com/MertCapkin/graphstack $env:TEMP\graphstack
+& $env:TEMP\graphstack\install.ps1 .
+```
+
+**Her platform (Python — shell tercihinden bağımsız):**
+```bash
+git clone https://github.com/MertCapkin/graphstack /path/to/graphstack
+python -m graphstack install . --non-interactive
 ```
 
 Bu komut şunları yapar:
@@ -18,11 +31,14 @@ Bu komut şunları yapar:
 - `.cursor/skills/` → tüm rol dosyaları
 - `orchestrator/` → Orchestrator ve Token Optimizer
 - `handoff/` + `scripts/` → board ve state dosyaları
+- `scripts/graphstack/` → Python helper paketi (bash ve PowerShell shim'leri buna delege eder)
 
 ### Adım 2 — Graphify'ı yükle ve grafiği oluştur
 
 ```bash
-pip install graphifyy
+pip install -r requirements.txt
+# veya doğrudan aynı pin ile:
+pip install "graphifyy>=0.7,<0.9"
 ```
 
 Cursor'da projeyi aç, chat'e yaz:
@@ -138,21 +154,33 @@ Run the pre-ship checklist for task [task-id].
 
 ## 📋 Board Komutları (Terminal)
 
+Üç biçim de eşdeğerdir. Shell tercihinize göre seçin.
+
+**macOS / Linux (bash):**
 ```bash
-# Board durumunu gör
 bash scripts/board.sh status
-
-# Yeni task oluştur
 bash scripts/board.sh new my-feature Add OAuth login support
-
-# Task'ı claim et
 bash scripts/board.sh claim my-feature builder
-
-# Tamamlandı olarak işaretle
 bash scripts/board.sh complete my-feature
-
-# Git geçmişini gör
 bash scripts/board.sh log
+```
+
+**Windows (PowerShell):**
+```powershell
+.\scripts\board.ps1 status
+.\scripts\board.ps1 new my-feature Add OAuth login support
+.\scripts\board.ps1 claim my-feature builder
+.\scripts\board.ps1 complete my-feature
+.\scripts\board.ps1 log
+```
+
+**Cross-platform (Python):**
+```bash
+python -m graphstack board status
+python -m graphstack board new my-feature Add OAuth login support
+python -m graphstack board claim my-feature builder
+python -m graphstack board complete my-feature
+python -m graphstack board log
 ```
 
 ---
@@ -161,6 +189,6 @@ bash scripts/board.sh log
 
 - Her Orchestrator döngüsü için **yeni bir Cursor chat** aç — context temiz kalır
 - `.cursor/rules/graphstack.mdc` otomatik yüklenir, elle okutman gerekmiyor
-- Grafı büyük değişikliklerden sonra güncelle: `/graphify . --update`
+- Grafı büyük değişikliklerden sonra güncelle: `/graphify --update`
 - `handoff/STATE.md` dosyasını silme — oturum geçmişin orada
 - `handoff/board/` klasörünü commit'le — ekip arkadaşların board'u görsün

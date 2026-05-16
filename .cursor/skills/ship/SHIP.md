@@ -38,7 +38,7 @@ Code Hygiene
 
 Board
   [ ] Task moved to done/:
-      bash scripts/board.sh complete <task-id>
+      python -m graphstack board complete <task-id>
   [ ] board/doing/ is empty after this commit
 
 Handoff Files

@@ -61,7 +61,7 @@ Board: [creating board/todo/rate-limit-login.json]
 **User says:** "looks good"
 
 ```
-$ bash scripts/board.sh new rate-limit-login "Rate limit login — 5 attempts / 15 min"
+$ python -m graphstack board new rate-limit-login "Rate limit login — 5 attempts / 15 min"
 ✅ Task 'rate-limit-login' created in todo/
 
 [ARCHITECT → BUILDER]
@@ -74,7 +74,7 @@ Brief locked. Board task created. Switching to Builder.
 
 ```
 [BUILDER MODE]
-$ bash scripts/board.sh claim rate-limit-login builder
+$ python -m graphstack board claim rate-limit-login builder
 ✅ Task 'rate-limit-login' claimed by builder
 
 Graph check: rateLimit.ts doesn't exist yet — no dependencies to verify.
@@ -233,9 +233,9 @@ Verdict: PASS
 ```
 [SHIP MODE]
 Checklist: 5/5 passed
-$ bash scripts/board.sh complete rate-limit-login
+$ python -m graphstack board complete rate-limit-login
 ✅ Task 'rate-limit-login' marked complete
-$ bash scripts/board.sh status
+$ python -m graphstack board status
 
 📋 GraphStack GNAP Board
 ════════════════════════════════════════

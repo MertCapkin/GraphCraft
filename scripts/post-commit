@@ -1,71 +1,20 @@
-#!/bin/bash
-# GraphStack — Smart Graph Update Hook
-# Triggers on: new/deleted files | Ship commit | 24h staleness
-# Skips on:    edits to existing files only
+#!/usr/bin/env bash
+# GraphStack — Smart Graph Update Hook (thin shim).
+# Real logic lives in scripts/graphstack/hook.py.
 
-GRAPHIFY_OUT="graphify-out"
-GRAPH_REPORT="$GRAPHIFY_OUT/GRAPH_REPORT.md"
+set -uo pipefail
 
-do_update() {
-  local reason="$1"
-  if command -v graphify &> /dev/null; then
-    graphify . --update --quiet 2>/dev/null
-    if [ $? -eq 0 ]; then
-      git add "$GRAPHIFY_OUT/GRAPH_REPORT.md" \
-              "$GRAPHIFY_OUT/graph.json" \
-              "$GRAPHIFY_OUT/graph.html" 2>/dev/null
-      echo "✅ GraphStack: Graph updated ($reason) and staged."
-    else
-      echo "⚠️  GraphStack: graphify update failed. Run /graphify --update manually."
-    fi
-  else
-    echo "⚠️  GraphStack: graphify not found. Install: pip install graphifyy"
-  fi
-}
+REPO_ROOT="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
+export PYTHONPATH="${REPO_ROOT}/scripts${PYTHONPATH:+:$PYTHONPATH}"
 
-# ── 1. No graph yet? ─────────────────────────────────────
-if [ ! -f "$GRAPH_REPORT" ]; then
-  echo "🧠 GraphStack: No graph yet. Run /graphify . manually after first build."
+if command -v python3 >/dev/null 2>&1; then
+  PY=python3
+elif command -v python >/dev/null 2>&1; then
+  PY=python
+else
+  echo "⚠️  GraphStack: Python not found — skipping graph update."
   exit 0
 fi
 
-# ── 2. Structural change? (files added or deleted) ───────
-STRUCTURAL=$(git diff HEAD~1 --name-status 2>/dev/null \
-  | grep -E "^[AD]" \
-  | grep -v "graphify-out/" \
-  | grep -v "handoff/" \
-  | wc -l | tr -d ' ')
-
-if [ "$STRUCTURAL" -gt 0 ]; then
-  echo "🧠 GraphStack: $STRUCTURAL file(s) added/deleted — updating graph..."
-  do_update "structural ($STRUCTURAL files)"
-  exit 0
-fi
-
-# ── 3. Ship commit? ──────────────────────────────────────
-COMMIT_MSG=$(git log -1 --pretty=%s 2>/dev/null || echo "")
-if echo "$COMMIT_MSG" | grep -qiE "^board: complete|^\[ship\]|^ship:"; then
-  echo "🧠 GraphStack: Ship commit detected — updating graph..."
-  do_update "ship commit"
-  exit 0
-fi
-
-# ── 4. Stale graph? (> 24 hours old) ────────────────────
-if [ -f "$GRAPH_REPORT" ]; then
-  # macOS: date -r, Linux: stat -c %Y
-  LAST_MOD=$(date -r "$GRAPH_REPORT" +%s 2>/dev/null \
-    || stat -c %Y "$GRAPH_REPORT" 2>/dev/null \
-    || echo 0)
-  NOW=$(date +%s)
-  AGE_H=$(( (NOW - LAST_MOD) / 3600 ))
-  if [ "$AGE_H" -gt 24 ]; then
-    echo "🧠 GraphStack: Graph is ${AGE_H}h old — updating..."
-    do_update "stale (${AGE_H}h)"
-    exit 0
-  fi
-fi
-
-# ── No trigger met ───────────────────────────────────────
-CHANGED=$(git diff HEAD~1 --name-only 2>/dev/null \
-  | grep -v "graphify-out/" | wc -l | tr -d ' ')
-echo "🧠 GraphStack: $CHANGED file(s) modified (content only, graph current) — no update needed. ✓"
+cd "$REPO_ROOT" || exit 0
+exec "$PY" -m graphstack hook

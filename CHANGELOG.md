@@ -4,6 +4,50 @@ All notable changes to GraphStack are documented here.
 
 ---
 
+## [v4.0.0] — 2026-05-16
+
+GraphStack v4 is the **cross-platform release**. Windows runs natively in PowerShell (no Git Bash needed), macOS runs without `coreutils`, and the entire workflow logic lives in a single Python package. The `skills/` directory was unified with the post-install `.cursor/skills/` layout so the source repo and an installed project look identical.
+
+### Added
+- **Python core package** — `scripts/graphstack/` (single source of truth):
+  - `cli.py` dispatcher (`python -m graphstack <board|install|hook>`)
+  - `board.py` — full GNAP lifecycle (status / new / claim / complete / log)
+  - `installer.py` — non-destructive installer with `--non-interactive` flag
+  - `hook.py` — smart graph-update post-commit logic
+  - `platform_utils.py` — Python detection, encoding-safe `echo`, git wrappers
+  - `constants.py` — single place for board / graphify-out paths
+- **PowerShell shims**: `install.ps1`, `scripts/board.ps1`, `scripts/post-commit.ps1` — Windows-native, no Git Bash dependency.
+- **Pytest suite** — 23 tests covering board lifecycle, installer layout, hook logic, platform detection, encoding fallbacks. Runs on all three OSes via CI matrix.
+- **Tri-OS CI matrix** — `.github/workflows/ci.yml` now validates on Ubuntu + macOS + Windows in parallel. Bash syntax is checked once on Linux; Python module + native shim smoke tests run on every OS.
+- **Markdown lint job** — broken relative-link detection across all `.md` files.
+- **`requirements.txt`** — pins `graphifyy>=0.7,<0.9` so an upstream breaking release does not silently break GraphStack.
+- **`.gitkeep` files** — `handoff/board/doing/` and `handoff/board/done/` are now tracked so cloned repos start with a complete directory structure.
+- **OS dropdown + Python/Graphify version fields** in `bug_report.yml` for faster triage.
+
+### Changed
+- **Single-layout source repo** — `skills/` was moved to `.cursor/skills/`. The source repo now mirrors the installed layout exactly. Cursor working on the GraphStack source itself sees the same paths an end user would.
+- **Bash scripts → thin shims** — `install.sh`, `scripts/board.sh`, `scripts/post-commit` are now 5–15 line delegators that locate Python and exec the package. All real logic lives in Python.
+- **Role files use cross-platform commands** — `bash scripts/board.sh ...` was replaced with `python -m graphstack board ...` in `ARCHITECT.md`, `BUILDER.md`, `REVIEWER.md`, `QA.md`, `SHIP.md`, `BOOTSTRAPPER.md`, `ORCHESTRATOR.md`, and `DEMO_WALKTHROUGH.md`.
+- **`ORCHESTRATOR.md` path references** — internal references like `skills/bootstrapper/BOOTSTRAPPER.md` were corrected to `.cursor/skills/bootstrapper/BOOTSTRAPPER.md` (and equivalents for builder / ship). Architect, builder, reviewer, QA, and ship references are now all explicit.
+- **`STATE.md` template** — the example session block is now wrapped in an HTML comment so the orchestrator no longer mistakes it for a real session entry.
+- **Graphify command syntax** — three places that used `/graphify . --update` were standardised to `/graphify --update`.
+- **README + CURSOR_PROMPTS** — three install paths documented (bash / PowerShell / cross-platform Python). Windows section no longer references Git Bash as a prerequisite.
+
+### Fixed
+- **macOS `realpath` portability** — installer no longer depends on GNU coreutils. `pathlib.Path.resolve()` works on a stock macOS install.
+- **Windows Microsoft Store stub** — PowerShell shims detect the WindowsApps redirect stub and fall back to `py -3` automatically.
+- **First-commit hook crash** — post-commit hook now guards against missing `HEAD~1` on a fresh repo instead of failing the commit.
+- **cp1254 / Turkish locale crashes** — stdout is reconfigured to UTF-8 with replacement; box-drawing characters in the board status header are plain ASCII.
+- **Bash `((count++))` exit-code workaround** — replaced with proper Python integer counters in board status.
+- **JSON Unicode round-trip** — board task files now serialize with `ensure_ascii=False`, so Turkish / non-Latin titles are preserved verbatim.
+
+### Migration from v3.0.0
+- Existing `handoff/board/*.json` task files are forward-compatible — schema is unchanged.
+- `bash scripts/board.sh ...` shim still works; only its body changed.
+- If you have local edits in the old `skills/` directory, replay them against `.cursor/skills/`. Everything else is non-breaking.
+
+---
+
 ## [v3.0.0] — 2026-05-06
 
 ### Added

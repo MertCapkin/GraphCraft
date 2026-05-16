@@ -20,7 +20,7 @@ When activated, execute this sequence exactly:
    → Understand what was already checked — don't duplicate
 
 4. Claim the active board task as qa:
-   bash scripts/board.sh claim <task-id> qa
+   python -m graphstack board claim <task-id> qa
    → If task is already in doing/ under a different role: note it, continue
    → If no board task found: skip silently
 

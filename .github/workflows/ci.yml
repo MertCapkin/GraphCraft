@@ -2,94 +2,215 @@ name: GraphStack CI
 
 on:
   push:
-    branches: [main, dev]
+    branches: [main, dev, master]
   pull_request:
-    branches: [main]
+    branches: [main, master]
 
 jobs:
-  validate:
-    name: Validate GraphStack files
+  # ──────────────────────────────────────────────────────────────────
+  # Job 1: Bash syntax check (Linux only — bash isn't on Windows native)
+  # ──────────────────────────────────────────────────────────────────
+  bash-syntax:
+    name: Bash syntax check
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Check bash syntax — board.sh
-        run: bash -n scripts/board.sh
-
-      - name: Check bash syntax — install.sh
+      - name: bash -n install.sh
         run: bash -n install.sh
 
-      - name: Check bash syntax — post-commit hook
+      - name: bash -n scripts/board.sh
+        run: bash -n scripts/board.sh
+
+      - name: bash -n scripts/post-commit
         run: bash -n scripts/post-commit
 
-      - name: Verify required skill files exist
+  # ──────────────────────────────────────────────────────────────────
+  # Job 2: Cross-platform validation matrix (Win + Mac + Linux)
+  # ──────────────────────────────────────────────────────────────────
+  validate:
+    name: Validate (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install pytest
+        run: python -m pip install --quiet pytest
+
+      - name: Verify required files exist (Python)
+        shell: python
         run: |
-          files=(
-            "skills/architect/ARCHITECT.md"
-            "skills/builder/BUILDER.md"
-            "skills/reviewer/REVIEWER.md"
-            "skills/qa/QA.md"
-            "skills/ship/SHIP.md"
-            "skills/bootstrapper/BOOTSTRAPPER.md"
-            "orchestrator/ORCHESTRATOR.md"
-            "orchestrator/TOKEN_OPTIMIZER.md"
-            ".cursor/rules/graphstack.mdc"
-            "handoff/BRIEF.md"
-            "handoff/REVIEW.md"
-            "handoff/BOOTSTRAP.md"
-            "handoff/board/README.md"
-            "handoff/board/todo/example-task.json"
-            "docs/CURSOR_PROMPTS.md"
-            "install.sh"
-            "scripts/board.sh"
-            "scripts/post-commit"
-          )
-          missing=0
-          for f in "${files[@]}"; do
-            if [ ! -f "$f" ]; then
-              echo "❌ Missing: $f"
-              missing=$((missing + 1))
-            else
-              echo "✅ $f"
-            fi
-          done
-          if [ $missing -gt 0 ]; then
-            echo ""
-            echo "$missing required file(s) missing. CI failed."
-            exit 1
-          fi
+          import sys
+          from pathlib import Path
+
+          required = [
+              ".cursor/skills/architect/ARCHITECT.md",
+              ".cursor/skills/builder/BUILDER.md",
+              ".cursor/skills/reviewer/REVIEWER.md",
+              ".cursor/skills/qa/QA.md",
+              ".cursor/skills/ship/SHIP.md",
+              ".cursor/skills/bootstrapper/BOOTSTRAPPER.md",
+              "orchestrator/ORCHESTRATOR.md",
+              "orchestrator/TOKEN_OPTIMIZER.md",
+              ".cursor/rules/graphstack.mdc",
+              "handoff/BRIEF.md",
+              "handoff/REVIEW.md",
+              "handoff/BOOTSTRAP.md",
+              "handoff/STATE.md",
+              "handoff/board/README.md",
+              "handoff/board/todo/example-task.json",
+              "handoff/board/doing/.gitkeep",
+              "handoff/board/done/.gitkeep",
+              "docs/CURSOR_PROMPTS.md",
+              "install.sh",
+              "install.ps1",
+              "requirements.txt",
+              "scripts/board.sh",
+              "scripts/board.ps1",
+              "scripts/post-commit",
+              "scripts/post-commit.ps1",
+              "scripts/graphstack/__init__.py",
+              "scripts/graphstack/__main__.py",
+              "scripts/graphstack/cli.py",
+              "scripts/graphstack/board.py",
+              "scripts/graphstack/installer.py",
+              "scripts/graphstack/hook.py",
+              "scripts/graphstack/platform_utils.py",
+              "scripts/graphstack/constants.py",
+          ]
+          missing = [p for p in required if not Path(p).is_file()]
+          for p in required:
+              mark = "OK" if Path(p).is_file() else "MISSING"
+              print(f"[{mark}] {p}")
+          if missing:
+              print(f"\n{len(missing)} file(s) missing.", file=sys.stderr)
+              sys.exit(1)
 
       - name: Validate example task JSON
+        shell: python
         run: |
-          python3 -c "
-          import json
-          with open('handoff/board/todo/example-task.json') as f:
-              d = json.load(f)
-          required = ['id','title','status','assigned_to','created_at']
-          for k in required:
-              assert k in d, f'Missing key: {k}'
-          print('✅ example-task.json valid')
-          "
+          import json, sys
+          with open("handoff/board/todo/example-task.json", encoding="utf-8") as f:
+              data = json.load(f)
+          required = ["id", "title", "status", "assigned_to", "created_at"]
+          missing = [k for k in required if k not in data]
+          if missing:
+              print(f"Missing keys: {missing}", file=sys.stderr)
+              sys.exit(1)
+          print("example-task.json schema OK")
 
-      - name: Board smoke test
-        run: |
-          bash scripts/board.sh status
-          bash scripts/board.sh new ci-test-task CI smoke test task
-          bash scripts/board.sh claim ci-test-task builder
-          bash scripts/board.sh status
-          bash scripts/board.sh complete ci-test-task
-          bash scripts/board.sh status
-          rm -f handoff/board/done/ci-test-task.json
-          echo "✅ Board lifecycle: todo → doing → done ✓"
+      - name: Run graphstack pytest suite
+        env:
+          PYTHONPATH: scripts
+        run: python -m pytest scripts/graphstack/tests -v
 
-      - name: Check markdown files are not empty
+      - name: Board smoke test (Python module — cross-platform)
+        env:
+          PYTHONPATH: scripts
+        shell: python
         run: |
-          for f in skills/**/*.md orchestrator/*.md; do
-            lines=$(wc -l < "$f")
-            if [ "$lines" -lt 10 ]; then
-              echo "⚠️  $f seems too short ($lines lines)"
-            fi
-          done
-          echo "✅ Markdown size check complete"
+          import os, subprocess, sys
+          from pathlib import Path
+
+          def run(*args):
+              proc = subprocess.run(
+                  [sys.executable, "-m", "graphstack", "board", *args],
+                  check=True,
+              )
+              return proc
+
+          run("status")
+          run("new", "py-ci-task", "Pythonic", "CI", "task")
+          run("claim", "py-ci-task", "reviewer")
+          run("complete", "py-ci-task")
+          done = Path("handoff/board/done/py-ci-task.json")
+          if done.exists():
+              done.unlink()
+          print("Python board lifecycle OK")
+
+      - name: Board smoke test (bash shim — Unix only)
+        if: runner.os != 'Windows'
+        run: |
+          bash scripts/board.sh status
+          bash scripts/board.sh new sh-ci-task Bash smoke test task
+          bash scripts/board.sh claim sh-ci-task builder
+          bash scripts/board.sh complete sh-ci-task
+          rm -f handoff/board/done/sh-ci-task.json
+          echo "bash shim board lifecycle OK"
+
+      - name: Board smoke test (PowerShell shim — Windows only)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          .\scripts\board.ps1 status
+          .\scripts\board.ps1 new ps-ci-task PowerShell smoke test task
+          .\scripts\board.ps1 claim ps-ci-task builder
+          .\scripts\board.ps1 complete ps-ci-task
+          if (Test-Path handoff/board/done/ps-ci-task.json) {
+              Remove-Item handoff/board/done/ps-ci-task.json
+          }
+          Write-Host "PowerShell shim board lifecycle OK"
+
+  # ──────────────────────────────────────────────────────────────────
+  # Job 3: Markdown size + link sanity check (Linux only — runs once)
+  # ──────────────────────────────────────────────────────────────────
+  markdown-checks:
+    name: Markdown lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Detect short markdown files
+        shell: python
+        run: |
+          import sys
+          from pathlib import Path
+          warnings = 0
+          for path in sorted(Path(".").glob(".cursor/skills/**/*.md")) + sorted(Path("orchestrator").glob("*.md")):
+              lines = sum(1 for _ in path.open(encoding="utf-8"))
+              if lines < 10:
+                  print(f"WARN: {path} seems too short ({lines} lines)")
+                  warnings += 1
+          if warnings:
+              print(f"\n{warnings} short markdown file(s) detected (warning only).")
+          else:
+              print("All markdown files pass size threshold.")
+
+      - name: Check internal links resolve
+        shell: python
+        run: |
+          import re, sys
+          from pathlib import Path
+
+          link_re = re.compile(r"\]\(([^)#]+?)(?:#[^)]*)?\)")
+          broken = []
+          for md in Path(".").rglob("*.md"):
+              if any(part in md.parts for part in (".git", "node_modules", "graphify-out")):
+                  continue
+              text = md.read_text(encoding="utf-8", errors="replace")
+              for match in link_re.finditer(text):
+                  target = match.group(1).strip()
+                  if target.startswith(("http://", "https://", "mailto:")):
+                      continue
+                  if target.startswith("#") or "://" in target:
+                      continue
+                  resolved = (md.parent / target).resolve()
+                  if not resolved.exists():
+                      broken.append((md, target))
+
+          for md, target in broken:
+              print(f"BROKEN: {md} -> {target}")
+          if broken:
+              print(f"\n{len(broken)} broken link(s) found.", file=sys.stderr)
+              sys.exit(1)
+          print("All relative markdown links resolve.")

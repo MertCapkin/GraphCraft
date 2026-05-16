@@ -1,9 +1,9 @@
 ---
-description: GraphStack v3 — Orchestrated, graph-first, GNAP-tracked AI development
+description: GraphStack v4 — Orchestrated, graph-first, GNAP-tracked AI development (cross-platform)
 alwaysApply: true
 ---
 
-# GraphStack Core Rules (v3)
+# GraphStack Core Rules (v4)
 
 ## 🎯 Default Mode: Orchestrated
 
@@ -57,7 +57,7 @@ If something looks wrong but is out of scope, note it in `handoff/REVIEW.md` for
 ## 🔄 Rule 6: Graph Staleness Check
 
 If `graphify-out/GRAPH_REPORT.md` is older than the files being discussed:
-- Warn: "Graph may be stale. Consider running `/graphify . --update`"
+- Warn: "Graph may be stale. Consider running `/graphify --update`"
 - Continue with available graph data unless user requests refresh
 
 ## 📁 Rule 7: Handoff Files

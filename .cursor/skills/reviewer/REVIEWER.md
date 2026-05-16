@@ -19,7 +19,7 @@ When activated, execute this sequence exactly:
    → If missing: skip silently
 
 4. Claim the active board task as reviewer:
-   bash scripts/board.sh claim <task-id> reviewer
+   python -m graphstack board claim <task-id> reviewer
    → If no task in doing/: check todo/ for a matching task and claim it
    → If board has no matching task: skip board step silently, continue
 

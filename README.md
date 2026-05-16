@@ -7,10 +7,14 @@ One prompt starts the entire lifecycle — from blank repo to production.
 
 [![CI](https://github.com/MertCapkin/graphstack/actions/workflows/ci.yml/badge.svg)](https://github.com/MertCapkin/graphstack/actions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Version](https://img.shields.io/badge/version-v4.0.0-blue)](CHANGELOG.md)
+[![Platforms](https://img.shields.io/badge/platforms-Windows%20%7C%20macOS%20%7C%20Linux-success)](#compatibility)
 [![Works with Cursor](https://img.shields.io/badge/Works%20with-Cursor-blue)](https://cursor.sh)
 [![Works with Claude Code](https://img.shields.io/badge/Works%20with-Claude%20Code-orange)](https://claude.ai/code)
 
 </div>
+
+> **v4 highlights:** native Windows PowerShell support (no Git Bash needed), single Python core for board/install/hook logic, tri-OS CI matrix, and 23-test pytest suite. See [CHANGELOG.md](CHANGELOG.md) for the full migration notes.
 
 ---
 
@@ -25,23 +29,30 @@ py -3 --version   # need 3.8 or higher
 git --version       # any recent version is fine
 ```
 
-**Install Graphify** — the knowledge graph engine GraphStack is built on:
+**Install Graphify** — the knowledge graph engine GraphStack is built on. The version range is pinned in [`requirements.txt`](requirements.txt):
 
 ```bash
-pip install graphifyy
+pip install -r requirements.txt
+# or, equivalently, install Graphify directly with the same pin:
+pip install "graphifyy>=0.7,<0.9"
 ```
-After, for cursor:
+
+After installation, register the Cursor slash command (one-time):
+
 ```bash
 graphify cursor install
 ```
+
 Verify it worked:
+
 ```bash
 pip show graphifyy
 ```
 
 If `graphify` is not found after install, try:
+
 ```bash
-pip install graphifyy --user
+pip install --user "graphifyy>=0.7,<0.9"
 # then add ~/.local/bin to your PATH, or use:
 python3 -m graphify --version
 ```
@@ -53,31 +64,42 @@ python3 -m graphify --version
 
 ### Step 2 — Install GraphStack into your project
 
-#### macOS / Linux
+GraphStack now works natively on Windows, macOS, and Linux. The installer runs through Python (which you already have for Graphify), so no shell-specific tooling is required.
+
+#### macOS / Linux (bash / zsh)
 
 ```bash
 git clone https://github.com/MertCapkin/graphstack /tmp/graphstack
 cd /path/to/your-project
 bash /tmp/graphstack/install.sh
+# or, equivalently:
+# python3 -m graphstack install . --no-interactive
 ```
 
-#### Windows (önerilen: Git Bash)
-PowerShell’de /tmp ve bash yoktur; kurulum script’i bash bekler. Git for Windows ile gelen Git Bash kullan.
+#### Windows (PowerShell — native, no Git Bash needed)
 
-Git Bash’i aç (Başlat menüsünde “Git Bash”).
-Aşağıdakileri sırayla çalıştır (your-project yolunu kendi projenle değiştir):
+```powershell
+git clone https://github.com/MertCapkin/graphstack $env:TEMP\graphstack
+cd C:\path\to\your-project
+& $env:TEMP\graphstack\install.ps1 .
+```
+
+If `python.exe` on Windows redirects you to the Microsoft Store, the installer detects that and falls back to the official `py -3` launcher automatically.
+
+#### Any platform (Python, no shell preference)
+
 ```bash
-git clone https://github.com/MertCapkin/graphstack /tmp/graphstack
-cd "/c/Users/YOUR_USERNAME/path/to/your-project"
-bash /tmp/graphstack/install.sh .
+git clone https://github.com/MertCapkin/graphstack /path/to/graphstack
+cd /path/to/your-project
+python -m graphstack install . --non-interactive
 ```
-
 
 This copies all GraphStack files into your project:
 - `.cursor/rules/graphstack.mdc` — Cursor loads this automatically on every session
-- `orchestrator/`, `skills/`, `handoff/`, `scripts/` — the full workflow system
+- `orchestrator/`, `.cursor/skills/`, `handoff/`, `scripts/` — the full workflow system
+- `scripts/graphstack/` — the Python helper package (used by both the bash and PowerShell shims)
 
-The install script is non-destructive: it won't overwrite existing `handoff/BRIEF.md` or `handoff/REVIEW.md` if they already exist.
+The install script is non-destructive: it won't overwrite existing `handoff/BRIEF.md`, `handoff/REVIEW.md`, or `handoff/BOOTSTRAP.md` if they already exist.
 
 ---
 
@@ -272,8 +294,17 @@ your-project/
 │   ├── graph.json
 │   └── graph.html
 ├── scripts/
-│   ├── board.sh                          ← GNAP task board manager
-│   └── post-commit                       ← smart graph update hook
+│   ├── board.sh                          ← GNAP board shim (bash)
+│   ├── board.ps1                         ← GNAP board shim (PowerShell)
+│   ├── post-commit                       ← smart graph-update hook (bash)
+│   ├── post-commit.ps1                   ← smart graph-update hook (PowerShell)
+│   └── graphstack/                       ← Python core (single source of truth)
+│       ├── board.py                      ← GNAP board logic
+│       ├── installer.py                  ← project installer logic
+│       ├── hook.py                       ← post-commit graph-update logic
+│       ├── platform_utils.py             ← OS detection, Python finder, encoding-safe echo
+│       ├── cli.py                        ← entry point dispatcher
+│       └── tests/                        ← pytest suite
 ```
 
 ---
@@ -282,21 +313,36 @@ your-project/
 
 GraphStack uses Git-Native Agent Protocol for task tracking — no server, no database, just files and git commits.
 
+All three forms below are equivalent. Pick whichever fits your shell.
+
+#### macOS / Linux (bash)
+
 ```bash
-# See everything at a glance
 bash scripts/board.sh status
-
-# Create a task (Architect does this automatically)
 bash scripts/board.sh new add-oauth Add OAuth login with GitHub
-
-# Claim before starting work
 bash scripts/board.sh claim add-oauth builder
-
-# Mark done after Ship
 bash scripts/board.sh complete add-oauth
-
-# Full audit trail
 bash scripts/board.sh log
+```
+
+#### Windows (PowerShell)
+
+```powershell
+.\scripts\board.ps1 status
+.\scripts\board.ps1 new add-oauth Add OAuth login with GitHub
+.\scripts\board.ps1 claim add-oauth builder
+.\scripts\board.ps1 complete add-oauth
+.\scripts\board.ps1 log
+```
+
+#### Cross-platform (any shell with Python)
+
+```bash
+python -m graphstack board status
+python -m graphstack board new add-oauth Add OAuth login with GitHub
+python -m graphstack board claim add-oauth builder
+python -m graphstack board complete add-oauth
+python -m graphstack board log
 ```
 
 Every board operation is a git commit. `git log handoff/board/` shows who did what, when.

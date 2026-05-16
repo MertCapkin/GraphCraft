@@ -113,7 +113,7 @@ You always know which state you're in. Transitions happen automatically.
 ```
 [BOOTSTRAPPER MODE]
 No existing codebase detected. Starting project bootstrap.
-[execute bootstrapper logic from skills/bootstrapper/BOOTSTRAPPER.md]
+[execute bootstrapper logic from .cursor/skills/bootstrapper/BOOTSTRAPPER.md]
 ```
 
 **Never:** Run Architect when there is no graph and no codebase. Bootstrapper always goes first.
@@ -151,7 +151,7 @@ Bootstrapper writing Cycle [N+1] brief.
 ```
 [ARCHITECT MODE]
 Reading graph context...
-[execute architect logic from skills/architect/ARCHITECT.md]
+[execute architect logic from .cursor/skills/architect/ARCHITECT.md]
 ```
 
 ### ARCHITECT → BUILDER
@@ -163,7 +163,7 @@ Reading graph context...
 ```
 [ARCHITECT → BUILDER]
 Brief locked. Switching to Builder.
-[execute builder logic from BUILDER.md]
+[execute builder logic from .cursor/skills/builder/BUILDER.md]
 ```
 
 **Gate:** Never transition if brief has open questions. Ask the one question, wait, then transition.
@@ -233,7 +233,7 @@ Switching to Builder.
 [QA → SHIP]
 QA: PASSED
 Switching to Ship.
-[execute ship logic from SHIP.md]
+[execute ship logic from .cursor/skills/ship/SHIP.md]
 ```
 
 ### SHIP → IDLE
@@ -335,10 +335,10 @@ After every role transition, do TWO things:
 **2. Update the GNAP board task file:**
 ```bash
 # On role claim:
-bash scripts/board.sh claim <task-id> <role>
+python -m graphstack board claim <task-id> <role>
 
 # On completion:
-bash scripts/board.sh complete <task-id>
+python -m graphstack board complete <task-id>
 ```
 
 This keeps git history as a full audit trail — every transition is a commit.
@@ -349,8 +349,9 @@ This keeps git history as a full audit trail — every transition is a commit.
 
 - Every new feature/fix starts with Architect creating a board task:
   ```bash
-  bash scripts/board.sh new <task-id> "<title>"
+  python -m graphstack board new <task-id> "<title>"
   ```
+  > Bash users may also call `bash scripts/board.sh ...`; PowerShell users `.\scripts\board.ps1 ...` — all three are equivalent.
 - Builder claims the task before writing any code
 - If a `doing/` task exists on activation → offer to resume it
 - If multiple `todo/` tasks exist → ask user which to tackle first

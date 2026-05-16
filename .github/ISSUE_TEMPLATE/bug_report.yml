@@ -8,6 +8,37 @@ body:
         Thanks for reporting. Please fill in as much as you can.
 
   - type: dropdown
+    id: os
+    attributes:
+      label: Operating system
+      options:
+        - Windows (PowerShell)
+        - Windows (Git Bash / WSL)
+        - macOS
+        - Linux
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: python-version
+    attributes:
+      label: Python version
+      description: Output of `python --version` (or `py -3 --version` on Windows).
+      placeholder: "3.11.7"
+    validations:
+      required: false
+
+  - type: input
+    id: graphifyy-version
+    attributes:
+      label: Graphifyy version
+      description: Output of `pip show graphifyy | head -2`.
+      placeholder: "0.7.8"
+    validations:
+      required: false
+
+  - type: dropdown
     id: ai-tool
     attributes:
       label: AI tool

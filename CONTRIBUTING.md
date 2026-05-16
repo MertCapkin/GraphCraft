@@ -21,7 +21,7 @@ There is no build step. No package.json. No dependencies to install to contribut
 
 Found a better way to phrase a token rule? A clearer transition condition? A missing edge case in the Reviewer checklist?
 
-Edit the relevant file in `skills/` or `orchestrator/` and open a PR. Describe what behavior you changed and why.
+Edit the relevant file in `.cursor/skills/` or `orchestrator/` and open a PR. Describe what behavior you changed and why.
 
 ### 2. Add a new role
 
@@ -29,7 +29,7 @@ If you think GraphStack is missing a role (e.g., a Security Auditor, a Performan
 
 1. Open an issue describing the role's job, inputs, outputs, and when it activates
 2. Get feedback before writing the file
-3. Once approved: add `skills/<rolename>/<ROLENAME>.md`, update `ORCHESTRATOR.md` with the transition rule, add a prompt to `docs/CURSOR_PROMPTS.md`
+3. Once approved: add `.cursor/skills/<rolename>/<ROLENAME>.md`, update `ORCHESTRATOR.md` with the transition rule, add a prompt to `docs/CURSOR_PROMPTS.md`, and register the new path in `scripts/graphstack/installer.py`'s `FILE_COPIES`.
 
 ### 3. Improve the board script
 
