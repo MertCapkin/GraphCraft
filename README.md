@@ -136,15 +136,35 @@ Run this once. After that, use `/graphify --update` — it only re-scans changed
 
 ### Step 4 — Start working
 
-Open a **new Cursor chat** and paste one of these:
+The repo ships two ways to bootstrap the orchestrator — pick whichever feels natural.
+
+#### A) Easiest — new chat only (recommended)
+
+Because `.cursor/rules/graphstack.mdc` is **`alwaysApply: true`**, every new Composer / Agent
+session already carries GraphStack’s binding rules. Simply open chat and describe your goal in
+natural language (`Add …`, `Fix …`). The assistant’s first turn must still **execute**
+`orchestrator/ORCHESTRATOR.md → Activation** (parallel `TOKEN_OPTIMIZER` + `GRAPH_REPORT`),
+but **you don’t paste** `Read orchestrator/...` anymore.
+
+#### B) Slash command `/graphstack` (explicit nudge)
+
+In Cursor Chat/Composer press `/` → choose **`graphstack`**. That injects the Bootstrap command
+stored in `.cursor/commands/graphstack.md` (helps when you want deterministic orchestrator wording
+or onboarding teammates).
+
+*If `/graphstack` doesn't appear immediately, restart Cursor once so it rescans `.cursor/commands/`.*
+
+#### C) Classic explicit prompt (fallback / other tools)
 
 **Existing codebase:**
+
 ```
 Read orchestrator/ORCHESTRATOR.md and follow it exactly.
 [Describe what you want to build or fix]
 ```
 
 **New project from scratch:**
+
 ```
 Read orchestrator/ORCHESTRATOR.md and follow it exactly.
 This is a new project with no existing codebase.
@@ -196,8 +216,13 @@ Problems:
 Step 1 — once:
   /graphify .  →  graphify-out/GRAPH_REPORT.md + graph.json
 
-Step 2 — every session (one prompt):
-  "Read orchestrator/ORCHESTRATOR.md. Add rate limiting to login."
+Step 2 — every session (minimal typing):
+  Open Composer + describe the task (rules already activate GraphStack automatically),
+  optionally type `/graphstack` once for an explicit orchestrator preamble,
+  or paste the legacy `Read orchestrator/ORCHESTRATOR.md …` snippet if working outside Cursor.
+
+Example natural-language kickoff:
+  "Add rate limiting to login."
 
   [ARCHITECT]   reads graph (not raw files) → scopes change → writes BRIEF.md
        ↓ auto
@@ -219,8 +244,12 @@ Step 2 — every session (one prompt):
 No code yet? GraphStack handles that too.
 
 ```
-"Read orchestrator/ORCHESTRATOR.md.
- New project: REST API for task management. TypeScript, Express, PostgreSQL."
+Composer (Cursor):
+  Describe the product + tech stack naturally (alwaysApply rules bootstrap GraphStack),
+  optionally `/graphstack` beforehand to inject the scripted opener.
+
+Bootstrap example:
+"/graphstack then: New project REST API for task mgmt — TS, Express, PostgreSQL."
 
   [BOOTSTRAPPER]  analyzes idea → decomposes into modules → orders by dependency
                   → writes BOOTSTRAP.md (the memory across all cycles)
@@ -270,6 +299,7 @@ GraphStack's savings come from three mechanisms:
 ```
 your-project/
 ├── .cursor/rules/graphstack.mdc          ← always-active rules (Cursor auto-loads)
+├── .cursor/commands/graphstack.md        ← `/graphstack` Cursor slash-command bootstrapper
 ├── orchestrator/
 │   ├── ORCHESTRATOR.md                   ← state machine: all transitions
 │   └── TOKEN_OPTIMIZER.md                ← token budget rules for all roles
@@ -402,11 +432,16 @@ The post-commit hook enforces the same rules automatically. You never need to th
 | Git-native task board | ✅ GNAP | ❌ | ❌ | ❌ |
 | Session resumability | ✅ STATE.md | ❌ | ❌ | ❌ |
 | Token optimization rules | ✅ explicit | ❌ | ❌ | ✅ partial |
+| Cursor `/graphstack` slash bootstrap | ✅ | ❌ | ❌ | ❌ |
 | Setup complexity | Low | Low | High | Low |
 
 ---
 
 ## Resuming a Session
+
+Default (Cursor Composer with GraphStack repo open): reopen chat and paste a short cue such as `"Resume GraphStack STATE.md"` or select `/graphstack` followed by `"Resume"` — Activation still runs tokens + graph loaders automatically.
+
+Classic explicit prompt:
 
 ```
 Read orchestrator/ORCHESTRATOR.md and follow it exactly.
@@ -419,13 +454,15 @@ Orchestrator reads `handoff/STATE.md` and `handoff/board/doing/` and picks up ex
 
 ## All Prompts
 
-### Standard session
+**Quick path:** describe work directly (rules + optional `/graphstack`). Legacy blocks remain for deterministic copy/paste workflows or non‑Cursor tooling.
+
+### Standard session *(legacy explicit)*
 ```
 Read orchestrator/ORCHESTRATOR.md and follow it exactly.
 [What you want to build or fix — any language]
 ```
 
-### New project from scratch
+### New project from scratch *(legacy explicit)*
 ```
 Read orchestrator/ORCHESTRATOR.md and follow it exactly.
 This is a new project with no existing codebase.
@@ -433,7 +470,7 @@ I want to build [describe your idea].
 Tech stack: [language, framework, database].
 ```
 
-### Resume a previous session
+### Resume a previous session *(legacy explicit)*
 ```
 Read orchestrator/ORCHESTRATOR.md and follow it exactly.
 Resume from last session.

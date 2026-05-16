@@ -21,6 +21,7 @@ def test_install_creates_full_layout(tmp_path: Path, monkeypatch: pytest.MonkeyP
         ".cursor/rules",
         ".cursor/skills/architect",
         ".cursor/skills/bootstrapper",
+        ".cursor/commands",
         "orchestrator",
         "handoff/board/todo",
         "handoff/board/doing",
@@ -33,6 +34,7 @@ def test_install_creates_full_layout(tmp_path: Path, monkeypatch: pytest.MonkeyP
 
     expected_files = (
         ".cursor/rules/graphstack.mdc",
+        ".cursor/commands/graphstack.md",
         "orchestrator/ORCHESTRATOR.md",
         "orchestrator/TOKEN_OPTIMIZER.md",
         ".cursor/skills/builder/BUILDER.md",

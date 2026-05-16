@@ -32,6 +32,7 @@ Bu komut şunları yapar:
 - `orchestrator/` → Orchestrator ve Token Optimizer
 - `handoff/` + `scripts/` → board ve state dosyaları
 - `scripts/graphstack/` → Python helper paketi (bash ve PowerShell shim'leri buna delege eder)
+- `.cursor/commands/graphstack.md` → Slash menüsünde `/graphstack` komutu
 
 ### Adım 2 — Graphify'ı yükle ve grafiği oluştur
 
@@ -51,60 +52,79 @@ Büyük projelerde 1-2 dakika sürebilir, sonrası anında.
 
 ### Adım 3 — Başla
 
-Yeni bir Cursor chat'i aç ve aşağıdaki promptlardan birini kullan.
+**Önerilen (en az sürtünme):** Cursor'da projeyle birlikte yeni Composer/Agent aç —
+`graphstack.mdc` `alwaysApply: true` olduğu için Kurallar zaten yüklü. Direkt olarak
+hedefini yaz (**Türkçe veya İngilizce**). Asistanın ilk işi olarak yine Orchestrator Activation
+(okuma + TOKEN_OPTIMIZER + graf) çalıştırması gerekir; senin her seferinde
+`Read orchestrator/...` kopyalamana gerek yok.
 
-> **Not:** `.cursor/rules/graphstack.mdc` dosyası Cursor tarafından otomatik yüklenir.
-> Kurallar her chat'te aktif — ek bir şey yapman gerekmiyor.
+**Slash komutu (istersen daha net başlatmak için):** Sohbete `/` yaz → **`graphstack`**
+dosyası `.cursor/commands/graphstack.md` içeriğini enjekte eder (`/graphstack` çıkmıyorsa
+Cursor'ı yeniden başlat).
+
+**İsteğe bağlı klasik satır *(başka editör ya da garanti için):*** aşağıdaki blok hâlen geçerlidir.
+
+```
+Read orchestrator/ORCHESTRATOR.md and follow it exactly.
+[Hedefini yaz]
+```
+
+> **Not:** `.cursor/rules/graphstack.mdc` her oturumda otomatik yüklenir; bu satır fazladan garanti için.
 
 ---
 
-## ⚡ Normal Kullanım — Tek Prompt
+## ⚡ Örnek hedef yazıları (klasik bloğu atlarsan bile)
+
+Orchestrator yine graf + handoff yüklemesini yapmak zorunda; senden sadece amaç gerek:
 
 ```
-Read orchestrator/ORCHESTRATOR.md and follow it exactly.
-[Ne yapmak istediğini buraya yaz — Türkçe veya İngilizce]
+Kayıtta e-posta doğrulaması eklemek istiyorum.
+```
+```
+Login endpoint çok yavaş — performansı bul ve düzelt.
+```
+```
+Resume from last session.
 ```
 
-**Örnekler:**
-```
-Read orchestrator/ORCHESTRATOR.md and follow it exactly.
-Add email verification to the registration flow.
-```
-```
-Read orchestrator/ORCHESTRATOR.md and follow it exactly.
-Login endpoint çok yavaş, performans sorununu bul ve düzelt.
-```
-
-Orchestrator Architect → Builder → Reviewer → QA → Ship döngüsünü otomatik yönetir.
+Architect → Builder → Reviewer → QA → Ship zinciri kullanıcı etkileşimi olmadan yürür.
 
 ---
 
 ## 🚀 Sıfırdan Yeni Proje (Bootstrap Modu)
 
-Henüz hiç kod yoksa:
+Henüz kod yoksa **sırf hedef yazman yeter**: `alwaysApply` kuralları etkin.
+İstersen garanti olarak `/graphstack` komutunun ardından açıklamayı yaz.
+
+```
+Boş bir repo için REST API yazıyorum: kullanıcılar proje oluşturup görev atayabilecek.
+TypeScript + Node + Express + PostgreSQL istiyorum. İlk fazda önce authentication.
+```
+
+**Klasik tam blok (yedek)**
 
 ```
 Read orchestrator/ORCHESTRATOR.md and follow it exactly.
 This is a new project with no existing codebase.
-[Projeyi tanımla: ne yapıyor, kime yönelik, hangi teknoloji]
-```
-
-**Örnek:**
-```
-Read orchestrator/ORCHESTRATOR.md and follow it exactly.
-This is a new project. I want to build a REST API for task management.
-Users can create projects, add tasks, assign them, track progress.
-Tech stack: TypeScript, Node.js, Express, PostgreSQL.
+[Projeyi tanımla: amaç, kullanıcı, teknoloji]
 ```
 
 Bootstrapper tüm modülleri planlar, bağımlılık sırasını belirler,
-her döngü için brief yazar. Her döngü sonrası grafı gerçek koddan günceller.
+her döngü için brief yazar; her döngü sonunda güncellenmiş graf gerekli.
 
 ---
 
 ## 🔄 Oturum Devam Ettirme
 
-Cursor'ı kapatıp yeniden açtıysan:
+Cursor'ı yeniden açtıktan sonra sadece:
+
+```
+Önceki GraphStack oturumundan devam et.
+STATE.md ile board'daki yapılacaklara uy.
+```
+
+Gerekli güvence için hâlen şu blok kullanılabilir:
+
 ```
 Read orchestrator/ORCHESTRATOR.md and follow it exactly.
 Resume from last session.
@@ -187,7 +207,8 @@ python -m graphstack board log
 
 ## 💡 İpuçları
 
-- Her Orchestrator döngüsü için **yeni bir Cursor chat** aç — context temiz kalır
+- Her Orchestrator döngüsünde mümkünse **yeni bir Cursor chat** aç — context temiz kalır
+- Cursor slash menüsünde **`/graphstack`** kullanarak Orchestrator açılışını netleştir
 - `.cursor/rules/graphstack.mdc` otomatik yüklenir, elle okutman gerekmiyor
 - Grafı büyük değişikliklerden sonra güncelle: `/graphify --update`
 - `handoff/STATE.md` dosyasını silme — oturum geçmişin orada

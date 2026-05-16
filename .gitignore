@@ -35,6 +35,9 @@ npm-debug.log*
 # ── GraphStack-specific ───────────────────────────────────
 
 # graphify-out: COMMIT this in your projects (it's the knowledge graph)
+# Local AST cache is machine-specific and must not be versioned:
+graphify-out/cache/
+
 # But exclude the visual HTML in CI if it's large:
 # graphify-out/graph.html
 

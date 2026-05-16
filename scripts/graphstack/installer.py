@@ -28,6 +28,7 @@ DIRS_TO_CREATE = (
     ".cursor/skills/qa",
     ".cursor/skills/ship",
     ".cursor/skills/bootstrapper",
+    ".cursor/commands",
     "orchestrator",
     "handoff/board/todo",
     "handoff/board/doing",
@@ -41,6 +42,7 @@ DIRS_TO_CREATE = (
 # (source path inside repo, dest path inside target)
 FILE_COPIES = (
     (".cursor/rules/graphstack.mdc", ".cursor/rules/graphstack.mdc"),
+    (".cursor/commands/graphstack.md", ".cursor/commands/graphstack.md"),
     ("orchestrator/ORCHESTRATOR.md", "orchestrator/ORCHESTRATOR.md"),
     ("orchestrator/TOKEN_OPTIMIZER.md", "orchestrator/TOKEN_OPTIMIZER.md"),
     (".cursor/skills/architect/ARCHITECT.md", ".cursor/skills/architect/ARCHITECT.md"),

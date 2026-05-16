@@ -49,6 +49,11 @@ The `demo/` folder shows GraphStack in action on a Node.js auth service. More de
 Used GraphStack on a real project? Measured token savings? Wrote about it?
 Open a PR adding a `docs/case-studies/` entry or link to your post in the README.
 
+### 6. Cursor slash-command bootstrap snippets
+
+Markdown files inside `.cursor/commands/` register under Cursor Composer’s **`/`** slash menu.
+When you introduce a copy change, restart Cursor once locally (and mention that in README) so teammates see the refreshed entry. Keep installers + CI manifests in sync via `installer.py`'s `FILE_COPIES` and `.github/workflows/ci.yml`.
+
 ---
 
 ## Pull Request Guidelines

@@ -11,9 +11,10 @@ The user talks to you naturally. You decide which role acts, execute it, and tra
 Execute this sequence exactly on every session start. Each step has a fallback — never abort.
 
 ```
-1. Read graphify-out/GRAPH_REPORT.md
-   → If missing: note "No graph found" and continue
-   → Never read it again this session after this step
+1a. Parallel read (once per session — same tool batch if both exist):
+    - orchestrator/TOKEN_OPTIMIZER.md  (always — full token decision tree & parallel-read rules)
+    - graphify-out/GRAPH_REPORT.md     (if file exists — else note "No graph found" and continue)
+    → Never re-read TOKEN_OPTIMIZER or GRAPH_REPORT.md after this step this session.
 
 2. Read handoff/BRIEF.md
    → If missing: note "No active brief" and continue

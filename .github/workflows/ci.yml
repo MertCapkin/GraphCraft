@@ -63,6 +63,7 @@ jobs:
               "orchestrator/ORCHESTRATOR.md",
               "orchestrator/TOKEN_OPTIMIZER.md",
               ".cursor/rules/graphstack.mdc",
+              ".cursor/commands/graphstack.md",
               "handoff/BRIEF.md",
               "handoff/REVIEW.md",
               "handoff/BOOTSTRAP.md",
