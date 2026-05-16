@@ -5102,9 +5102,9 @@
       "source_file": "scripts/graphstack/installer.py",
       "source_location": "L143",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "graphstack_installer_rationale_143",
-      "target": "graphstack_installer_install_python_package",
-      "confidence_score": 1.0
+      "target": "graphstack_installer_install_python_package"
     },
     {
       "relation": "calls",
@@ -6021,9 +6021,9 @@
       "source_file": "CONTRIBUTING.md",
       "source_location": "L52",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "graphstack_contributing_ways_to_contribute",
-      "target": "graphstack_contributing_6_cursor_slash_command_bootstrap_snippets",
-      "confidence_score": 1.0
+      "target": "graphstack_contributing_6_cursor_slash_command_bootstrap_snippets"
     },
     {
       "relation": "contains",
@@ -6371,9 +6371,9 @@
       "source_file": "README.md",
       "source_location": "L141",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "graphstack_readme_step_4_start_working",
-      "target": "graphstack_readme_a_easiest_new_chat_only_recommended",
-      "confidence_score": 1.0
+      "target": "graphstack_readme_a_easiest_new_chat_only_recommended"
     },
     {
       "relation": "contains",
@@ -6381,9 +6381,9 @@
       "source_file": "README.md",
       "source_location": "L149",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "graphstack_readme_step_4_start_working",
-      "target": "graphstack_readme_b_slash_command_graphstack_explicit_nudge",
-      "confidence_score": 1.0
+      "target": "graphstack_readme_b_slash_command_graphstack_explicit_nudge"
     },
     {
       "relation": "contains",
@@ -6391,9 +6391,9 @@
       "source_file": "README.md",
       "source_location": "L157",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "graphstack_readme_step_4_start_working",
-      "target": "graphstack_readme_c_classic_explicit_prompt_fallback_other_tools",
-      "confidence_score": 1.0
+      "target": "graphstack_readme_c_classic_explicit_prompt_fallback_other_tools"
     },
     {
       "relation": "contains",
@@ -6421,9 +6421,9 @@
       "source_file": "README.md",
       "source_location": "L161",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "graphstack_readme_c_classic_explicit_prompt_fallback_other_tools",
-      "target": "graphstack_readme_codeblock_10",
-      "confidence_score": 1.0
+      "target": "graphstack_readme_codeblock_10"
     },
     {
       "relation": "contains",
@@ -6431,9 +6431,9 @@
       "source_file": "README.md",
       "source_location": "L168",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "graphstack_readme_c_classic_explicit_prompt_fallback_other_tools",
-      "target": "graphstack_readme_codeblock_11",
-      "confidence_score": 1.0
+      "target": "graphstack_readme_codeblock_11"
     },
     {
       "relation": "contains",
@@ -6551,9 +6551,9 @@
       "source_file": "README.md",
       "source_location": "L459",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "graphstack_readme_all_prompts",
-      "target": "graphstack_readme_standard_session_legacy_explicit",
-      "confidence_score": 1.0
+      "target": "graphstack_readme_standard_session_legacy_explicit"
     },
     {
       "relation": "contains",
@@ -6561,9 +6561,9 @@
       "source_file": "README.md",
       "source_location": "L465",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "graphstack_readme_all_prompts",
-      "target": "graphstack_readme_new_project_from_scratch_legacy_explicit",
-      "confidence_score": 1.0
+      "target": "graphstack_readme_new_project_from_scratch_legacy_explicit"
     },
     {
       "relation": "contains",
@@ -6571,9 +6571,9 @@
       "source_file": "README.md",
       "source_location": "L473",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "graphstack_readme_all_prompts",
-      "target": "graphstack_readme_resume_a_previous_session_legacy_explicit",
-      "confidence_score": 1.0
+      "target": "graphstack_readme_resume_a_previous_session_legacy_explicit"
     },
     {
       "relation": "contains",
@@ -6621,9 +6621,9 @@
       "source_file": "README.md",
       "source_location": "L460",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "graphstack_readme_standard_session_legacy_explicit",
-      "target": "graphstack_readme_codeblock_20",
-      "confidence_score": 1.0
+      "target": "graphstack_readme_codeblock_20"
     },
     {
       "relation": "contains",
@@ -6641,9 +6641,9 @@
       "source_file": "README.md",
       "source_location": "L466",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "graphstack_readme_new_project_from_scratch_legacy_explicit",
-      "target": "graphstack_readme_codeblock_21",
-      "confidence_score": 1.0
+      "target": "graphstack_readme_codeblock_21"
     },
     {
       "relation": "contains",
@@ -6661,9 +6661,9 @@
       "source_file": "README.md",
       "source_location": "L474",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "graphstack_readme_resume_a_previous_session_legacy_explicit",
-      "target": "graphstack_readme_codeblock_22",
-      "confidence_score": 1.0
+      "target": "graphstack_readme_codeblock_22"
     },
     {
       "relation": "contains",
@@ -7031,9 +7031,9 @@
       "source_file": "docs/CURSOR_PROMPTS.md",
       "source_location": "L76",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "docs_cursor_prompts_graphstack_v4_cursor_prompts_setup_guide",
-      "target": "docs_cursor_prompts_rnek_hedef_yaz_lar_klasik_blo_u_atlarsan_bile",
-      "confidence_score": 1.0
+      "target": "docs_cursor_prompts_rnek_hedef_yaz_lar_klasik_blo_u_atlarsan_bile"
     },
     {
       "relation": "contains",
@@ -7181,9 +7181,9 @@
       "source_file": "docs/CURSOR_PROMPTS.md",
       "source_location": "L67",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "docs_cursor_prompts_ad_m_3_ba_la",
-      "target": "docs_cursor_prompts_codeblock_6",
-      "confidence_score": 1.0
+      "target": "docs_cursor_prompts_codeblock_6"
     },
     {
       "relation": "contains",
@@ -7201,9 +7201,9 @@
       "source_file": "docs/CURSOR_PROMPTS.md",
       "source_location": "L80",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "docs_cursor_prompts_rnek_hedef_yaz_lar_klasik_blo_u_atlarsan_bile",
-      "target": "docs_cursor_prompts_codeblock_7",
-      "confidence_score": 1.0
+      "target": "docs_cursor_prompts_codeblock_7"
     },
     {
       "relation": "contains",
@@ -7211,9 +7211,9 @@
       "source_file": "docs/CURSOR_PROMPTS.md",
       "source_location": "L83",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "docs_cursor_prompts_rnek_hedef_yaz_lar_klasik_blo_u_atlarsan_bile",
-      "target": "docs_cursor_prompts_codeblock_8",
-      "confidence_score": 1.0
+      "target": "docs_cursor_prompts_codeblock_8"
     },
     {
       "relation": "contains",
@@ -7221,9 +7221,9 @@
       "source_file": "docs/CURSOR_PROMPTS.md",
       "source_location": "L86",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "docs_cursor_prompts_rnek_hedef_yaz_lar_klasik_blo_u_atlarsan_bile",
-      "target": "docs_cursor_prompts_codeblock_9",
-      "confidence_score": 1.0
+      "target": "docs_cursor_prompts_codeblock_9"
     },
     {
       "relation": "contains",
@@ -7271,9 +7271,9 @@
       "source_file": "docs/CURSOR_PROMPTS.md",
       "source_location": "L106",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "docs_cursor_prompts_s_f_rdan_yeni_proje_bootstrap_modu",
-      "target": "docs_cursor_prompts_codeblock_11",
-      "confidence_score": 1.0
+      "target": "docs_cursor_prompts_codeblock_11"
     },
     {
       "relation": "contains",
@@ -7291,9 +7291,9 @@
       "source_file": "docs/CURSOR_PROMPTS.md",
       "source_location": "L121",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "docs_cursor_prompts_oturum_devam_ettirme",
-      "target": "docs_cursor_prompts_codeblock_12",
-      "confidence_score": 1.0
+      "target": "docs_cursor_prompts_codeblock_12"
     },
     {
       "relation": "contains",
@@ -7301,9 +7301,9 @@
       "source_file": "docs/CURSOR_PROMPTS.md",
       "source_location": "L128",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "docs_cursor_prompts_oturum_devam_ettirme",
-      "target": "docs_cursor_prompts_codeblock_13",
-      "confidence_score": 1.0
+      "target": "docs_cursor_prompts_codeblock_13"
     },
     {
       "relation": "contains",
@@ -7381,9 +7381,9 @@
       "source_file": "docs/CURSOR_PROMPTS.md",
       "source_location": "L140",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "docs_cursor_prompts_architect_planlama",
-      "target": "docs_cursor_prompts_codeblock_14",
-      "confidence_score": 1.0
+      "target": "docs_cursor_prompts_codeblock_14"
     },
     {
       "relation": "contains",
@@ -7401,9 +7401,9 @@
       "source_file": "docs/CURSOR_PROMPTS.md",
       "source_location": "L147",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "docs_cursor_prompts_builder_do_rudan_build",
-      "target": "docs_cursor_prompts_codeblock_15",
-      "confidence_score": 1.0
+      "target": "docs_cursor_prompts_codeblock_15"
     },
     {
       "relation": "contains",
@@ -7421,9 +7421,9 @@
       "source_file": "docs/CURSOR_PROMPTS.md",
       "source_location": "L154",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "docs_cursor_prompts_reviewer_kod_inceleme",
-      "target": "docs_cursor_prompts_codeblock_16",
-      "confidence_score": 1.0
+      "target": "docs_cursor_prompts_codeblock_16"
     },
     {
       "relation": "contains",
@@ -7441,9 +7441,9 @@
       "source_file": "docs/CURSOR_PROMPTS.md",
       "source_location": "L161",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "docs_cursor_prompts_qa_davran_do_rulama",
-      "target": "docs_cursor_prompts_codeblock_17",
-      "confidence_score": 1.0
+      "target": "docs_cursor_prompts_codeblock_17"
     },
     {
       "relation": "contains",
@@ -7461,9 +7461,9 @@
       "source_file": "docs/CURSOR_PROMPTS.md",
       "source_location": "L168",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "docs_cursor_prompts_ship_deploy_haz_rl",
-      "target": "docs_cursor_prompts_codeblock_18",
-      "confidence_score": 1.0
+      "target": "docs_cursor_prompts_codeblock_18"
     },
     {
       "relation": "contains",
@@ -7491,9 +7491,9 @@
       "source_file": "docs/CURSOR_PROMPTS.md",
       "source_location": "L189",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "docs_cursor_prompts_board_komutlar_terminal",
-      "target": "docs_cursor_prompts_codeblock_20",
-      "confidence_score": 1.0
+      "target": "docs_cursor_prompts_codeblock_20"
     },
     {
       "relation": "contains",
@@ -7501,9 +7501,9 @@
       "source_file": "docs/CURSOR_PROMPTS.md",
       "source_location": "L198",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "docs_cursor_prompts_board_komutlar_terminal",
-      "target": "docs_cursor_prompts_codeblock_21",
-      "confidence_score": 1.0
+      "target": "docs_cursor_prompts_codeblock_21"
     },
     {
       "relation": "contains",
@@ -8707,5 +8707,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "98922cfc2c6117e0c3740d3fcd18f7141cbab1a4"
+  "built_at_commit": "b256809b2b80b1f31035e5abe1f032ef99b68e6f"
 }
