@@ -11,7 +11,7 @@ import json
 import sys
 from pathlib import Path
 
-from .constants import BOARD_DIR, DOING_DIR, DONE_DIR, EXAMPLE_TASK_NAME, TODO_DIR
+from .constants import BOARD_DIR, DOING_DIR, DONE_DIR, TODO_DIR
 from .platform_utils import echo, run_git, utc_now_iso
 
 VALID_ROLES = ("architect", "builder", "reviewer", "qa", "ship", "bootstrapper")
@@ -47,13 +47,10 @@ def _print_task(path: Path) -> None:
     )
 
 
-def _iter_tasks(directory: Path, exclude_example: bool = False) -> list[Path]:
+def _iter_tasks(directory: Path) -> list[Path]:
     if not directory.is_dir():
         return []
-    files = sorted(directory.glob("*.json"))
-    if exclude_example:
-        files = [f for f in files if f.name != EXAMPLE_TASK_NAME]
-    return files
+    return sorted(directory.glob("*.json"))
 
 
 def _git_commit_board(message: str) -> None:
@@ -69,7 +66,7 @@ def cmd_status(_args: argparse.Namespace) -> int:
     echo(f"  {'TASK ID':<32} {'STATUS':<10} {'ASSIGNED':<12} TITLE")
     echo("  " + "-" * 54)
 
-    todo = _iter_tasks(TODO_DIR, exclude_example=True)
+    todo = _iter_tasks(TODO_DIR)
     doing = _iter_tasks(DOING_DIR)
     done = _iter_tasks(DONE_DIR)
 

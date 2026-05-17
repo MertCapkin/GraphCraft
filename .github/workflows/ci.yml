@@ -76,7 +76,6 @@ jobs:
               "handoff/BOOTSTRAP.md",
               "handoff/STATE.md",
               "handoff/board/README.md",
-              "handoff/board/todo/example-task.json",
               "handoff/board/doing/.gitkeep",
               "handoff/board/done/.gitkeep",
               "docs/CURSOR_PROMPTS.md",
@@ -108,18 +107,25 @@ jobs:
               print(f"\n{len(missing)} file(s) missing.", file=sys.stderr)
               sys.exit(1)
 
-      - name: Validate example task JSON
+      - name: Validate GNAP task schema (board new)
         shell: python
         run: |
-          import json, sys
-          with open("handoff/board/todo/example-task.json", encoding="utf-8") as f:
-              data = json.load(f)
-          required = ["id", "title", "status", "assigned_to", "created_at"]
+          import json, subprocess, sys
+          from pathlib import Path
+
+          subprocess.run(
+              [sys.executable, "-m", "graphstack", "board", "new", "schema-check", "CI schema probe"],
+              check=True,
+          )
+          path = Path("handoff/board/todo/schema-check.json")
+          data = json.loads(path.read_text(encoding="utf-8"))
+          required = ["id", "title", "status", "created_at"]
           missing = [k for k in required if k not in data]
+          path.unlink(missing_ok=True)
           if missing:
-              print(f"Missing keys: {missing}", file=sys.stderr)
+              print(f"board new() missing keys: {missing}", file=sys.stderr)
               sys.exit(1)
-          print("example-task.json schema OK")
+          print("GNAP task schema OK")
 
       - name: Run graphstack pytest suite
         run: python -m pytest scripts/graphstack/tests -v

@@ -17,14 +17,13 @@ from .constants import (
     BOARD_DIR,
     DOING_DIR,
     DONE_DIR,
-    EXAMPLE_TASK_NAME,
     GRAPH_REPORT,
     HANDOFF_DIR,
+    TASK_REQUIRED_KEYS,
     TODO_DIR,
 )
 from .platform_utils import echo, git_available, graphify_available, run_git
 
-TASK_REQUIRED_KEYS = ("id", "title", "status", "created_at")
 BRIEF_TEMPLATE_MARKERS = (
     "[Feature/Change Name]",
     "YYYY-MM-DD",
@@ -77,10 +76,7 @@ def _iter_board_tasks() -> list[Path]:
     for directory in (TODO_DIR, DOING_DIR, DONE_DIR):
         if not directory.is_dir():
             continue
-        for path in sorted(directory.glob("*.json")):
-            if path.name == EXAMPLE_TASK_NAME:
-                continue
-            paths.append(path)
+        paths.extend(sorted(directory.glob("*.json")))
     return paths
 
 

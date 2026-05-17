@@ -20,6 +20,7 @@ GRAPH_REPORT = GRAPHIFY_OUT / "GRAPH_REPORT.md"
 GRAPH_JSON = GRAPHIFY_OUT / "graph.json"
 GRAPH_HTML = GRAPHIFY_OUT / "graph.html"
 
-EXAMPLE_TASK_NAME = "example-task.json"
-
 STALE_GRAPH_HOURS = 24
+
+# Required keys for GNAP board task JSON files (see handoff/board/README.md).
+TASK_REQUIRED_KEYS = ("id", "title", "status", "created_at")

@@ -26,7 +26,7 @@ Execute this sequence exactly on every session start. Each step has a fallback �
    → If directory empty or missing: no tasks in progress — skip silently
    → If 1+ files found: note which tasks are in progress
 
-5. Read handoff/board/todo/*.json (exclude example-task.json)
+5. Read handoff/board/todo/*.json
    → If empty: no pending tasks — skip silently
    → If 1+ files found: note how many tasks are waiting
 

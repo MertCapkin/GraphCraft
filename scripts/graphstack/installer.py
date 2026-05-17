@@ -52,7 +52,6 @@ FILE_COPIES = (
     (".cursor/skills/ship/SHIP.md", ".cursor/skills/ship/SHIP.md"),
     (".cursor/skills/bootstrapper/BOOTSTRAPPER.md", ".cursor/skills/bootstrapper/BOOTSTRAPPER.md"),
     ("handoff/board/README.md", "handoff/board/README.md"),
-    ("handoff/board/todo/example-task.json", "handoff/board/todo/example-task.json"),
     ("docs/CURSOR_PROMPTS.md", "docs/CURSOR_PROMPTS.md"),
     ("scripts/board.sh", "scripts/board.sh"),
     ("scripts/board.ps1", "scripts/board.ps1"),

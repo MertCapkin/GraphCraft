@@ -26,4 +26,30 @@ board/
 
 ## Task File Format
 
-See `board/todo/example-task.json` for the schema.
+Create `board/todo/<task-id>.json` (filename must match `id`):
+
+```json
+{
+  "id": "add-rate-limiting",
+  "title": "Add rate limiting to login endpoint",
+  "created_at": "2026-05-04T10:00:00Z",
+  "created_by": "architect",
+  "brief": "handoff/BRIEF.md",
+  "graph_nodes": [],
+  "criteria_count": 0,
+  "priority": "normal",
+  "status": "todo",
+  "assigned_to": null,
+  "started_at": null,
+  "completed_at": null,
+  "notes": ""
+}
+```
+
+Or use the CLI:
+
+```bash
+python -m graphstack board new <task-id> "Task title here"
+```
+
+Required fields: `id`, `title`, `status`, `created_at`.

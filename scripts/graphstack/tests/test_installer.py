@@ -39,7 +39,6 @@ def test_install_creates_full_layout(tmp_path: Path, monkeypatch: pytest.MonkeyP
         "orchestrator/TOKEN_OPTIMIZER.md",
         ".cursor/skills/builder/BUILDER.md",
         "handoff/board/README.md",
-        "handoff/board/todo/example-task.json",
         "handoff/STATE.md",
         "scripts/board.sh",
         "scripts/board.ps1",
