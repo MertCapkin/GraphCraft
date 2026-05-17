@@ -7,14 +7,14 @@ One prompt starts the entire lifecycle — from blank repo to production.
 
 [![CI](https://github.com/MertCapkin/graphstack/actions/workflows/ci.yml/badge.svg)](https://github.com/MertCapkin/graphstack/actions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-v4.1.0-blue)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-v4.2.0-blue)](CHANGELOG.md)
 [![Platforms](https://img.shields.io/badge/platforms-Windows%20%7C%20macOS%20%7C%20Linux-success)](#compatibility)
 [![Works with Cursor](https://img.shields.io/badge/Works%20with-Cursor-blue)](https://cursor.sh)
 [![Works with Claude Code](https://img.shields.io/badge/Works%20with-Claude%20Code-orange)](https://claude.ai/code)
 
 </div>
 
-> **v4.1 highlights:** `pip install -e .` packaging, `graphstack validate` / `graphstack doctor`, CI graph-staleness checks, code-focused `.graphifyignore`, and an honest limitations + case-study section. See [CHANGELOG.md](CHANGELOG.md).
+> **v4.2 highlights:** `graphstack run` — token-safe shell output for git/tests (quality-preserving compaction, no external deps). Plus v4.1: `pip install -e .`, `validate` / `doctor`, CI graph checks. See [CHANGELOG.md](CHANGELOG.md).
 
 ---
 
@@ -36,7 +36,7 @@ pip install -r requirements.txt
 # or, equivalently, install Graphify directly with the same pin:
 pip install "graphifyy>=0.7,<0.9"
 
-# Optional: install GraphStack CLI from a clone (board / validate / doctor)
+# Optional: install GraphStack CLI from a clone (board / validate / doctor / run)
 pip install -e /path/to/graphstack
 # or with Graphify in one step:
 pip install -e "/path/to/graphstack[graphify]"
@@ -285,6 +285,7 @@ GraphStack's savings come from three mechanisms:
 | Role discipline | Each role reads only what its job requires | ~60% vs unstructured sessions |
 | File-based state | STATE.md replaces chat history on resume | ~60% per new session |
 | Parallel reads | Multiple files in one tool call | ~50% on multi-file ops |
+| Shell compaction | `graphstack run` shrinks git/test output before it hits context | ~60–80% on verbose shell ops |
 
 **Net savings by codebase size:**
 
@@ -317,6 +318,32 @@ graphstack doctor
 graphstack validate
 graphstack validate --strict --fail-stale-graph
 ```
+
+---
+
+## Shell Output Compaction (`graphstack run`)
+
+Graph-first rules reduce **file reads**. Shell compaction reduces **terminal output** (git status, diffs, test runners) before it enters the AI context — without installing third-party proxies.
+
+**Who uses it:** Cursor/Claude agents follow `TOKEN_OPTIMIZER.md` and `.cursor/rules/graphstack.mdc` — they call `graphstack run`, not raw `git`/`pytest`. You do not need to remember a separate workflow.
+
+```bash
+python -m graphstack run -- git status
+python -m graphstack run -- git diff
+python -m graphstack run -- git log -n 20
+python -m graphstack run -- pytest -q
+```
+
+**Quality safeguards (not “blind compression”):**
+
+- File paths, branch names, diff hunks (`@@`), and `+`/`-` lines are preserved
+- Test failures, tracebacks, and stderr are kept (stderr is never compacted)
+- If compaction would drop too much signal, output **falls back to raw** automatically
+- Full output when debugging: `python -m graphstack run --raw -- git diff`
+
+Independent Python implementation (MIT) — inspired by common agent-tooling patterns, no RTK dependency or vendored code.
+
+`graphstack doctor` reports whether the compact module is installed in your project.
 
 ---
 
@@ -361,6 +388,8 @@ your-project/
 │       ├── platform_utils.py             ← OS detection, Python finder, encoding-safe echo
 │       ├── cli.py                        ← entry point dispatcher
 │       ├── validate.py                   ← layout / brief / graph checks
+│       ├── run.py                        ← shell runner with compaction
+│       ├── compact/                      ← git / pytest / generic compactors
 │       └── tests/                        ← pytest suite
 ├── pyproject.toml                        ← pip install -e . (v4.1+)
 ├── .graphifyignore                       ← code-focused graph for this repo
@@ -402,6 +431,7 @@ python -m graphstack board new add-oauth Add OAuth login with GitHub
 python -m graphstack board claim add-oauth builder
 python -m graphstack board complete add-oauth
 python -m graphstack board log
+python -m graphstack run -- git status
 python -m graphstack doctor
 python -m graphstack validate --fail-stale-graph
 ```

@@ -57,6 +57,42 @@ Before reading a file:
 
 ---
 
+## Shell Output (Mandatory for Agents)
+
+Every **Shell / terminal** tool call that runs git, tests, linters, or package managers MUST use GraphStack compaction — not raw commands.
+
+**Default:**
+```bash
+python -m graphstack run -- git status
+python -m graphstack run -- git diff
+python -m graphstack run -- git log -n 20 --oneline
+python -m graphstack run -- pytest -q
+```
+
+**Quality escape hatch** (debug only — wastes tokens):
+```bash
+python -m graphstack run --raw -- git diff
+```
+
+### What compactors preserve (never sacrifice for size)
+
+- File paths, branch names, commit hashes
+- Diff hunk headers (`@@`) and changed lines (`+` / `-`)
+- Test failures, tracebacks, `FAILED` / `ERROR` lines
+- stderr (always appended verbatim)
+
+If compaction would drop critical signal, the tool **falls back to raw stdout** automatically.
+
+### Tier placement
+
+| Action | Tier |
+|--------|------|
+| `graphstack run -- git status` | Tier 2 — cheap, preferred |
+| Raw `git status` in shell | Tier 3 — avoid unless `run` unavailable |
+| `graphstack run --raw` | Tier 3 — justified for deep debug |
+
+---
+
 ## Graph Query Patterns
 
 These answer common questions WITHOUT reading files:

@@ -300,6 +300,7 @@ This is the core optimization. Every action has a token cost tier.
 - Read a single function/class from a file
 - Read a file that's explicitly in the brief
 - Read a file listed in graph node details
+- Shell via `python -m graphstack run -- <command>` (git, tests, lint — see `TOKEN_OPTIMIZER.md` Shell Output)
 
 ### Tier 3 — Expensive (require justification)
 - Read a whole file not in the brief

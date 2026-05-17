@@ -76,6 +76,15 @@ PYTHON_PACKAGE_FILES = (
     "validate.py",
     "platform_utils.py",
     "constants.py",
+    "run.py",
+)
+
+COMPACT_PACKAGE_FILES = (
+    "__init__.py",
+    "base.py",
+    "git.py",
+    "generic.py",
+    "registry.py",
 )
 
 GITKEEP_DIRS = ("handoff/board/todo", "handoff/board/doing", "handoff/board/done")
@@ -152,6 +161,16 @@ def _install_python_package(target: Path) -> int:
             continue
         shutil.copy2(src, dst_pkg / name)
         copied += 1
+
+    compact_src = src_pkg / "compact"
+    compact_dst = dst_pkg / "compact"
+    if compact_src.is_dir():
+        compact_dst.mkdir(parents=True, exist_ok=True)
+        for name in COMPACT_PACKAGE_FILES:
+            src = compact_src / name
+            if src.is_file():
+                shutil.copy2(src, compact_dst / name)
+                copied += 1
     return copied
 
 

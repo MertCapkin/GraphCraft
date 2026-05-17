@@ -103,6 +103,18 @@ Need to read 3+ files?                    → Read them in parallel (one tool ca
 Already read a file this session?         → Use existing context, don't re-read
 ```
 
+## Shell Commands (Builder)
+
+Never run raw `git` or test commands in the Shell tool. Use compaction (preserves paths and failures):
+
+```bash
+python -m graphstack run -- git status
+python -m graphstack run -- git diff
+python -m graphstack run -- pytest -q
+```
+
+Use `--raw` only when debugging a compaction issue.
+
 ---
 
 ## When the Brief Is Ambiguous

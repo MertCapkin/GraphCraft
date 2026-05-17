@@ -16,40 +16,64 @@
     "hash": "573b85b4ef5de25ee6f428c358282f88"
   },
   "C:\\Users\\elife\\Desktop\\Mert_Proje\\graphstack\\scripts\\graphstack\\board.py": {
-    "mtime": 1778951854.4298868,
-    "hash": "66767e71d4081fcfe755cf804f220665"
+    "mtime": 1779032053.2617111,
+    "hash": "1c32f6be29eac71281e2e112ef45fc82"
   },
   "C:\\Users\\elife\\Desktop\\Mert_Proje\\graphstack\\scripts\\graphstack\\cli.py": {
-    "mtime": 1779024519.4627633,
-    "hash": "b7b08aaabf04303e49070be77522751b"
+    "mtime": 1779042803.3093987,
+    "hash": "7f5d03ab30846c27d968e4f678be5eec"
   },
   "C:\\Users\\elife\\Desktop\\Mert_Proje\\graphstack\\scripts\\graphstack\\constants.py": {
-    "mtime": 1778951559.5867226,
-    "hash": "8e2326eea5ede61ed0216df32d146af3"
+    "mtime": 1779032053.2617111,
+    "hash": "92e5bacbfa504e0ed0073e37d09b37f8"
   },
   "C:\\Users\\elife\\Desktop\\Mert_Proje\\graphstack\\scripts\\graphstack\\hook.py": {
     "mtime": 1778951715.9025033,
     "hash": "8f6624bd7c3bcb0f8ba92d28b43bcd89"
   },
   "C:\\Users\\elife\\Desktop\\Mert_Proje\\graphstack\\scripts\\graphstack\\installer.py": {
-    "mtime": 1779024521.261984,
-    "hash": "5f8b9bb6c13c2043d90234f8ec08f19e"
+    "mtime": 1779042814.3613179,
+    "hash": "cc87e5958e2555ecaf15a3a7b151a718"
   },
   "C:\\Users\\elife\\Desktop\\Mert_Proje\\graphstack\\scripts\\graphstack\\platform_utils.py": {
     "mtime": 1778951848.462769,
     "hash": "d16cf15fb6a8023ab1b4c7a05ba42c73"
   },
+  "C:\\Users\\elife\\Desktop\\Mert_Proje\\graphstack\\scripts\\graphstack\\run.py": {
+    "mtime": 1779042798.263256,
+    "hash": "d8a2033367ad2bfce81c7615781d21c8"
+  },
   "C:\\Users\\elife\\Desktop\\Mert_Proje\\graphstack\\scripts\\graphstack\\validate.py": {
-    "mtime": 1779029533.2847264,
-    "hash": "4f7fe74170a363ea54232f89a2a21ad1"
+    "mtime": 1779042816.0752947,
+    "hash": "2eedac885a1398481f5448da1663e7e8"
   },
   "C:\\Users\\elife\\Desktop\\Mert_Proje\\graphstack\\scripts\\graphstack\\__init__.py": {
-    "mtime": 1779024520.1957564,
-    "hash": "60d14328899aa7ac952611685320e855"
+    "mtime": 1779042804.1117277,
+    "hash": "2c819310d04f8a5b4ab9f812d1a46014"
   },
   "C:\\Users\\elife\\Desktop\\Mert_Proje\\graphstack\\scripts\\graphstack\\__main__.py": {
     "mtime": 1778951586.1178832,
     "hash": "f8f4484b7c02dadb2736d3f86f18f3a2"
+  },
+  "C:\\Users\\elife\\Desktop\\Mert_Proje\\graphstack\\scripts\\graphstack\\compact\\base.py": {
+    "mtime": 1779042762.5159256,
+    "hash": "7b362b83d247ccd311b9a4e2c9567671"
+  },
+  "C:\\Users\\elife\\Desktop\\Mert_Proje\\graphstack\\scripts\\graphstack\\compact\\generic.py": {
+    "mtime": 1779042782.6314025,
+    "hash": "8b55282603c783997b487c7d6f9364e1"
+  },
+  "C:\\Users\\elife\\Desktop\\Mert_Proje\\graphstack\\scripts\\graphstack\\compact\\git.py": {
+    "mtime": 1779042798.5800974,
+    "hash": "e2ac55271234c43b77a274eadf9a229e"
+  },
+  "C:\\Users\\elife\\Desktop\\Mert_Proje\\graphstack\\scripts\\graphstack\\compact\\registry.py": {
+    "mtime": 1779042787.4329345,
+    "hash": "a9e5aa818f6c3a66bbd026d35b6b0f01"
+  },
+  "C:\\Users\\elife\\Desktop\\Mert_Proje\\graphstack\\scripts\\graphstack\\compact\\__init__.py": {
+    "mtime": 1779042753.6001005,
+    "hash": "d6faf73e36798b551ac3780dc5108261"
   },
   "C:\\Users\\elife\\Desktop\\Mert_Proje\\graphstack\\scripts\\graphstack\\tests\\conftest.py": {
     "mtime": 1778952018.6105912,
@@ -59,13 +83,17 @@
     "mtime": 1778952033.679693,
     "hash": "265d9c35394562ed092616f96b44d42f"
   },
+  "C:\\Users\\elife\\Desktop\\Mert_Proje\\graphstack\\scripts\\graphstack\\tests\\test_compact.py": {
+    "mtime": 1779042811.4957619,
+    "hash": "53a1bb8fae07a22c465fabaa312aecfa"
+  },
   "C:\\Users\\elife\\Desktop\\Mert_Proje\\graphstack\\scripts\\graphstack\\tests\\test_hook.py": {
     "mtime": 1778952067.6273427,
     "hash": "c39ea56b57813beb6150b9581e081fcf"
   },
   "C:\\Users\\elife\\Desktop\\Mert_Proje\\graphstack\\scripts\\graphstack\\tests\\test_installer.py": {
-    "mtime": 1779024574.2730126,
-    "hash": "bff9d8af2161cff5a990c190f35777a6"
+    "mtime": 1779032843.7053974,
+    "hash": "50deeae9a81c72095e8c28fdd7030066"
   },
   "C:\\Users\\elife\\Desktop\\Mert_Proje\\graphstack\\scripts\\graphstack\\tests\\test_platform_utils.py": {
     "mtime": 1778952045.643568,

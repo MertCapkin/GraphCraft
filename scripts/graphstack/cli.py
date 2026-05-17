@@ -1,11 +1,12 @@
 """Top-level CLI dispatcher.
 
-Five sub-commands:
+Six sub-commands:
 - ``board``     — GNAP task board manager (replaces ``scripts/board.sh``)
 - ``install``   — install GraphStack into a target project (replaces ``install.sh``)
 - ``hook``      — post-commit graph-update logic (replaces ``scripts/post-commit``)
 - ``validate``  — check handoff layout, brief, board tasks, graph freshness
 - ``doctor``    — human-friendly health report (same checks as validate)
+- ``run``       — execute shell commands with token-safe output compaction
 
 Each sub-command parses its own arguments to keep the dispatcher minimal.
 """
@@ -21,7 +22,7 @@ from . import __version__
 def _build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="graphstack",
-        description="GraphStack cross-platform helper (board / install / hook / validate / doctor).",
+        description="GraphStack cross-platform helper (board / install / hook / validate / doctor / run).",
     )
     parser.add_argument(
         "--version", action="version", version=f"graphstack {__version__}"
@@ -33,6 +34,7 @@ def _build_parser() -> argparse.ArgumentParser:
     sub.add_parser("hook", help="Run the post-commit hook logic", add_help=False)
     sub.add_parser("validate", help="Validate handoff and graph layout", add_help=False)
     sub.add_parser("doctor", help="Project health report", add_help=False)
+    sub.add_parser("run", help="Run shell command with compact output", add_help=False)
 
     return parser
 
@@ -64,6 +66,9 @@ def main(argv: list[str] | None = None) -> int:
     if cmd == "doctor":
         from .validate import run_doctor
         return run_doctor(rest)
+    if cmd == "run":
+        from .run import run as run_cmd
+        return run_cmd(rest)
 
     print(f"Unknown command: {cmd}", file=sys.stderr)
     _build_parser().print_help()

@@ -281,6 +281,23 @@ def check_graph(report: Report, root: Path, *, fail_stale: bool) -> None:
     )
 
 
+def check_compact_module(report: Report, root: Path) -> None:
+    run_py = root / "scripts" / "graphstack" / "run.py"
+    registry = root / "scripts" / "graphstack" / "compact" / "registry.py"
+    if run_py.is_file() and registry.is_file():
+        report.add(
+            "ok",
+            "compact_ok",
+            "Output compact module present (use: python -m graphstack run -- <cmd>)",
+        )
+    else:
+        report.add(
+            "warn",
+            "compact_missing",
+            "Output compact module missing — reinstall GraphStack for shell token savings",
+        )
+
+
 def check_tooling(report: Report, *, doctor: bool) -> None:
     if graphify_available():
         report.add("ok", "graphify_ok", "graphify CLI found on PATH")
@@ -314,6 +331,7 @@ def run_checks(
     check_board_tasks(report)
     check_state(report, root)
     check_graph(report, root, fail_stale=fail_stale)
+    check_compact_module(report, root)
     check_tooling(report, doctor=doctor)
     return report
 

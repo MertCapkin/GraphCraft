@@ -9,7 +9,7 @@
       "source_file": "demo/src/api/types.ts",
       "source_location": "L1",
       "id": "demo_src_api_types_ts",
-      "community": 15,
+      "community": 14,
       "norm_label": "types.ts"
     },
     {
@@ -18,7 +18,7 @@
       "source_file": "demo/src/auth/login.ts",
       "source_location": "L1",
       "id": "demo_src_auth_login_ts",
-      "community": 15,
+      "community": 14,
       "norm_label": "login.ts"
     },
     {
@@ -27,7 +27,7 @@
       "source_file": "demo/src/auth/login.ts",
       "source_location": "L7",
       "id": "auth_login_login",
-      "community": 15,
+      "community": 14,
       "norm_label": "login()"
     },
     {
@@ -36,7 +36,7 @@
       "source_file": "demo/src/auth/login.ts",
       "source_location": "L23",
       "id": "auth_login_logout",
-      "community": 15,
+      "community": 14,
       "norm_label": "logout()"
     },
     {
@@ -45,7 +45,7 @@
       "source_file": "demo/src/auth/session.ts",
       "source_location": "L1",
       "id": "demo_src_auth_session_ts",
-      "community": 15,
+      "community": 14,
       "norm_label": "session.ts"
     },
     {
@@ -54,7 +54,7 @@
       "source_file": "demo/src/auth/session.ts",
       "source_location": "L13",
       "id": "auth_session_createsession",
-      "community": 15,
+      "community": 14,
       "norm_label": "createsession()"
     },
     {
@@ -63,7 +63,7 @@
       "source_file": "demo/src/auth/session.ts",
       "source_location": "L25",
       "id": "auth_session_validatesession",
-      "community": 15,
+      "community": 14,
       "norm_label": "validatesession()"
     },
     {
@@ -72,7 +72,7 @@
       "source_file": "demo/src/auth/session.ts",
       "source_location": "L35",
       "id": "auth_session_destroysession",
-      "community": 15,
+      "community": 14,
       "norm_label": "destroysession()"
     },
     {
@@ -81,7 +81,7 @@
       "source_file": "demo/src/utils/crypto.ts",
       "source_location": "L1",
       "id": "demo_src_utils_crypto_ts",
-      "community": 15,
+      "community": 14,
       "norm_label": "crypto.ts"
     },
     {
@@ -90,7 +90,7 @@
       "source_file": "demo/src/utils/crypto.ts",
       "source_location": "L7",
       "id": "utils_crypto_hashpassword",
-      "community": 15,
+      "community": 14,
       "norm_label": "hashpassword()"
     },
     {
@@ -99,7 +99,7 @@
       "source_file": "demo/src/utils/crypto.ts",
       "source_location": "L13",
       "id": "utils_crypto_comparepassword",
-      "community": 15,
+      "community": 14,
       "norm_label": "comparepassword()"
     },
     {
@@ -108,7 +108,7 @@
       "source_file": "demo/src/utils/crypto.ts",
       "source_location": "L23",
       "id": "utils_crypto_generatetoken",
-      "community": 15,
+      "community": 14,
       "norm_label": "generatetoken()"
     },
     {
@@ -117,7 +117,7 @@
       "source_file": "scripts/graphstack/board.py",
       "source_location": "L1",
       "id": "scripts_graphstack_board_py",
-      "community": 2,
+      "community": 0,
       "norm_label": "board.py"
     },
     {
@@ -126,7 +126,7 @@
       "source_file": "scripts/graphstack/board.py",
       "source_location": "L20",
       "id": "graphstack_board_load_task",
-      "community": 2,
+      "community": 0,
       "norm_label": "_load_task()"
     },
     {
@@ -135,7 +135,7 @@
       "source_file": "scripts/graphstack/board.py",
       "source_location": "L25",
       "id": "graphstack_board_save_task",
-      "community": 2,
+      "community": 0,
       "norm_label": "_save_task()"
     },
     {
@@ -144,7 +144,7 @@
       "source_file": "scripts/graphstack/board.py",
       "source_location": "L31",
       "id": "graphstack_board_get",
-      "community": 2,
+      "community": 0,
       "norm_label": "_get()"
     },
     {
@@ -153,7 +153,7 @@
       "source_file": "scripts/graphstack/board.py",
       "source_location": "L38",
       "id": "graphstack_board_print_task",
-      "community": 2,
+      "community": 0,
       "norm_label": "_print_task()"
     },
     {
@@ -162,88 +162,88 @@
       "source_file": "scripts/graphstack/board.py",
       "source_location": "L50",
       "id": "graphstack_board_iter_tasks",
-      "community": 2,
+      "community": 0,
       "norm_label": "_iter_tasks()"
     },
     {
       "label": "_git_commit_board()",
       "file_type": "code",
       "source_file": "scripts/graphstack/board.py",
-      "source_location": "L59",
+      "source_location": "L56",
       "id": "graphstack_board_git_commit_board",
-      "community": 2,
+      "community": 0,
       "norm_label": "_git_commit_board()"
     },
     {
       "label": "cmd_status()",
       "file_type": "code",
       "source_file": "scripts/graphstack/board.py",
-      "source_location": "L65",
+      "source_location": "L62",
       "id": "graphstack_board_cmd_status",
-      "community": 2,
+      "community": 0,
       "norm_label": "cmd_status()"
     },
     {
       "label": "cmd_new()",
       "file_type": "code",
       "source_file": "scripts/graphstack/board.py",
-      "source_location": "L88",
+      "source_location": "L85",
       "id": "graphstack_board_cmd_new",
-      "community": 2,
+      "community": 0,
       "norm_label": "cmd_new()"
     },
     {
       "label": "cmd_claim()",
       "file_type": "code",
       "source_file": "scripts/graphstack/board.py",
-      "source_location": "L121",
+      "source_location": "L118",
       "id": "graphstack_board_cmd_claim",
-      "community": 2,
+      "community": 0,
       "norm_label": "cmd_claim()"
     },
     {
       "label": "cmd_complete()",
       "file_type": "code",
       "source_file": "scripts/graphstack/board.py",
-      "source_location": "L160",
+      "source_location": "L157",
       "id": "graphstack_board_cmd_complete",
-      "community": 2,
+      "community": 0,
       "norm_label": "cmd_complete()"
     },
     {
       "label": "cmd_log()",
       "file_type": "code",
       "source_file": "scripts/graphstack/board.py",
-      "source_location": "L187",
+      "source_location": "L184",
       "id": "graphstack_board_cmd_log",
-      "community": 2,
+      "community": 0,
       "norm_label": "cmd_log()"
     },
     {
       "label": "_build_parser()",
       "file_type": "code",
       "source_file": "scripts/graphstack/board.py",
-      "source_location": "L199",
+      "source_location": "L196",
       "id": "graphstack_board_build_parser",
-      "community": 2,
+      "community": 0,
       "norm_label": "_build_parser()"
     },
     {
       "label": "_print_help()",
       "file_type": "code",
       "source_file": "scripts/graphstack/board.py",
-      "source_location": "L224",
+      "source_location": "L221",
       "id": "graphstack_board_print_help",
-      "community": 2,
+      "community": 0,
       "norm_label": "_print_help()"
     },
     {
       "label": "run()",
       "file_type": "code",
       "source_file": "scripts/graphstack/board.py",
-      "source_location": "L249",
+      "source_location": "L246",
       "id": "graphstack_board_run",
-      "community": 2,
+      "community": 0,
       "norm_label": "run()"
     },
     {
@@ -252,16 +252,16 @@
       "source_file": "scripts/graphstack/board.py",
       "source_location": "L1",
       "id": "graphstack_board_rationale_1",
-      "community": 2,
+      "community": 0,
       "norm_label": "gnap board manager \u2014 pure python port of ``scripts/board.sh``.  json schema is"
     },
     {
       "label": "Stage the board directory and commit silently \u2014 never fails the command.",
       "file_type": "rationale",
       "source_file": "scripts/graphstack/board.py",
-      "source_location": "L60",
-      "id": "graphstack_board_rationale_60",
-      "community": 2,
+      "source_location": "L57",
+      "id": "graphstack_board_rationale_57",
+      "community": 0,
       "norm_label": "stage the board directory and commit silently \u2014 never fails the command."
     },
     {
@@ -270,43 +270,43 @@
       "source_file": "scripts/graphstack/cli.py",
       "source_location": "L1",
       "id": "scripts_graphstack_cli_py",
-      "community": 16,
+      "community": 15,
       "norm_label": "cli.py"
     },
     {
       "label": "_build_parser()",
       "file_type": "code",
       "source_file": "scripts/graphstack/cli.py",
-      "source_location": "L21",
+      "source_location": "L22",
       "id": "graphstack_cli_build_parser",
-      "community": 16,
+      "community": 15,
       "norm_label": "_build_parser()"
     },
     {
       "label": "main()",
       "file_type": "code",
       "source_file": "scripts/graphstack/cli.py",
-      "source_location": "L40",
+      "source_location": "L42",
       "id": "graphstack_cli_main",
-      "community": 16,
+      "community": 15,
       "norm_label": "main()"
     },
     {
-      "label": "Top-level CLI dispatcher.  Five sub-commands: - ``board``     \u2014 GNAP task boa",
+      "label": "Top-level CLI dispatcher.  Six sub-commands: - ``board``     \u2014 GNAP task boar",
       "file_type": "rationale",
       "source_file": "scripts/graphstack/cli.py",
       "source_location": "L1",
       "id": "graphstack_cli_rationale_1",
-      "community": 16,
-      "norm_label": "top-level cli dispatcher.  five sub-commands: - ``board``     \u2014 gnap task boa"
+      "community": 15,
+      "norm_label": "top-level cli dispatcher.  six sub-commands: - ``board``     \u2014 gnap task boar"
     },
     {
       "label": "Entry point for both ``python -m graphstack`` and unit tests.",
       "file_type": "rationale",
       "source_file": "scripts/graphstack/cli.py",
-      "source_location": "L41",
-      "id": "graphstack_cli_rationale_41",
-      "community": 16,
+      "source_location": "L43",
+      "id": "graphstack_cli_rationale_43",
+      "community": 15,
       "norm_label": "entry point for both ``python -m graphstack`` and unit tests."
     },
     {
@@ -315,7 +315,7 @@
       "source_file": "scripts/graphstack/constants.py",
       "source_location": "L1",
       "id": "scripts_graphstack_constants_py",
-      "community": 2,
+      "community": 0,
       "norm_label": "constants.py"
     },
     {
@@ -324,7 +324,7 @@
       "source_file": "scripts/graphstack/constants.py",
       "source_location": "L1",
       "id": "graphstack_constants_rationale_1",
-      "community": 2,
+      "community": 0,
       "norm_label": "path and configuration constants used across the package.  paths are resolved"
     },
     {
@@ -333,7 +333,7 @@
       "source_file": "scripts/graphstack/hook.py",
       "source_location": "L1",
       "id": "scripts_graphstack_hook_py",
-      "community": 8,
+      "community": 0,
       "norm_label": "hook.py"
     },
     {
@@ -342,7 +342,7 @@
       "source_file": "scripts/graphstack/hook.py",
       "source_location": "L33",
       "id": "graphstack_hook_has_previous_commit",
-      "community": 8,
+      "community": 0,
       "norm_label": "_has_previous_commit()"
     },
     {
@@ -351,7 +351,7 @@
       "source_file": "scripts/graphstack/hook.py",
       "source_location": "L38",
       "id": "graphstack_hook_structural_changes_count",
-      "community": 8,
+      "community": 0,
       "norm_label": "_structural_changes_count()"
     },
     {
@@ -360,7 +360,7 @@
       "source_file": "scripts/graphstack/hook.py",
       "source_location": "L58",
       "id": "graphstack_hook_modified_count",
-      "community": 8,
+      "community": 0,
       "norm_label": "_modified_count()"
     },
     {
@@ -369,7 +369,7 @@
       "source_file": "scripts/graphstack/hook.py",
       "source_location": "L71",
       "id": "graphstack_hook_last_commit_message",
-      "community": 8,
+      "community": 0,
       "norm_label": "_last_commit_message()"
     },
     {
@@ -378,7 +378,7 @@
       "source_file": "scripts/graphstack/hook.py",
       "source_location": "L76",
       "id": "graphstack_hook_do_update",
-      "community": 8,
+      "community": 0,
       "norm_label": "_do_update()"
     },
     {
@@ -387,7 +387,7 @@
       "source_file": "scripts/graphstack/hook.py",
       "source_location": "L101",
       "id": "graphstack_hook_run_hook",
-      "community": 8,
+      "community": 0,
       "norm_label": "run_hook()"
     },
     {
@@ -396,7 +396,7 @@
       "source_file": "scripts/graphstack/hook.py",
       "source_location": "L131",
       "id": "graphstack_hook_build_parser",
-      "community": 8,
+      "community": 0,
       "norm_label": "_build_parser()"
     },
     {
@@ -405,7 +405,7 @@
       "source_file": "scripts/graphstack/hook.py",
       "source_location": "L138",
       "id": "graphstack_hook_run",
-      "community": 8,
+      "community": 0,
       "norm_label": "run()"
     },
     {
@@ -414,7 +414,7 @@
       "source_file": "scripts/graphstack/hook.py",
       "source_location": "L1",
       "id": "graphstack_hook_rationale_1",
-      "community": 8,
+      "community": 0,
       "norm_label": "smart graph-update logic \u2014 pure python port of ``scripts/post-commit``.  trigg"
     },
     {
@@ -423,7 +423,7 @@
       "source_file": "scripts/graphstack/hook.py",
       "source_location": "L34",
       "id": "graphstack_hook_rationale_34",
-      "community": 8,
+      "community": 0,
       "norm_label": "``head~1`` exists only after at least 2 commits \u2014 guard for first commit."
     },
     {
@@ -432,7 +432,7 @@
       "source_file": "scripts/graphstack/hook.py",
       "source_location": "L39",
       "id": "graphstack_hook_rationale_39",
-      "community": 8,
+      "community": 0,
       "norm_label": "number of added/deleted files in the latest commit (excluding generated dirs)."
     },
     {
@@ -441,7 +441,7 @@
       "source_file": "scripts/graphstack/hook.py",
       "source_location": "L59",
       "id": "graphstack_hook_rationale_59",
-      "community": 8,
+      "community": 0,
       "norm_label": "number of files modified in the latest commit (any status, excludes generated)."
     },
     {
@@ -450,79 +450,79 @@
       "source_file": "scripts/graphstack/installer.py",
       "source_location": "L1",
       "id": "scripts_graphstack_installer_py",
-      "community": 2,
+      "community": 0,
       "norm_label": "installer.py"
     },
     {
       "label": "_copy_if_exists()",
       "file_type": "code",
       "source_file": "scripts/graphstack/installer.py",
-      "source_location": "L94",
+      "source_location": "L102",
       "id": "graphstack_installer_copy_if_exists",
-      "community": 2,
+      "community": 0,
       "norm_label": "_copy_if_exists()"
     },
     {
       "label": "_ask_yes_no()",
       "file_type": "code",
       "source_file": "scripts/graphstack/installer.py",
-      "source_location": "L103",
+      "source_location": "L111",
       "id": "graphstack_installer_ask_yes_no",
-      "community": 2,
+      "community": 0,
       "norm_label": "_ask_yes_no()"
     },
     {
       "label": "_install_git_hook()",
       "file_type": "code",
       "source_file": "scripts/graphstack/installer.py",
-      "source_location": "L116",
+      "source_location": "L124",
       "id": "graphstack_installer_install_git_hook",
-      "community": 2,
+      "community": 0,
       "norm_label": "_install_git_hook()"
     },
     {
       "label": "_ensure_state_md()",
       "file_type": "code",
       "source_file": "scripts/graphstack/installer.py",
-      "source_location": "L135",
+      "source_location": "L143",
       "id": "graphstack_installer_ensure_state_md",
-      "community": 2,
+      "community": 0,
       "norm_label": "_ensure_state_md()"
     },
     {
       "label": "_install_python_package()",
       "file_type": "code",
       "source_file": "scripts/graphstack/installer.py",
-      "source_location": "L143",
+      "source_location": "L151",
       "id": "graphstack_installer_install_python_package",
-      "community": 2,
+      "community": 0,
       "norm_label": "_install_python_package()"
     },
     {
       "label": "install()",
       "file_type": "code",
       "source_file": "scripts/graphstack/installer.py",
-      "source_location": "L159",
+      "source_location": "L177",
       "id": "graphstack_installer_install",
-      "community": 2,
+      "community": 0,
       "norm_label": "install()"
     },
     {
       "label": "_build_parser()",
       "file_type": "code",
       "source_file": "scripts/graphstack/installer.py",
-      "source_location": "L224",
+      "source_location": "L242",
       "id": "graphstack_installer_build_parser",
-      "community": 2,
+      "community": 0,
       "norm_label": "_build_parser()"
     },
     {
       "label": "run()",
       "file_type": "code",
       "source_file": "scripts/graphstack/installer.py",
-      "source_location": "L243",
+      "source_location": "L261",
       "id": "graphstack_installer_run",
-      "community": 2,
+      "community": 0,
       "norm_label": "run()"
     },
     {
@@ -531,16 +531,16 @@
       "source_file": "scripts/graphstack/installer.py",
       "source_location": "L1",
       "id": "graphstack_installer_rationale_1",
-      "community": 2,
+      "community": 0,
       "norm_label": "graphstack installer \u2014 pure python port of ``install.sh``.  improvements over"
     },
     {
       "label": "Copy ``scripts/graphstack/*.py`` into the target so the shims work.",
       "file_type": "rationale",
       "source_file": "scripts/graphstack/installer.py",
-      "source_location": "L144",
-      "id": "graphstack_installer_rationale_144",
-      "community": 2,
+      "source_location": "L152",
+      "id": "graphstack_installer_rationale_152",
+      "community": 0,
       "norm_label": "copy ``scripts/graphstack/*.py`` into the target so the shims work."
     },
     {
@@ -549,7 +549,7 @@
       "source_file": "scripts/graphstack/platform_utils.py",
       "source_location": "L1",
       "id": "scripts_graphstack_platform_utils_py",
-      "community": 8,
+      "community": 0,
       "norm_label": "platform_utils.py"
     },
     {
@@ -558,7 +558,7 @@
       "source_file": "scripts/graphstack/platform_utils.py",
       "source_location": "L19",
       "id": "graphstack_platform_utils_reconfigure_stdout",
-      "community": 8,
+      "community": 0,
       "norm_label": "_reconfigure_stdout()"
     },
     {
@@ -567,7 +567,7 @@
       "source_file": "scripts/graphstack/platform_utils.py",
       "source_location": "L42",
       "id": "graphstack_platform_utils_find_python",
-      "community": 8,
+      "community": 0,
       "norm_label": "find_python()"
     },
     {
@@ -576,7 +576,7 @@
       "source_file": "scripts/graphstack/platform_utils.py",
       "source_location": "L57",
       "id": "graphstack_platform_utils_run_git",
-      "community": 8,
+      "community": 0,
       "norm_label": "run_git()"
     },
     {
@@ -585,7 +585,7 @@
       "source_file": "scripts/graphstack/platform_utils.py",
       "source_location": "L74",
       "id": "graphstack_platform_utils_git_available",
-      "community": 0,
+      "community": 1,
       "norm_label": "git_available()"
     },
     {
@@ -603,7 +603,7 @@
       "source_file": "scripts/graphstack/platform_utils.py",
       "source_location": "L82",
       "id": "graphstack_platform_utils_utc_now_iso",
-      "community": 2,
+      "community": 0,
       "norm_label": "utc_now_iso()"
     },
     {
@@ -612,7 +612,7 @@
       "source_file": "scripts/graphstack/platform_utils.py",
       "source_location": "L87",
       "id": "graphstack_platform_utils_file_mtime_seconds",
-      "community": 8,
+      "community": 0,
       "norm_label": "file_mtime_seconds()"
     },
     {
@@ -621,7 +621,7 @@
       "source_file": "scripts/graphstack/platform_utils.py",
       "source_location": "L94",
       "id": "graphstack_platform_utils_emoji_safe",
-      "community": 2,
+      "community": 0,
       "norm_label": "emoji_safe()"
     },
     {
@@ -630,7 +630,7 @@
       "source_file": "scripts/graphstack/platform_utils.py",
       "source_location": "L114",
       "id": "graphstack_platform_utils_echo",
-      "community": 2,
+      "community": 0,
       "norm_label": "echo()"
     },
     {
@@ -639,7 +639,7 @@
       "source_file": "scripts/graphstack/platform_utils.py",
       "source_location": "L1",
       "id": "graphstack_platform_utils_rationale_1",
-      "community": 8,
+      "community": 0,
       "norm_label": "os-agnostic helpers: python detection, git wrappers, console output.  the pack"
     },
     {
@@ -648,7 +648,7 @@
       "source_file": "scripts/graphstack/platform_utils.py",
       "source_location": "L20",
       "id": "graphstack_platform_utils_rationale_20",
-      "community": 8,
+      "community": 0,
       "norm_label": "make stdout/stderr tolerant of unicode on windows code pages.      many window"
     },
     {
@@ -657,7 +657,7 @@
       "source_file": "scripts/graphstack/platform_utils.py",
       "source_location": "L43",
       "id": "graphstack_platform_utils_rationale_43",
-      "community": 8,
+      "community": 0,
       "norm_label": "return the argv prefix to launch a python interpreter.      order: ``python3``"
     },
     {
@@ -666,7 +666,7 @@
       "source_file": "scripts/graphstack/platform_utils.py",
       "source_location": "L58",
       "id": "graphstack_platform_utils_rationale_58",
-      "community": 8,
+      "community": 0,
       "norm_label": "run a git subcommand without ever raising on non-zero exit.      returns the c"
     },
     {
@@ -675,7 +675,7 @@
       "source_file": "scripts/graphstack/platform_utils.py",
       "source_location": "L83",
       "id": "graphstack_platform_utils_rationale_83",
-      "community": 2,
+      "community": 0,
       "norm_label": "iso 8601 timestamp in utc, second precision (matches old shell output)."
     },
     {
@@ -684,7 +684,7 @@
       "source_file": "scripts/graphstack/platform_utils.py",
       "source_location": "L95",
       "id": "graphstack_platform_utils_rationale_95",
-      "community": 2,
+      "community": 0,
       "norm_label": "return ``text`` unchanged on utf-8 capable stdouts, ascii-flatten otherwise."
     },
     {
@@ -693,8 +693,62 @@
       "source_file": "scripts/graphstack/platform_utils.py",
       "source_location": "L115",
       "id": "graphstack_platform_utils_rationale_115",
-      "community": 2,
+      "community": 0,
       "norm_label": "``print`` with emoji-safe fallback. always flushes for shim transparency."
+    },
+    {
+      "label": "run.py",
+      "file_type": "code",
+      "source_file": "scripts/graphstack/run.py",
+      "source_location": "L1",
+      "id": "scripts_graphstack_run_py",
+      "community": 3,
+      "norm_label": "run.py"
+    },
+    {
+      "label": "_build_parser()",
+      "file_type": "code",
+      "source_file": "scripts/graphstack/run.py",
+      "source_location": "L16",
+      "id": "graphstack_run_build_parser",
+      "community": 3,
+      "norm_label": "_build_parser()"
+    },
+    {
+      "label": "_strip_leading_dashes()",
+      "file_type": "code",
+      "source_file": "scripts/graphstack/run.py",
+      "source_location": "L34",
+      "id": "graphstack_run_strip_leading_dashes",
+      "community": 3,
+      "norm_label": "_strip_leading_dashes()"
+    },
+    {
+      "label": "execute()",
+      "file_type": "code",
+      "source_file": "scripts/graphstack/run.py",
+      "source_location": "L40",
+      "id": "graphstack_run_execute",
+      "community": 3,
+      "norm_label": "execute()"
+    },
+    {
+      "label": "run()",
+      "file_type": "code",
+      "source_file": "scripts/graphstack/run.py",
+      "source_location": "L82",
+      "id": "graphstack_run_run",
+      "community": 3,
+      "norm_label": "run()"
+    },
+    {
+      "label": "Run shell commands with token-safe output compaction.  Usage:   graphstack ru",
+      "file_type": "rationale",
+      "source_file": "scripts/graphstack/run.py",
+      "source_location": "L1",
+      "id": "graphstack_run_rationale_1",
+      "community": 3,
+      "norm_label": "run shell commands with token-safe output compaction.  usage:   graphstack ru"
     },
     {
       "label": "validate.py",
@@ -702,214 +756,223 @@
       "source_file": "scripts/graphstack/validate.py",
       "source_location": "L1",
       "id": "scripts_graphstack_validate_py",
-      "community": 0,
+      "community": 1,
       "norm_label": "validate.py"
     },
     {
       "label": "Finding",
       "file_type": "code",
       "source_file": "scripts/graphstack/validate.py",
-      "source_location": "L49",
+      "source_location": "L48",
       "id": "graphstack_validate_finding",
-      "community": 0,
+      "community": 1,
       "norm_label": "finding"
     },
     {
       "label": "Report",
       "file_type": "code",
       "source_file": "scripts/graphstack/validate.py",
-      "source_location": "L56",
+      "source_location": "L55",
       "id": "graphstack_validate_report",
-      "community": 0,
+      "community": 1,
       "norm_label": "report"
     },
     {
       "label": ".add()",
       "file_type": "code",
       "source_file": "scripts/graphstack/validate.py",
-      "source_location": "L59",
+      "source_location": "L58",
       "id": "graphstack_validate_report_add",
-      "community": 0,
+      "community": 1,
       "norm_label": ".add()"
     },
     {
       "label": "errors()",
       "file_type": "code",
       "source_file": "scripts/graphstack/validate.py",
-      "source_location": "L63",
+      "source_location": "L62",
       "id": "graphstack_validate_errors",
-      "community": 0,
+      "community": 1,
       "norm_label": "errors()"
     },
     {
       "label": "warnings()",
       "file_type": "code",
       "source_file": "scripts/graphstack/validate.py",
-      "source_location": "L67",
+      "source_location": "L66",
       "id": "graphstack_validate_warnings",
-      "community": 0,
+      "community": 1,
       "norm_label": "warnings()"
     },
     {
       "label": "_root()",
       "file_type": "code",
       "source_file": "scripts/graphstack/validate.py",
-      "source_location": "L71",
+      "source_location": "L70",
       "id": "graphstack_validate_root",
-      "community": 0,
+      "community": 1,
       "norm_label": "_root()"
     },
     {
       "label": "_iter_board_tasks()",
       "file_type": "code",
       "source_file": "scripts/graphstack/validate.py",
-      "source_location": "L75",
+      "source_location": "L74",
       "id": "graphstack_validate_iter_board_tasks",
-      "community": 0,
+      "community": 1,
       "norm_label": "_iter_board_tasks()"
     },
     {
       "label": "_brief_is_template()",
       "file_type": "code",
       "source_file": "scripts/graphstack/validate.py",
-      "source_location": "L87",
+      "source_location": "L83",
       "id": "graphstack_validate_brief_is_template",
-      "community": 0,
+      "community": 1,
       "norm_label": "_brief_is_template()"
     },
     {
       "label": "_brief_status()",
       "file_type": "code",
       "source_file": "scripts/graphstack/validate.py",
-      "source_location": "L91",
+      "source_location": "L87",
       "id": "graphstack_validate_brief_status",
-      "community": 0,
+      "community": 1,
       "norm_label": "_brief_status()"
     },
     {
       "label": "check_layout()",
       "file_type": "code",
       "source_file": "scripts/graphstack/validate.py",
-      "source_location": "L98",
+      "source_location": "L94",
       "id": "graphstack_validate_check_layout",
-      "community": 0,
+      "community": 1,
       "norm_label": "check_layout()"
     },
     {
       "label": "check_brief()",
       "file_type": "code",
       "source_file": "scripts/graphstack/validate.py",
-      "source_location": "L114",
+      "source_location": "L110",
       "id": "graphstack_validate_check_brief",
-      "community": 0,
+      "community": 1,
       "norm_label": "check_brief()"
     },
     {
       "label": "check_board_tasks()",
       "file_type": "code",
       "source_file": "scripts/graphstack/validate.py",
-      "source_location": "L138",
+      "source_location": "L134",
       "id": "graphstack_validate_check_board_tasks",
-      "community": 0,
+      "community": 1,
       "norm_label": "check_board_tasks()"
     },
     {
       "label": "_commit_matches_graph()",
       "file_type": "code",
       "source_file": "scripts/graphstack/validate.py",
-      "source_location": "L187",
+      "source_location": "L183",
       "id": "graphstack_validate_commit_matches_graph",
-      "community": 0,
+      "community": 1,
       "norm_label": "_commit_matches_graph()"
     },
     {
       "label": "_refs_for_staleness_check()",
       "file_type": "code",
       "source_file": "scripts/graphstack/validate.py",
-      "source_location": "L193",
+      "source_location": "L189",
       "id": "graphstack_validate_refs_for_staleness_check",
-      "community": 0,
+      "community": 1,
       "norm_label": "_refs_for_staleness_check()"
     },
     {
       "label": "check_state()",
       "file_type": "code",
       "source_file": "scripts/graphstack/validate.py",
-      "source_location": "L218",
+      "source_location": "L214",
       "id": "graphstack_validate_check_state",
-      "community": 0,
+      "community": 1,
       "norm_label": "check_state()"
     },
     {
       "label": "check_graph()",
       "file_type": "code",
       "source_file": "scripts/graphstack/validate.py",
-      "source_location": "L229",
+      "source_location": "L225",
       "id": "graphstack_validate_check_graph",
-      "community": 0,
+      "community": 1,
       "norm_label": "check_graph()"
+    },
+    {
+      "label": "check_compact_module()",
+      "file_type": "code",
+      "source_file": "scripts/graphstack/validate.py",
+      "source_location": "L284",
+      "id": "graphstack_validate_check_compact_module",
+      "community": 1,
+      "norm_label": "check_compact_module()"
     },
     {
       "label": "check_tooling()",
       "file_type": "code",
       "source_file": "scripts/graphstack/validate.py",
-      "source_location": "L288",
+      "source_location": "L301",
       "id": "graphstack_validate_check_tooling",
-      "community": 0,
+      "community": 1,
       "norm_label": "check_tooling()"
     },
     {
       "label": "run_checks()",
       "file_type": "code",
       "source_file": "scripts/graphstack/validate.py",
-      "source_location": "L308",
+      "source_location": "L321",
       "id": "graphstack_validate_run_checks",
-      "community": 0,
+      "community": 1,
       "norm_label": "run_checks()"
     },
     {
       "label": "_print_report()",
       "file_type": "code",
       "source_file": "scripts/graphstack/validate.py",
-      "source_location": "L325",
+      "source_location": "L339",
       "id": "graphstack_validate_print_report",
-      "community": 0,
+      "community": 1,
       "norm_label": "_print_report()"
     },
     {
       "label": "_build_parser()",
       "file_type": "code",
       "source_file": "scripts/graphstack/validate.py",
-      "source_location": "L354",
+      "source_location": "L368",
       "id": "graphstack_validate_build_parser",
-      "community": 0,
+      "community": 1,
       "norm_label": "_build_parser()"
     },
     {
       "label": "run_validate()",
       "file_type": "code",
       "source_file": "scripts/graphstack/validate.py",
-      "source_location": "L369",
+      "source_location": "L383",
       "id": "graphstack_validate_run_validate",
-      "community": 0,
+      "community": 1,
       "norm_label": "run_validate()"
     },
     {
       "label": "run_doctor()",
       "file_type": "code",
       "source_file": "scripts/graphstack/validate.py",
-      "source_location": "L377",
+      "source_location": "L391",
       "id": "graphstack_validate_run_doctor",
-      "community": 0,
+      "community": 1,
       "norm_label": "run_doctor()"
     },
     {
       "label": "run()",
       "file_type": "code",
       "source_file": "scripts/graphstack/validate.py",
-      "source_location": "L385",
+      "source_location": "L399",
       "id": "graphstack_validate_run",
-      "community": 0,
+      "community": 1,
       "norm_label": "run()"
     },
     {
@@ -918,25 +981,25 @@
       "source_file": "scripts/graphstack/validate.py",
       "source_location": "L1",
       "id": "graphstack_validate_rationale_1",
-      "community": 0,
+      "community": 1,
       "norm_label": "graphstack project health checks (llm-free).  validates handoff layout, board"
     },
     {
       "label": "HEAD, HEAD~1, and last commit that touched the graph report.      Graph is oft",
       "file_type": "rationale",
       "source_file": "scripts/graphstack/validate.py",
-      "source_location": "L194",
-      "id": "graphstack_validate_rationale_194",
-      "community": 0,
+      "source_location": "L190",
+      "id": "graphstack_validate_rationale_190",
+      "community": 1,
       "norm_label": "head, head~1, and last commit that touched the graph report.      graph is oft"
     },
     {
       "label": "Default entry when invoked as ``validate`` sub-command.",
       "file_type": "rationale",
       "source_file": "scripts/graphstack/validate.py",
-      "source_location": "L386",
-      "id": "graphstack_validate_rationale_386",
-      "community": 0,
+      "source_location": "L400",
+      "id": "graphstack_validate_rationale_400",
+      "community": 1,
       "norm_label": "default entry when invoked as ``validate`` sub-command."
     },
     {
@@ -945,7 +1008,7 @@
       "source_file": "scripts/graphstack/__init__.py",
       "source_location": "L1",
       "id": "scripts_graphstack_init_py",
-      "community": 16,
+      "community": 15,
       "norm_label": "__init__.py"
     },
     {
@@ -954,7 +1017,7 @@
       "source_file": "scripts/graphstack/__init__.py",
       "source_location": "L1",
       "id": "graphstack_init_rationale_1",
-      "community": 16,
+      "community": 15,
       "norm_label": "graphstack \u2014 cross-platform python core.  this package replaces the bash/power"
     },
     {
@@ -963,7 +1026,7 @@
       "source_file": "scripts/graphstack/__main__.py",
       "source_location": "L1",
       "id": "scripts_graphstack_main_py",
-      "community": 16,
+      "community": 15,
       "norm_label": "__main__.py"
     },
     {
@@ -972,8 +1035,251 @@
       "source_file": "scripts/graphstack/__main__.py",
       "source_location": "L1",
       "id": "graphstack_main_rationale_1",
-      "community": 16,
+      "community": 15,
       "norm_label": "allow ``python -m graphstack`` to invoke the cli."
+    },
+    {
+      "label": "base.py",
+      "file_type": "code",
+      "source_file": "scripts/graphstack/compact/base.py",
+      "source_location": "L1",
+      "id": "scripts_graphstack_compact_base_py",
+      "community": 3,
+      "norm_label": "base.py"
+    },
+    {
+      "label": "CompactResult",
+      "file_type": "code",
+      "source_file": "scripts/graphstack/compact/base.py",
+      "source_location": "L20",
+      "id": "compact_base_compactresult",
+      "community": 3,
+      "norm_label": "compactresult"
+    },
+    {
+      "label": "is_critical_line()",
+      "file_type": "code",
+      "source_file": "scripts/graphstack/compact/base.py",
+      "source_location": "L26",
+      "id": "compact_base_is_critical_line",
+      "community": 3,
+      "norm_label": "is_critical_line()"
+    },
+    {
+      "label": "dedupe_consecutive()",
+      "file_type": "code",
+      "source_file": "scripts/graphstack/compact/base.py",
+      "source_location": "L33",
+      "id": "compact_base_dedupe_consecutive",
+      "community": 3,
+      "norm_label": "dedupe_consecutive()"
+    },
+    {
+      "label": "truncate_preserving_critical()",
+      "file_type": "code",
+      "source_file": "scripts/graphstack/compact/base.py",
+      "source_location": "L56",
+      "id": "compact_base_truncate_preserving_critical",
+      "community": 3,
+      "norm_label": "truncate_preserving_critical()"
+    },
+    {
+      "label": "safe_compact()",
+      "file_type": "code",
+      "source_file": "scripts/graphstack/compact/base.py",
+      "source_location": "L92",
+      "id": "compact_base_safe_compact",
+      "community": 3,
+      "norm_label": "safe_compact()"
+    },
+    {
+      "label": "Shared helpers for safe output compaction.",
+      "file_type": "rationale",
+      "source_file": "scripts/graphstack/compact/base.py",
+      "source_location": "L1",
+      "id": "compact_base_rationale_1",
+      "community": 3,
+      "norm_label": "shared helpers for safe output compaction."
+    },
+    {
+      "label": "Keep critical lines and a head/tail window; return (lines, omitted_count).",
+      "file_type": "rationale",
+      "source_file": "scripts/graphstack/compact/base.py",
+      "source_location": "L61",
+      "id": "compact_base_rationale_61",
+      "community": 3,
+      "norm_label": "keep critical lines and a head/tail window; return (lines, omitted_count)."
+    },
+    {
+      "label": "Return compacted text unless it lost too much signal vs raw.",
+      "file_type": "rationale",
+      "source_file": "scripts/graphstack/compact/base.py",
+      "source_location": "L97",
+      "id": "compact_base_rationale_97",
+      "community": 3,
+      "norm_label": "return compacted text unless it lost too much signal vs raw."
+    },
+    {
+      "label": "generic.py",
+      "file_type": "code",
+      "source_file": "scripts/graphstack/compact/generic.py",
+      "source_location": "L1",
+      "id": "scripts_graphstack_compact_generic_py",
+      "community": 3,
+      "norm_label": "generic.py"
+    },
+    {
+      "label": "compact_pytest()",
+      "file_type": "code",
+      "source_file": "scripts/graphstack/compact/generic.py",
+      "source_location": "L19",
+      "id": "compact_generic_compact_pytest",
+      "community": 3,
+      "norm_label": "compact_pytest()"
+    },
+    {
+      "label": "compact_generic()",
+      "file_type": "code",
+      "source_file": "scripts/graphstack/compact/generic.py",
+      "source_location": "L68",
+      "id": "compact_generic_compact_generic",
+      "community": 3,
+      "norm_label": "compact_generic()"
+    },
+    {
+      "label": "Generic compaction for test runners and unknown commands.",
+      "file_type": "rationale",
+      "source_file": "scripts/graphstack/compact/generic.py",
+      "source_location": "L1",
+      "id": "compact_generic_rationale_1",
+      "community": 3,
+      "norm_label": "generic compaction for test runners and unknown commands."
+    },
+    {
+      "label": "git.py",
+      "file_type": "code",
+      "source_file": "scripts/graphstack/compact/git.py",
+      "source_location": "L1",
+      "id": "scripts_graphstack_compact_git_py",
+      "community": 3,
+      "norm_label": "git.py"
+    },
+    {
+      "label": "compact_git_status()",
+      "file_type": "code",
+      "source_file": "scripts/graphstack/compact/git.py",
+      "source_location": "L19",
+      "id": "compact_git_compact_git_status",
+      "community": 3,
+      "norm_label": "compact_git_status()"
+    },
+    {
+      "label": "_try_porcelain_status()",
+      "file_type": "code",
+      "source_file": "scripts/graphstack/compact/git.py",
+      "source_location": "L48",
+      "id": "compact_git_try_porcelain_status",
+      "community": 3,
+      "norm_label": "_try_porcelain_status()"
+    },
+    {
+      "label": "_limit_paths()",
+      "file_type": "code",
+      "source_file": "scripts/graphstack/compact/git.py",
+      "source_location": "L90",
+      "id": "compact_git_limit_paths",
+      "community": 3,
+      "norm_label": "_limit_paths()"
+    },
+    {
+      "label": "compact_git_diff()",
+      "file_type": "code",
+      "source_file": "scripts/graphstack/compact/git.py",
+      "source_location": "L98",
+      "id": "compact_git_compact_git_diff",
+      "community": 3,
+      "norm_label": "compact_git_diff()"
+    },
+    {
+      "label": "compact_git_log()",
+      "file_type": "code",
+      "source_file": "scripts/graphstack/compact/git.py",
+      "source_location": "L145",
+      "id": "compact_git_compact_git_log",
+      "community": 3,
+      "norm_label": "compact_git_log()"
+    },
+    {
+      "label": "Git command output compactors \u2014 preserve paths, branch, and diff hunks.",
+      "file_type": "rationale",
+      "source_file": "scripts/graphstack/compact/git.py",
+      "source_location": "L1",
+      "id": "compact_git_rationale_1",
+      "community": 3,
+      "norm_label": "git command output compactors \u2014 preserve paths, branch, and diff hunks."
+    },
+    {
+      "label": "registry.py",
+      "file_type": "code",
+      "source_file": "scripts/graphstack/compact/registry.py",
+      "source_location": "L1",
+      "id": "scripts_graphstack_compact_registry_py",
+      "community": 3,
+      "norm_label": "registry.py"
+    },
+    {
+      "label": "_normalize_argv()",
+      "file_type": "code",
+      "source_file": "scripts/graphstack/compact/registry.py",
+      "source_location": "L10",
+      "id": "compact_registry_normalize_argv",
+      "community": 3,
+      "norm_label": "_normalize_argv()"
+    },
+    {
+      "label": "compact_command_output()",
+      "file_type": "code",
+      "source_file": "scripts/graphstack/compact/registry.py",
+      "source_location": "L14",
+      "id": "compact_registry_compact_command_output",
+      "community": 3,
+      "norm_label": "compact_command_output()"
+    },
+    {
+      "label": "Route argv to the right compactor.",
+      "file_type": "rationale",
+      "source_file": "scripts/graphstack/compact/registry.py",
+      "source_location": "L1",
+      "id": "compact_registry_rationale_1",
+      "community": 3,
+      "norm_label": "route argv to the right compactor."
+    },
+    {
+      "label": "Compact *raw_stdout* for the given command argv. stderr is appended verbatim.",
+      "file_type": "rationale",
+      "source_file": "scripts/graphstack/compact/registry.py",
+      "source_location": "L15",
+      "id": "compact_registry_rationale_15",
+      "community": 3,
+      "norm_label": "compact *raw_stdout* for the given command argv. stderr is appended verbatim."
+    },
+    {
+      "label": "__init__.py",
+      "file_type": "code",
+      "source_file": "scripts/graphstack/compact/__init__.py",
+      "source_location": "L1",
+      "id": "scripts_graphstack_compact_init_py",
+      "community": 3,
+      "norm_label": "__init__.py"
+    },
+    {
+      "label": "Token-safe shell output compaction (independent implementation).  Preserves ac",
+      "file_type": "rationale",
+      "source_file": "scripts/graphstack/compact/__init__.py",
+      "source_location": "L1",
+      "id": "compact_init_rationale_1",
+      "community": 3,
+      "norm_label": "token-safe shell output compaction (independent implementation).  preserves ac"
     },
     {
       "label": "conftest.py",
@@ -981,7 +1287,7 @@
       "source_file": "scripts/graphstack/tests/conftest.py",
       "source_location": "L1",
       "id": "scripts_graphstack_tests_conftest_py",
-      "community": 21,
+      "community": 20,
       "norm_label": "conftest.py"
     },
     {
@@ -990,7 +1296,7 @@
       "source_file": "scripts/graphstack/tests/conftest.py",
       "source_location": "L12",
       "id": "tests_conftest_project_root",
-      "community": 21,
+      "community": 20,
       "norm_label": "project_root()"
     },
     {
@@ -999,7 +1305,7 @@
       "source_file": "scripts/graphstack/tests/conftest.py",
       "source_location": "L26",
       "id": "tests_conftest_disable_git_in_tests",
-      "community": 21,
+      "community": 20,
       "norm_label": "_disable_git_in_tests()"
     },
     {
@@ -1008,7 +1314,7 @@
       "source_file": "scripts/graphstack/tests/conftest.py",
       "source_location": "L1",
       "id": "tests_conftest_rationale_1",
-      "community": 21,
+      "community": 20,
       "norm_label": "shared pytest fixtures for the graphstack package."
     },
     {
@@ -1017,7 +1323,7 @@
       "source_file": "scripts/graphstack/tests/conftest.py",
       "source_location": "L13",
       "id": "tests_conftest_rationale_13",
-      "community": 21,
+      "community": 20,
       "norm_label": "provide an isolated, writable directory and chdir into it.      all board oper"
     },
     {
@@ -1026,7 +1332,7 @@
       "source_file": "scripts/graphstack/tests/conftest.py",
       "source_location": "L27",
       "id": "tests_conftest_rationale_27",
-      "community": 21,
+      "community": 20,
       "norm_label": "prevent any board command from creating real git commits during tests."
     },
     {
@@ -1147,12 +1453,93 @@
       "norm_label": "round-trip tests for the gnap board lifecycle."
     },
     {
+      "label": "test_compact.py",
+      "file_type": "code",
+      "source_file": "scripts/graphstack/tests/test_compact.py",
+      "source_location": "L1",
+      "id": "scripts_graphstack_tests_test_compact_py",
+      "community": 3,
+      "norm_label": "test_compact.py"
+    },
+    {
+      "label": "test_git_status_keeps_branch_and_paths()",
+      "file_type": "code",
+      "source_file": "scripts/graphstack/tests/test_compact.py",
+      "source_location": "L50",
+      "id": "tests_test_compact_test_git_status_keeps_branch_and_paths",
+      "community": 3,
+      "norm_label": "test_git_status_keeps_branch_and_paths()"
+    },
+    {
+      "label": "test_git_diff_keeps_hunk_headers()",
+      "file_type": "code",
+      "source_file": "scripts/graphstack/tests/test_compact.py",
+      "source_location": "L57",
+      "id": "tests_test_compact_test_git_diff_keeps_hunk_headers",
+      "community": 3,
+      "norm_label": "test_git_diff_keeps_hunk_headers()"
+    },
+    {
+      "label": "test_git_log_truncates_but_keeps_recent()",
+      "file_type": "code",
+      "source_file": "scripts/graphstack/tests/test_compact.py",
+      "source_location": "L64",
+      "id": "tests_test_compact_test_git_log_truncates_but_keeps_recent",
+      "community": 3,
+      "norm_label": "test_git_log_truncates_but_keeps_recent()"
+    },
+    {
+      "label": "test_pytest_keeps_failure_and_summary()",
+      "file_type": "code",
+      "source_file": "scripts/graphstack/tests/test_compact.py",
+      "source_location": "L72",
+      "id": "tests_test_compact_test_pytest_keeps_failure_and_summary",
+      "community": 3,
+      "norm_label": "test_pytest_keeps_failure_and_summary()"
+    },
+    {
+      "label": "test_registry_falls_back_when_compaction_empty()",
+      "file_type": "code",
+      "source_file": "scripts/graphstack/tests/test_compact.py",
+      "source_location": "L78",
+      "id": "tests_test_compact_test_registry_falls_back_when_compaction_empty",
+      "community": 3,
+      "norm_label": "test_registry_falls_back_when_compaction_empty()"
+    },
+    {
+      "label": "test_critical_lines_survive_generic_truncate()",
+      "file_type": "code",
+      "source_file": "scripts/graphstack/tests/test_compact.py",
+      "source_location": "L84",
+      "id": "tests_test_compact_test_critical_lines_survive_generic_truncate",
+      "community": 3,
+      "norm_label": "test_critical_lines_survive_generic_truncate()"
+    },
+    {
+      "label": "test_registry_git_status_route()",
+      "file_type": "code",
+      "source_file": "scripts/graphstack/tests/test_compact.py",
+      "source_location": "L90",
+      "id": "tests_test_compact_test_registry_git_status_route",
+      "community": 3,
+      "norm_label": "test_registry_git_status_route()"
+    },
+    {
+      "label": "Quality tests for output compaction \u2014 paths and errors must survive.",
+      "file_type": "rationale",
+      "source_file": "scripts/graphstack/tests/test_compact.py",
+      "source_location": "L1",
+      "id": "tests_test_compact_rationale_1",
+      "community": 3,
+      "norm_label": "quality tests for output compaction \u2014 paths and errors must survive."
+    },
+    {
       "label": "test_hook.py",
       "file_type": "code",
       "source_file": "scripts/graphstack/tests/test_hook.py",
       "source_location": "L1",
       "id": "scripts_graphstack_tests_test_hook_py",
-      "community": 20,
+      "community": 19,
       "norm_label": "test_hook.py"
     },
     {
@@ -1161,7 +1548,7 @@
       "source_file": "scripts/graphstack/tests/test_hook.py",
       "source_location": "L12",
       "id": "tests_test_hook_test_no_graph_returns_zero_and_warns",
-      "community": 20,
+      "community": 19,
       "norm_label": "test_no_graph_returns_zero_and_warns()"
     },
     {
@@ -1170,7 +1557,7 @@
       "source_file": "scripts/graphstack/tests/test_hook.py",
       "source_location": "L21",
       "id": "tests_test_hook_test_ship_commit_pattern_matches_real_messages",
-      "community": 20,
+      "community": 19,
       "norm_label": "test_ship_commit_pattern_matches_real_messages()"
     },
     {
@@ -1179,7 +1566,7 @@
       "source_file": "scripts/graphstack/tests/test_hook.py",
       "source_location": "L31",
       "id": "tests_test_hook_test_no_previous_commit_skips_structural_diff",
-      "community": 20,
+      "community": 19,
       "norm_label": "test_no_previous_commit_skips_structural_diff()"
     },
     {
@@ -1188,7 +1575,7 @@
       "source_file": "scripts/graphstack/tests/test_hook.py",
       "source_location": "L41",
       "id": "tests_test_hook_test_excludes_generated_paths_from_structural_count",
-      "community": 20,
+      "community": 19,
       "norm_label": "test_excludes_generated_paths_from_structural_count()"
     },
     {
@@ -1197,7 +1584,7 @@
       "source_file": "scripts/graphstack/tests/test_hook.py",
       "source_location": "L1",
       "id": "tests_test_hook_rationale_1",
-      "community": 20,
+      "community": 19,
       "norm_label": "tests for the post-commit graph-update logic."
     },
     {
@@ -1206,7 +1593,7 @@
       "source_file": "scripts/graphstack/tests/test_hook.py",
       "source_location": "L34",
       "id": "tests_test_hook_rationale_34",
-      "community": 20,
+      "community": 19,
       "norm_label": "when ``head~1`` cannot be resolved, structural count must be 0."
     },
     {
@@ -1215,7 +1602,7 @@
       "source_file": "scripts/graphstack/tests/test_hook.py",
       "source_location": "L44",
       "id": "tests_test_hook_rationale_44",
-      "community": 20,
+      "community": 19,
       "norm_label": "files inside graphify-out/ or handoff/ never trigger an update by themselves."
     },
     {
@@ -1224,7 +1611,7 @@
       "source_file": "scripts/graphstack/tests/test_installer.py",
       "source_location": "L1",
       "id": "scripts_graphstack_tests_test_installer_py",
-      "community": 23,
+      "community": 22,
       "norm_label": "test_installer.py"
     },
     {
@@ -1233,7 +1620,7 @@
       "source_file": "scripts/graphstack/tests/test_installer.py",
       "source_location": "L12",
       "id": "tests_test_installer_test_install_creates_full_layout",
-      "community": 23,
+      "community": 22,
       "norm_label": "test_install_creates_full_layout()"
     },
     {
@@ -1242,7 +1629,7 @@
       "source_file": "scripts/graphstack/tests/test_installer.py",
       "source_location": "L62",
       "id": "tests_test_installer_test_install_does_not_overwrite_existing_brief",
-      "community": 23,
+      "community": 22,
       "norm_label": "test_install_does_not_overwrite_existing_brief()"
     },
     {
@@ -1251,7 +1638,7 @@
       "source_file": "scripts/graphstack/tests/test_installer.py",
       "source_location": "L1",
       "id": "tests_test_installer_rationale_1",
-      "community": 23,
+      "community": 22,
       "norm_label": "smoke test for the installer \u2014 confirms a clean install creates expected paths."
     },
     {
@@ -1260,7 +1647,7 @@
       "source_file": "scripts/graphstack/tests/test_platform_utils.py",
       "source_location": "L1",
       "id": "scripts_graphstack_tests_test_platform_utils_py",
-      "community": 19,
+      "community": 18,
       "norm_label": "test_platform_utils.py"
     },
     {
@@ -1269,7 +1656,7 @@
       "source_file": "scripts/graphstack/tests/test_platform_utils.py",
       "source_location": "L12",
       "id": "tests_test_platform_utils_test_find_python_returns_non_empty_list",
-      "community": 19,
+      "community": 18,
       "norm_label": "test_find_python_returns_non_empty_list()"
     },
     {
@@ -1278,7 +1665,7 @@
       "source_file": "scripts/graphstack/tests/test_platform_utils.py",
       "source_location": "L19",
       "id": "tests_test_platform_utils_test_find_python_falls_back_to_sys_executable",
-      "community": 19,
+      "community": 18,
       "norm_label": "test_find_python_falls_back_to_sys_executable()"
     },
     {
@@ -1287,7 +1674,7 @@
       "source_file": "scripts/graphstack/tests/test_platform_utils.py",
       "source_location": "L25",
       "id": "tests_test_platform_utils_test_find_python_prefers_python3_when_available",
-      "community": 19,
+      "community": 18,
       "norm_label": "test_find_python_prefers_python3_when_available()"
     },
     {
@@ -1296,7 +1683,7 @@
       "source_file": "scripts/graphstack/tests/test_platform_utils.py",
       "source_location": "L35",
       "id": "tests_test_platform_utils_test_utc_now_iso_is_well_formed",
-      "community": 19,
+      "community": 18,
       "norm_label": "test_utc_now_iso_is_well_formed()"
     },
     {
@@ -1305,7 +1692,7 @@
       "source_file": "scripts/graphstack/tests/test_platform_utils.py",
       "source_location": "L42",
       "id": "tests_test_platform_utils_test_emoji_safe_passthrough_on_utf",
-      "community": 19,
+      "community": 18,
       "norm_label": "test_emoji_safe_passthrough_on_utf()"
     },
     {
@@ -1314,7 +1701,7 @@
       "source_file": "scripts/graphstack/tests/test_platform_utils.py",
       "source_location": "L51",
       "id": "tests_test_platform_utils_test_emoji_safe_downgrades_on_legacy_encoding",
-      "community": 19,
+      "community": 18,
       "norm_label": "test_emoji_safe_downgrades_on_legacy_encoding()"
     },
     {
@@ -1323,7 +1710,7 @@
       "source_file": "scripts/graphstack/tests/test_platform_utils.py",
       "source_location": "L63",
       "id": "tests_test_platform_utils_test_echo_never_raises_on_unprintable",
-      "community": 19,
+      "community": 18,
       "norm_label": "test_echo_never_raises_on_unprintable()"
     },
     {
@@ -1332,7 +1719,7 @@
       "source_file": "scripts/graphstack/tests/test_platform_utils.py",
       "source_location": "L1",
       "id": "tests_test_platform_utils_rationale_1",
-      "community": 19,
+      "community": 18,
       "norm_label": "tests for the os helpers in ``platform_utils``."
     },
     {
@@ -1341,7 +1728,7 @@
       "source_file": "scripts/graphstack/tests/test_validate.py",
       "source_location": "L1",
       "id": "scripts_graphstack_tests_test_validate_py",
-      "community": 0,
+      "community": 1,
       "norm_label": "test_validate.py"
     },
     {
@@ -1350,7 +1737,7 @@
       "source_file": "scripts/graphstack/tests/test_validate.py",
       "source_location": "L13",
       "id": "tests_test_validate_minimal_layout",
-      "community": 0,
+      "community": 1,
       "norm_label": "_minimal_layout()"
     },
     {
@@ -1359,7 +1746,7 @@
       "source_file": "scripts/graphstack/tests/test_validate.py",
       "source_location": "L36",
       "id": "tests_test_validate_test_validate_reports_template_brief_as_warning",
-      "community": 0,
+      "community": 1,
       "norm_label": "test_validate_reports_template_brief_as_warning()"
     },
     {
@@ -1368,7 +1755,7 @@
       "source_file": "scripts/graphstack/tests/test_validate.py",
       "source_location": "L48",
       "id": "tests_test_validate_test_validate_strict_template_brief_is_error",
-      "community": 0,
+      "community": 1,
       "norm_label": "test_validate_strict_template_brief_is_error()"
     },
     {
@@ -1377,7 +1764,7 @@
       "source_file": "scripts/graphstack/tests/test_validate.py",
       "source_location": "L60",
       "id": "tests_test_validate_test_validate_invalid_board_json_is_error",
-      "community": 0,
+      "community": 1,
       "norm_label": "test_validate_invalid_board_json_is_error()"
     },
     {
@@ -1386,7 +1773,7 @@
       "source_file": "scripts/graphstack/tests/test_validate.py",
       "source_location": "L70",
       "id": "tests_test_validate_test_validate_task_missing_keys",
-      "community": 0,
+      "community": 1,
       "norm_label": "test_validate_task_missing_keys()"
     },
     {
@@ -1395,7 +1782,7 @@
       "source_file": "scripts/graphstack/tests/test_validate.py",
       "source_location": "L80",
       "id": "tests_test_validate_test_graph_stale_when_commit_mismatch",
-      "community": 0,
+      "community": 1,
       "norm_label": "test_graph_stale_when_commit_mismatch()"
     },
     {
@@ -1404,7 +1791,7 @@
       "source_file": "scripts/graphstack/tests/test_validate.py",
       "source_location": "L108",
       "id": "tests_test_validate_test_graph_fresh_when_built_commit_is_ancestor_of_head",
-      "community": 0,
+      "community": 1,
       "norm_label": "test_graph_fresh_when_built_commit_is_ancestor_of_head()"
     },
     {
@@ -1413,7 +1800,7 @@
       "source_file": "scripts/graphstack/tests/test_validate.py",
       "source_location": "L145",
       "id": "tests_test_validate_test_graph_fresh_when_built_from_parent_commit",
-      "community": 0,
+      "community": 1,
       "norm_label": "test_graph_fresh_when_built_from_parent_commit()"
     },
     {
@@ -1422,7 +1809,7 @@
       "source_file": "scripts/graphstack/tests/test_validate.py",
       "source_location": "L1",
       "id": "tests_test_validate_rationale_1",
-      "community": 0,
+      "community": 1,
       "norm_label": "tests for graphstack validate / doctor."
     },
     {
@@ -1431,15 +1818,78 @@
       "source_file": "scripts/graphstack/tests/__init__.py",
       "source_location": "L1",
       "id": "scripts_graphstack_tests_init_py",
-      "community": 29,
+      "community": 28,
       "norm_label": "__init__.py"
+    },
+    {
+      "label": "Entry point for both ``python -m graphstack`` and unit tests.",
+      "file_type": "rationale",
+      "source_file": "scripts/graphstack/cli.py",
+      "source_location": "L41",
+      "community": 15,
+      "norm_label": "entry point for both ``python -m graphstack`` and unit tests.",
+      "id": "graphstack_cli_rationale_41"
+    },
+    {
+      "label": "Copy ``scripts/graphstack/*.py`` into the target so the shims work.",
+      "file_type": "rationale",
+      "source_file": "scripts/graphstack/installer.py",
+      "source_location": "L143",
+      "community": 0,
+      "norm_label": "copy ``scripts/graphstack/*.py`` into the target so the shims work.",
+      "id": "graphstack_installer_rationale_143"
+    },
+    {
+      "label": "Default entry when invoked as ``validate`` sub-command.",
+      "file_type": "rationale",
+      "source_file": "scripts/graphstack/validate.py",
+      "source_location": "L382",
+      "community": 1,
+      "norm_label": "default entry when invoked as ``validate`` sub-command.",
+      "id": "graphstack_validate_rationale_382"
+    },
+    {
+      "label": "Stage the board directory and commit silently \u2014 never fails the command.",
+      "file_type": "rationale",
+      "source_file": "scripts/graphstack/board.py",
+      "source_location": "L60",
+      "community": 0,
+      "norm_label": "stage the board directory and commit silently \u2014 never fails the command.",
+      "id": "graphstack_board_rationale_60"
+    },
+    {
+      "label": "Copy ``scripts/graphstack/*.py`` into the target so the shims work.",
+      "file_type": "rationale",
+      "source_file": "scripts/graphstack/installer.py",
+      "source_location": "L144",
+      "community": 0,
+      "norm_label": "copy ``scripts/graphstack/*.py`` into the target so the shims work.",
+      "id": "graphstack_installer_rationale_144"
+    },
+    {
+      "label": "HEAD, HEAD~1, and last commit that touched the graph report.      Graph is oft",
+      "file_type": "rationale",
+      "source_file": "scripts/graphstack/validate.py",
+      "source_location": "L194",
+      "community": 1,
+      "norm_label": "head, head~1, and last commit that touched the graph report.      graph is oft",
+      "id": "graphstack_validate_rationale_194"
+    },
+    {
+      "label": "Default entry when invoked as ``validate`` sub-command.",
+      "file_type": "rationale",
+      "source_file": "scripts/graphstack/validate.py",
+      "source_location": "L386",
+      "community": 1,
+      "norm_label": "default entry when invoked as ``validate`` sub-command.",
+      "id": "graphstack_validate_rationale_386"
     },
     {
       "label": "Default entry when invoked as ``validate`` sub-command.",
       "file_type": "rationale",
       "source_file": "scripts/graphstack/validate.py",
       "source_location": "L349",
-      "community": 0,
+      "community": 1,
       "norm_label": "default entry when invoked as ``validate`` sub-command.",
       "id": "graphstack_validate_rationale_349"
     },
@@ -1448,7 +1898,7 @@
       "file_type": "rationale",
       "source_file": "scripts/graphstack/validate.py",
       "source_location": "L331",
-      "community": 0,
+      "community": 1,
       "norm_label": "default entry when invoked as ``validate`` sub-command.",
       "id": "graphstack_validate_rationale_331"
     },
@@ -1457,7 +1907,7 @@
       "file_type": "code",
       "source_file": "install.ps1",
       "source_location": "L1",
-      "community": 24,
+      "community": 23,
       "norm_label": "install.ps1",
       "id": "install_ps1"
     },
@@ -1466,7 +1916,7 @@
       "file_type": "code",
       "source_file": "install.ps1",
       "source_location": "L16",
-      "community": 24,
+      "community": 23,
       "norm_label": "resolve-python()",
       "id": "graphstack_install_resolve_python"
     },
@@ -1475,7 +1925,7 @@
       "file_type": "code",
       "source_file": "scripts/board.ps1",
       "source_location": "L1",
-      "community": 25,
+      "community": 24,
       "norm_label": "board.ps1",
       "id": "scripts_board_ps1"
     },
@@ -1484,7 +1934,7 @@
       "file_type": "code",
       "source_file": "scripts/board.ps1",
       "source_location": "L15",
-      "community": 25,
+      "community": 24,
       "norm_label": "resolve-python()",
       "id": "scripts_board_resolve_python"
     },
@@ -1493,7 +1943,7 @@
       "file_type": "code",
       "source_file": "scripts/post-commit.ps1",
       "source_location": "L1",
-      "community": 26,
+      "community": 25,
       "norm_label": "post-commit.ps1",
       "id": "scripts_post_commit_ps1"
     },
@@ -1502,7 +1952,7 @@
       "file_type": "code",
       "source_file": "scripts/post-commit.ps1",
       "source_location": "L20",
-      "community": 26,
+      "community": 25,
       "norm_label": "resolve-python()",
       "id": "scripts_post_commit_resolve_python"
     },
@@ -1511,18 +1961,9 @@
       "file_type": "rationale",
       "source_file": "scripts/graphstack/cli.py",
       "source_location": "L37",
-      "community": 16,
+      "community": 15,
       "norm_label": "entry point for both ``python -m graphstack`` and unit tests.",
       "id": "graphstack_cli_rationale_37"
-    },
-    {
-      "label": "Copy ``scripts/graphstack/*.py`` into the target so the shims work.",
-      "file_type": "rationale",
-      "source_file": "scripts/graphstack/installer.py",
-      "source_location": "L143",
-      "community": 2,
-      "norm_label": "copy ``scripts/graphstack/*.py`` into the target so the shims work.",
-      "id": "graphstack_installer_rationale_143"
     },
     {
       "label": "CHANGELOG.md",
@@ -1799,7 +2240,7 @@
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L1",
-      "community": 5,
+      "community": 6,
       "norm_label": "readme.md",
       "id": "readme_md"
     },
@@ -1808,7 +2249,7 @@
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L3",
-      "community": 5,
+      "community": 6,
       "norm_label": "graphstack \ud83e\udde0\u26a1",
       "id": "graphstack_readme_graphstack"
     },
@@ -2015,7 +2456,7 @@
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L179",
-      "community": 5,
+      "community": 6,
       "norm_label": "what is graphstack?",
       "id": "graphstack_readme_what_is_graphstack"
     },
@@ -2024,7 +2465,7 @@
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L191",
-      "community": 5,
+      "community": 6,
       "norm_label": "the problem",
       "id": "graphstack_readme_the_problem"
     },
@@ -2033,7 +2474,7 @@
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L195",
-      "community": 5,
+      "community": 6,
       "norm_label": "code:block12 (you:  \"add rate limiting to login.\")",
       "id": "graphstack_readme_codeblock_12"
     },
@@ -2042,7 +2483,7 @@
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L213",
-      "community": 5,
+      "community": 6,
       "norm_label": "the solution",
       "id": "graphstack_readme_the_solution"
     },
@@ -2051,7 +2492,7 @@
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L215",
-      "community": 5,
+      "community": 6,
       "norm_label": "code:block13 (step 1 \u2014 once:)",
       "id": "graphstack_readme_codeblock_13"
     },
@@ -2060,7 +2501,7 @@
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L242",
-      "community": 5,
+      "community": 6,
       "norm_label": "bootstrap mode \u2014 start from zero",
       "id": "graphstack_readme_bootstrap_mode_start_from_zero"
     },
@@ -2069,7 +2510,7 @@
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L246",
-      "community": 5,
+      "community": 6,
       "norm_label": "code:block14 (composer (cursor):)",
       "id": "graphstack_readme_codeblock_14"
     },
@@ -2078,7 +2519,7 @@
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L273",
-      "community": 5,
+      "community": 6,
       "norm_label": "token savings",
       "id": "graphstack_readme_token_savings"
     },
@@ -2087,7 +2528,7 @@
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L297",
-      "community": 5,
+      "community": 6,
       "norm_label": "what gets installed",
       "id": "graphstack_readme_what_gets_installed"
     },
@@ -2096,7 +2537,7 @@
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L299",
-      "community": 5,
+      "community": 6,
       "norm_label": "code:block15 (your-project/)",
       "id": "graphstack_readme_codeblock_15"
     },
@@ -2105,7 +2546,7 @@
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L342",
-      "community": 5,
+      "community": 6,
       "norm_label": "the gnap board",
       "id": "graphstack_readme_the_gnap_board"
     },
@@ -2114,7 +2555,7 @@
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L348",
-      "community": 5,
+      "community": 6,
       "norm_label": "macos / linux (bash)",
       "id": "graphstack_readme_macos_linux_bash"
     },
@@ -2123,7 +2564,7 @@
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L350",
-      "community": 5,
+      "community": 6,
       "norm_label": "code:bash (bash scripts/board.sh status)",
       "id": "graphstack_readme_codeblock_16"
     },
@@ -2132,7 +2573,7 @@
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L358",
-      "community": 5,
+      "community": 6,
       "norm_label": "windows (powershell)",
       "id": "graphstack_readme_windows_powershell"
     },
@@ -2141,7 +2582,7 @@
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L360",
-      "community": 5,
+      "community": 6,
       "norm_label": "code:powershell (.\\scripts\\board.ps1 status)",
       "id": "graphstack_readme_codeblock_17"
     },
@@ -2150,7 +2591,7 @@
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L368",
-      "community": 5,
+      "community": 6,
       "norm_label": "cross-platform (any shell with python)",
       "id": "graphstack_readme_cross_platform_any_shell_with_python"
     },
@@ -2159,7 +2600,7 @@
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L370",
-      "community": 5,
+      "community": 6,
       "norm_label": "code:bash (python -m graphstack board status)",
       "id": "graphstack_readme_codeblock_18"
     },
@@ -2168,7 +2609,7 @@
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L382",
-      "community": 5,
+      "community": 6,
       "norm_label": "graph update strategy",
       "id": "graphstack_readme_graph_update_strategy"
     },
@@ -2177,7 +2618,7 @@
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L396",
-      "community": 5,
+      "community": 6,
       "norm_label": "project suitability",
       "id": "graphstack_readme_project_suitability"
     },
@@ -2186,7 +2627,7 @@
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L425",
-      "community": 5,
+      "community": 6,
       "norm_label": "comparison",
       "id": "graphstack_readme_comparison"
     },
@@ -2195,7 +2636,7 @@
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L440",
-      "community": 5,
+      "community": 6,
       "norm_label": "resuming a session",
       "id": "graphstack_readme_resuming_a_session"
     },
@@ -2204,7 +2645,7 @@
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L446",
-      "community": 5,
+      "community": 6,
       "norm_label": "code:block19 (read orchestrator/orchestrator.md and follow it exactly.)",
       "id": "graphstack_readme_codeblock_19"
     },
@@ -2339,7 +2780,7 @@
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L528",
-      "community": 5,
+      "community": 6,
       "norm_label": "compatibility",
       "id": "graphstack_readme_compatibility"
     },
@@ -2348,7 +2789,7 @@
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L540",
-      "community": 5,
+      "community": 6,
       "norm_label": "demo",
       "id": "graphstack_readme_demo"
     },
@@ -2357,7 +2798,7 @@
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L546",
-      "community": 5,
+      "community": 6,
       "norm_label": "contributing",
       "id": "graphstack_readme_contributing"
     },
@@ -2366,7 +2807,7 @@
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L552",
-      "community": 5,
+      "community": 6,
       "norm_label": "license",
       "id": "graphstack_readme_license"
     },
@@ -2375,7 +2816,7 @@
       "file_type": "document",
       "source_file": "demo/DEMO_WALKTHROUGH.md",
       "source_location": "L1",
-      "community": 6,
+      "community": 7,
       "norm_label": "demo_walkthrough.md",
       "id": "demo_demo_walkthrough_md"
     },
@@ -2384,7 +2825,7 @@
       "file_type": "document",
       "source_file": "demo/DEMO_WALKTHROUGH.md",
       "source_location": "L1",
-      "community": 6,
+      "community": 7,
       "norm_label": "graphstack demo: full lifecycle walkthrough",
       "id": "demo_demo_walkthrough_graphstack_demo_full_lifecycle_walkthrough"
     },
@@ -2393,7 +2834,7 @@
       "file_type": "document",
       "source_file": "demo/DEMO_WALKTHROUGH.md",
       "source_location": "L10",
-      "community": 6,
+      "community": 7,
       "norm_label": "setup",
       "id": "demo_demo_walkthrough_setup"
     },
@@ -2402,7 +2843,7 @@
       "file_type": "document",
       "source_file": "demo/DEMO_WALKTHROUGH.md",
       "source_location": "L12",
-      "community": 6,
+      "community": 7,
       "norm_label": "code:bash (# 1. install graphstack into the demo project)",
       "id": "demo_demo_walkthrough_codeblock_1"
     },
@@ -2411,7 +2852,7 @@
       "file_type": "document",
       "source_file": "demo/DEMO_WALKTHROUGH.md",
       "source_location": "L23",
-      "community": 6,
+      "community": 7,
       "norm_label": "code:block2 (read orchestrator/orchestrator.md.)",
       "id": "demo_demo_walkthrough_codeblock_2"
     },
@@ -2420,7 +2861,7 @@
       "file_type": "document",
       "source_file": "demo/DEMO_WALKTHROUGH.md",
       "source_location": "L30",
-      "community": 6,
+      "community": 7,
       "norm_label": "what happens automatically",
       "id": "demo_demo_walkthrough_what_happens_automatically"
     },
@@ -2429,7 +2870,7 @@
       "file_type": "document",
       "source_file": "demo/DEMO_WALKTHROUGH.md",
       "source_location": "L32",
-      "community": 6,
+      "community": 7,
       "norm_label": "step 1 \u2014 orchestrator activates",
       "id": "demo_demo_walkthrough_step_1_orchestrator_activates"
     },
@@ -2438,7 +2879,7 @@
       "file_type": "document",
       "source_file": "demo/DEMO_WALKTHROUGH.md",
       "source_location": "L34",
-      "community": 6,
+      "community": 7,
       "norm_label": "code:block3 (graphstack ready.)",
       "id": "demo_demo_walkthrough_codeblock_3"
     },
@@ -2447,7 +2888,7 @@
       "file_type": "document",
       "source_file": "demo/DEMO_WALKTHROUGH.md",
       "source_location": "L44",
-      "community": 6,
+      "community": 7,
       "norm_label": "step 2 \u2014 [architect mode]",
       "id": "demo_demo_walkthrough_step_2_architect_mode"
     },
@@ -2456,7 +2897,7 @@
       "file_type": "document",
       "source_file": "demo/DEMO_WALKTHROUGH.md",
       "source_location": "L46",
-      "community": 6,
+      "community": 7,
       "norm_label": "code:block4 ([architect mode])",
       "id": "demo_demo_walkthrough_codeblock_4"
     },
@@ -2465,7 +2906,7 @@
       "file_type": "document",
       "source_file": "demo/DEMO_WALKTHROUGH.md",
       "source_location": "L63",
-      "community": 6,
+      "community": 7,
       "norm_label": "code:block5 ($ python -m graphstack board new rate-limit-login \"rate limi)",
       "id": "demo_demo_walkthrough_codeblock_5"
     },
@@ -2474,7 +2915,7 @@
       "file_type": "document",
       "source_file": "demo/DEMO_WALKTHROUGH.md",
       "source_location": "L73",
-      "community": 6,
+      "community": 7,
       "norm_label": "step 4 \u2014 [builder mode]",
       "id": "demo_demo_walkthrough_step_4_builder_mode"
     },
@@ -2483,7 +2924,7 @@
       "file_type": "document",
       "source_file": "demo/DEMO_WALKTHROUGH.md",
       "source_location": "L75",
-      "community": 6,
+      "community": 7,
       "norm_label": "code:block6 ([builder mode])",
       "id": "demo_demo_walkthrough_codeblock_6"
     },
@@ -2492,7 +2933,7 @@
       "file_type": "document",
       "source_file": "demo/DEMO_WALKTHROUGH.md",
       "source_location": "L87",
-      "community": 6,
+      "community": 7,
       "norm_label": "code:typescript (// src/auth/ratelimit.ts)",
       "id": "demo_demo_walkthrough_codeblock_7"
     },
@@ -2501,7 +2942,7 @@
       "file_type": "document",
       "source_file": "demo/DEMO_WALKTHROUGH.md",
       "source_location": "L123",
-      "community": 6,
+      "community": 7,
       "norm_label": "code:block8 (implementing criterion 3 & 4: update src/auth/login.ts)",
       "id": "demo_demo_walkthrough_codeblock_8"
     },
@@ -2510,7 +2951,7 @@
       "file_type": "document",
       "source_file": "demo/DEMO_WALKTHROUGH.md",
       "source_location": "L127",
-      "community": 6,
+      "community": 7,
       "norm_label": "code:typescript (// src/auth/login.ts (updated))",
       "id": "demo_demo_walkthrough_codeblock_9"
     },
@@ -2519,7 +2960,7 @@
       "file_type": "document",
       "source_file": "demo/DEMO_WALKTHROUGH.md",
       "source_location": "L161",
-      "community": 6,
+      "community": 7,
       "norm_label": "code:block10 (updating src/api/types.ts \u2014 adding rate_limited error code.)",
       "id": "demo_demo_walkthrough_codeblock_10"
     },
@@ -2528,7 +2969,7 @@
       "file_type": "document",
       "source_file": "demo/DEMO_WALKTHROUGH.md",
       "source_location": "L165",
-      "community": 6,
+      "community": 7,
       "norm_label": "code:typescript (error?: \"user_not_found\" | \"invalid_password\" | \"session_err)",
       "id": "demo_demo_walkthrough_codeblock_11"
     },
@@ -2537,7 +2978,7 @@
       "file_type": "document",
       "source_file": "demo/DEMO_WALKTHROUGH.md",
       "source_location": "L171",
-      "community": 6,
+      "community": 7,
       "norm_label": "code:block12 ([builder \u2192 reviewer])",
       "id": "demo_demo_walkthrough_codeblock_12"
     },
@@ -2546,7 +2987,7 @@
       "file_type": "document",
       "source_file": "demo/DEMO_WALKTHROUGH.md",
       "source_location": "L178",
-      "community": 6,
+      "community": 7,
       "norm_label": "step 5 \u2014 [reviewer mode]",
       "id": "demo_demo_walkthrough_step_5_reviewer_mode"
     },
@@ -2555,7 +2996,7 @@
       "file_type": "document",
       "source_file": "demo/DEMO_WALKTHROUGH.md",
       "source_location": "L180",
-      "community": 6,
+      "community": 7,
       "norm_label": "code:block13 ([reviewer mode])",
       "id": "demo_demo_walkthrough_codeblock_13"
     },
@@ -2564,7 +3005,7 @@
       "file_type": "document",
       "source_file": "demo/DEMO_WALKTHROUGH.md",
       "source_location": "L206",
-      "community": 6,
+      "community": 7,
       "norm_label": "step 6 \u2014 [qa mode]",
       "id": "demo_demo_walkthrough_step_6_qa_mode"
     },
@@ -2573,7 +3014,7 @@
       "file_type": "document",
       "source_file": "demo/DEMO_WALKTHROUGH.md",
       "source_location": "L208",
-      "community": 6,
+      "community": 7,
       "norm_label": "code:block14 ([qa mode])",
       "id": "demo_demo_walkthrough_codeblock_14"
     },
@@ -2582,7 +3023,7 @@
       "file_type": "document",
       "source_file": "demo/DEMO_WALKTHROUGH.md",
       "source_location": "L231",
-      "community": 6,
+      "community": 7,
       "norm_label": "step 7 \u2014 [ship mode]",
       "id": "demo_demo_walkthrough_step_7_ship_mode"
     },
@@ -2591,7 +3032,7 @@
       "file_type": "document",
       "source_file": "demo/DEMO_WALKTHROUGH.md",
       "source_location": "L233",
-      "community": 6,
+      "community": 7,
       "norm_label": "code:block15 ([ship mode])",
       "id": "demo_demo_walkthrough_codeblock_15"
     },
@@ -2600,7 +3041,7 @@
       "file_type": "document",
       "source_file": "demo/DEMO_WALKTHROUGH.md",
       "source_location": "L277",
-      "community": 6,
+      "community": 7,
       "norm_label": "what this demo shows",
       "id": "demo_demo_walkthrough_what_this_demo_shows"
     },
@@ -2609,7 +3050,7 @@
       "file_type": "document",
       "source_file": "demo/DEMO_WALKTHROUGH.md",
       "source_location": "L290",
-      "community": 6,
+      "community": 7,
       "norm_label": "try it yourself",
       "id": "demo_demo_walkthrough_try_it_yourself"
     },
@@ -2618,7 +3059,7 @@
       "file_type": "document",
       "source_file": "demo/DEMO_WALKTHROUGH.md",
       "source_location": "L292",
-      "community": 6,
+      "community": 7,
       "norm_label": "code:bash (# clone and install)",
       "id": "demo_demo_walkthrough_codeblock_16"
     },
@@ -2627,7 +3068,7 @@
       "file_type": "document",
       "source_file": "docs/CURSOR_PROMPTS.md",
       "source_location": "L1",
-      "community": 1,
+      "community": 4,
       "norm_label": "cursor_prompts.md",
       "id": "docs_cursor_prompts_md"
     },
@@ -2636,7 +3077,7 @@
       "file_type": "document",
       "source_file": "docs/CURSOR_PROMPTS.md",
       "source_location": "L1",
-      "community": 1,
+      "community": 4,
       "norm_label": "graphstack v4 \u2014 cursor prompts & setup guide",
       "id": "docs_cursor_prompts_graphstack_v4_cursor_prompts_setup_guide"
     },
@@ -2645,7 +3086,7 @@
       "file_type": "document",
       "source_file": "docs/CURSOR_PROMPTS.md",
       "source_location": "L5",
-      "community": 1,
+      "community": 4,
       "norm_label": "\ud83d\udd27 cursor'a kurulum (ilk kez)",
       "id": "docs_cursor_prompts_cursor_a_kurulum_lk_kez"
     },
@@ -2654,7 +3095,7 @@
       "file_type": "document",
       "source_file": "docs/CURSOR_PROMPTS.md",
       "source_location": "L7",
-      "community": 1,
+      "community": 4,
       "norm_label": "ad\u0131m 1 \u2014 graphstack'i projeye yukle",
       "id": "docs_cursor_prompts_ad_m_1_graphstack_i_projeye_y_kle"
     },
@@ -2663,7 +3104,7 @@
       "file_type": "document",
       "source_file": "docs/CURSOR_PROMPTS.md",
       "source_location": "L12",
-      "community": 1,
+      "community": 4,
       "norm_label": "code:bash (git clone https://github.com/mertcapkin/graphstack /tmp/grap)",
       "id": "docs_cursor_prompts_codeblock_1"
     },
@@ -2672,7 +3113,7 @@
       "file_type": "document",
       "source_file": "docs/CURSOR_PROMPTS.md",
       "source_location": "L18",
-      "community": 1,
+      "community": 4,
       "norm_label": "code:powershell (git clone https://github.com/mertcapkin/graphstack $env:temp)",
       "id": "docs_cursor_prompts_codeblock_2"
     },
@@ -2681,7 +3122,7 @@
       "file_type": "document",
       "source_file": "docs/CURSOR_PROMPTS.md",
       "source_location": "L24",
-      "community": 1,
+      "community": 4,
       "norm_label": "code:bash (git clone https://github.com/mertcapkin/graphstack /path/to/)",
       "id": "docs_cursor_prompts_codeblock_3"
     },
@@ -2690,7 +3131,7 @@
       "file_type": "document",
       "source_file": "docs/CURSOR_PROMPTS.md",
       "source_location": "L37",
-      "community": 1,
+      "community": 4,
       "norm_label": "ad\u0131m 2 \u2014 graphify'\u0131 yukle ve grafigi olustur",
       "id": "docs_cursor_prompts_ad_m_2_graphify_y_kle_ve_grafi_i_olu_tur"
     },
@@ -2699,7 +3140,7 @@
       "file_type": "document",
       "source_file": "docs/CURSOR_PROMPTS.md",
       "source_location": "L39",
-      "community": 1,
+      "community": 4,
       "norm_label": "code:bash (pip install -r requirements.txt)",
       "id": "docs_cursor_prompts_codeblock_4"
     },
@@ -2708,7 +3149,7 @@
       "file_type": "document",
       "source_file": "docs/CURSOR_PROMPTS.md",
       "source_location": "L46",
-      "community": 1,
+      "community": 4,
       "norm_label": "code:block5 (/graphify .)",
       "id": "docs_cursor_prompts_codeblock_5"
     },
@@ -2717,7 +3158,7 @@
       "file_type": "document",
       "source_file": "docs/CURSOR_PROMPTS.md",
       "source_location": "L53",
-      "community": 1,
+      "community": 4,
       "norm_label": "ad\u0131m 3 \u2014 basla",
       "id": "docs_cursor_prompts_ad_m_3_ba_la"
     },
@@ -2726,7 +3167,7 @@
       "file_type": "document",
       "source_file": "docs/CURSOR_PROMPTS.md",
       "source_location": "L67",
-      "community": 1,
+      "community": 4,
       "norm_label": "code:block6 (read orchestrator/orchestrator.md and follow it exactly.)",
       "id": "docs_cursor_prompts_codeblock_6"
     },
@@ -2735,7 +3176,7 @@
       "file_type": "document",
       "source_file": "docs/CURSOR_PROMPTS.md",
       "source_location": "L76",
-      "community": 1,
+      "community": 4,
       "norm_label": "\u26a1 ornek hedef yaz\u0131lar\u0131 (klasik blogu atlarsan bile)",
       "id": "docs_cursor_prompts_rnek_hedef_yaz_lar_klasik_blo_u_atlarsan_bile"
     },
@@ -2744,7 +3185,7 @@
       "file_type": "document",
       "source_file": "docs/CURSOR_PROMPTS.md",
       "source_location": "L80",
-      "community": 1,
+      "community": 4,
       "norm_label": "code:block7 (kay\u0131tta e-posta dogrulamas\u0131 eklemek istiyorum.)",
       "id": "docs_cursor_prompts_codeblock_7"
     },
@@ -2753,7 +3194,7 @@
       "file_type": "document",
       "source_file": "docs/CURSOR_PROMPTS.md",
       "source_location": "L83",
-      "community": 1,
+      "community": 4,
       "norm_label": "code:block8 (login endpoint cok yavas \u2014 performans\u0131 bul ve duzelt.)",
       "id": "docs_cursor_prompts_codeblock_8"
     },
@@ -2762,7 +3203,7 @@
       "file_type": "document",
       "source_file": "docs/CURSOR_PROMPTS.md",
       "source_location": "L86",
-      "community": 1,
+      "community": 4,
       "norm_label": "code:block9 (resume from last session.)",
       "id": "docs_cursor_prompts_codeblock_9"
     },
@@ -2771,7 +3212,7 @@
       "file_type": "document",
       "source_file": "docs/CURSOR_PROMPTS.md",
       "source_location": "L94",
-      "community": 1,
+      "community": 4,
       "norm_label": "\ud83d\ude80 s\u0131f\u0131rdan yeni proje (bootstrap modu)",
       "id": "docs_cursor_prompts_s_f_rdan_yeni_proje_bootstrap_modu"
     },
@@ -2780,7 +3221,7 @@
       "file_type": "document",
       "source_file": "docs/CURSOR_PROMPTS.md",
       "source_location": "L99",
-      "community": 1,
+      "community": 4,
       "norm_label": "code:block10 (bos bir repo icin rest api yaz\u0131yorum: kullan\u0131c\u0131lar proje olu)",
       "id": "docs_cursor_prompts_codeblock_10"
     },
@@ -2789,7 +3230,7 @@
       "file_type": "document",
       "source_file": "docs/CURSOR_PROMPTS.md",
       "source_location": "L106",
-      "community": 1,
+      "community": 4,
       "norm_label": "code:block11 (read orchestrator/orchestrator.md and follow it exactly.)",
       "id": "docs_cursor_prompts_codeblock_11"
     },
@@ -2798,7 +3239,7 @@
       "file_type": "document",
       "source_file": "docs/CURSOR_PROMPTS.md",
       "source_location": "L117",
-      "community": 1,
+      "community": 4,
       "norm_label": "\ud83d\udd04 oturum devam ettirme",
       "id": "docs_cursor_prompts_oturum_devam_ettirme"
     },
@@ -2807,7 +3248,7 @@
       "file_type": "document",
       "source_file": "docs/CURSOR_PROMPTS.md",
       "source_location": "L121",
-      "community": 1,
+      "community": 4,
       "norm_label": "code:block12 (onceki graphstack oturumundan devam et.)",
       "id": "docs_cursor_prompts_codeblock_12"
     },
@@ -2816,7 +3257,7 @@
       "file_type": "document",
       "source_file": "docs/CURSOR_PROMPTS.md",
       "source_location": "L128",
-      "community": 1,
+      "community": 4,
       "norm_label": "code:block13 (read orchestrator/orchestrator.md and follow it exactly.)",
       "id": "docs_cursor_prompts_codeblock_13"
     },
@@ -2825,7 +3266,7 @@
       "file_type": "document",
       "source_file": "docs/CURSOR_PROMPTS.md",
       "source_location": "L135",
-      "community": 1,
+      "community": 4,
       "norm_label": "\ud83c\udfad manuel rol aktivasyonu (ileri duzey)",
       "id": "docs_cursor_prompts_manuel_rol_aktivasyonu_leri_d_zey"
     },
@@ -2834,7 +3275,7 @@
       "file_type": "document",
       "source_file": "docs/CURSOR_PROMPTS.md",
       "source_location": "L139",
-      "community": 1,
+      "community": 4,
       "norm_label": "architect (planlama)",
       "id": "docs_cursor_prompts_architect_planlama"
     },
@@ -2843,7 +3284,7 @@
       "file_type": "document",
       "source_file": "docs/CURSOR_PROMPTS.md",
       "source_location": "L140",
-      "community": 1,
+      "community": 4,
       "norm_label": "code:block14 (read .cursor/skills/architect/architect.md and follow it exa)",
       "id": "docs_cursor_prompts_codeblock_14"
     },
@@ -2852,7 +3293,7 @@
       "file_type": "document",
       "source_file": "docs/CURSOR_PROMPTS.md",
       "source_location": "L146",
-      "community": 1,
+      "community": 4,
       "norm_label": "builder (dogrudan build)",
       "id": "docs_cursor_prompts_builder_do_rudan_build"
     },
@@ -2861,7 +3302,7 @@
       "file_type": "document",
       "source_file": "docs/CURSOR_PROMPTS.md",
       "source_location": "L147",
-      "community": 1,
+      "community": 4,
       "norm_label": "code:block15 (read .cursor/skills/builder/builder.md and follow it exactly)",
       "id": "docs_cursor_prompts_codeblock_15"
     },
@@ -2870,7 +3311,7 @@
       "file_type": "document",
       "source_file": "docs/CURSOR_PROMPTS.md",
       "source_location": "L153",
-      "community": 1,
+      "community": 4,
       "norm_label": "reviewer (kod inceleme)",
       "id": "docs_cursor_prompts_reviewer_kod_inceleme"
     },
@@ -2879,7 +3320,7 @@
       "file_type": "document",
       "source_file": "docs/CURSOR_PROMPTS.md",
       "source_location": "L154",
-      "community": 1,
+      "community": 4,
       "norm_label": "code:block16 (read .cursor/skills/reviewer/reviewer.md and follow it exact)",
       "id": "docs_cursor_prompts_codeblock_16"
     },
@@ -2888,7 +3329,7 @@
       "file_type": "document",
       "source_file": "docs/CURSOR_PROMPTS.md",
       "source_location": "L160",
-      "community": 1,
+      "community": 4,
       "norm_label": "qa (davran\u0131s dogrulama)",
       "id": "docs_cursor_prompts_qa_davran_do_rulama"
     },
@@ -2897,7 +3338,7 @@
       "file_type": "document",
       "source_file": "docs/CURSOR_PROMPTS.md",
       "source_location": "L161",
-      "community": 1,
+      "community": 4,
       "norm_label": "code:block17 (read .cursor/skills/qa/qa.md and follow it exactly.)",
       "id": "docs_cursor_prompts_codeblock_17"
     },
@@ -2906,7 +3347,7 @@
       "file_type": "document",
       "source_file": "docs/CURSOR_PROMPTS.md",
       "source_location": "L167",
-      "community": 1,
+      "community": 4,
       "norm_label": "ship (deploy haz\u0131rl\u0131g\u0131)",
       "id": "docs_cursor_prompts_ship_deploy_haz_rl"
     },
@@ -2915,7 +3356,7 @@
       "file_type": "document",
       "source_file": "docs/CURSOR_PROMPTS.md",
       "source_location": "L168",
-      "community": 1,
+      "community": 4,
       "norm_label": "code:block18 (read .cursor/skills/ship/ship.md and follow it exactly.)",
       "id": "docs_cursor_prompts_codeblock_18"
     },
@@ -2924,7 +3365,7 @@
       "file_type": "document",
       "source_file": "docs/CURSOR_PROMPTS.md",
       "source_location": "L175",
-      "community": 1,
+      "community": 4,
       "norm_label": "\ud83d\udccb board komutlar\u0131 (terminal)",
       "id": "docs_cursor_prompts_board_komutlar_terminal"
     },
@@ -2933,7 +3374,7 @@
       "file_type": "document",
       "source_file": "docs/CURSOR_PROMPTS.md",
       "source_location": "L180",
-      "community": 1,
+      "community": 4,
       "norm_label": "code:bash (bash scripts/board.sh status)",
       "id": "docs_cursor_prompts_codeblock_19"
     },
@@ -2942,7 +3383,7 @@
       "file_type": "document",
       "source_file": "docs/CURSOR_PROMPTS.md",
       "source_location": "L189",
-      "community": 1,
+      "community": 4,
       "norm_label": "code:powershell (.\\scripts\\board.ps1 status)",
       "id": "docs_cursor_prompts_codeblock_20"
     },
@@ -2951,7 +3392,7 @@
       "file_type": "document",
       "source_file": "docs/CURSOR_PROMPTS.md",
       "source_location": "L198",
-      "community": 1,
+      "community": 4,
       "norm_label": "code:bash (python -m graphstack board status)",
       "id": "docs_cursor_prompts_codeblock_21"
     },
@@ -2960,7 +3401,7 @@
       "file_type": "document",
       "source_file": "docs/CURSOR_PROMPTS.md",
       "source_location": "L208",
-      "community": 1,
+      "community": 4,
       "norm_label": "\ud83d\udca1 ipuclar\u0131",
       "id": "docs_cursor_prompts_pu_lar"
     },
@@ -2969,7 +3410,7 @@
       "file_type": "document",
       "source_file": "handoff/BOOTSTRAP.md",
       "source_location": "L1",
-      "community": 17,
+      "community": 16,
       "norm_label": "bootstrap.md",
       "id": "handoff_bootstrap_md"
     },
@@ -2978,7 +3419,7 @@
       "file_type": "document",
       "source_file": "handoff/BOOTSTRAP.md",
       "source_location": "L1",
-      "community": 17,
+      "community": 16,
       "norm_label": "bootstrap plan: [project name]",
       "id": "handoff_bootstrap_bootstrap_plan_project_name"
     },
@@ -2987,7 +3428,7 @@
       "file_type": "document",
       "source_file": "handoff/BOOTSTRAP.md",
       "source_location": "L9",
-      "community": 17,
+      "community": 16,
       "norm_label": "project summary",
       "id": "handoff_bootstrap_project_summary"
     },
@@ -2996,7 +3437,7 @@
       "file_type": "document",
       "source_file": "handoff/BOOTSTRAP.md",
       "source_location": "L15",
-      "community": 17,
+      "community": 16,
       "norm_label": "tech stack",
       "id": "handoff_bootstrap_tech_stack"
     },
@@ -3005,7 +3446,7 @@
       "file_type": "document",
       "source_file": "handoff/BOOTSTRAP.md",
       "source_location": "L26",
-      "community": 17,
+      "community": 16,
       "norm_label": "module map",
       "id": "handoff_bootstrap_module_map"
     },
@@ -3014,7 +3455,7 @@
       "file_type": "document",
       "source_file": "handoff/BOOTSTRAP.md",
       "source_location": "L28",
-      "community": 17,
+      "community": 16,
       "norm_label": "code:block1 ([project name])",
       "id": "handoff_bootstrap_codeblock_1"
     },
@@ -3023,7 +3464,7 @@
       "file_type": "document",
       "source_file": "handoff/BOOTSTRAP.md",
       "source_location": "L38",
-      "community": 17,
+      "community": 16,
       "norm_label": "cycle sequence",
       "id": "handoff_bootstrap_cycle_sequence"
     },
@@ -3032,7 +3473,7 @@
       "file_type": "document",
       "source_file": "handoff/BOOTSTRAP.md",
       "source_location": "L50",
-      "community": 17,
+      "community": 16,
       "norm_label": "cross-cutting concerns",
       "id": "handoff_bootstrap_cross_cutting_concerns"
     },
@@ -3041,7 +3482,7 @@
       "file_type": "document",
       "source_file": "handoff/BOOTSTRAP.md",
       "source_location": "L63",
-      "community": 17,
+      "community": 16,
       "norm_label": "known risks",
       "id": "handoff_bootstrap_known_risks"
     },
@@ -3050,7 +3491,7 @@
       "file_type": "document",
       "source_file": "handoff/BOOTSTRAP.md",
       "source_location": "L69",
-      "community": 17,
+      "community": 16,
       "norm_label": "cycle log",
       "id": "handoff_bootstrap_cycle_log"
     },
@@ -3059,7 +3500,7 @@
       "file_type": "document",
       "source_file": "handoff/BRIEF.md",
       "source_location": "L1",
-      "community": 18,
+      "community": 17,
       "norm_label": "brief.md",
       "id": "handoff_brief_md"
     },
@@ -3068,7 +3509,7 @@
       "file_type": "document",
       "source_file": "handoff/BRIEF.md",
       "source_location": "L1",
-      "community": 18,
+      "community": 17,
       "norm_label": "brief: [feature/change name]",
       "id": "handoff_brief_brief_feature_change_name"
     },
@@ -3077,7 +3518,7 @@
       "file_type": "document",
       "source_file": "handoff/BRIEF.md",
       "source_location": "L9",
-      "community": 18,
+      "community": 17,
       "norm_label": "objective",
       "id": "handoff_brief_objective"
     },
@@ -3086,7 +3527,7 @@
       "file_type": "document",
       "source_file": "handoff/BRIEF.md",
       "source_location": "L15",
-      "community": 18,
+      "community": 17,
       "norm_label": "scope",
       "id": "handoff_brief_scope"
     },
@@ -3095,7 +3536,7 @@
       "file_type": "document",
       "source_file": "handoff/BRIEF.md",
       "source_location": "L17",
-      "community": 18,
+      "community": 17,
       "norm_label": "in scope",
       "id": "handoff_brief_in_scope"
     },
@@ -3104,7 +3545,7 @@
       "file_type": "document",
       "source_file": "handoff/BRIEF.md",
       "source_location": "L20",
-      "community": 18,
+      "community": 17,
       "norm_label": "out of scope",
       "id": "handoff_brief_out_of_scope"
     },
@@ -3113,7 +3554,7 @@
       "file_type": "document",
       "source_file": "handoff/BRIEF.md",
       "source_location": "L25",
-      "community": 18,
+      "community": 17,
       "norm_label": "graph context",
       "id": "handoff_brief_graph_context"
     },
@@ -3122,7 +3563,7 @@
       "file_type": "document",
       "source_file": "handoff/BRIEF.md",
       "source_location": "L40",
-      "community": 18,
+      "community": 17,
       "norm_label": "implementation hints",
       "id": "handoff_brief_implementation_hints"
     },
@@ -3131,7 +3572,7 @@
       "file_type": "document",
       "source_file": "handoff/BRIEF.md",
       "source_location": "L54",
-      "community": 18,
+      "community": 17,
       "norm_label": "acceptance criteria",
       "id": "handoff_brief_acceptance_criteria"
     },
@@ -3140,7 +3581,7 @@
       "file_type": "document",
       "source_file": "handoff/BRIEF.md",
       "source_location": "L62",
-      "community": 18,
+      "community": 17,
       "norm_label": "handoff note",
       "id": "handoff_brief_handoff_note"
     },
@@ -3149,7 +3590,7 @@
       "file_type": "document",
       "source_file": "handoff/REVIEW.md",
       "source_location": "L1",
-      "community": 27,
+      "community": 26,
       "norm_label": "review.md",
       "id": "handoff_review_md"
     },
@@ -3158,7 +3599,7 @@
       "file_type": "document",
       "source_file": "handoff/REVIEW.md",
       "source_location": "L1",
-      "community": 27,
+      "community": 26,
       "norm_label": "review log",
       "id": "handoff_review_review_log"
     },
@@ -3167,7 +3608,7 @@
       "file_type": "document",
       "source_file": "handoff/STATE.md",
       "source_location": "L1",
-      "community": 28,
+      "community": 27,
       "norm_label": "state.md",
       "id": "handoff_state_md"
     },
@@ -3176,7 +3617,7 @@
       "file_type": "document",
       "source_file": "handoff/STATE.md",
       "source_location": "L1",
-      "community": 28,
+      "community": 27,
       "norm_label": "graphstack session state",
       "id": "handoff_state_graphstack_session_state"
     },
@@ -3185,7 +3626,7 @@
       "file_type": "document",
       "source_file": "handoff/board/README.md",
       "source_location": "L1",
-      "community": 22,
+      "community": 21,
       "norm_label": "readme.md",
       "id": "handoff_board_readme_md"
     },
@@ -3194,7 +3635,7 @@
       "file_type": "document",
       "source_file": "handoff/board/README.md",
       "source_location": "L1",
-      "community": 22,
+      "community": 21,
       "norm_label": "graphstack gnap board",
       "id": "board_readme_graphstack_gnap_board"
     },
@@ -3203,7 +3644,7 @@
       "file_type": "document",
       "source_file": "handoff/board/README.md",
       "source_location": "L5",
-      "community": 22,
+      "community": 21,
       "norm_label": "code:block1 (board/)",
       "id": "board_readme_codeblock_1"
     },
@@ -3212,7 +3653,7 @@
       "file_type": "document",
       "source_file": "handoff/board/README.md",
       "source_location": "L12",
-      "community": 22,
+      "community": 21,
       "norm_label": "how it works",
       "id": "board_readme_how_it_works"
     },
@@ -3221,7 +3662,7 @@
       "file_type": "document",
       "source_file": "handoff/board/README.md",
       "source_location": "L20",
-      "community": 22,
+      "community": 21,
       "norm_label": "why git?",
       "id": "board_readme_why_git"
     },
@@ -3230,7 +3671,7 @@
       "file_type": "document",
       "source_file": "handoff/board/README.md",
       "source_location": "L27",
-      "community": 22,
+      "community": 21,
       "norm_label": "task file format",
       "id": "board_readme_task_file_format"
     },
@@ -3239,7 +3680,7 @@
       "file_type": "document",
       "source_file": "orchestrator/ORCHESTRATOR.md",
       "source_location": "L1",
-      "community": 3,
+      "community": 5,
       "norm_label": "orchestrator.md",
       "id": "orchestrator_orchestrator_md"
     },
@@ -3248,7 +3689,7 @@
       "file_type": "document",
       "source_file": "orchestrator/ORCHESTRATOR.md",
       "source_location": "L1",
-      "community": 3,
+      "community": 5,
       "norm_label": "orchestrator",
       "id": "orchestrator_orchestrator_orchestrator"
     },
@@ -3257,7 +3698,7 @@
       "file_type": "document",
       "source_file": "orchestrator/ORCHESTRATOR.md",
       "source_location": "L9",
-      "community": 3,
+      "community": 5,
       "norm_label": "activation",
       "id": "orchestrator_orchestrator_activation"
     },
@@ -3266,7 +3707,7 @@
       "file_type": "document",
       "source_file": "orchestrator/ORCHESTRATOR.md",
       "source_location": "L13",
-      "community": 3,
+      "community": 5,
       "norm_label": "code:block1 (1a. parallel read (once per session \u2014 same tool batch if bot)",
       "id": "orchestrator_orchestrator_codeblock_1"
     },
@@ -3275,7 +3716,7 @@
       "file_type": "document",
       "source_file": "orchestrator/ORCHESTRATOR.md",
       "source_location": "L60",
-      "community": 3,
+      "community": 5,
       "norm_label": "the state machine",
       "id": "orchestrator_orchestrator_the_state_machine"
     },
@@ -3284,7 +3725,7 @@
       "file_type": "document",
       "source_file": "orchestrator/ORCHESTRATOR.md",
       "source_location": "L64",
-      "community": 3,
+      "community": 5,
       "norm_label": "code:block2 (\u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510)",
       "id": "orchestrator_orchestrator_codeblock_2"
     },
@@ -3293,7 +3734,7 @@
       "file_type": "document",
       "source_file": "orchestrator/ORCHESTRATOR.md",
       "source_location": "L108",
-      "community": 7,
+      "community": 8,
       "norm_label": "transition rules",
       "id": "orchestrator_orchestrator_transition_rules"
     },
@@ -3302,7 +3743,7 @@
       "file_type": "document",
       "source_file": "orchestrator/ORCHESTRATOR.md",
       "source_location": "L110",
-      "community": 7,
+      "community": 8,
       "norm_label": "idle \u2192 bootstrapper",
       "id": "orchestrator_orchestrator_idle_bootstrapper"
     },
@@ -3311,7 +3752,7 @@
       "file_type": "document",
       "source_file": "orchestrator/ORCHESTRATOR.md",
       "source_location": "L114",
-      "community": 7,
+      "community": 8,
       "norm_label": "code:block3 ([bootstrapper mode])",
       "id": "orchestrator_orchestrator_codeblock_3"
     },
@@ -3320,7 +3761,7 @@
       "file_type": "document",
       "source_file": "orchestrator/ORCHESTRATOR.md",
       "source_location": "L122",
-      "community": 7,
+      "community": 8,
       "norm_label": "bootstrapper \u2192 builder (cycle 1)",
       "id": "orchestrator_orchestrator_bootstrapper_builder_cycle_1"
     },
@@ -3329,7 +3770,7 @@
       "file_type": "document",
       "source_file": "orchestrator/ORCHESTRATOR.md",
       "source_location": "L126",
-      "community": 7,
+      "community": 8,
       "norm_label": "code:block4 ([bootstrapper \u2192 builder])",
       "id": "orchestrator_orchestrator_codeblock_4"
     },
@@ -3338,7 +3779,7 @@
       "file_type": "document",
       "source_file": "orchestrator/ORCHESTRATOR.md",
       "source_location": "L133",
-      "community": 7,
+      "community": 8,
       "norm_label": "ship \u2192 bootstrapper (inter-cycle, bootstrap mode only)",
       "id": "orchestrator_orchestrator_ship_bootstrapper_inter_cycle_bootstrap_mode_only"
     },
@@ -3347,7 +3788,7 @@
       "file_type": "document",
       "source_file": "orchestrator/ORCHESTRATOR.md",
       "source_location": "L137",
-      "community": 7,
+      "community": 8,
       "norm_label": "code:block5 ([ship \u2192 bootstrapper])",
       "id": "orchestrator_orchestrator_codeblock_5"
     },
@@ -3356,7 +3797,7 @@
       "file_type": "document",
       "source_file": "orchestrator/ORCHESTRATOR.md",
       "source_location": "L148",
-      "community": 7,
+      "community": 8,
       "norm_label": "idle \u2192 architect",
       "id": "orchestrator_orchestrator_idle_architect"
     },
@@ -3365,7 +3806,7 @@
       "file_type": "document",
       "source_file": "orchestrator/ORCHESTRATOR.md",
       "source_location": "L152",
-      "community": 7,
+      "community": 8,
       "norm_label": "code:block6 ([architect mode])",
       "id": "orchestrator_orchestrator_codeblock_6"
     },
@@ -3374,7 +3815,7 @@
       "file_type": "document",
       "source_file": "orchestrator/ORCHESTRATOR.md",
       "source_location": "L158",
-      "community": 7,
+      "community": 8,
       "norm_label": "architect \u2192 builder",
       "id": "orchestrator_orchestrator_architect_builder"
     },
@@ -3383,7 +3824,7 @@
       "file_type": "document",
       "source_file": "orchestrator/ORCHESTRATOR.md",
       "source_location": "L164",
-      "community": 7,
+      "community": 8,
       "norm_label": "code:block7 ([architect \u2192 builder])",
       "id": "orchestrator_orchestrator_codeblock_7"
     },
@@ -3392,7 +3833,7 @@
       "file_type": "document",
       "source_file": "orchestrator/ORCHESTRATOR.md",
       "source_location": "L172",
-      "community": 7,
+      "community": 8,
       "norm_label": "builder \u2192 reviewer",
       "id": "orchestrator_orchestrator_builder_reviewer"
     },
@@ -3401,7 +3842,7 @@
       "file_type": "document",
       "source_file": "orchestrator/ORCHESTRATOR.md",
       "source_location": "L176",
-      "community": 7,
+      "community": 8,
       "norm_label": "code:block8 ([builder \u2192 reviewer])",
       "id": "orchestrator_orchestrator_codeblock_8"
     },
@@ -3410,7 +3851,7 @@
       "file_type": "document",
       "source_file": "orchestrator/ORCHESTRATOR.md",
       "source_location": "L185",
-      "community": 7,
+      "community": 8,
       "norm_label": "reviewer \u2192 builder (rejection path)",
       "id": "orchestrator_orchestrator_reviewer_builder_rejection_path"
     },
@@ -3419,7 +3860,7 @@
       "file_type": "document",
       "source_file": "orchestrator/ORCHESTRATOR.md",
       "source_location": "L189",
-      "community": 7,
+      "community": 8,
       "norm_label": "code:block9 ([reviewer \u2192 builder])",
       "id": "orchestrator_orchestrator_codeblock_9"
     },
@@ -3428,7 +3869,7 @@
       "file_type": "document",
       "source_file": "orchestrator/ORCHESTRATOR.md",
       "source_location": "L199",
-      "community": 7,
+      "community": 8,
       "norm_label": "code:block10 (\"this change has been revised 3 times. here are the persiste)",
       "id": "orchestrator_orchestrator_codeblock_10"
     },
@@ -3437,7 +3878,7 @@
       "file_type": "document",
       "source_file": "orchestrator/ORCHESTRATOR.md",
       "source_location": "L205",
-      "community": 7,
+      "community": 8,
       "norm_label": "reviewer \u2192 qa (approval path)",
       "id": "orchestrator_orchestrator_reviewer_qa_approval_path"
     },
@@ -3446,7 +3887,7 @@
       "file_type": "document",
       "source_file": "orchestrator/ORCHESTRATOR.md",
       "source_location": "L209",
-      "community": 7,
+      "community": 8,
       "norm_label": "code:block11 ([reviewer \u2192 qa])",
       "id": "orchestrator_orchestrator_codeblock_11"
     },
@@ -3455,7 +3896,7 @@
       "file_type": "document",
       "source_file": "orchestrator/ORCHESTRATOR.md",
       "source_location": "L217",
-      "community": 7,
+      "community": 8,
       "norm_label": "qa \u2192 builder (failure path)",
       "id": "orchestrator_orchestrator_qa_builder_failure_path"
     },
@@ -3464,7 +3905,7 @@
       "file_type": "document",
       "source_file": "orchestrator/ORCHESTRATOR.md",
       "source_location": "L221",
-      "community": 7,
+      "community": 8,
       "norm_label": "code:block12 ([qa \u2192 builder])",
       "id": "orchestrator_orchestrator_codeblock_12"
     },
@@ -3473,7 +3914,7 @@
       "file_type": "document",
       "source_file": "orchestrator/ORCHESTRATOR.md",
       "source_location": "L229",
-      "community": 7,
+      "community": 8,
       "norm_label": "qa \u2192 ship (pass path)",
       "id": "orchestrator_orchestrator_qa_ship_pass_path"
     },
@@ -3482,7 +3923,7 @@
       "file_type": "document",
       "source_file": "orchestrator/ORCHESTRATOR.md",
       "source_location": "L233",
-      "community": 7,
+      "community": 8,
       "norm_label": "code:block13 ([qa \u2192 ship])",
       "id": "orchestrator_orchestrator_codeblock_13"
     },
@@ -3491,7 +3932,7 @@
       "file_type": "document",
       "source_file": "orchestrator/ORCHESTRATOR.md",
       "source_location": "L240",
-      "community": 7,
+      "community": 8,
       "norm_label": "ship \u2192 idle",
       "id": "orchestrator_orchestrator_ship_idle"
     },
@@ -3500,7 +3941,7 @@
       "file_type": "document",
       "source_file": "orchestrator/ORCHESTRATOR.md",
       "source_location": "L244",
-      "community": 7,
+      "community": 8,
       "norm_label": "code:block14 ([ship \u2192 idle])",
       "id": "orchestrator_orchestrator_codeblock_14"
     },
@@ -3509,7 +3950,7 @@
       "file_type": "document",
       "source_file": "orchestrator/ORCHESTRATOR.md",
       "source_location": "L254",
-      "community": 3,
+      "community": 5,
       "norm_label": "interruption handling",
       "id": "orchestrator_orchestrator_interruption_handling"
     },
@@ -3518,7 +3959,7 @@
       "file_type": "document",
       "source_file": "orchestrator/ORCHESTRATOR.md",
       "source_location": "L272",
-      "community": 3,
+      "community": 5,
       "norm_label": "graphify schedule (bootstrap mode)",
       "id": "orchestrator_orchestrator_graphify_schedule_bootstrap_mode"
     },
@@ -3527,7 +3968,7 @@
       "file_type": "document",
       "source_file": "orchestrator/ORCHESTRATOR.md",
       "source_location": "L276",
-      "community": 3,
+      "community": 5,
       "norm_label": "code:block15 (after cycle 1 ship:)",
       "id": "orchestrator_orchestrator_codeblock_15"
     },
@@ -3536,7 +3977,7 @@
       "file_type": "document",
       "source_file": "orchestrator/ORCHESTRATOR.md",
       "source_location": "L290",
-      "community": 3,
+      "community": 5,
       "norm_label": "token budget system",
       "id": "orchestrator_orchestrator_token_budget_system"
     },
@@ -3545,7 +3986,7 @@
       "file_type": "document",
       "source_file": "orchestrator/ORCHESTRATOR.md",
       "source_location": "L294",
-      "community": 3,
+      "community": 5,
       "norm_label": "tier 1 \u2014 free (always do first)",
       "id": "orchestrator_orchestrator_tier_1_free_always_do_first"
     },
@@ -3554,7 +3995,7 @@
       "file_type": "document",
       "source_file": "orchestrator/ORCHESTRATOR.md",
       "source_location": "L299",
-      "community": 3,
+      "community": 5,
       "norm_label": "tier 2 \u2014 cheap (use freely)",
       "id": "orchestrator_orchestrator_tier_2_cheap_use_freely"
     },
@@ -3563,7 +4004,7 @@
       "file_type": "document",
       "source_file": "orchestrator/ORCHESTRATOR.md",
       "source_location": "L304",
-      "community": 3,
+      "community": 5,
       "norm_label": "tier 3 \u2014 expensive (require justification)",
       "id": "orchestrator_orchestrator_tier_3_expensive_require_justification"
     },
@@ -3572,7 +4013,7 @@
       "file_type": "document",
       "source_file": "orchestrator/ORCHESTRATOR.md",
       "source_location": "L309",
-      "community": 3,
+      "community": 5,
       "norm_label": "tier 4 \u2014 banned",
       "id": "orchestrator_orchestrator_tier_4_banned"
     },
@@ -3581,7 +4022,7 @@
       "file_type": "document",
       "source_file": "orchestrator/ORCHESTRATOR.md",
       "source_location": "L315",
-      "community": 3,
+      "community": 5,
       "norm_label": "before every file read, ask internally:",
       "id": "orchestrator_orchestrator_before_every_file_read_ask_internally"
     },
@@ -3590,7 +4031,7 @@
       "file_type": "document",
       "source_file": "orchestrator/ORCHESTRATOR.md",
       "source_location": "L316",
-      "community": 3,
+      "community": 5,
       "norm_label": "code:block16 (is this in tier 1 or 2?  \u2192 proceed)",
       "id": "orchestrator_orchestrator_codeblock_16"
     },
@@ -3599,7 +4040,7 @@
       "file_type": "document",
       "source_file": "orchestrator/ORCHESTRATOR.md",
       "source_location": "L324",
-      "community": 3,
+      "community": 5,
       "norm_label": "state persistence",
       "id": "orchestrator_orchestrator_state_persistence"
     },
@@ -3608,7 +4049,7 @@
       "file_type": "document",
       "source_file": "orchestrator/ORCHESTRATOR.md",
       "source_location": "L329",
-      "community": 3,
+      "community": 5,
       "norm_label": "code:markdown (## [yyyy-mm-dd hh:mm] \u2014 [role] \u2192 [next_role])",
       "id": "orchestrator_orchestrator_codeblock_17"
     },
@@ -3617,7 +4058,7 @@
       "file_type": "document",
       "source_file": "orchestrator/ORCHESTRATOR.md",
       "source_location": "L337",
-      "community": 3,
+      "community": 5,
       "norm_label": "code:bash (# on role claim:)",
       "id": "orchestrator_orchestrator_codeblock_18"
     },
@@ -3626,7 +4067,7 @@
       "file_type": "document",
       "source_file": "orchestrator/ORCHESTRATOR.md",
       "source_location": "L349",
-      "community": 3,
+      "community": 5,
       "norm_label": "gnap board rules",
       "id": "orchestrator_orchestrator_gnap_board_rules"
     },
@@ -3635,7 +4076,7 @@
       "file_type": "document",
       "source_file": "orchestrator/ORCHESTRATOR.md",
       "source_location": "L352",
-      "community": 3,
+      "community": 5,
       "norm_label": "code:bash (python -m graphstack board new <task-id> \"<title>\")",
       "id": "orchestrator_orchestrator_codeblock_19"
     },
@@ -3644,7 +4085,7 @@
       "file_type": "document",
       "source_file": "orchestrator/ORCHESTRATOR.md",
       "source_location": "L363",
-      "community": 3,
+      "community": 5,
       "norm_label": "resuming a session",
       "id": "orchestrator_orchestrator_resuming_a_session"
     },
@@ -3653,7 +4094,7 @@
       "file_type": "document",
       "source_file": "orchestrator/ORCHESTRATOR.md",
       "source_location": "L367",
-      "community": 3,
+      "community": 5,
       "norm_label": "code:block20 (1. read handoff/state.md (last entry only))",
       "id": "orchestrator_orchestrator_codeblock_20"
     },
@@ -3662,7 +4103,7 @@
       "file_type": "document",
       "source_file": "orchestrator/ORCHESTRATOR.md",
       "source_location": "L380",
-      "community": 3,
+      "community": 5,
       "norm_label": "language handling",
       "id": "orchestrator_orchestrator_language_handling"
     },
@@ -3671,7 +4112,7 @@
       "file_type": "document",
       "source_file": "orchestrator/ORCHESTRATOR.md",
       "source_location": "L391",
-      "community": 3,
+      "community": 5,
       "norm_label": "output format per role",
       "id": "orchestrator_orchestrator_output_format_per_role"
     },
@@ -3680,7 +4121,7 @@
       "file_type": "document",
       "source_file": "orchestrator/ORCHESTRATOR.md",
       "source_location": "L396",
-      "community": 3,
+      "community": 5,
       "norm_label": "code:block21 ([architect mode])",
       "id": "orchestrator_orchestrator_codeblock_21"
     },
@@ -3689,7 +4130,7 @@
       "file_type": "document",
       "source_file": "orchestrator/ORCHESTRATOR.md",
       "source_location": "L406",
-      "community": 3,
+      "community": 5,
       "norm_label": "code:block22 ([builder mode])",
       "id": "orchestrator_orchestrator_codeblock_22"
     },
@@ -3698,7 +4139,7 @@
       "file_type": "document",
       "source_file": "orchestrator/ORCHESTRATOR.md",
       "source_location": "L415",
-      "community": 3,
+      "community": 5,
       "norm_label": "code:block23 ([reviewer mode])",
       "id": "orchestrator_orchestrator_codeblock_23"
     },
@@ -3707,7 +4148,7 @@
       "file_type": "document",
       "source_file": "orchestrator/ORCHESTRATOR.md",
       "source_location": "L424",
-      "community": 3,
+      "community": 5,
       "norm_label": "code:block24 ([qa mode])",
       "id": "orchestrator_orchestrator_codeblock_24"
     },
@@ -3716,7 +4157,7 @@
       "file_type": "document",
       "source_file": "orchestrator/ORCHESTRATOR.md",
       "source_location": "L434",
-      "community": 3,
+      "community": 5,
       "norm_label": "code:block25 ([ship mode])",
       "id": "orchestrator_orchestrator_codeblock_25"
     },
@@ -3725,7 +4166,7 @@
       "file_type": "document",
       "source_file": "orchestrator/TOKEN_OPTIMIZER.md",
       "source_location": "L1",
-      "community": 4,
+      "community": 2,
       "norm_label": "token_optimizer.md",
       "id": "orchestrator_token_optimizer_md"
     },
@@ -3734,7 +4175,7 @@
       "file_type": "document",
       "source_file": "orchestrator/TOKEN_OPTIMIZER.md",
       "source_location": "L1",
-      "community": 4,
+      "community": 2,
       "norm_label": "token optimizer",
       "id": "orchestrator_token_optimizer_token_optimizer"
     },
@@ -3743,7 +4184,7 @@
       "file_type": "document",
       "source_file": "orchestrator/TOKEN_OPTIMIZER.md",
       "source_location": "L7",
-      "community": 4,
+      "community": 2,
       "norm_label": "the core principle",
       "id": "orchestrator_token_optimizer_the_core_principle"
     },
@@ -3752,7 +4193,7 @@
       "file_type": "document",
       "source_file": "orchestrator/TOKEN_OPTIMIZER.md",
       "source_location": "L15",
-      "community": 4,
+      "community": 2,
       "norm_label": "session budget tracker",
       "id": "orchestrator_token_optimizer_session_budget_tracker"
     },
@@ -3761,7 +4202,7 @@
       "file_type": "document",
       "source_file": "orchestrator/TOKEN_OPTIMIZER.md",
       "source_location": "L19",
-      "community": 4,
+      "community": 2,
       "norm_label": "code:block1 (session budget)",
       "id": "orchestrator_token_optimizer_codeblock_1"
     },
@@ -3770,7 +4211,7 @@
       "file_type": "document",
       "source_file": "orchestrator/TOKEN_OPTIMIZER.md",
       "source_location": "L31",
-      "community": 4,
+      "community": 2,
       "norm_label": "decision tree (run before every tool call)",
       "id": "orchestrator_token_optimizer_decision_tree_run_before_every_tool_call"
     },
@@ -3779,7 +4220,7 @@
       "file_type": "document",
       "source_file": "orchestrator/TOKEN_OPTIMIZER.md",
       "source_location": "L33",
-      "community": 4,
+      "community": 2,
       "norm_label": "code:block2 (before reading a file:)",
       "id": "orchestrator_token_optimizer_codeblock_2"
     },
@@ -3788,7 +4229,7 @@
       "file_type": "document",
       "source_file": "orchestrator/TOKEN_OPTIMIZER.md",
       "source_location": "L60",
-      "community": 14,
+      "community": 2,
       "norm_label": "graph query patterns",
       "id": "orchestrator_token_optimizer_graph_query_patterns"
     },
@@ -3797,7 +4238,7 @@
       "file_type": "document",
       "source_file": "orchestrator/TOKEN_OPTIMIZER.md",
       "source_location": "L64",
-      "community": 14,
+      "community": 2,
       "norm_label": "\"what does this module import?\"",
       "id": "orchestrator_token_optimizer_what_does_this_module_import"
     },
@@ -3806,7 +4247,7 @@
       "file_type": "document",
       "source_file": "orchestrator/TOKEN_OPTIMIZER.md",
       "source_location": "L65",
-      "community": 14,
+      "community": 2,
       "norm_label": "code:block3 (graph.json \u2192 node[\"src/auth/login.ts\"].edges.filter(e => e.t)",
       "id": "orchestrator_token_optimizer_codeblock_3"
     },
@@ -3815,7 +4256,7 @@
       "file_type": "document",
       "source_file": "orchestrator/TOKEN_OPTIMIZER.md",
       "source_location": "L69",
-      "community": 14,
+      "community": 2,
       "norm_label": "\"who calls this function?\"",
       "id": "orchestrator_token_optimizer_who_calls_this_function"
     },
@@ -3824,7 +4265,7 @@
       "file_type": "document",
       "source_file": "orchestrator/TOKEN_OPTIMIZER.md",
       "source_location": "L70",
-      "community": 14,
+      "community": 2,
       "norm_label": "code:block4 (graph.json \u2192 nodes.filter(n => n.edges.some(e => e.target ==)",
       "id": "orchestrator_token_optimizer_codeblock_4"
     },
@@ -3833,7 +4274,7 @@
       "file_type": "document",
       "source_file": "orchestrator/TOKEN_OPTIMIZER.md",
       "source_location": "L74",
-      "community": 14,
+      "community": 2,
       "norm_label": "\"what modules are in this cluster?\"",
       "id": "orchestrator_token_optimizer_what_modules_are_in_this_cluster"
     },
@@ -3842,7 +4283,7 @@
       "file_type": "document",
       "source_file": "orchestrator/TOKEN_OPTIMIZER.md",
       "source_location": "L75",
-      "community": 14,
+      "community": 2,
       "norm_label": "code:block5 (graph_report.md \u2192 cluster section \u2192 find cluster containing )",
       "id": "orchestrator_token_optimizer_codeblock_5"
     },
@@ -3851,7 +4292,7 @@
       "file_type": "document",
       "source_file": "orchestrator/TOKEN_OPTIMIZER.md",
       "source_location": "L79",
-      "community": 14,
+      "community": 2,
       "norm_label": "\"what's the blast radius of changing x?\"",
       "id": "orchestrator_token_optimizer_what_s_the_blast_radius_of_changing_x"
     },
@@ -3860,7 +4301,7 @@
       "file_type": "document",
       "source_file": "orchestrator/TOKEN_OPTIMIZER.md",
       "source_location": "L80",
-      "community": 14,
+      "community": 2,
       "norm_label": "code:block6 (graph.json \u2192 bfs from node x, depth 2, outgoing edges only)",
       "id": "orchestrator_token_optimizer_codeblock_6"
     },
@@ -3869,7 +4310,7 @@
       "file_type": "document",
       "source_file": "orchestrator/TOKEN_OPTIMIZER.md",
       "source_location": "L84",
-      "community": 14,
+      "community": 2,
       "norm_label": "\"are there tests for this?\"",
       "id": "orchestrator_token_optimizer_are_there_tests_for_this"
     },
@@ -3878,7 +4319,7 @@
       "file_type": "document",
       "source_file": "orchestrator/TOKEN_OPTIMIZER.md",
       "source_location": "L85",
-      "community": 14,
+      "community": 2,
       "norm_label": "code:block7 (graph.json \u2192 node[\"src/auth/login.ts\"].edges.filter(e => e.t)",
       "id": "orchestrator_token_optimizer_codeblock_7"
     },
@@ -3887,7 +4328,7 @@
       "file_type": "document",
       "source_file": "orchestrator/TOKEN_OPTIMIZER.md",
       "source_location": "L89",
-      "community": 14,
+      "community": 2,
       "norm_label": "\"what pattern does the codebase use for y?\"",
       "id": "orchestrator_token_optimizer_what_pattern_does_the_codebase_use_for_y"
     },
@@ -3896,7 +4337,7 @@
       "file_type": "document",
       "source_file": "orchestrator/TOKEN_OPTIMIZER.md",
       "source_location": "L90",
-      "community": 14,
+      "community": 2,
       "norm_label": "code:block8 (graph_report.md \u2192 patterns section)",
       "id": "orchestrator_token_optimizer_codeblock_8"
     },
@@ -3905,7 +4346,7 @@
       "file_type": "document",
       "source_file": "orchestrator/TOKEN_OPTIMIZER.md",
       "source_location": "L97",
-      "community": 4,
+      "community": 2,
       "norm_label": "parallel read protocol",
       "id": "orchestrator_token_optimizer_parallel_read_protocol"
     },
@@ -3914,7 +4355,7 @@
       "file_type": "document",
       "source_file": "orchestrator/TOKEN_OPTIMIZER.md",
       "source_location": "L102",
-      "community": 4,
+      "community": 2,
       "norm_label": "code:block9 (read(src/auth/login.ts))",
       "id": "orchestrator_token_optimizer_codeblock_9"
     },
@@ -3923,7 +4364,7 @@
       "file_type": "document",
       "source_file": "orchestrator/TOKEN_OPTIMIZER.md",
       "source_location": "L108",
-      "community": 4,
+      "community": 2,
       "norm_label": "code:block10 (read([src/auth/login.ts, src/auth/session.ts])  // one tool )",
       "id": "orchestrator_token_optimizer_codeblock_10"
     },
@@ -3932,7 +4373,7 @@
       "file_type": "document",
       "source_file": "orchestrator/TOKEN_OPTIMIZER.md",
       "source_location": "L116",
-      "community": 4,
+      "community": 2,
       "norm_label": "output compression rules",
       "id": "orchestrator_token_optimizer_output_compression_rules"
     },
@@ -3941,7 +4382,7 @@
       "file_type": "document",
       "source_file": "orchestrator/TOKEN_OPTIMIZER.md",
       "source_location": "L118",
-      "community": 4,
+      "community": 2,
       "norm_label": "never produce these:",
       "id": "orchestrator_token_optimizer_never_produce_these"
     },
@@ -3950,7 +4391,7 @@
       "file_type": "document",
       "source_file": "orchestrator/TOKEN_OPTIMIZER.md",
       "source_location": "L126",
-      "community": 4,
+      "community": 2,
       "norm_label": "always prefer:",
       "id": "orchestrator_token_optimizer_always_prefer"
     },
@@ -3959,7 +4400,7 @@
       "file_type": "document",
       "source_file": "orchestrator/TOKEN_OPTIMIZER.md",
       "source_location": "L135",
-      "community": 4,
+      "community": 2,
       "norm_label": "context window rules",
       "id": "orchestrator_token_optimizer_context_window_rules"
     },
@@ -3968,7 +4409,7 @@
       "file_type": "document",
       "source_file": "orchestrator/TOKEN_OPTIMIZER.md",
       "source_location": "L137",
-      "community": 4,
+      "community": 2,
       "norm_label": "what stays in context (never re-read):",
       "id": "orchestrator_token_optimizer_what_stays_in_context_never_re_read"
     },
@@ -3977,7 +4418,7 @@
       "file_type": "document",
       "source_file": "orchestrator/TOKEN_OPTIMIZER.md",
       "source_location": "L142",
-      "community": 4,
+      "community": 2,
       "norm_label": "what gets summarized out (to free context):",
       "id": "orchestrator_token_optimizer_what_gets_summarized_out_to_free_context"
     },
@@ -3986,7 +4427,7 @@
       "file_type": "document",
       "source_file": "orchestrator/TOKEN_OPTIMIZER.md",
       "source_location": "L147",
-      "community": 4,
+      "community": 2,
       "norm_label": "when context is getting full:",
       "id": "orchestrator_token_optimizer_when_context_is_getting_full"
     },
@@ -3995,7 +4436,7 @@
       "file_type": "document",
       "source_file": "orchestrator/TOKEN_OPTIMIZER.md",
       "source_location": "L148",
-      "community": 4,
+      "community": 2,
       "norm_label": "code:block11 (\"context at ~80% capacity. summarizing intermediate state to)",
       "id": "orchestrator_token_optimizer_codeblock_11"
     },
@@ -4004,7 +4445,7 @@
       "file_type": "document",
       "source_file": "orchestrator/TOKEN_OPTIMIZER.md",
       "source_location": "L155",
-      "community": 4,
+      "community": 2,
       "norm_label": "estimated token savings by pattern",
       "id": "orchestrator_token_optimizer_estimated_token_savings_by_pattern"
     },
@@ -4013,7 +4454,7 @@
       "file_type": "document",
       "source_file": "orchestrator/TOKEN_OPTIMIZER.md",
       "source_location": "L168",
-      "community": 4,
+      "community": 2,
       "norm_label": "graph update strategy",
       "id": "orchestrator_token_optimizer_graph_update_strategy"
     },
@@ -4022,7 +4463,7 @@
       "file_type": "document",
       "source_file": "orchestrator/TOKEN_OPTIMIZER.md",
       "source_location": "L170",
-      "community": 4,
+      "community": 2,
       "norm_label": "when to update (smart triggers)",
       "id": "orchestrator_token_optimizer_when_to_update_smart_triggers"
     },
@@ -4031,7 +4472,7 @@
       "file_type": "document",
       "source_file": "orchestrator/TOKEN_OPTIMIZER.md",
       "source_location": "L174",
-      "community": 4,
+      "community": 2,
       "norm_label": "code:block12 (trigger 1 \u2014 structural change (highest priority))",
       "id": "orchestrator_token_optimizer_codeblock_12"
     },
@@ -4040,7 +4481,7 @@
       "file_type": "document",
       "source_file": "orchestrator/TOKEN_OPTIMIZER.md",
       "source_location": "L196",
-      "community": 4,
+      "community": 2,
       "norm_label": "why not update every commit?",
       "id": "orchestrator_token_optimizer_why_not_update_every_commit"
     },
@@ -4049,7 +4490,7 @@
       "file_type": "document",
       "source_file": "orchestrator/TOKEN_OPTIMIZER.md",
       "source_location": "L206",
-      "community": 4,
+      "community": 2,
       "norm_label": "manual update commands",
       "id": "orchestrator_token_optimizer_manual_update_commands"
     },
@@ -4058,7 +4499,7 @@
       "file_type": "document",
       "source_file": "orchestrator/TOKEN_OPTIMIZER.md",
       "source_location": "L208",
-      "community": 4,
+      "community": 2,
       "norm_label": "code:bash (# force update now (run in cursor or terminal))",
       "id": "orchestrator_token_optimizer_codeblock_13"
     },
@@ -4067,7 +4508,7 @@
       "file_type": "document",
       "source_file": "orchestrator/TOKEN_OPTIMIZER.md",
       "source_location": "L219",
-      "community": 4,
+      "community": 2,
       "norm_label": "bootstrap mode graph schedule",
       "id": "orchestrator_token_optimizer_bootstrap_mode_graph_schedule"
     },
@@ -4076,7 +4517,7 @@
       "file_type": "document",
       "source_file": "orchestrator/TOKEN_OPTIMIZER.md",
       "source_location": "L223",
-      "community": 4,
+      "community": 2,
       "norm_label": "code:block14 (cycle 1 \u2192 ship \u2192 stop \u2192 \"run /graphify . now\" \u2192 wait for con)",
       "id": "orchestrator_token_optimizer_codeblock_14"
     },
@@ -4085,7 +4526,7 @@
       "file_type": "document",
       "source_file": "orchestrator/TOKEN_OPTIMIZER.md",
       "source_location": "L232",
-      "community": 4,
+      "community": 2,
       "norm_label": "project type suitability",
       "id": "orchestrator_token_optimizer_project_type_suitability"
     },
@@ -4094,7 +4535,7 @@
       "file_type": "document",
       "source_file": "orchestrator/TOKEN_OPTIMIZER.md",
       "source_location": "L236",
-      "community": 4,
+      "community": 2,
       "norm_label": "code:block15 (high value (>60% savings):)",
       "id": "orchestrator_token_optimizer_codeblock_15"
     },
@@ -4103,7 +4544,7 @@
       "file_type": "document",
       "source_file": "orchestrator/TOKEN_OPTIMIZER.md",
       "source_location": "L257",
-      "community": 4,
+      "community": 2,
       "norm_label": "code:block16 (\u274c reading graph_report.md more than once per session)",
       "id": "orchestrator_token_optimizer_codeblock_16"
     },
@@ -4112,7 +4553,7 @@
       "file_type": "rationale",
       "source_file": "scripts/graphstack/installer.py",
       "source_location": "L141",
-      "community": 2,
+      "community": 0,
       "norm_label": "copy ``scripts/graphstack/*.py`` into the target so the shims work.",
       "id": "graphstack_installer_rationale_141"
     },
@@ -4148,7 +4589,7 @@
       "file_type": "document",
       "source_file": "docs/CURSOR_PROMPTS.md",
       "source_location": "L61",
-      "community": 1,
+      "community": 4,
       "norm_label": "\u26a1 normal kullan\u0131m \u2014 tek prompt",
       "id": "docs_cursor_prompts_normal_kullan_m_tek_prompt"
     }
@@ -4674,10 +5115,10 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "scripts/graphstack/board.py",
-      "source_location": "L60",
+      "source_location": "L57",
       "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "graphstack_board_rationale_60",
+      "source": "graphstack_board_rationale_57",
       "target": "graphstack_board_git_commit_board"
     },
     {
@@ -4690,6 +5131,16 @@
       "weight": 1.0,
       "source": "graphstack_board_git_commit_board",
       "target": "graphstack_platform_utils_run_git"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/graphstack/board.py",
+      "source_location": "L60",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "graphstack_board_rationale_60",
+      "target": "graphstack_board_git_commit_board"
     },
     {
       "relation": "calls",
@@ -4890,11 +5341,11 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "scripts/graphstack/cli.py",
-      "source_location": "L41",
+      "source_location": "L43",
       "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "graphstack_cli_rationale_41",
-      "target": "graphstack_cli_main"
+      "source": "graphstack_cli_rationale_43",
+      "target": "graphstack_cli_main",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -4917,6 +5368,16 @@
       "weight": 1.0,
       "source": "graphstack_cli_main",
       "target": "graphstack_validate_run_doctor"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/graphstack/cli.py",
+      "source_location": "L41",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "graphstack_cli_rationale_41",
+      "target": "graphstack_cli_main"
     },
     {
       "relation": "rationale_for",
@@ -5482,11 +5943,11 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "scripts/graphstack/installer.py",
-      "source_location": "L144",
+      "source_location": "L152",
       "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "graphstack_installer_rationale_144",
-      "target": "graphstack_installer_install_python_package"
+      "source": "graphstack_installer_rationale_152",
+      "target": "graphstack_installer_install_python_package",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -5507,6 +5968,16 @@
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "graphstack_installer_rationale_143",
+      "target": "graphstack_installer_install_python_package"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/graphstack/installer.py",
+      "source_location": "L144",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "graphstack_installer_rationale_144",
       "target": "graphstack_installer_install_python_package"
     },
     {
@@ -5812,6 +6283,122 @@
       "target": "graphstack_platform_utils_echo"
     },
     {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/graphstack/run.py",
+      "source_location": "L15",
+      "weight": 1.0,
+      "source": "scripts_graphstack_run_py",
+      "target": "scripts_graphstack_compact_registry_py",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/graphstack/run.py",
+      "source_location": "L16",
+      "weight": 1.0,
+      "source": "scripts_graphstack_run_py",
+      "target": "graphstack_run_build_parser",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/graphstack/run.py",
+      "source_location": "L34",
+      "weight": 1.0,
+      "source": "scripts_graphstack_run_py",
+      "target": "graphstack_run_strip_leading_dashes",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/graphstack/run.py",
+      "source_location": "L40",
+      "weight": 1.0,
+      "source": "scripts_graphstack_run_py",
+      "target": "graphstack_run_execute",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/graphstack/run.py",
+      "source_location": "L82",
+      "weight": 1.0,
+      "source": "scripts_graphstack_run_py",
+      "target": "graphstack_run_run",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/graphstack/run.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "graphstack_run_rationale_1",
+      "target": "scripts_graphstack_run_py",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/graphstack/run.py",
+      "source_location": "L84",
+      "weight": 1.0,
+      "source": "graphstack_run_run",
+      "target": "graphstack_run_build_parser",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/graphstack/run.py",
+      "source_location": "L41",
+      "weight": 1.0,
+      "source": "graphstack_run_execute",
+      "target": "graphstack_run_strip_leading_dashes",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/graphstack/run.py",
+      "source_location": "L86",
+      "weight": 1.0,
+      "source": "graphstack_run_run",
+      "target": "graphstack_run_strip_leading_dashes",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/graphstack/run.py",
+      "source_location": "L87",
+      "weight": 1.0,
+      "source": "graphstack_run_run",
+      "target": "graphstack_run_execute",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "scripts/graphstack/run.py",
+      "source_location": "L73",
+      "weight": 1.0,
+      "source": "graphstack_run_execute",
+      "target": "compact_registry_compact_command_output"
+    },
+    {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "scripts/graphstack/validate.py",
@@ -5965,6 +6552,16 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "scripts/graphstack/validate.py",
+      "source_location": "L284",
+      "weight": 1.0,
+      "source": "scripts_graphstack_validate_py",
+      "target": "graphstack_validate_check_compact_module",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/graphstack/validate.py",
       "source_location": "L233",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -6113,9 +6710,9 @@
       "source_file": "scripts/graphstack/validate.py",
       "source_location": "L207",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "graphstack_validate_refs_for_staleness_check",
-      "target": "graphstack_validate_report_add",
-      "confidence_score": 1.0
+      "target": "graphstack_validate_report_add"
     },
     {
       "relation": "calls",
@@ -6138,6 +6735,17 @@
       "confidence_score": 1.0,
       "source": "graphstack_validate_check_graph",
       "target": "graphstack_validate_report_add"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/graphstack/validate.py",
+      "source_location": "L288",
+      "weight": 1.0,
+      "source": "graphstack_validate_check_compact_module",
+      "target": "graphstack_validate_report_add",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -6253,6 +6861,16 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "scripts/graphstack/validate.py",
+      "source_location": "L190",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "graphstack_validate_rationale_190",
+      "target": "graphstack_validate_refs_for_staleness_check"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/graphstack/validate.py",
       "source_location": "L194",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -6280,6 +6898,17 @@
       "confidence_score": 1.0,
       "source": "graphstack_validate_run_checks",
       "target": "graphstack_validate_check_graph"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/graphstack/validate.py",
+      "source_location": "L334",
+      "weight": 1.0,
+      "source": "graphstack_validate_run_checks",
+      "target": "graphstack_validate_check_compact_module",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -6450,11 +7079,31 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "scripts/graphstack/validate.py",
-      "source_location": "L386",
+      "source_location": "L400",
       "weight": 1.0,
-      "source": "graphstack_validate_rationale_386",
+      "source": "graphstack_validate_rationale_400",
       "target": "graphstack_validate_run",
       "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/graphstack/validate.py",
+      "source_location": "L382",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "graphstack_validate_rationale_382",
+      "target": "graphstack_validate_run"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/graphstack/validate.py",
+      "source_location": "L386",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "graphstack_validate_rationale_386",
+      "target": "graphstack_validate_run"
     },
     {
       "relation": "rationale_for",
@@ -6495,6 +7144,611 @@
       "confidence_score": 1.0,
       "source": "graphstack_main_rationale_1",
       "target": "scripts_graphstack_main_py"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/graphstack/compact/base.py",
+      "source_location": "L20",
+      "weight": 1.0,
+      "source": "scripts_graphstack_compact_base_py",
+      "target": "compact_base_compactresult",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/graphstack/compact/base.py",
+      "source_location": "L26",
+      "weight": 1.0,
+      "source": "scripts_graphstack_compact_base_py",
+      "target": "compact_base_is_critical_line",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/graphstack/compact/base.py",
+      "source_location": "L33",
+      "weight": 1.0,
+      "source": "scripts_graphstack_compact_base_py",
+      "target": "compact_base_dedupe_consecutive",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/graphstack/compact/base.py",
+      "source_location": "L56",
+      "weight": 1.0,
+      "source": "scripts_graphstack_compact_base_py",
+      "target": "compact_base_truncate_preserving_critical",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/graphstack/compact/base.py",
+      "source_location": "L92",
+      "weight": 1.0,
+      "source": "scripts_graphstack_compact_base_py",
+      "target": "compact_base_safe_compact",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/graphstack/compact/base.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "compact_base_rationale_1",
+      "target": "scripts_graphstack_compact_base_py",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/graphstack/compact/generic.py",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "scripts_graphstack_compact_generic_py",
+      "target": "scripts_graphstack_compact_base_py",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/graphstack/compact/git.py",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "scripts_graphstack_compact_git_py",
+      "target": "scripts_graphstack_compact_base_py",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/graphstack/compact/registry.py",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "scripts_graphstack_compact_registry_py",
+      "target": "scripts_graphstack_compact_base_py",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/graphstack/compact/base.py",
+      "source_location": "L102",
+      "weight": 1.0,
+      "source": "compact_base_safe_compact",
+      "target": "compact_base_compactresult",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "scripts/graphstack/compact/registry.py",
+      "source_location": "L21",
+      "weight": 1.0,
+      "source": "compact_registry_compact_command_output",
+      "target": "compact_base_compactresult"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/graphstack/compact/base.py",
+      "source_location": "L65",
+      "weight": 1.0,
+      "source": "compact_base_truncate_preserving_critical",
+      "target": "compact_base_is_critical_line",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/graphstack/compact/base.py",
+      "source_location": "L111",
+      "weight": 1.0,
+      "source": "compact_base_safe_compact",
+      "target": "compact_base_is_critical_line",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "scripts/graphstack/compact/generic.py",
+      "source_location": "L39",
+      "weight": 1.0,
+      "source": "compact_generic_compact_pytest",
+      "target": "compact_base_is_critical_line"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "scripts/graphstack/compact/git.py",
+      "source_location": "L158",
+      "weight": 1.0,
+      "source": "compact_git_compact_git_log",
+      "target": "compact_base_is_critical_line"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "scripts/graphstack/compact/generic.py",
+      "source_location": "L57",
+      "weight": 1.0,
+      "source": "compact_generic_compact_pytest",
+      "target": "compact_base_dedupe_consecutive"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "scripts/graphstack/compact/generic.py",
+      "source_location": "L82",
+      "weight": 1.0,
+      "source": "compact_generic_compact_generic",
+      "target": "compact_base_dedupe_consecutive"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "scripts/graphstack/compact/git.py",
+      "source_location": "L41",
+      "weight": 1.0,
+      "source": "compact_git_compact_git_status",
+      "target": "compact_base_dedupe_consecutive"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/graphstack/compact/base.py",
+      "source_location": "L61",
+      "weight": 1.0,
+      "source": "compact_base_rationale_61",
+      "target": "compact_base_truncate_preserving_critical",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "scripts/graphstack/compact/generic.py",
+      "source_location": "L60",
+      "weight": 1.0,
+      "source": "compact_generic_compact_pytest",
+      "target": "compact_base_truncate_preserving_critical"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "scripts/graphstack/compact/generic.py",
+      "source_location": "L86",
+      "weight": 1.0,
+      "source": "compact_generic_compact_generic",
+      "target": "compact_base_truncate_preserving_critical"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "scripts/graphstack/compact/git.py",
+      "source_location": "L43",
+      "weight": 1.0,
+      "source": "compact_git_compact_git_status",
+      "target": "compact_base_truncate_preserving_critical"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/graphstack/compact/base.py",
+      "source_location": "L97",
+      "weight": 1.0,
+      "source": "compact_base_rationale_97",
+      "target": "compact_base_safe_compact",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "scripts/graphstack/compact/registry.py",
+      "source_location": "L28",
+      "weight": 1.0,
+      "source": "compact_registry_compact_command_output",
+      "target": "compact_base_safe_compact"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/graphstack/compact/generic.py",
+      "source_location": "L19",
+      "weight": 1.0,
+      "source": "scripts_graphstack_compact_generic_py",
+      "target": "compact_generic_compact_pytest",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/graphstack/compact/generic.py",
+      "source_location": "L68",
+      "weight": 1.0,
+      "source": "scripts_graphstack_compact_generic_py",
+      "target": "compact_generic_compact_generic",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/graphstack/compact/generic.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "compact_generic_rationale_1",
+      "target": "scripts_graphstack_compact_generic_py",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/graphstack/compact/registry.py",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "scripts_graphstack_compact_registry_py",
+      "target": "scripts_graphstack_compact_generic_py",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/graphstack/compact/generic.py",
+      "source_location": "L64",
+      "weight": 1.0,
+      "source": "compact_generic_compact_pytest",
+      "target": "compact_generic_compact_generic",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "scripts/graphstack/compact/registry.py",
+      "source_location": "L36",
+      "weight": 1.0,
+      "source": "compact_registry_compact_command_output",
+      "target": "compact_generic_compact_pytest"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "scripts/graphstack/tests/test_compact.py",
+      "source_location": "L73",
+      "weight": 1.0,
+      "source": "tests_test_compact_test_pytest_keeps_failure_and_summary",
+      "target": "compact_generic_compact_pytest"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "scripts/graphstack/compact/registry.py",
+      "source_location": "L39",
+      "weight": 1.0,
+      "source": "compact_registry_compact_command_output",
+      "target": "compact_generic_compact_generic"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "scripts/graphstack/tests/test_compact.py",
+      "source_location": "L86",
+      "weight": 1.0,
+      "source": "tests_test_compact_test_critical_lines_survive_generic_truncate",
+      "target": "compact_generic_compact_generic"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/graphstack/compact/git.py",
+      "source_location": "L19",
+      "weight": 1.0,
+      "source": "scripts_graphstack_compact_git_py",
+      "target": "compact_git_compact_git_status",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/graphstack/compact/git.py",
+      "source_location": "L48",
+      "weight": 1.0,
+      "source": "scripts_graphstack_compact_git_py",
+      "target": "compact_git_try_porcelain_status",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/graphstack/compact/git.py",
+      "source_location": "L90",
+      "weight": 1.0,
+      "source": "scripts_graphstack_compact_git_py",
+      "target": "compact_git_limit_paths",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/graphstack/compact/git.py",
+      "source_location": "L98",
+      "weight": 1.0,
+      "source": "scripts_graphstack_compact_git_py",
+      "target": "compact_git_compact_git_diff",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/graphstack/compact/git.py",
+      "source_location": "L145",
+      "weight": 1.0,
+      "source": "scripts_graphstack_compact_git_py",
+      "target": "compact_git_compact_git_log",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/graphstack/compact/git.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "compact_git_rationale_1",
+      "target": "scripts_graphstack_compact_git_py",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/graphstack/compact/registry.py",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "scripts_graphstack_compact_registry_py",
+      "target": "scripts_graphstack_compact_git_py",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/graphstack/compact/git.py",
+      "source_location": "L20",
+      "weight": 1.0,
+      "source": "compact_git_compact_git_status",
+      "target": "compact_git_try_porcelain_status",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "scripts/graphstack/compact/registry.py",
+      "source_location": "L27",
+      "weight": 1.0,
+      "source": "compact_registry_compact_command_output",
+      "target": "compact_git_compact_git_status"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "scripts/graphstack/tests/test_compact.py",
+      "source_location": "L51",
+      "weight": 1.0,
+      "source": "tests_test_compact_test_git_status_keeps_branch_and_paths",
+      "target": "compact_git_compact_git_status"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/graphstack/compact/git.py",
+      "source_location": "L80",
+      "weight": 1.0,
+      "source": "compact_git_try_porcelain_status",
+      "target": "compact_git_limit_paths",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "scripts/graphstack/compact/registry.py",
+      "source_location": "L30",
+      "weight": 1.0,
+      "source": "compact_registry_compact_command_output",
+      "target": "compact_git_compact_git_diff"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "scripts/graphstack/tests/test_compact.py",
+      "source_location": "L58",
+      "weight": 1.0,
+      "source": "tests_test_compact_test_git_diff_keeps_hunk_headers",
+      "target": "compact_git_compact_git_diff"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "scripts/graphstack/compact/registry.py",
+      "source_location": "L33",
+      "weight": 1.0,
+      "source": "compact_registry_compact_command_output",
+      "target": "compact_git_compact_git_log"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "scripts/graphstack/tests/test_compact.py",
+      "source_location": "L67",
+      "weight": 1.0,
+      "source": "tests_test_compact_test_git_log_truncates_but_keeps_recent",
+      "target": "compact_git_compact_git_log"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/graphstack/compact/registry.py",
+      "source_location": "L10",
+      "weight": 1.0,
+      "source": "scripts_graphstack_compact_registry_py",
+      "target": "compact_registry_normalize_argv",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/graphstack/compact/registry.py",
+      "source_location": "L14",
+      "weight": 1.0,
+      "source": "scripts_graphstack_compact_registry_py",
+      "target": "compact_registry_compact_command_output",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/graphstack/compact/registry.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "compact_registry_rationale_1",
+      "target": "scripts_graphstack_compact_registry_py",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/graphstack/compact/__init__.py",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "scripts_graphstack_compact_init_py",
+      "target": "scripts_graphstack_compact_registry_py",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/graphstack/compact/registry.py",
+      "source_location": "L16",
+      "weight": 1.0,
+      "source": "compact_registry_compact_command_output",
+      "target": "compact_registry_normalize_argv",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/graphstack/compact/registry.py",
+      "source_location": "L15",
+      "weight": 1.0,
+      "source": "compact_registry_rationale_15",
+      "target": "compact_registry_compact_command_output",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "scripts/graphstack/tests/test_compact.py",
+      "source_location": "L80",
+      "weight": 1.0,
+      "source": "tests_test_compact_test_registry_falls_back_when_compaction_empty",
+      "target": "compact_registry_compact_command_output"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "scripts/graphstack/tests/test_compact.py",
+      "source_location": "L91",
+      "weight": 1.0,
+      "source": "tests_test_compact_test_registry_git_status_route",
+      "target": "compact_registry_compact_command_output"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/graphstack/compact/__init__.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "compact_init_rationale_1",
+      "target": "scripts_graphstack_compact_init_py",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -6698,6 +7952,86 @@
       "confidence_score": 1.0,
       "source": "tests_test_board_test_unicode_title_is_preserved",
       "target": "tests_test_board_read"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/graphstack/tests/test_compact.py",
+      "source_location": "L50",
+      "weight": 1.0,
+      "source": "scripts_graphstack_tests_test_compact_py",
+      "target": "tests_test_compact_test_git_status_keeps_branch_and_paths",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/graphstack/tests/test_compact.py",
+      "source_location": "L57",
+      "weight": 1.0,
+      "source": "scripts_graphstack_tests_test_compact_py",
+      "target": "tests_test_compact_test_git_diff_keeps_hunk_headers",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/graphstack/tests/test_compact.py",
+      "source_location": "L64",
+      "weight": 1.0,
+      "source": "scripts_graphstack_tests_test_compact_py",
+      "target": "tests_test_compact_test_git_log_truncates_but_keeps_recent",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/graphstack/tests/test_compact.py",
+      "source_location": "L72",
+      "weight": 1.0,
+      "source": "scripts_graphstack_tests_test_compact_py",
+      "target": "tests_test_compact_test_pytest_keeps_failure_and_summary",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/graphstack/tests/test_compact.py",
+      "source_location": "L78",
+      "weight": 1.0,
+      "source": "scripts_graphstack_tests_test_compact_py",
+      "target": "tests_test_compact_test_registry_falls_back_when_compaction_empty",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/graphstack/tests/test_compact.py",
+      "source_location": "L84",
+      "weight": 1.0,
+      "source": "scripts_graphstack_tests_test_compact_py",
+      "target": "tests_test_compact_test_critical_lines_survive_generic_truncate",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/graphstack/tests/test_compact.py",
+      "source_location": "L90",
+      "weight": 1.0,
+      "source": "scripts_graphstack_tests_test_compact_py",
+      "target": "tests_test_compact_test_registry_git_status_route",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/graphstack/tests/test_compact.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "tests_test_compact_rationale_1",
+      "target": "scripts_graphstack_tests_test_compact_py",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -6945,9 +8279,9 @@
       "source_file": "scripts/graphstack/tests/test_validate.py",
       "source_location": "L108",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scripts_graphstack_tests_test_validate_py",
-      "target": "tests_test_validate_test_graph_fresh_when_built_commit_is_ancestor_of_head",
-      "confidence_score": 1.0
+      "target": "tests_test_validate_test_graph_fresh_when_built_commit_is_ancestor_of_head"
     },
     {
       "relation": "contains",
@@ -7031,9 +8365,9 @@
       "source_file": "scripts/graphstack/tests/test_validate.py",
       "source_location": "L115",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "tests_test_validate_test_graph_fresh_when_built_commit_is_ancestor_of_head",
-      "target": "tests_test_validate_minimal_layout",
-      "confidence_score": 1.0
+      "target": "tests_test_validate_minimal_layout"
     },
     {
       "relation": "calls",
@@ -10038,5 +11372,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "8e37fdd8ecea58c070c91fb13d8086ed1d37ff32"
+  "built_at_commit": "e803050f6f13dff7e9152c32a60c2a5661f2fa6f"
 }

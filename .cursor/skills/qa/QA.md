@@ -74,6 +74,20 @@ graph.json → edges between different clusters = integration points
 
 ---
 
+## Shell Commands (QA)
+
+All verification commands go through compaction — failures and file paths must reach context:
+
+```bash
+python -m graphstack run -- pytest -q
+python -m graphstack run -- git diff
+python -m graphstack run -- git status
+```
+
+Do not use raw `pytest` / `git` in Shell unless `graphstack run` is unavailable.
+
+---
+
 ## QA Verification Process
 
 ```

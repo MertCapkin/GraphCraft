@@ -4,6 +4,21 @@ All notable changes to GraphStack are documented here.
 
 ---
 
+## [v4.2.0] — 2026-05-17
+
+### Added
+- **`graphstack run`** — run shell commands with token-safe output compaction (`--raw` for full output).
+- **`scripts/graphstack/compact/`** — independent compactors for `git status` / `diff` / `log`, `pytest`, and generic commands; preserves paths, hunks, and failures; falls back to raw when signal would be lost.
+- **Workflow integration** — `TOKEN_OPTIMIZER.md`, `graphstack.mdc`, `ORCHESTRATOR.md`, Builder/QA skills mandate `graphstack run` for shell tools.
+- **`validate` / `doctor`** — `compact_ok` check for the output-compact module.
+- **Pytest** — `test_compact.py` (7 tests for compaction quality).
+
+### Changed
+- **Installer** — copies `run.py` and `scripts/graphstack/compact/` into target projects.
+- **README** — Shell Output Compaction section and v4.2 highlights.
+
+---
+
 ## [v4.1.0] — 2026-05-17
 
 ### Added

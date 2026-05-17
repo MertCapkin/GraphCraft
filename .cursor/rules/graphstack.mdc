@@ -43,6 +43,7 @@ activation — follow both that file **and** the abbreviated reminders below:
 
 ```
 Is the answer in the graph?        → Use graph, skip raw file read
+Shell/git/test command needed?     → python -m graphstack run -- <cmd> (not raw)
 Is this tool call speculative?     → Cancel it, ask user first
 Can reads run in parallel?         → Parallelize them
 Output > 15 lines user won't act on → Summarize instead
