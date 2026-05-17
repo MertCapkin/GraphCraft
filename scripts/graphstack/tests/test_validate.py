@@ -103,3 +103,35 @@ def test_graph_stale_when_commit_mismatch(
     monkeypatch.setattr(validate_mod, "git_available", lambda: True)
     report = run_checks(fail_stale=True)
     assert any(f.code == "graph_stale" for f in report.errors)
+
+
+def test_graph_fresh_when_built_from_parent_commit(
+    project_root: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    import subprocess
+
+    from graphstack import validate as validate_mod
+
+    _minimal_layout(project_root)
+    graph_dir = project_root / "graphify-out"
+    graph_dir.mkdir()
+    parent = "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+    (graph_dir / "GRAPH_REPORT.md").write_text(
+        f"Built from commit: `{parent}`\n",
+        encoding="utf-8",
+    )
+
+    def fake_git(*args: str, capture: bool = True) -> subprocess.CompletedProcess[str]:
+        if args == ("rev-parse", "HEAD"):
+            return subprocess.CompletedProcess(
+                args, 0, "cccccccccccccccccccccccccccccccccccccccc\n", ""
+            )
+        if args == ("rev-parse", "HEAD~1"):
+            return subprocess.CompletedProcess(args, 0, f"{parent}\n", "")
+        return subprocess.CompletedProcess(args, 1, "", "")
+
+    monkeypatch.setattr(validate_mod, "run_git", fake_git)
+    monkeypatch.setattr(validate_mod, "git_available", lambda: True)
+    report = run_checks(fail_stale=True)
+    assert any(f.code == "graph_fresh" for f in report.findings)
+    assert not report.errors

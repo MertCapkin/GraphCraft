@@ -13,14 +13,14 @@ All notable changes to GraphStack are documented here.
 - **`.graphifyignore`** — code-focused graph profile for the GraphStack source repo (reduces markdown noise in `graphify-out/`).
 - **`docs/case-studies/graphstack-self.md`** — honest self-analysis: graph quality on a meta-repo, token savings confidence levels, validation workflow.
 - **README Limitations** section — orchestrator enforcement, token estimates, graph ROI, setup steps.
-- **Pytest** — 5 new tests in `test_validate.py` (28 total in suite).
+- **Pytest** — 6 new tests in `test_validate.py` (29 total in suite).
 
 ### Changed
 - **CI** — `pip install -e .` before tests; `graphstack validate --fail-stale-graph` step; `pyproject.toml` and `validate.py` in required-files manifest.
 - **Installer** — copies `validate.py` into target projects with the Python package.
 
 ### Fixed
-- N/A (quality-of-life / transparency release).
+- **Graph staleness check** — `validate --fail-stale-graph` accepts `HEAD~1` when the graph was built before a dedicated graph-artifacts commit (common release workflow).
 
 ---
 

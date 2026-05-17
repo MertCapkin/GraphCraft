@@ -184,6 +184,22 @@ def check_board_tasks(report: Report) -> None:
             report.add("ok", "task_ok", f"{path.name} ({folder}, {status})")
 
 
+def _commit_matches_graph(graph_commit: str, ref: str) -> bool:
+    ref = ref.strip().lower()
+    graph_commit = graph_commit.lower()
+    return ref.startswith(graph_commit) or graph_commit.startswith(ref[: len(graph_commit)])
+
+
+def _refs_for_staleness_check() -> list[str]:
+    """HEAD and HEAD~1 — graph is often committed one commit after graphify runs."""
+    refs: list[str] = []
+    for arg in ("HEAD", "HEAD~1"):
+        proc = run_git("rev-parse", arg)
+        if proc.returncode == 0 and proc.stdout:
+            refs.append(proc.stdout.strip().lower())
+    return refs
+
+
 def check_state(report: Report, root: Path) -> None:
     state_path = root / "handoff" / "STATE.md"
     if not state_path.is_file():
@@ -212,15 +228,17 @@ def check_graph(report: Report, root: Path, *, fail_stale: bool) -> None:
         report.add("ok", "graph_commit", f"Graph built from {graph_commit[:12]} (git not checked)")
         return
 
-    proc = run_git("rev-parse", "HEAD")
-    if proc.returncode != 0 or not proc.stdout:
+    refs = _refs_for_staleness_check()
+    if not refs:
         report.add("warn", "graph_git_head", "Could not read git HEAD for staleness check")
         return
 
-    head = proc.stdout.strip().lower()
-    if head.startswith(graph_commit) or graph_commit.startswith(head[: len(graph_commit)]):
-        report.add("ok", "graph_fresh", f"Graph matches HEAD ({head[:12]})")
-        return
+    head = refs[0]
+    for ref in refs:
+        if _commit_matches_graph(graph_commit, ref):
+            label = "HEAD" if ref == head else "HEAD~1"
+            report.add("ok", "graph_fresh", f"Graph matches {label} ({ref[:12]})")
+            return
 
     level = "error" if fail_stale else "warn"
     report.add(
