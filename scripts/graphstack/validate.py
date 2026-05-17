@@ -191,12 +191,27 @@ def _commit_matches_graph(graph_commit: str, ref: str) -> bool:
 
 
 def _refs_for_staleness_check() -> list[str]:
-    """HEAD and HEAD~1 — graph is often committed one commit after graphify runs."""
+    """HEAD, HEAD~1, and last commit that touched the graph report.
+
+    Graph is often built on HEAD~1 then committed on HEAD (release workflow).
+    GitHub Actions uses fetch-depth: 1 by default — without HEAD~1, fall back to
+    the commit that last modified GRAPH_REPORT.md (needs at least that commit).
+    """
     refs: list[str] = []
+    seen: set[str] = set()
     for arg in ("HEAD", "HEAD~1"):
         proc = run_git("rev-parse", arg)
         if proc.returncode == 0 and proc.stdout:
-            refs.append(proc.stdout.strip().lower())
+            ref = proc.stdout.strip().lower()
+            if ref not in seen:
+                seen.add(ref)
+                refs.append(ref)
+    proc = run_git("log", "-1", "--format=%H", "--", str(GRAPH_REPORT))
+    if proc.returncode == 0 and proc.stdout:
+        ref = proc.stdout.strip().lower()
+        if ref not in seen:
+            seen.add(ref)
+            refs.append(ref)
     return refs
 
 

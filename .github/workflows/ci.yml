@@ -37,7 +37,11 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     steps:
+      # depth 2+ required: validate --fail-stale-graph matches graph commit to HEAD~1
+      # when graph artifacts land in a follow-up commit (v4.1 release pattern).
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -120,10 +124,10 @@ jobs:
         run: python -m pytest scripts/graphstack/tests -v
 
       - name: Validate project layout (graphstack validate)
-        run: graphstack validate
+        run: python -m graphstack validate
 
       - name: Fail if knowledge graph is stale vs HEAD
-        run: graphstack validate --fail-stale-graph
+        run: python -m graphstack validate --fail-stale-graph
 
       - name: Board smoke test (Python module — cross-platform)
         shell: python
