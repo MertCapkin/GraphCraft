@@ -78,7 +78,7 @@ PYTHON_PACKAGE_FILES = (
     "constants.py",
 )
 
-GITKEEP_DIRS = ("handoff/board/doing", "handoff/board/done")
+GITKEEP_DIRS = ("handoff/board/todo", "handoff/board/doing", "handoff/board/done")
 
 STATE_TEMPLATE = """# GraphStack Session State
 

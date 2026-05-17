@@ -76,6 +76,7 @@ jobs:
               "handoff/BOOTSTRAP.md",
               "handoff/STATE.md",
               "handoff/board/README.md",
+              "handoff/board/todo/.gitkeep",
               "handoff/board/doing/.gitkeep",
               "handoff/board/done/.gitkeep",
               "docs/CURSOR_PROMPTS.md",
