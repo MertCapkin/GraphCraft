@@ -21,7 +21,7 @@ All notable changes to GraphStack are documented here.
 
 ### Fixed
 - **Graph staleness check** — `validate --fail-stale-graph` accepts `HEAD~1` when the graph was built before a dedicated graph-artifacts commit (common release workflow).
-- **CI validate job** — `actions/checkout` uses `fetch-depth: 2` (shallow clones hid `HEAD~1` and failed stale-graph checks); validate steps use `python -m graphstack` for Windows PATH reliability.
+- **CI validate job** — `actions/checkout` uses `fetch-depth: 2`; validate steps use `python -m graphstack`; CI runs `graphify update .` before `--fail-stale-graph` (graph built on an older commit than HEAD no longer fails shallow clones).
 
 ---
 

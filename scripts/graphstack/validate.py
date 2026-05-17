@@ -251,9 +251,31 @@ def check_graph(report: Report, root: Path, *, fail_stale: bool) -> None:
     head = refs[0]
     for ref in refs:
         if _commit_matches_graph(graph_commit, ref):
-            label = "HEAD" if ref == head else "HEAD~1"
+            label = "HEAD" if ref == head else "git ref"
             report.add("ok", "graph_fresh", f"Graph matches {label} ({ref[:12]})")
             return
+
+    # Graph built on an older commit that is still in history (full or deep clone).
+    ancestor = run_git("merge-base", "--is-ancestor", graph_commit, "HEAD")
+    if ancestor.returncode == 0:
+        report.add(
+            "ok",
+            "graph_fresh",
+            f"Graph commit {graph_commit[:12]} is an ancestor of HEAD ({head[:12]})",
+        )
+        return
+
+    # Shallow clone: match any fetched commit on the current branch.
+    listed = run_git("rev-list", "--max-count", "100", "HEAD")
+    if listed.returncode == 0 and listed.stdout:
+        for ref in listed.stdout.splitlines():
+            if _commit_matches_graph(graph_commit, ref):
+                report.add(
+                    "ok",
+                    "graph_fresh",
+                    f"Graph matches fetched commit {ref[:12]} (shallow history)",
+                )
+                return
 
     level = "error" if fail_stale else "warn"
     report.add(

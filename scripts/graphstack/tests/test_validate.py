@@ -105,6 +105,43 @@ def test_graph_stale_when_commit_mismatch(
     assert any(f.code == "graph_stale" for f in report.errors)
 
 
+def test_graph_fresh_when_built_commit_is_ancestor_of_head(
+    project_root: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    import subprocess
+
+    from graphstack import validate as validate_mod
+
+    _minimal_layout(project_root)
+    graph_dir = project_root / "graphify-out"
+    graph_dir.mkdir()
+    old = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    head = "cccccccccccccccccccccccccccccccccccccccc"
+    (graph_dir / "GRAPH_REPORT.md").write_text(
+        f"Built from commit: `{old}`\n",
+        encoding="utf-8",
+    )
+
+    def fake_git(*args: str, capture: bool = True) -> subprocess.CompletedProcess[str]:
+        if args == ("rev-parse", "HEAD"):
+            return subprocess.CompletedProcess(args, 0, f"{head}\n", "")
+        if args == ("rev-parse", "HEAD~1"):
+            return subprocess.CompletedProcess(args, 1, "", "unknown")
+        if args[:2] == ("merge-base", "--is-ancestor"):
+            return subprocess.CompletedProcess(args, 0, "", "")
+        if args[:2] == ("rev-list", "--max-count"):
+            return subprocess.CompletedProcess(args, 0, f"{head}\n", "")
+        if args[:3] == ("log", "-1", "--format=%H"):
+            return subprocess.CompletedProcess(args, 0, f"{head}\n", "")
+        return subprocess.CompletedProcess(args, 1, "", "")
+
+    monkeypatch.setattr(validate_mod, "run_git", fake_git)
+    monkeypatch.setattr(validate_mod, "git_available", lambda: True)
+    report = run_checks(fail_stale=True)
+    assert any(f.code == "graph_fresh" for f in report.findings)
+    assert not report.errors
+
+
 def test_graph_fresh_when_built_from_parent_commit(
     project_root: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:

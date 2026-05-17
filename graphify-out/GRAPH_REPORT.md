@@ -1,16 +1,16 @@
 # Graph Report - graphstack  (2026-05-17)
 
 ## Corpus Check
-- 20 files · ~5,707 words
+- 20 files · ~5,985 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 459 nodes · 570 edges · 30 communities (26 shown, 4 thin omitted)
-- Extraction: 92% EXTRACTED · 8% INFERRED · 0% AMBIGUOUS · INFERRED: 43 edges (avg confidence: 0.8)
+- 461 nodes · 575 edges · 30 communities (26 shown, 4 thin omitted)
+- Extraction: 92% EXTRACTED · 8% INFERRED · 0% AMBIGUOUS · INFERRED: 44 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `68d5e32f`
+- Built from commit: `8e37fdd8`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -43,9 +43,9 @@
 - [[_COMMUNITY_Community 28|Community 28]]
 
 ## God Nodes (most connected - your core abstractions)
-1. `GraphStack 🧠⚡` - 18 edges
-2. `echo()` - 17 edges
-3. `run_checks()` - 17 edges
+1. `run_checks()` - 18 edges
+2. `GraphStack 🧠⚡` - 18 edges
+3. `echo()` - 17 edges
 4. `ORCHESTRATOR` - 12 edges
 5. `Transition Rules` - 12 edges
 6. `run_git()` - 11 edges
@@ -70,7 +70,7 @@
 
 ### Community 0 - "Community 0"
 Cohesion: 0.1
-Nodes (34): git_available(), graphify_available(), _brief_is_template(), _brief_status(), _build_parser(), check_board_tasks(), check_brief(), check_graph() (+26 more)
+Nodes (36): git_available(), graphify_available(), _brief_is_template(), _brief_status(), _build_parser(), check_board_tasks(), check_brief(), check_graph() (+28 more)
 
 ### Community 1 - "Community 1"
 Cohesion: 0.07
@@ -157,7 +157,7 @@ Cohesion: 0.33
 Nodes (5): code:block1 (board/), GraphStack GNAP Board, How It Works, Task File Format, Why Git?
 
 ## Knowledge Gaps
-- **193 isolated node(s):** `GNAP board manager — pure Python port of ``scripts/board.sh``.  JSON schema is`, `Stage the board directory and commit silently — never fails the command.`, `Top-level CLI dispatcher.  Five sub-commands: - ``board``     — GNAP task boa`, `Entry point for both ``python -m graphstack`` and unit tests.`, `Path and configuration constants used across the package.  Paths are resolved` (+188 more)
+- **194 isolated node(s):** `GNAP board manager — pure Python port of ``scripts/board.sh``.  JSON schema is`, `Stage the board directory and commit silently — never fails the command.`, `Top-level CLI dispatcher.  Five sub-commands: - ``board``     — GNAP task boa`, `Entry point for both ``python -m graphstack`` and unit tests.`, `Path and configuration constants used across the package.  Paths are resolved` (+189 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **4 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -168,13 +168,13 @@ _Questions this graph is uniquely positioned to answer:_
   _High betweenness centrality (0.017) - this node is a cross-community bridge._
 - **Why does `echo()` connect `Community 2` to `Community 8`, `Community 0`?**
   _High betweenness centrality (0.011) - this node is a cross-community bridge._
-- **Why does `Quick Start` connect `Community 9` to `Community 5`?**
-  _High betweenness centrality (0.011) - this node is a cross-community bridge._
+- **Are the 7 inferred relationships involving `run_checks()` (e.g. with `test_validate_reports_template_brief_as_warning()` and `test_validate_strict_template_brief_is_error()`) actually correct?**
+  _`run_checks()` has 7 INFERRED edges - model-reasoned connections that need verification._
 - **Are the 14 inferred relationships involving `echo()` (e.g. with `_print_task()` and `cmd_status()`) actually correct?**
   _`echo()` has 14 INFERRED edges - model-reasoned connections that need verification._
-- **Are the 6 inferred relationships involving `run_checks()` (e.g. with `test_validate_reports_template_brief_as_warning()` and `test_validate_strict_template_brief_is_error()`) actually correct?**
-  _`run_checks()` has 6 INFERRED edges - model-reasoned connections that need verification._
 - **What connects `GNAP board manager — pure Python port of ``scripts/board.sh``.  JSON schema is`, `Stage the board directory and commit silently — never fails the command.`, `Top-level CLI dispatcher.  Five sub-commands: - ``board``     — GNAP task boa` to the rest of the system?**
-  _193 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _194 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Community 0` be split into smaller, more focused modules?**
   _Cohesion score 0.1 - nodes in this community are weakly interconnected._
+- **Should `Community 1` be split into smaller, more focused modules?**
+  _Cohesion score 0.07 - nodes in this community are weakly interconnected._

@@ -48,10 +48,11 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Install package and pytest
+      - name: Install package, pytest, and Graphify
         run: |
           python -m pip install --quiet pytest
           python -m pip install --quiet -e .
+          python -m pip install --quiet -r requirements.txt
 
       - name: Verify required files exist (Python)
         shell: python
@@ -125,6 +126,9 @@ jobs:
 
       - name: Validate project layout (graphstack validate)
         run: python -m graphstack validate
+
+      - name: Refresh knowledge graph (CI)
+        run: graphify update .
 
       - name: Fail if knowledge graph is stale vs HEAD
         run: python -m graphstack validate --fail-stale-graph

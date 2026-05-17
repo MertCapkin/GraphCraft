@@ -835,7 +835,7 @@
       "label": "check_state()",
       "file_type": "code",
       "source_file": "scripts/graphstack/validate.py",
-      "source_location": "L203",
+      "source_location": "L218",
       "id": "graphstack_validate_check_state",
       "community": 0,
       "norm_label": "check_state()"
@@ -844,7 +844,7 @@
       "label": "check_graph()",
       "file_type": "code",
       "source_file": "scripts/graphstack/validate.py",
-      "source_location": "L214",
+      "source_location": "L229",
       "id": "graphstack_validate_check_graph",
       "community": 0,
       "norm_label": "check_graph()"
@@ -853,7 +853,7 @@
       "label": "check_tooling()",
       "file_type": "code",
       "source_file": "scripts/graphstack/validate.py",
-      "source_location": "L251",
+      "source_location": "L288",
       "id": "graphstack_validate_check_tooling",
       "community": 0,
       "norm_label": "check_tooling()"
@@ -862,7 +862,7 @@
       "label": "run_checks()",
       "file_type": "code",
       "source_file": "scripts/graphstack/validate.py",
-      "source_location": "L271",
+      "source_location": "L308",
       "id": "graphstack_validate_run_checks",
       "community": 0,
       "norm_label": "run_checks()"
@@ -871,7 +871,7 @@
       "label": "_print_report()",
       "file_type": "code",
       "source_file": "scripts/graphstack/validate.py",
-      "source_location": "L288",
+      "source_location": "L325",
       "id": "graphstack_validate_print_report",
       "community": 0,
       "norm_label": "_print_report()"
@@ -880,7 +880,7 @@
       "label": "_build_parser()",
       "file_type": "code",
       "source_file": "scripts/graphstack/validate.py",
-      "source_location": "L317",
+      "source_location": "L354",
       "id": "graphstack_validate_build_parser",
       "community": 0,
       "norm_label": "_build_parser()"
@@ -889,7 +889,7 @@
       "label": "run_validate()",
       "file_type": "code",
       "source_file": "scripts/graphstack/validate.py",
-      "source_location": "L332",
+      "source_location": "L369",
       "id": "graphstack_validate_run_validate",
       "community": 0,
       "norm_label": "run_validate()"
@@ -898,7 +898,7 @@
       "label": "run_doctor()",
       "file_type": "code",
       "source_file": "scripts/graphstack/validate.py",
-      "source_location": "L340",
+      "source_location": "L377",
       "id": "graphstack_validate_run_doctor",
       "community": 0,
       "norm_label": "run_doctor()"
@@ -907,7 +907,7 @@
       "label": "run()",
       "file_type": "code",
       "source_file": "scripts/graphstack/validate.py",
-      "source_location": "L348",
+      "source_location": "L385",
       "id": "graphstack_validate_run",
       "community": 0,
       "norm_label": "run()"
@@ -922,20 +922,20 @@
       "norm_label": "graphstack project health checks (llm-free).  validates handoff layout, board"
     },
     {
-      "label": "HEAD and HEAD~1 \u2014 graph is often committed one commit after graphify runs.",
+      "label": "HEAD, HEAD~1, and last commit that touched the graph report.      Graph is oft",
       "file_type": "rationale",
       "source_file": "scripts/graphstack/validate.py",
       "source_location": "L194",
       "id": "graphstack_validate_rationale_194",
       "community": 0,
-      "norm_label": "head and head~1 \u2014 graph is often committed one commit after graphify runs."
+      "norm_label": "head, head~1, and last commit that touched the graph report.      graph is oft"
     },
     {
       "label": "Default entry when invoked as ``validate`` sub-command.",
       "file_type": "rationale",
       "source_file": "scripts/graphstack/validate.py",
-      "source_location": "L349",
-      "id": "graphstack_validate_rationale_349",
+      "source_location": "L386",
+      "id": "graphstack_validate_rationale_386",
       "community": 0,
       "norm_label": "default entry when invoked as ``validate`` sub-command."
     },
@@ -1399,10 +1399,19 @@
       "norm_label": "test_graph_stale_when_commit_mismatch()"
     },
     {
-      "label": "test_graph_fresh_when_built_from_parent_commit()",
+      "label": "test_graph_fresh_when_built_commit_is_ancestor_of_head()",
       "file_type": "code",
       "source_file": "scripts/graphstack/tests/test_validate.py",
       "source_location": "L108",
+      "id": "tests_test_validate_test_graph_fresh_when_built_commit_is_ancestor_of_head",
+      "community": 0,
+      "norm_label": "test_graph_fresh_when_built_commit_is_ancestor_of_head()"
+    },
+    {
+      "label": "test_graph_fresh_when_built_from_parent_commit()",
+      "file_type": "code",
+      "source_file": "scripts/graphstack/tests/test_validate.py",
+      "source_location": "L145",
       "id": "tests_test_validate_test_graph_fresh_when_built_from_parent_commit",
       "community": 0,
       "norm_label": "test_graph_fresh_when_built_from_parent_commit()"
@@ -1424,6 +1433,15 @@
       "id": "scripts_graphstack_tests_init_py",
       "community": 29,
       "norm_label": "__init__.py"
+    },
+    {
+      "label": "Default entry when invoked as ``validate`` sub-command.",
+      "file_type": "rationale",
+      "source_file": "scripts/graphstack/validate.py",
+      "source_location": "L349",
+      "community": 0,
+      "norm_label": "default entry when invoked as ``validate`` sub-command.",
+      "id": "graphstack_validate_rationale_349"
     },
     {
       "label": "Default entry when invoked as ``validate`` sub-command.",
@@ -5909,9 +5927,9 @@
       "source_file": "scripts/graphstack/validate.py",
       "source_location": "L187",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scripts_graphstack_validate_py",
-      "target": "graphstack_validate_commit_matches_graph",
-      "confidence_score": 1.0
+      "target": "graphstack_validate_commit_matches_graph"
     },
     {
       "relation": "contains",
@@ -5919,9 +5937,9 @@
       "source_file": "scripts/graphstack/validate.py",
       "source_location": "L193",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scripts_graphstack_validate_py",
-      "target": "graphstack_validate_refs_for_staleness_check",
-      "confidence_score": 1.0
+      "target": "graphstack_validate_refs_for_staleness_check"
     },
     {
       "relation": "contains",
@@ -6093,6 +6111,17 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "scripts/graphstack/validate.py",
+      "source_location": "L207",
+      "weight": 1.0,
+      "source": "graphstack_validate_refs_for_staleness_check",
+      "target": "graphstack_validate_report_add",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/graphstack/validate.py",
       "source_location": "L190",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -6205,9 +6234,9 @@
       "source_file": "scripts/graphstack/validate.py",
       "source_location": "L238",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "graphstack_validate_check_graph",
-      "target": "graphstack_validate_commit_matches_graph",
-      "confidence_score": 1.0
+      "target": "graphstack_validate_commit_matches_graph"
     },
     {
       "relation": "calls",
@@ -6216,9 +6245,9 @@
       "source_file": "scripts/graphstack/validate.py",
       "source_location": "L231",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "graphstack_validate_check_graph",
-      "target": "graphstack_validate_refs_for_staleness_check",
-      "confidence_score": 1.0
+      "target": "graphstack_validate_refs_for_staleness_check"
     },
     {
       "relation": "rationale_for",
@@ -6226,9 +6255,9 @@
       "source_file": "scripts/graphstack/validate.py",
       "source_location": "L194",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "graphstack_validate_rationale_194",
-      "target": "graphstack_validate_refs_for_staleness_check",
-      "confidence_score": 1.0
+      "target": "graphstack_validate_refs_for_staleness_check"
     },
     {
       "relation": "calls",
@@ -6346,6 +6375,17 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "scripts/graphstack/tests/test_validate.py",
+      "source_location": "L140",
+      "weight": 1.0,
+      "source": "tests_test_validate_test_graph_fresh_when_built_commit_is_ancestor_of_head",
+      "target": "graphstack_validate_run_checks"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "scripts/graphstack/tests/test_validate.py",
       "source_location": "L135",
       "weight": 1.0,
       "source": "tests_test_validate_test_graph_fresh_when_built_from_parent_commit",
@@ -6410,11 +6450,21 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "scripts/graphstack/validate.py",
-      "source_location": "L349",
+      "source_location": "L386",
       "weight": 1.0,
-      "source": "graphstack_validate_rationale_349",
+      "source": "graphstack_validate_rationale_386",
       "target": "graphstack_validate_run",
       "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/graphstack/validate.py",
+      "source_location": "L349",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "graphstack_validate_rationale_349",
+      "target": "graphstack_validate_run"
     },
     {
       "relation": "rationale_for",
@@ -6896,8 +6946,18 @@
       "source_location": "L108",
       "weight": 1.0,
       "source": "scripts_graphstack_tests_test_validate_py",
-      "target": "tests_test_validate_test_graph_fresh_when_built_from_parent_commit",
+      "target": "tests_test_validate_test_graph_fresh_when_built_commit_is_ancestor_of_head",
       "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/graphstack/tests/test_validate.py",
+      "source_location": "L108",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "scripts_graphstack_tests_test_validate_py",
+      "target": "tests_test_validate_test_graph_fresh_when_built_from_parent_commit"
     },
     {
       "relation": "rationale_for",
@@ -6971,9 +7031,20 @@
       "source_file": "scripts/graphstack/tests/test_validate.py",
       "source_location": "L115",
       "weight": 1.0,
-      "source": "tests_test_validate_test_graph_fresh_when_built_from_parent_commit",
+      "source": "tests_test_validate_test_graph_fresh_when_built_commit_is_ancestor_of_head",
       "target": "tests_test_validate_minimal_layout",
       "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/graphstack/tests/test_validate.py",
+      "source_location": "L115",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "tests_test_validate_test_graph_fresh_when_built_from_parent_commit",
+      "target": "tests_test_validate_minimal_layout"
     },
     {
       "relation": "contains",
@@ -9967,5 +10038,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "68d5e32fc729b06727878ea2085c628946e8bf91"
+  "built_at_commit": "8e37fdd8ecea58c070c91fb13d8086ed1d37ff32"
 }
