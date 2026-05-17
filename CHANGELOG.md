@@ -4,6 +4,26 @@ All notable changes to GraphStack are documented here.
 
 ---
 
+## [v4.1.0] — 2026-05-17
+
+### Added
+- **`pyproject.toml`** — install GraphStack with `pip install -e .`; console script `graphstack` points at `graphstack.cli:main`.
+- **`graphstack validate`** — LLM-free checks for handoff layout, board task JSON, `STATE.md`, and graph commit vs `git HEAD` (`--fail-stale-graph` for CI).
+- **`graphstack doctor`** — human-readable health report (same checks as validate; warnings do not fail by default).
+- **`.graphifyignore`** — code-focused graph profile for the GraphStack source repo (reduces markdown noise in `graphify-out/`).
+- **`docs/case-studies/graphstack-self.md`** — honest self-analysis: graph quality on a meta-repo, token savings confidence levels, validation workflow.
+- **README Limitations** section — orchestrator enforcement, token estimates, graph ROI, setup steps.
+- **Pytest** — 5 new tests in `test_validate.py` (28 total in suite).
+
+### Changed
+- **CI** — `pip install -e .` before tests; `graphstack validate --fail-stale-graph` step; `pyproject.toml` and `validate.py` in required-files manifest.
+- **Installer** — copies `validate.py` into target projects with the Python package.
+
+### Fixed
+- N/A (quality-of-life / transparency release).
+
+---
+
 ## [v4.0.0] — 2026-05-16
 
 GraphStack v4 is the **cross-platform release**. Windows runs natively in PowerShell (no Git Bash needed), macOS runs without `coreutils`, and the entire workflow logic lives in a single Python package. The `skills/` directory was unified with the post-install `.cursor/skills/` layout so the source repo and an installed project look identical.

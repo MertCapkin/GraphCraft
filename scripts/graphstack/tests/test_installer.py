@@ -50,6 +50,7 @@ def test_install_creates_full_layout(tmp_path: Path, monkeypatch: pytest.MonkeyP
         "scripts/graphstack/installer.py",
         "scripts/graphstack/hook.py",
         "scripts/graphstack/cli.py",
+        "scripts/graphstack/validate.py",
         "scripts/graphstack/__main__.py",
         "handoff/board/doing/.gitkeep",
         "handoff/board/done/.gitkeep",

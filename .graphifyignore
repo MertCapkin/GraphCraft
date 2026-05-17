@@ -1,0 +1,22 @@
+# GraphStack source repo — code-focused graph (v4.1+)
+# Markdown workflow files inflate the graph with doc fragments; scan Python core + demo app.
+
+README.md
+CHANGELOG.md
+CONTRIBUTING.md
+LICENSE
+docs/**
+orchestrator/**
+.cursor/skills/**
+.cursor/rules/**
+.cursor/commands/**
+handoff/**
+.github/**
+demo/DEMO_WALKTHROUGH.md
+install.sh
+install.ps1
+scripts/board.sh
+scripts/board.ps1
+scripts/post-commit
+scripts/post-commit.ps1
+graphify-out/**

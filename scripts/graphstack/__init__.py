@@ -4,8 +4,8 @@ This package replaces the bash/PowerShell scripts with a single Python
 implementation that works identically on Windows, macOS, and Linux.
 
 Entry point: ``python -m graphstack <command>``
-Commands: ``board``, ``install``, ``hook``
+Commands: ``board``, ``install``, ``hook``, ``validate``, ``doctor``
 """
 
-__version__ = "4.0.0"
+__version__ = "4.1.0"
 __all__ = ["__version__"]

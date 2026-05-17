@@ -74,6 +74,7 @@ PYTHON_PACKAGE_FILES = (
     "board.py",
     "installer.py",
     "hook.py",
+    "validate.py",
     "platform_utils.py",
     "constants.py",
 )

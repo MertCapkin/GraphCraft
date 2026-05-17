@@ -44,8 +44,10 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Install pytest
-        run: python -m pip install --quiet pytest
+      - name: Install package and pytest
+        run: |
+          python -m pip install --quiet pytest
+          python -m pip install --quiet -e .
 
       - name: Verify required files exist (Python)
         shell: python
@@ -76,6 +78,7 @@ jobs:
               "install.sh",
               "install.ps1",
               "requirements.txt",
+              "pyproject.toml",
               "scripts/board.sh",
               "scripts/board.ps1",
               "scripts/post-commit",
@@ -88,6 +91,9 @@ jobs:
               "scripts/graphstack/hook.py",
               "scripts/graphstack/platform_utils.py",
               "scripts/graphstack/constants.py",
+              "scripts/graphstack/validate.py",
+              ".graphifyignore",
+              "docs/case-studies/graphstack-self.md",
           ]
           missing = [p for p in required if not Path(p).is_file()]
           for p in required:
@@ -111,13 +117,15 @@ jobs:
           print("example-task.json schema OK")
 
       - name: Run graphstack pytest suite
-        env:
-          PYTHONPATH: scripts
         run: python -m pytest scripts/graphstack/tests -v
 
+      - name: Validate project layout (graphstack validate)
+        run: graphstack validate
+
+      - name: Fail if knowledge graph is stale vs HEAD
+        run: graphstack validate --fail-stale-graph
+
       - name: Board smoke test (Python module — cross-platform)
-        env:
-          PYTHONPATH: scripts
         shell: python
         run: |
           import os, subprocess, sys

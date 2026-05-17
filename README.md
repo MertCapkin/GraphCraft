@@ -7,14 +7,14 @@ One prompt starts the entire lifecycle — from blank repo to production.
 
 [![CI](https://github.com/MertCapkin/graphstack/actions/workflows/ci.yml/badge.svg)](https://github.com/MertCapkin/graphstack/actions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-v4.0.0-blue)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-v4.1.0-blue)](CHANGELOG.md)
 [![Platforms](https://img.shields.io/badge/platforms-Windows%20%7C%20macOS%20%7C%20Linux-success)](#compatibility)
 [![Works with Cursor](https://img.shields.io/badge/Works%20with-Cursor-blue)](https://cursor.sh)
 [![Works with Claude Code](https://img.shields.io/badge/Works%20with-Claude%20Code-orange)](https://claude.ai/code)
 
 </div>
 
-> **v4 highlights:** native Windows PowerShell support (no Git Bash needed), single Python core for board/install/hook logic, tri-OS CI matrix, and 23-test pytest suite. See [CHANGELOG.md](CHANGELOG.md) for the full migration notes.
+> **v4.1 highlights:** `pip install -e .` packaging, `graphstack validate` / `graphstack doctor`, CI graph-staleness checks, code-focused `.graphifyignore`, and an honest limitations + case-study section. See [CHANGELOG.md](CHANGELOG.md).
 
 ---
 
@@ -35,6 +35,11 @@ git --version       # any recent version is fine
 pip install -r requirements.txt
 # or, equivalently, install Graphify directly with the same pin:
 pip install "graphifyy>=0.7,<0.9"
+
+# Optional: install GraphStack CLI from a clone (board / validate / doctor)
+pip install -e /path/to/graphstack
+# or with Graphify in one step:
+pip install -e "/path/to/graphstack[graphify]"
 ```
 
 After installation, register the Cursor slash command (one-time):
@@ -290,7 +295,28 @@ GraphStack's savings come from three mechanisms:
 | Large (200+ files) | ~600k | ~90k | **~85%** |
 | Very large (500+ files) | ~1.5M | ~180k | **~88%** |
 
-*Estimates based on Graphify benchmarks and TOKEN_OPTIMIZER rules. Real savings depend on query patterns.*
+*Estimates based on Graphify benchmarks and TOKEN_OPTIMIZER rules. Real savings depend on query patterns. See [docs/case-studies/graphstack-self.md](docs/case-studies/graphstack-self.md) for an honest self-analysis — measured community benchmarks are welcome via PR.*
+
+---
+
+## Limitations (read before adopting)
+
+GraphStack is a **workflow protocol** (markdown + handoff files), not a runtime that enforces AI behavior.
+
+| Topic | Reality |
+|-------|---------|
+| Role automation | The Orchestrator state machine lives in `ORCHESTRATOR.md`. Models can skip Activation or transitions unless you use discipline + `graphstack validate`. |
+| Token savings | The table above is **estimated**, not guaranteed. Small repos or undisciplined sessions may use **more** tokens than unstructured chat. |
+| Knowledge graph | Value appears on **20+ file** codebases with module boundaries. Meta-repos full of markdown produce noisy graphs — use `.graphifyignore` (included in this repo). |
+| Setup | Graphify + GraphStack install + `/graphify` + Cursor — four steps, not zero-config. |
+
+**v4.1 helpers:** `graphstack doctor` (health report) and `graphstack validate` (exit code for CI). Use `--strict` before Builder handoff; use `--fail-stale-graph` in CI after code changes.
+
+```bash
+graphstack doctor
+graphstack validate
+graphstack validate --strict --fail-stale-graph
+```
 
 ---
 
@@ -334,7 +360,10 @@ your-project/
 │       ├── hook.py                       ← post-commit graph-update logic
 │       ├── platform_utils.py             ← OS detection, Python finder, encoding-safe echo
 │       ├── cli.py                        ← entry point dispatcher
+│       ├── validate.py                   ← layout / brief / graph checks
 │       └── tests/                        ← pytest suite
+├── pyproject.toml                        ← pip install -e . (v4.1+)
+├── .graphifyignore                       ← code-focused graph for this repo
 ```
 
 ---
@@ -373,6 +402,8 @@ python -m graphstack board new add-oauth Add OAuth login with GitHub
 python -m graphstack board claim add-oauth builder
 python -m graphstack board complete add-oauth
 python -m graphstack board log
+python -m graphstack doctor
+python -m graphstack validate --fail-stale-graph
 ```
 
 Every board operation is a git commit. `git log handoff/board/` shows who did what, when.

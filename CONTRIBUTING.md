@@ -47,7 +47,7 @@ The `demo/` folder shows GraphStack in action on a Node.js auth service. More de
 ### 5. Write a case study
 
 Used GraphStack on a real project? Measured token savings? Wrote about it?
-Open a PR adding a `docs/case-studies/` entry or link to your post in the README.
+Open a PR adding a `docs/case-studies/<name>.md` entry (see `docs/case-studies/graphstack-self.md` for the template style) or link to your post in the README.
 
 ### 6. Cursor slash-command bootstrap snippets
 
