@@ -52,14 +52,14 @@ function Test-GraphstackCli {
 function Install-GraphstackPackage {
     if ((Test-GraphstackCli) -and (Test-WheelAssets)) {
         $ver = (& $python.Exe @($python.PreArgs) -m graphstack --version 2>$null)
-        Write-Host "Step 1/2: GraphStack already installed ($ver) — skipping pip."
+        Write-Host "Step 1/2: GraphStack already installed ($ver) - skipping pip."
         return
     }
 
     Write-Host 'Step 1/2: Installing MertCapkin_GraphStack + graphify from PyPI...'
     $rc = Invoke-GraphstackPython @('-m', 'pip', 'install', '--upgrade', $Pkg)
     if ($rc -ne 0) {
-        Write-Host 'PyPI install failed — trying GitHub source...' -ForegroundColor Yellow
+        Write-Host 'PyPI install failed - trying GitHub source...' -ForegroundColor Yellow
         $rc = Invoke-GraphstackPython @('-m', 'pip', 'install', '--upgrade', $GitSpec)
         if ($rc -ne 0) {
             Write-Error 'Could not install graphstack. Check network and Python pip.'
@@ -68,7 +68,7 @@ function Install-GraphstackPackage {
     }
 
     if (-not (Test-WheelAssets)) {
-        Write-Host 'PyPI wheel missing .cursor assets — reinstalling from PyPI...' -ForegroundColor Yellow
+        Write-Host 'PyPI wheel missing .cursor assets - reinstalling from PyPI...' -ForegroundColor Yellow
         $rc = Invoke-GraphstackPython @('-m', 'pip', 'install', '--upgrade', '--force-reinstall', $Pkg)
         if ($rc -ne 0 -or -not (Test-WheelAssets)) {
             Write-Host 'Trying GitHub source...' -ForegroundColor Yellow
@@ -121,7 +121,7 @@ if (-not (Test-Path -LiteralPath $ruleFile)) {
 
 if ($initRc -ne 0) {
     Write-Host ''
-    Write-Host "Init reported issues (exit $initRc) but core files are present." -ForegroundColor Yellow
+    Write-Host ('Init reported issues (exit {0}) but core files are present.' -f $initRc) -ForegroundColor Yellow
     Write-Host 'Run:  py -3 -m graphstack doctor'
 }
 
