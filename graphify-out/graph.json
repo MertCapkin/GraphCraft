@@ -5702,9 +5702,9 @@
       "source_file": "scripts/gate-hook.ps1",
       "source_location": "L15",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scripts_gate_hook_ps1",
-      "target": "scripts_gate_hook_resolve_python",
-      "confidence_score": 1.0
+      "target": "scripts_gate_hook_resolve_python"
     },
     {
       "relation": "imports_from",
@@ -7420,9 +7420,9 @@
       "source_file": "scripts/graphstack/installer.py",
       "source_location": "L149",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scripts_graphstack_installer_py",
-      "target": "graphstack_installer_gate_hook_command",
-      "confidence_score": 1.0
+      "target": "graphstack_installer_gate_hook_command"
     },
     {
       "relation": "contains",
@@ -7430,9 +7430,9 @@
       "source_file": "scripts/graphstack/installer.py",
       "source_location": "L159",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scripts_graphstack_installer_py",
-      "target": "graphstack_installer_cursor_hooks_payload",
-      "confidence_score": 1.0
+      "target": "graphstack_installer_cursor_hooks_payload"
     },
     {
       "relation": "contains",
@@ -7440,9 +7440,9 @@
       "source_file": "scripts/graphstack/installer.py",
       "source_location": "L171",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scripts_graphstack_installer_py",
-      "target": "graphstack_installer_claude_settings_payload",
-      "confidence_score": 1.0
+      "target": "graphstack_installer_claude_settings_payload"
     },
     {
       "relation": "contains",
@@ -7598,9 +7598,9 @@
       "source_file": "scripts/graphstack/installer.py",
       "source_location": "L160",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "graphstack_installer_cursor_hooks_payload",
-      "target": "graphstack_installer_gate_hook_command",
-      "confidence_score": 1.0
+      "target": "graphstack_installer_gate_hook_command"
     },
     {
       "relation": "calls",
@@ -7609,9 +7609,9 @@
       "source_file": "scripts/graphstack/installer.py",
       "source_location": "L172",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "graphstack_installer_claude_settings_payload",
-      "target": "graphstack_installer_gate_hook_command",
-      "confidence_score": 1.0
+      "target": "graphstack_installer_gate_hook_command"
     },
     {
       "relation": "rationale_for",
@@ -7619,9 +7619,9 @@
       "source_file": "scripts/graphstack/installer.py",
       "source_location": "L150",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "graphstack_installer_rationale_150",
-      "target": "graphstack_installer_gate_hook_command",
-      "confidence_score": 1.0
+      "target": "graphstack_installer_gate_hook_command"
     },
     {
       "relation": "calls",
@@ -7630,9 +7630,9 @@
       "source_file": "scripts/graphstack/installer.py",
       "source_location": "L201",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "graphstack_installer_install_hook_adapters",
-      "target": "graphstack_installer_cursor_hooks_payload",
-      "confidence_score": 1.0
+      "target": "graphstack_installer_cursor_hooks_payload"
     },
     {
       "relation": "calls",
@@ -7641,9 +7641,9 @@
       "source_file": "scripts/graphstack/installer.py",
       "source_location": "L202",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "graphstack_installer_install_hook_adapters",
-      "target": "graphstack_installer_claude_settings_payload",
-      "confidence_score": 1.0
+      "target": "graphstack_installer_claude_settings_payload"
     },
     {
       "relation": "calls",
@@ -7662,9 +7662,9 @@
       "source_file": "scripts/graphstack/installer.py",
       "source_location": "L195",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "graphstack_installer_rationale_195",
-      "target": "graphstack_installer_install_hook_adapters",
-      "confidence_score": 1.0
+      "target": "graphstack_installer_install_hook_adapters"
     },
     {
       "relation": "calls",
@@ -7726,9 +7726,9 @@
       "source_file": "scripts/graphstack/installer.py",
       "source_location": "L222",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "graphstack_installer_rationale_222",
-      "target": "graphstack_installer_install_python_package",
-      "confidence_score": 1.0
+      "target": "graphstack_installer_install_python_package"
     },
     {
       "relation": "calls",
@@ -8544,9 +8544,9 @@
       "source_file": "scripts/graphstack/validate.py",
       "source_location": "L216",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scripts_graphstack_validate_py",
-      "target": "graphstack_validate_state_has_active_sessions",
-      "confidence_score": 1.0
+      "target": "graphstack_validate_state_has_active_sessions"
     },
     {
       "relation": "contains",
@@ -8554,9 +8554,9 @@
       "source_file": "scripts/graphstack/validate.py",
       "source_location": "L222",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scripts_graphstack_validate_py",
-      "target": "graphstack_validate_check_framework_handoff",
-      "confidence_score": 1.0
+      "target": "graphstack_validate_check_framework_handoff"
     },
     {
       "relation": "contains",
@@ -8751,9 +8751,9 @@
       "source_file": "scripts/graphstack/validate.py",
       "source_location": "L231",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "graphstack_validate_check_framework_handoff",
-      "target": "graphstack_validate_report_add",
-      "confidence_score": 1.0
+      "target": "graphstack_validate_report_add"
     },
     {
       "relation": "calls",
@@ -8839,9 +8839,9 @@
       "source_file": "scripts/graphstack/validate.py",
       "source_location": "L230",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "graphstack_validate_check_framework_handoff",
-      "target": "graphstack_validate_brief_is_template",
-      "confidence_score": 1.0
+      "target": "graphstack_validate_brief_is_template"
     },
     {
       "relation": "calls",
@@ -8915,9 +8915,9 @@
       "source_file": "scripts/graphstack/validate.py",
       "source_location": "L192",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "graphstack_validate_rationale_192",
-      "target": "graphstack_validate_refs_for_staleness_check",
-      "confidence_score": 1.0
+      "target": "graphstack_validate_refs_for_staleness_check"
     },
     {
       "relation": "rationale_for",
@@ -8946,9 +8946,9 @@
       "source_file": "scripts/graphstack/validate.py",
       "source_location": "L252",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "graphstack_validate_check_framework_handoff",
-      "target": "graphstack_validate_state_has_active_sessions",
-      "confidence_score": 1.0
+      "target": "graphstack_validate_state_has_active_sessions"
     },
     {
       "relation": "rationale_for",
@@ -8956,9 +8956,9 @@
       "source_file": "scripts/graphstack/validate.py",
       "source_location": "L217",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "graphstack_validate_rationale_217",
-      "target": "graphstack_validate_state_has_active_sessions",
-      "confidence_score": 1.0
+      "target": "graphstack_validate_state_has_active_sessions"
     },
     {
       "relation": "calls",
@@ -8967,9 +8967,9 @@
       "source_file": "scripts/graphstack/validate.py",
       "source_location": "L381",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "graphstack_validate_run_checks",
-      "target": "graphstack_validate_check_framework_handoff",
-      "confidence_score": 1.0
+      "target": "graphstack_validate_check_framework_handoff"
     },
     {
       "relation": "rationale_for",
@@ -8977,9 +8977,9 @@
       "source_file": "scripts/graphstack/validate.py",
       "source_location": "L223",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "graphstack_validate_rationale_223",
-      "target": "graphstack_validate_check_framework_handoff",
-      "confidence_score": 1.0
+      "target": "graphstack_validate_check_framework_handoff"
     },
     {
       "relation": "calls",
@@ -9207,9 +9207,9 @@
       "source_file": "scripts/graphstack/validate.py",
       "source_location": "L450",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "graphstack_validate_rationale_450",
-      "target": "graphstack_validate_run",
-      "confidence_score": 1.0
+      "target": "graphstack_validate_run"
     },
     {
       "relation": "rationale_for",
@@ -11141,9 +11141,9 @@
       "source_file": "scripts/graphstack/tests/test_validate.py",
       "source_location": "L177",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scripts_graphstack_tests_test_validate_py",
-      "target": "tests_test_validate_test_validate_framework_warns_on_dirty_handoff",
-      "confidence_score": 1.0
+      "target": "tests_test_validate_test_validate_framework_warns_on_dirty_handoff"
     },
     {
       "relation": "contains",
@@ -11151,9 +11151,9 @@
       "source_file": "scripts/graphstack/tests/test_validate.py",
       "source_location": "L196",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scripts_graphstack_tests_test_validate_py",
-      "target": "tests_test_validate_test_validate_framework_clean_handoff_no_warnings",
-      "confidence_score": 1.0
+      "target": "tests_test_validate_test_validate_framework_clean_handoff_no_warnings"
     },
     {
       "relation": "rationale_for",
@@ -11249,9 +11249,9 @@
       "source_file": "scripts/graphstack/tests/test_validate.py",
       "source_location": "L178",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "tests_test_validate_test_validate_framework_warns_on_dirty_handoff",
-      "target": "tests_test_validate_minimal_layout",
-      "confidence_score": 1.0
+      "target": "tests_test_validate_minimal_layout"
     },
     {
       "relation": "calls",
@@ -11260,9 +11260,9 @@
       "source_file": "scripts/graphstack/tests/test_validate.py",
       "source_location": "L197",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "tests_test_validate_test_validate_framework_clean_handoff_no_warnings",
-      "target": "tests_test_validate_minimal_layout",
-      "confidence_score": 1.0
+      "target": "tests_test_validate_minimal_layout"
     },
     {
       "relation": "contains",
@@ -14256,5 +14256,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "b7494691808f598564d3f6ef6fb965299c1db563"
+  "built_at_commit": "6c71b5fe3db14b9947c168c620d980e94f42e469"
 }
