@@ -54,8 +54,6 @@
 ## Acceptance Criteria
 
 - [ ] 
-- [ ] 
-- [ ] 
 
 ---
 

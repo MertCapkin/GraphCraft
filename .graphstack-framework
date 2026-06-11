@@ -1,0 +1,3 @@
+# GraphStack framework source repository (not a consumer project).
+# handoff/ must ship as templates — reset BRIEF/REVIEW/STATE and clear board/done/
+# before release commits. See CONTRIBUTING.md.

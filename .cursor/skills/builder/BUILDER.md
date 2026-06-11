@@ -29,14 +29,12 @@ When activated, execute this sequence exactly:
 4. Claim the task:
    python -m graphstack board claim <task-id> builder
 
-5. Report:
-   "Graph loaded. Brief loaded. Board task claimed: [task-id]
-    Objective: [one line from brief]
-    Files to change: [list]
-    Acceptance criteria: [N items]
-    Ready to build. Proceed?"
+5. Update machine-readable state (Orchestrator already confirmed the brief —
+   do NOT ask the user again):
+   python -m graphstack state set --role builder --task <task-id>
 
-6. Wait for user confirmation before writing any code.
+6. Report once, then start building immediately:
+   "[BUILDER MODE] Task: [task-id] | Criteria: [N] | Files: [list]"
 ```
 
 ---
@@ -166,10 +164,4 @@ Ready for Reviewer.
 
 ## Token Rules (Builder)
 
-```
-Read GRAPH_REPORT.md once → never again this session
-Read each file maximum once → use context after
-Parallel file reads when possible → one tool call, multiple files
-No speculative reads → only read what the brief requires
-No output longer than needed → code + brief explanation only
-```
+Follow `orchestrator/TOKEN_OPTIMIZER.md` (loaded at session start). Builder-specific: read only brief-listed files; parallel reads in one tool call; no speculative exploration.

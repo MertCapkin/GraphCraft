@@ -56,6 +56,20 @@ When you introduce a copy change, restart Cursor once locally (and mention that 
 
 ---
 
+## Framework repo: reset `handoff/` before release commits
+
+This repository **is** GraphStack (marker: `.graphstack-framework`). The `handoff/` folder ships as **empty templates** for projects that run `install.sh` — not as a log of our own development cycles.
+
+Before pushing framework changes to GitHub:
+
+1. Restore `handoff/BRIEF.md`, `handoff/REVIEW.md`, and `handoff/STATE.md` to their templates (no real task content).
+2. Remove any `handoff/board/done/*.json` and `handoff/STATE.json`.
+3. Run `python -m graphstack validate` — warnings `framework_*` should be zero.
+
+Consumer projects keep their handoff history; only this source repo resets.
+
+---
+
 ## Pull Request Guidelines
 
 - **One PR per change.** Don't bundle unrelated edits.

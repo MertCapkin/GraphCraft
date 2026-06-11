@@ -172,3 +172,33 @@ def test_graph_fresh_when_built_from_parent_commit(
     report = run_checks(fail_stale=True)
     assert any(f.code == "graph_fresh" for f in report.findings)
     assert not report.errors
+
+
+def test_validate_framework_warns_on_dirty_handoff(project_root: Path) -> None:
+    _minimal_layout(project_root)
+    (project_root / ".graphstack-framework").write_text("framework\n", encoding="utf-8")
+    (project_root / "handoff" / "BRIEF.md").write_text(
+        "# Brief: Real Feature\n**Status:** Ready for Builder\n",
+        encoding="utf-8",
+    )
+    done = project_root / "handoff" / "board" / "done"
+    (done / "stale-task.json").write_text(
+        json.dumps({"id": "stale-task", "title": "x", "status": "done",
+                    "created_at": "2026-01-01T00:00:00+00:00"}),
+        encoding="utf-8",
+    )
+    report = run_checks()
+    codes = {f.code for f in report.findings if f.level == "warn"}
+    assert "framework_brief_dirty" in codes
+    assert "framework_board_dirty" in codes
+
+
+def test_validate_framework_clean_handoff_no_warnings(project_root: Path) -> None:
+    _minimal_layout(project_root)
+    (project_root / ".graphstack-framework").write_text("framework\n", encoding="utf-8")
+    (project_root / "handoff" / "BRIEF.md").write_text(
+        "# Brief: [Feature/Change Name]\n**Date:** YYYY-MM-DD\n",
+        encoding="utf-8",
+    )
+    report = run_checks()
+    assert not any(f.code.startswith("framework_") for f in report.findings)

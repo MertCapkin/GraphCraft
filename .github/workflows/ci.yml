@@ -97,6 +97,13 @@ jobs:
               "scripts/graphstack/platform_utils.py",
               "scripts/graphstack/constants.py",
               "scripts/graphstack/validate.py",
+              "scripts/graphstack/gate.py",
+              "scripts/graphstack/state.py",
+              "scripts/gate-hook.sh",
+              "scripts/gate-hook.ps1",
+              ".cursor/hooks.json",
+              ".claude/settings.json",
+              ".graphstack-framework",
               ".graphifyignore",
               "docs/case-studies/graphstack-self.md",
           ]
@@ -133,6 +140,9 @@ jobs:
 
       - name: Validate project layout (graphstack validate)
         run: python -m graphstack validate
+
+      - name: Process gate check (graphstack gate)
+        run: python -m graphstack gate check
 
       - name: Refresh knowledge graph (CI)
         run: graphify update .

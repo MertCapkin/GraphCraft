@@ -20,6 +20,18 @@ GRAPH_REPORT = GRAPHIFY_OUT / "GRAPH_REPORT.md"
 GRAPH_JSON = GRAPHIFY_OUT / "graph.json"
 GRAPH_HTML = GRAPHIFY_OUT / "graph.html"
 
+STATE_JSON = HANDOFF_DIR / "STATE.json"
+GATE_OFF_FILE = HANDOFF_DIR / ".gate-off"
+
+# Paths that never count as "code" for the process gate. Anything else
+# (plus root-level *.md files, handled in gate.is_code_path) is gated.
+NON_CODE_PREFIXES = (
+    "handoff/",
+    "graphify-out/",
+    ".cursor/",
+    ".claude/",
+)
+
 STALE_GRAPH_HOURS = 24
 
 # Required keys for GNAP board task JSON files (see handoff/board/README.md).

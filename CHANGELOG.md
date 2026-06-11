@@ -4,6 +4,28 @@ All notable changes to GraphStack are documented here.
 
 ---
 
+## [v4.3.0] — 2026-06-11
+
+### Added
+- **`graphstack gate`** — deterministic process enforcement: `gate check` (CI/manual), `gate hook cursor`, `gate hook claude`. Rules: deny code commits/edits when no board task is in `doing/`, or when `BRIEF.md` is still the template. Fail-open on hook errors; bypass via `GRAPHSTACK_GATE=off` or `handoff/.gate-off`.
+- **`graphstack state`** — machine-readable `handoff/STATE.json` (`set` / `get` / `clear`) for hook verification and resume.
+- **Hook adapters** — `.cursor/hooks.json` (Cursor 3.x, `version: 1`) and `.claude/settings.json` (Claude Code `PreToolUse` + `Stop`). Installer writes OS-specific commands (`gate-hook.ps1` on Windows, `gate-hook.sh` on Unix).
+- **`scripts/gate-hook.sh` / `scripts/gate-hook.ps1`** — portable shims (resolve `py -3` / `python3` / `python` without hardcoding).
+- **`.graphstack-framework` marker** — `validate` warns when the framework repo ships dirty handoff state (non-template brief, `done/` tasks, active `STATE.md` entries).
+- **Pytest** — `test_gate.py` (26 tests), `test_state.py` (5 tests).
+
+### Changed
+- **ORCHESTRATOR** — token tier detail moved to `TOKEN_OPTIMIZER.md` (reference only); state persistence now includes `state set`.
+- **BUILDER** — removed duplicate user confirmation at activation (Orchestrator brief confirmation is the single human gate); activation now runs `state set` and builds immediately.
+- **ARCHITECT / BUILDER** — token rules condensed to pointers to `TOKEN_OPTIMIZER.md`.
+- **CI** — `graphstack gate check` step; required-files manifest includes gate modules and hook shims.
+- **README** — Process Gate section; Limitations updated.
+
+### Fixed
+- **Windows hook launcher** — hooks no longer hardcode `python` (often missing on Windows); shims prefer `py -3`.
+
+---
+
 ## [v4.2.0] — 2026-05-17
 
 ### Added

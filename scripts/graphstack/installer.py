@@ -11,6 +11,7 @@ Improvements over the bash original:
 from __future__ import annotations
 
 import argparse
+import json
 import shutil
 import sys
 from pathlib import Path
@@ -29,6 +30,7 @@ DIRS_TO_CREATE = (
     ".cursor/skills/ship",
     ".cursor/skills/bootstrapper",
     ".cursor/commands",
+    ".claude",
     "orchestrator",
     "handoff/board/todo",
     "handoff/board/doing",
@@ -57,6 +59,8 @@ FILE_COPIES = (
     ("scripts/board.ps1", "scripts/board.ps1"),
     ("scripts/post-commit", "scripts/post-commit"),
     ("scripts/post-commit.ps1", "scripts/post-commit.ps1"),
+    ("scripts/gate-hook.sh", "scripts/gate-hook.sh"),
+    ("scripts/gate-hook.ps1", "scripts/gate-hook.ps1"),
 )
 
 # Handoff files that must NOT overwrite an existing copy in the target.
@@ -77,6 +81,8 @@ PYTHON_PACKAGE_FILES = (
     "platform_utils.py",
     "constants.py",
     "run.py",
+    "gate.py",
+    "state.py",
 )
 
 COMPACT_PACKAGE_FILES = (
@@ -140,6 +146,70 @@ def _install_git_hook(target: Path, non_interactive: bool) -> None:
         echo("✅ Git hook installed.")
 
 
+def _gate_hook_command(platform: str) -> str:
+    """Shell command for hook adapters — OS-aware python launcher."""
+    if sys.platform == "win32":
+        return (
+            f"powershell -NoProfile -ExecutionPolicy Bypass "
+            f"-File scripts/gate-hook.ps1 {platform}"
+        )
+    return f"bash scripts/gate-hook.sh {platform}"
+
+
+def _cursor_hooks_payload() -> dict:
+    cmd = _gate_hook_command("cursor")
+    return {
+        "version": 1,
+        "hooks": {
+            "beforeShellExecution": [{"command": cmd}],
+            "afterFileEdit": [{"command": cmd}],
+            "stop": [{"command": cmd}],
+        },
+    }
+
+
+def _claude_settings_payload() -> dict:
+    cmd = _gate_hook_command("claude")
+    return {
+        "hooks": {
+            "PreToolUse": [
+                {
+                    "matcher": "Edit|Write|MultiEdit|NotebookEdit|Bash",
+                    "hooks": [
+                        {"type": "command", "command": cmd, "timeout": 30}
+                    ],
+                }
+            ],
+            "Stop": [
+                {
+                    "hooks": [
+                        {"type": "command", "command": cmd, "timeout": 30}
+                    ]
+                }
+            ],
+        }
+    }
+
+
+def _install_hook_adapters(target: Path) -> None:
+    """Write Cursor / Claude Code hook adapters with OS-specific shim commands.
+
+    Never overwrites an existing adapter — projects may have their own hooks
+    configured and merging JSON automatically is riskier than skipping.
+    """
+    adapters = (
+        (target / ".cursor" / "hooks.json", _cursor_hooks_payload()),
+        (target / ".claude" / "settings.json", _claude_settings_payload()),
+    )
+    for dst, payload in adapters:
+        if dst.exists():
+            echo(f"⏭️  {dst.relative_to(target)} already exists — skipping")
+            continue
+        dst.parent.mkdir(parents=True, exist_ok=True)
+        dst.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
+    echo("🛡️  Process-gate hooks installed (.cursor/hooks.json, .claude/settings.json)")
+
+
 def _ensure_state_md(target: Path) -> None:
     state = target / "handoff" / "STATE.md"
     if state.exists():
@@ -198,7 +268,7 @@ def install(target: Path, *, non_interactive: bool = False) -> int:
     echo(f"   {package_count} package files copied to scripts/graphstack/")
 
     # Make the unix shims executable; on Windows this is a no-op symbolic chmod.
-    for rel in ("scripts/board.sh", "scripts/post-commit"):
+    for rel in ("scripts/board.sh", "scripts/post-commit", "scripts/gate-hook.sh"):
         path = target / rel
         if path.is_file():
             try:
@@ -214,6 +284,7 @@ def install(target: Path, *, non_interactive: bool = False) -> int:
         echo("⏭️  Handoff files already exist — skipping (not overwriting)")
 
     _ensure_state_md(target)
+    _install_hook_adapters(target)
 
     for rel in GITKEEP_DIRS:
         keep = target / rel / ".gitkeep"

@@ -22,6 +22,8 @@ from .constants import (
     TASK_REQUIRED_KEYS,
     TODO_DIR,
 )
+
+FRAMEWORK_MARKER = Path(".graphstack-framework")
 from .platform_utils import echo, git_available, graphify_available, run_git
 
 BRIEF_TEMPLATE_MARKERS = (
@@ -211,6 +213,53 @@ def _refs_for_staleness_check() -> list[str]:
     return refs
 
 
+def _state_has_active_sessions(text: str) -> bool:
+    """True when STATE.md contains real session entries (not only the template comment)."""
+    without_comments = re.sub(r"<!--.*?-->", "", text, flags=re.DOTALL)
+    return bool(re.search(r"^## \[\d{4}-", without_comments, re.MULTILINE))
+
+
+def check_framework_handoff(report: Report, root: Path) -> None:
+    """Warn when the framework source repo ships consumer session state in handoff/."""
+    if not (root / FRAMEWORK_MARKER).is_file():
+        return
+
+    brief_path = root / "handoff" / "BRIEF.md"
+    if brief_path.is_file():
+        try:
+            if not _brief_is_template(brief_path.read_text(encoding="utf-8")):
+                report.add(
+                    "warn",
+                    "framework_brief_dirty",
+                    "Framework repo: handoff/BRIEF.md is not the template — "
+                    "reset before release (see CONTRIBUTING.md)",
+                )
+        except OSError:
+            pass
+
+    done_tasks = list(DONE_DIR.glob("*.json")) if DONE_DIR.is_dir() else []
+    if done_tasks:
+        report.add(
+            "warn",
+            "framework_board_dirty",
+            f"Framework repo: handoff/board/done/ has {len(done_tasks)} task(s) — "
+            "reset before release",
+        )
+
+    state_path = root / "handoff" / "STATE.md"
+    if state_path.is_file():
+        try:
+            if _state_has_active_sessions(state_path.read_text(encoding="utf-8")):
+                report.add(
+                    "warn",
+                    "framework_state_dirty",
+                    "Framework repo: handoff/STATE.md has active session entries — "
+                    "reset before release",
+                )
+        except OSError:
+            pass
+
+
 def check_state(report: Report, root: Path) -> None:
     state_path = root / "handoff" / "STATE.md"
     if not state_path.is_file():
@@ -329,6 +378,7 @@ def run_checks(
     check_layout(report, root)
     check_brief(report, root, strict=strict)
     check_board_tasks(report)
+    check_framework_handoff(report, root)
     check_state(report, root)
     check_graph(report, root, fail_stale=fail_stale)
     check_compact_module(report, root)

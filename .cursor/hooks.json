@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "hooks": {
+    "beforeShellExecution": [
+      { "command": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/gate-hook.ps1 cursor" }
+    ],
+    "afterFileEdit": [
+      { "command": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/gate-hook.ps1 cursor" }
+    ],
+    "stop": [
+      { "command": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/gate-hook.ps1 cursor" }
+    ]
+  }
+}

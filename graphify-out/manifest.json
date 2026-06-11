@@ -15,41 +15,53 @@
     "mtime": 1778918580.9617295,
     "hash": "573b85b4ef5de25ee6f428c358282f88"
   },
+  "C:\\Users\\elife\\Desktop\\Mert_Proje\\graphstack\\scripts\\gate-hook.ps1": {
+    "mtime": 1781190265.9424822,
+    "hash": "7549c3a4cecd1af5cffbce2eb8af177c"
+  },
   "C:\\Users\\elife\\Desktop\\Mert_Proje\\graphstack\\scripts\\graphstack\\board.py": {
     "mtime": 1779032053.2617111,
     "hash": "1c32f6be29eac71281e2e112ef45fc82"
   },
   "C:\\Users\\elife\\Desktop\\Mert_Proje\\graphstack\\scripts\\graphstack\\cli.py": {
-    "mtime": 1779042803.3093987,
-    "hash": "7f5d03ab30846c27d968e4f678be5eec"
+    "mtime": 1781188609.658236,
+    "hash": "1d130519542ba3706cfe99ecab71c853"
   },
   "C:\\Users\\elife\\Desktop\\Mert_Proje\\graphstack\\scripts\\graphstack\\constants.py": {
-    "mtime": 1779032053.2617111,
-    "hash": "92e5bacbfa504e0ed0073e37d09b37f8"
+    "mtime": 1781188499.235243,
+    "hash": "ccffe378124d13ce5b2ae0f7444507b6"
+  },
+  "C:\\Users\\elife\\Desktop\\Mert_Proje\\graphstack\\scripts\\graphstack\\gate.py": {
+    "mtime": 1781189205.811876,
+    "hash": "d408e30f86e923dd9c07d8409da3ed14"
   },
   "C:\\Users\\elife\\Desktop\\Mert_Proje\\graphstack\\scripts\\graphstack\\hook.py": {
     "mtime": 1778951715.9025033,
     "hash": "8f6624bd7c3bcb0f8ba92d28b43bcd89"
   },
   "C:\\Users\\elife\\Desktop\\Mert_Proje\\graphstack\\scripts\\graphstack\\installer.py": {
-    "mtime": 1779042814.3613179,
-    "hash": "cc87e5958e2555ecaf15a3a7b151a718"
+    "mtime": 1781190293.5094955,
+    "hash": "957c8c725e2933209fae67562c277f25"
   },
   "C:\\Users\\elife\\Desktop\\Mert_Proje\\graphstack\\scripts\\graphstack\\platform_utils.py": {
     "mtime": 1778951848.462769,
     "hash": "d16cf15fb6a8023ab1b4c7a05ba42c73"
   },
   "C:\\Users\\elife\\Desktop\\Mert_Proje\\graphstack\\scripts\\graphstack\\run.py": {
-    "mtime": 1779042798.263256,
-    "hash": "d8a2033367ad2bfce81c7615781d21c8"
+    "mtime": 1779042877.7413025,
+    "hash": "59c658f57b33a7897452d5e1c44bcc5e"
+  },
+  "C:\\Users\\elife\\Desktop\\Mert_Proje\\graphstack\\scripts\\graphstack\\state.py": {
+    "mtime": 1781188517.2686574,
+    "hash": "0d2e4082b03641f46a85ae0b6255d0a7"
   },
   "C:\\Users\\elife\\Desktop\\Mert_Proje\\graphstack\\scripts\\graphstack\\validate.py": {
-    "mtime": 1779042816.0752947,
-    "hash": "2eedac885a1398481f5448da1663e7e8"
+    "mtime": 1781190321.963348,
+    "hash": "729231da2b1b1fd3089f3ed80eb407b7"
   },
   "C:\\Users\\elife\\Desktop\\Mert_Proje\\graphstack\\scripts\\graphstack\\__init__.py": {
-    "mtime": 1779042804.1117277,
-    "hash": "2c819310d04f8a5b4ab9f812d1a46014"
+    "mtime": 1781190319.319357,
+    "hash": "cb47d1deffb84f5f32dddb84fc4cbe29"
   },
   "C:\\Users\\elife\\Desktop\\Mert_Proje\\graphstack\\scripts\\graphstack\\__main__.py": {
     "mtime": 1778951586.1178832,
@@ -87,6 +99,10 @@
     "mtime": 1779042811.4957619,
     "hash": "53a1bb8fae07a22c465fabaa312aecfa"
   },
+  "C:\\Users\\elife\\Desktop\\Mert_Proje\\graphstack\\scripts\\graphstack\\tests\\test_gate.py": {
+    "mtime": 1781190349.3633091,
+    "hash": "ed2698d9d32f891223634cc176060c26"
+  },
   "C:\\Users\\elife\\Desktop\\Mert_Proje\\graphstack\\scripts\\graphstack\\tests\\test_hook.py": {
     "mtime": 1778952067.6273427,
     "hash": "c39ea56b57813beb6150b9581e081fcf"
@@ -99,9 +115,13 @@
     "mtime": 1778952045.643568,
     "hash": "7b7b0060eae778aeca4a01193fd92b8e"
   },
+  "C:\\Users\\elife\\Desktop\\Mert_Proje\\graphstack\\scripts\\graphstack\\tests\\test_state.py": {
+    "mtime": 1781189113.2957845,
+    "hash": "208195f8945aed2bd76981500ef4cc31"
+  },
   "C:\\Users\\elife\\Desktop\\Mert_Proje\\graphstack\\scripts\\graphstack\\tests\\test_validate.py": {
-    "mtime": 1779029544.783796,
-    "hash": "15d59f3a322398b8bae4dec01d01e35b"
+    "mtime": 1781190400.139212,
+    "hash": "806b0e2e92f857a71cab32f2935d129d"
   },
   "C:\\Users\\elife\\Desktop\\Mert_Proje\\graphstack\\scripts\\graphstack\\tests\\__init__.py": {
     "mtime": 1778952011.811597,

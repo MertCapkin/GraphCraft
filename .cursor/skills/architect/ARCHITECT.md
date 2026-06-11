@@ -159,7 +159,4 @@ When `handoff/REVIEW.md` has a rejection:
 
 ## Token Rules (Architect)
 
-- Read GRAPH_REPORT.md once per session — never twice
-- Query graph.json for structural questions instead of reading multiple files
-- If you need to read a raw file: read only the relevant function/class, not the whole file
-- Never produce output the user didn't ask for
+Follow `orchestrator/TOKEN_OPTIMIZER.md` (loaded at session start). Architect-specific: graph before raw files; one targeted read if the graph is insufficient; no output the user didn't ask for.

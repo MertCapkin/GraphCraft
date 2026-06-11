@@ -289,44 +289,22 @@ Never advance to the next cycle brief without confirming the graph update ran.
 
 ## Token Budget System
 
-This is the core optimization. Every action has a token cost tier.
-
-### Tier 1 — Free (always do first)
-- Read `graphify-out/GRAPH_REPORT.md` (once per session)
-- Read `handoff/BRIEF.md` (once per session)
-- Query `graph.json` for structural facts
-
-### Tier 2 — Cheap (use freely)
-- Read a single function/class from a file
-- Read a file that's explicitly in the brief
-- Read a file listed in graph node details
-- Shell via `python -m graphstack run -- <command>` (git, tests, lint — see `TOKEN_OPTIMIZER.md` Shell Output)
-
-### Tier 3 — Expensive (require justification)
-- Read a whole file not in the brief
-- Read multiple files sequentially
-- Re-read something already in context
-
-### Tier 4 — Banned
-- Re-read `GRAPH_REPORT.md` (already in context)
-- Read files to "explore" without a specific question
-- Produce output the user didn't ask for
-- Restate what the user said
-
-### Before every file read, ask internally:
-```
-Is this in Tier 1 or 2?  → Proceed
-Is this Tier 3?          → Can graph answer this instead?
-Is this Tier 4?          → Stop. Use context.
-```
+Full tier rules, parallel-read protocol, and output compression live in
+`orchestrator/TOKEN_OPTIMIZER.md` (loaded once at Activation step 1a).
+**Graph first → brief → targeted reads only.** Run the decision tree before every file read.
 
 ---
 
 ## State Persistence
 
-After every role transition, do TWO things:
+After every role transition, do THREE things:
 
-**1. Append to `handoff/STATE.md`:**
+**1. Machine-readable state** (hooks verify this):
+```bash
+python -m graphstack state set --role <role> [--task <task-id>] [--note <text>]
+```
+
+**2. Append to `handoff/STATE.md`:**
 ```markdown
 ## [YYYY-MM-DD HH:MM] — [ROLE] → [NEXT_ROLE]
 - Trigger: [what caused transition]
@@ -334,16 +312,11 @@ After every role transition, do TWO things:
 - Issues: [any flags]
 ```
 
-**2. Update the GNAP board task file:**
+**3. GNAP board** (git audit trail):
 ```bash
-# On role claim:
-python -m graphstack board claim <task-id> <role>
-
-# On completion:
-python -m graphstack board complete <task-id>
+python -m graphstack board claim <task-id> <role>   # on role claim
+python -m graphstack board complete <task-id>       # on ship
 ```
-
-This keeps git history as a full audit trail — every transition is a commit.
 
 ---
 

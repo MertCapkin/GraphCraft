@@ -7,14 +7,14 @@ One prompt starts the entire lifecycle — from blank repo to production.
 
 [![CI](https://github.com/MertCapkin/graphstack/actions/workflows/ci.yml/badge.svg)](https://github.com/MertCapkin/graphstack/actions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-v4.2.0-blue)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-v4.3.0-blue)](CHANGELOG.md)
 [![Platforms](https://img.shields.io/badge/platforms-Windows%20%7C%20macOS%20%7C%20Linux-success)](#compatibility)
 [![Works with Cursor](https://img.shields.io/badge/Works%20with-Cursor-blue)](https://cursor.sh)
 [![Works with Claude Code](https://img.shields.io/badge/Works%20with-Claude%20Code-orange)](https://claude.ai/code)
 
 </div>
 
-> **v4.2 highlights:** `graphstack run` — token-safe shell output for git/tests (quality-preserving compaction, no external deps). Plus v4.1: `pip install -e .`, `validate` / `doctor`, CI graph checks. See [CHANGELOG.md](CHANGELOG.md).
+> **v4.3 highlights:** `graphstack gate` — deterministic handoff enforcement via Cursor + Claude Code hooks (brief + board task required before code changes). Plus v4.2 `graphstack run` (token-safe shell output), v4.1 `validate` / `doctor`. See [CHANGELOG.md](CHANGELOG.md).
 
 ---
 
@@ -306,7 +306,7 @@ GraphStack is a **workflow protocol** (markdown + handoff files), not a runtime 
 
 | Topic | Reality |
 |-------|---------|
-| Role automation | The Orchestrator state machine lives in `ORCHESTRATOR.md`. Models can skip Activation or transitions unless you use discipline + `graphstack validate`. |
+| Role automation | Prompts alone cannot guarantee discipline. v4.3 adds **`graphstack gate`** (hook-enforced) + `state set` + `validate`. Hooks block code commits/edits without a claimed board task; turn-end hooks are advisory only. |
 | Token savings | The table above is **estimated**, not guaranteed. Small repos or undisciplined sessions may use **more** tokens than unstructured chat. |
 | Knowledge graph | Value appears on **20+ file** codebases with module boundaries. Meta-repos full of markdown produce noisy graphs — use `.graphifyignore` (included in this repo). |
 | Setup | Graphify + GraphStack install + `/graphify` + Cursor — four steps, not zero-config. |
@@ -344,6 +344,29 @@ python -m graphstack run -- pytest -q
 Independent Python implementation (MIT) — inspired by common agent-tooling patterns, no RTK dependency or vendored code.
 
 `graphstack doctor` reports whether the compact module is installed in your project.
+
+---
+
+## Process Gate (`graphstack gate`)
+
+v4.3 adds **mechanical enforcement** so Architect → Builder → Reviewer steps are harder to skip silently.
+
+| Rule | What it blocks | Platform |
+|------|----------------|----------|
+| R1 | `git commit` touching code while `handoff/board/doing/` is empty | Cursor + Claude Code |
+| R2 | Edit/Write on code paths while `doing/` is empty | Claude Code (`PreToolUse`) |
+| R3 | Commit while `BRIEF.md` is still the template and a task is in `doing/` | Both |
+| R4 | *(advisory)* `STATE.json` not updated this cycle | Turn-end hooks |
+
+```bash
+python -m graphstack gate check          # CI / manual — exit 1 on violation
+python -m graphstack state set --role builder --task my-feature
+GRAPHSTACK_GATE=off                      # emergency bypass (one session)
+```
+
+**Install** writes `.cursor/hooks.json` and `.claude/settings.json` with OS-specific shim commands (`scripts/gate-hook.ps1` on Windows, `scripts/gate-hook.sh` on macOS/Linux). Hooks **fail open** if Python is missing — a crashing gate is worse than no gate.
+
+> **Framework repo note:** This GitHub repo ships `handoff/` as **templates** (empty brief, no `done/` tasks). Your installed project fills those files during real work. Before contributing here, reset handoff — see [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ---
 
