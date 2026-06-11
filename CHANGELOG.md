@@ -4,6 +4,14 @@ All notable changes to GraphStack are documented here.
 
 ---
 
+## [v4.5.1] — 2026-06-11
+
+### Changed
+- **PyPI distribution name** — `MertCapkin_GraphStack` (the name `graphstack` is taken on PyPI). CLI command remains `graphstack`.
+- Bootstrap scripts and docs updated for the new pip package name.
+
+---
+
 ## [v4.5.0] — 2026-06-11
 
 ### Added

@@ -3,8 +3,8 @@ requires = ["setuptools>=61", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "graphstack"
-version = "4.5.0"
+name = "MertCapkin_GraphStack"
+version = "4.5.1"
 description = "Graph-first AI development workflow — board, gate, graph queries, one-shot init"
 readme = "README.md"
 license = { text = "MIT" }

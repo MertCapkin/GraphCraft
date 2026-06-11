@@ -3,9 +3,14 @@
 from __future__ import annotations
 
 import subprocess
-import sys
 
 from .platform_utils import echo, find_python, graphify_available
+
+# PyPI distribution name (``graphstack`` was taken). CLI command remains ``graphstack``.
+PIP_SPEC = "MertCapkin_GraphStack[graphify]"
+PIP_SPEC_GIT = (
+    "MertCapkin_GraphStack[graphify] @ git+https://github.com/MertCapkin/GraphStack.git"
+)
 
 
 def pip_install(*specs: str, quiet: bool = True) -> int:
@@ -27,16 +32,14 @@ def ensure_graphify(*, install: bool = True) -> bool:
         return False
     echo("")
     echo("Installing Graphify (graphifyy)...")
-    rc = pip_install('graphifyy>=0.7,<0.9')
+    rc = pip_install("graphifyy>=0.7,<0.9")
     return rc == 0 and graphify_available()
 
 
 def ensure_graphstack_from_git() -> int:
     """Fallback when PyPI package is not published yet."""
     echo("Trying GitHub install (PyPI fallback)...")
-    return pip_install(
-        "graphstack[graphify] @ git+https://github.com/MertCapkin/GraphStack.git"
-    )
+    return pip_install(PIP_SPEC_GIT)
 
 
 def run_graphify_cursor_install() -> int:

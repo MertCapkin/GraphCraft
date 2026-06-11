@@ -34,10 +34,10 @@ echo ""
 
 $PY -m pip install --upgrade pip --quiet 2>/dev/null || true
 
-echo "Step 1/2: Installing graphstack + graphify from PyPI..."
-if ! $PY -m pip install --upgrade "graphstack[graphify]"; then
+echo "Step 1/2: Installing MertCapkin_GraphStack + graphify from PyPI..."
+if ! $PY -m pip install --upgrade "MertCapkin_GraphStack[graphify]"; then
   echo "PyPI install failed — trying GitHub source..." >&2
-  $PY -m pip install --upgrade "graphstack[graphify] @ git+https://github.com/MertCapkin/GraphStack.git"
+  $PY -m pip install --upgrade "MertCapkin_GraphStack[graphify] @ git+https://github.com/MertCapkin/GraphStack.git"
 fi
 
 echo ""

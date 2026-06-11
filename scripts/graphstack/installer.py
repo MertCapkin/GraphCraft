@@ -31,7 +31,7 @@ def install_source_root() -> Path:
         return bundled
     raise FileNotFoundError(
         "GraphStack workflow files not found. "
-        "Reinstall with: pip install --upgrade graphstack"
+        "Reinstall with: pip install --upgrade MertCapkin_GraphStack"
     )
 
 

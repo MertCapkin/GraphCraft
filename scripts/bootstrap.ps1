@@ -6,7 +6,8 @@
 #
 # Or after PyPI publish:
 #   irm ... | iex
-# Same as:  py -3 -m pip install -U "graphstack[graphify]" ; py -3 -m graphstack init . -y
+$Pkg = "MertCapkin_GraphStack[graphify]"
+# Same as:  py -3 -m pip install -U $Pkg ; py -3 -m graphstack init . -y
 
 $ErrorActionPreference = 'Stop'
 
@@ -35,11 +36,11 @@ Write-Host ''
 
 & $python.Exe @($python.PreArgs) -m pip install --upgrade pip --quiet 2>$null
 
-Write-Host 'Step 1/2: Installing graphstack + graphify from PyPI...'
-& $python.Exe @($python.PreArgs) -m pip install --upgrade "graphstack[graphify]"
+Write-Host "Step 1/2: Installing MertCapkin_GraphStack + graphify from PyPI..."
+& $python.Exe @($python.PreArgs) -m pip install --upgrade $Pkg
 if ($LASTEXITCODE -ne 0) {
     Write-Host 'PyPI install failed — trying GitHub source...' -ForegroundColor Yellow
-    & $python.Exe @($python.PreArgs) -m pip install --upgrade "graphstack[graphify] @ git+https://github.com/MertCapkin/GraphStack.git"
+    & $python.Exe @($python.PreArgs) -m pip install --upgrade "MertCapkin_GraphStack[graphify] @ git+https://github.com/MertCapkin/GraphStack.git"
     if ($LASTEXITCODE -ne 0) {
         Write-Error 'Could not install graphstack. Check network and Python pip.'
         exit 1

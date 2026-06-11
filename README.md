@@ -7,7 +7,7 @@ One prompt starts the entire lifecycle — from blank repo to production.
 
 [![CI](https://github.com/MertCapkin/graphstack/actions/workflows/ci.yml/badge.svg)](https://github.com/MertCapkin/graphstack/actions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-v4.5.0-blue)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-v4.5.1-blue)](CHANGELOG.md)
 [![Platforms](https://img.shields.io/badge/platforms-Windows%20%7C%20macOS%20%7C%20Linux-success)](#compatibility)
 [![Works with Cursor](https://img.shields.io/badge/Works%20with-Cursor-blue)](https://cursor.sh)
 [![Works with Claude Code](https://img.shields.io/badge/Works%20with-Claude%20Code-orange)](https://claude.ai/code)
@@ -33,8 +33,11 @@ curl -fsSL https://raw.githubusercontent.com/MertCapkin/GraphStack/main/scripts/
 ```
 
 **After [PyPI publish](docs/PYPI.md):**
+
+> PyPI package name is **`MertCapkin_GraphStack`** (`graphstack` was already taken). The CLI command is still `graphstack`.
+
 ```bash
-pip install "graphstack[graphify]" && graphstack init . -y --install-deps
+pip install "MertCapkin_GraphStack[graphify]" && graphstack init . -y --install-deps
 ```
 
 This installs GraphStack + Graphify, copies workflow files into **the current project**, refreshes the code graph, and runs `doctor`. Then describe your task in Cursor chat — rules load automatically.

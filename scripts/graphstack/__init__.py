@@ -8,5 +8,5 @@ Commands: ``board``, ``install``, ``init``, ``hook``, ``validate``, ``doctor``, 
 ``gate``, ``state``, ``graph``
 """
 
-__version__ = "4.5.0"
+__version__ = "4.5.1"
 __all__ = ["__version__"]
