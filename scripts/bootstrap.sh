@@ -38,14 +38,21 @@ assets_ok() {
   $PY -c "from graphstack.installer import install_source_root; p=install_source_root()/'.cursor'/'rules'/'graphstack.mdc'; import sys; sys.exit(0 if p.is_file() else 1)"
 }
 
+if $PY -m graphstack --version >/dev/null 2>&1 && assets_ok && [ -f .cursor/rules/graphstack.mdc ]; then
+  echo "GraphStack is already set up in this project."
+  echo "  Health: $PY -m graphstack doctor"
+  exit 0
+fi
+
 echo "Step 1/2: Installing MertCapkin_GraphStack + graphify from PyPI..."
-if ! $PY -m pip install --upgrade --force-reinstall "MertCapkin_GraphStack[graphify]"; then
+if ! $PY -m pip install --upgrade "MertCapkin_GraphStack[graphify]"; then
   echo "PyPI install failed — trying GitHub source..." >&2
-  $PY -m pip install --upgrade --force-reinstall "MertCapkin_GraphStack[graphify] @ git+https://github.com/MertCapkin/GraphStack.git"
+  $PY -m pip install --upgrade "MertCapkin_GraphStack[graphify] @ git+https://github.com/MertCapkin/GraphStack.git"
 fi
 if ! assets_ok; then
-  echo "PyPI wheel missing .cursor assets — installing from GitHub..." >&2
-  $PY -m pip install --upgrade --force-reinstall "MertCapkin_GraphStack[graphify] @ git+https://github.com/MertCapkin/GraphStack.git"
+  echo "PyPI wheel missing .cursor assets — force reinstall..." >&2
+  $PY -m pip install --upgrade --force-reinstall "MertCapkin_GraphStack[graphify]" || \
+    $PY -m pip install --upgrade --force-reinstall "MertCapkin_GraphStack[graphify] @ git+https://github.com/MertCapkin/GraphStack.git"
 fi
 if ! assets_ok; then
   echo "GraphStack bootstrap: installed package missing Cursor workflow files." >&2

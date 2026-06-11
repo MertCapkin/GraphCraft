@@ -4,6 +4,13 @@ All notable changes to GraphStack are documented here.
 
 ---
 
+## [v4.5.5] — 2026-06-11
+
+### Fixed
+- **bootstrap.ps1** — PowerShell captured pip stdout as the function return value, so every install looked like a failure and triggered slow `git clone` fallback. Use `Out-Host`; skip pip when CLI + project rules already exist.
+
+---
+
 ## [v4.5.4] — 2026-06-11
 
 ### Fixed

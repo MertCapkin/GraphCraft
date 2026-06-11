@@ -7,7 +7,6 @@
 $Pkg = 'MertCapkin_GraphStack[graphify]'
 $GitSpec = 'MertCapkin_GraphStack[graphify] @ git+https://github.com/MertCapkin/GraphStack.git'
 
-# Do not use Stop — pip/graphify write to stderr and Cursor marks the terminal failed.
 $ErrorActionPreference = 'Continue'
 
 function Resolve-Python {
@@ -23,38 +22,64 @@ function Resolve-Python {
 }
 
 function Invoke-GraphstackPython {
-    param([string[]]$CodeArgs)
-    & $python.Exe @($python.PreArgs) @CodeArgs
-    return $LASTEXITCODE
+    param(
+        [string[]]$CodeArgs,
+        [switch]$Quiet
+    )
+    if ($Quiet) {
+        & $python.Exe @($python.PreArgs) @CodeArgs *>$null
+    } else {
+        # Out-Host prevents pip stdout from polluting the function return value ($rc = ...).
+        & $python.Exe @($python.PreArgs) @CodeArgs | Out-Host
+    }
+    if ($null -eq $LASTEXITCODE) { return 0 }
+    return [int]$LASTEXITCODE
 }
 
 function Test-WheelAssets {
-    $rc = Invoke-GraphstackPython @(
+    $rc = Invoke-GraphstackPython -Quiet @(
         '-c',
         "from graphstack.installer import install_source_root; p=install_source_root()/'.cursor'/'rules'/'graphstack.mdc'; import sys; sys.exit(0 if p.is_file() else 1)"
     )
     return $rc -eq 0
 }
 
+function Test-GraphstackCli {
+    $rc = Invoke-GraphstackPython -Quiet @('-m', 'graphstack', '--version')
+    return $rc -eq 0
+}
+
 function Install-GraphstackPackage {
-    Write-Host "Step 1/2: Installing MertCapkin_GraphStack + graphify from PyPI..."
-    $rc = Invoke-GraphstackPython @('-m', 'pip', 'install', '--upgrade', '--force-reinstall', $Pkg)
+    if ((Test-GraphstackCli) -and (Test-WheelAssets)) {
+        $ver = (& $python.Exe @($python.PreArgs) -m graphstack --version 2>$null)
+        Write-Host "Step 1/2: GraphStack already installed ($ver) — skipping pip."
+        return
+    }
+
+    Write-Host 'Step 1/2: Installing MertCapkin_GraphStack + graphify from PyPI...'
+    $rc = Invoke-GraphstackPython @('-m', 'pip', 'install', '--upgrade', $Pkg)
     if ($rc -ne 0) {
         Write-Host 'PyPI install failed — trying GitHub source...' -ForegroundColor Yellow
-        $rc = Invoke-GraphstackPython @('-m', 'pip', 'install', '--upgrade', '--force-reinstall', $GitSpec)
+        $rc = Invoke-GraphstackPython @('-m', 'pip', 'install', '--upgrade', $GitSpec)
         if ($rc -ne 0) {
             Write-Error 'Could not install graphstack. Check network and Python pip.'
             exit 1
         }
     }
+
     if (-not (Test-WheelAssets)) {
-        Write-Host 'PyPI wheel missing .cursor assets — installing from GitHub...' -ForegroundColor Yellow
-        $rc = Invoke-GraphstackPython @('-m', 'pip', 'install', '--upgrade', '--force-reinstall', $GitSpec)
+        Write-Host 'PyPI wheel missing .cursor assets — reinstalling from PyPI...' -ForegroundColor Yellow
+        $rc = Invoke-GraphstackPython @('-m', 'pip', 'install', '--upgrade', '--force-reinstall', $Pkg)
         if ($rc -ne 0 -or -not (Test-WheelAssets)) {
-            Write-Error 'Installed package is missing Cursor workflow files. Open an issue on GitHub.'
-            exit 1
+            Write-Host 'Trying GitHub source...' -ForegroundColor Yellow
+            $rc = Invoke-GraphstackPython @('-m', 'pip', 'install', '--upgrade', '--force-reinstall', $GitSpec)
+            if ($rc -ne 0 -or -not (Test-WheelAssets)) {
+                Write-Error 'Installed package is missing Cursor workflow files. Open an issue on GitHub.'
+                exit 1
+            }
         }
     }
+
     $ver = (& $python.Exe @($python.PreArgs) -m graphstack --version 2>$null)
     Write-Host "  Installed: $ver"
 }
@@ -70,7 +95,15 @@ Write-Host 'GraphStack bootstrap' -ForegroundColor Cyan
 Write-Host '===================='
 Write-Host ''
 
-$null = Invoke-GraphstackPython @('-m', 'pip', 'install', '--upgrade', 'pip', '--quiet')
+$null = Invoke-GraphstackPython -Quiet @('-m', 'pip', 'install', '--upgrade', 'pip')
+
+$ruleFile = Join-Path (Get-Location) '.cursor\rules\graphstack.mdc'
+if ((Test-GraphstackCli) -and (Test-WheelAssets) -and (Test-Path -LiteralPath $ruleFile)) {
+    Write-Host 'GraphStack is already set up in this project.' -ForegroundColor Green
+    Write-Host "  Rules: $ruleFile"
+    Write-Host '  Health:  py -3 -m graphstack doctor'
+    exit 0
+}
 
 Install-GraphstackPackage
 
@@ -78,11 +111,10 @@ Write-Host ''
 Write-Host 'Step 2/2: Initializing GraphStack in this project...'
 $initRc = Invoke-GraphstackPython @('-m', 'graphstack', 'init', '.', '-y', '--install-deps')
 
-$ruleFile = Join-Path (Get-Location) '.cursor\rules\graphstack.mdc'
 if (-not (Test-Path -LiteralPath $ruleFile)) {
     Write-Host ''
     Write-Host 'Bootstrap failed: .cursor/rules/graphstack.mdc was not created.' -ForegroundColor Red
-    Write-Host 'Run:  py -3 -m pip install -U --force-reinstall ''MertCapkin_GraphStack[graphify]'''
+    Write-Host 'Run:  py -3 -m pip install -U ''MertCapkin_GraphStack[graphify]'''
     Write-Host 'Then: py -3 -m graphstack init . -y --install-deps'
     exit 1
 }
@@ -91,7 +123,6 @@ if ($initRc -ne 0) {
     Write-Host ''
     Write-Host "Init reported issues (exit $initRc) but core files are present." -ForegroundColor Yellow
     Write-Host 'Run:  py -3 -m graphstack doctor'
-    exit 0
 }
 
 Write-Host ''
