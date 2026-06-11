@@ -4,6 +4,14 @@ All notable changes to GraphStack are documented here.
 
 ---
 
+## [v4.5.4] — 2026-06-11
+
+### Fixed
+- **bootstrap.ps1** — `$ErrorActionPreference Stop` + stderr from pip/graphify made Cursor show exit 1 even when install worked; now uses `Continue`, `--force-reinstall`, wheel asset check, and exits 0 when `.cursor/rules/graphstack.mdc` exists.
+- **graphstack init** — no longer fails bootstrap when doctor reports non-fatal issues after a successful file install.
+
+---
+
 ## [v4.5.3] — 2026-06-11
 
 ### Fixed

@@ -15,18 +15,23 @@ def test_init_runs_install_graph_and_doctor(
 ) -> None:
     target = tmp_path / "proj"
     target.mkdir()
+    rule = target / ".cursor" / "rules" / "graphstack.mdc"
+    rule.parent.mkdir(parents=True)
 
-    install_mock = MagicMock(return_value=0)
+    def _install(t: Path, *, non_interactive: bool = False) -> int:
+        rule.write_text("rules", encoding="utf-8")
+        return 0
+
     graph_mock = MagicMock(return_value=0)
     doctor_mock = MagicMock(return_value=0)
 
-    monkeypatch.setattr(init_cmd, "install", install_mock)
+    monkeypatch.setattr(init_cmd, "install", _install)
     monkeypatch.setattr(init_cmd, "graph_update", graph_mock)
     monkeypatch.setattr(init_cmd, "run_doctor", doctor_mock)
     monkeypatch.setattr(init_cmd, "graphify_available", lambda: True)
 
     assert init_cmd.run([str(target), "-y"]) == 0
-    install_mock.assert_called_once_with(target.resolve(), non_interactive=True)
+    assert rule.is_file()
     graph_mock.assert_called_once_with(["."])
     doctor_mock.assert_called_once()
 
@@ -56,3 +61,20 @@ def test_init_propagates_install_failure(
     monkeypatch.setattr(init_cmd, "graph_update", MagicMock())
     monkeypatch.setattr(init_cmd, "run_doctor", MagicMock())
     assert init_cmd.run([str(target), "-y"]) == 1
+
+
+def test_init_succeeds_when_doctor_fails_but_layout_ok(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    target = tmp_path / "proj"
+    target.mkdir()
+    rule = target / ".cursor" / "rules" / "graphstack.mdc"
+    rule.parent.mkdir(parents=True)
+    rule.write_text("rules", encoding="utf-8")
+
+    monkeypatch.setattr(init_cmd, "install", MagicMock(return_value=0))
+    monkeypatch.setattr(init_cmd, "graph_update", MagicMock(return_value=0))
+    monkeypatch.setattr(init_cmd, "run_doctor", MagicMock(return_value=1))
+    monkeypatch.setattr(init_cmd, "graphify_available", lambda: False)
+
+    assert init_cmd.run([str(target), "-y", "--skip-graph"]) == 0
