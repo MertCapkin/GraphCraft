@@ -48,4 +48,12 @@ if ($LASTEXITCODE -ne 0) {
 Write-Host ''
 Write-Host 'Step 2/2: Initializing GraphStack in this project...'
 & $python.Exe @($python.PreArgs) -m graphstack init . -y --install-deps
-exit $LASTEXITCODE
+$initRc = $LASTEXITCODE
+if ($initRc -ne 0) {
+    Write-Host ''
+    Write-Host 'Bootstrap finished with errors (exit ' $initRc ').' -ForegroundColor Yellow
+    Write-Host 'PyPI package may be installed, but project init or doctor failed.'
+    Write-Host 'Check output above, then run:  py -3 -m graphstack doctor'
+    Write-Host 'If .cursor/rules/graphstack.mdc is missing, upgrade:  pip install -U MertCapkin_GraphStack[graphify]'
+}
+exit $initRc

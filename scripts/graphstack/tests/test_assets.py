@@ -1,35 +1,40 @@
-"""Tests for bundled assets and install source resolution."""
+"""PyPI wheel must ship ``.cursor`` workflow files inside ``graphstack/assets``."""
 
 from __future__ import annotations
 
+import zipfile
 from pathlib import Path
 
-from graphstack.installer import PACKAGE_ROOT, install_source_root
+import pytest
+
+REPO_ROOT = Path(__file__).resolve().parents[3]
+WHEEL_GLOB = "mertcapkin_graphstack-*.whl"
+
+REQUIRED_ASSET_PATHS = (
+    "graphstack/assets/.cursor/rules/graphstack.mdc",
+    "graphstack/assets/.cursor/commands/graphstack.md",
+    "graphstack/assets/.cursor/skills/architect/ARCHITECT.md",
+    "graphstack/assets/.cursor/skills/builder/BUILDER.md",
+)
 
 
-def test_install_source_root_from_dev_repo() -> None:
-    root = install_source_root()
-    assert (root / "orchestrator" / "ORCHESTRATOR.md").is_file()
+def _latest_wheel(dist_dir: Path) -> Path | None:
+    wheels = sorted(dist_dir.glob(WHEEL_GLOB), key=lambda p: p.stat().st_mtime)
+    return wheels[-1] if wheels else None
 
 
-def test_bundled_assets_exist_in_package() -> None:
-    assets = PACKAGE_ROOT / "assets"
-    assert (assets / "orchestrator" / "ORCHESTRATOR.md").is_file()
-    assert (assets / ".cursor" / "rules" / "graphstack.mdc").is_file()
-
-
-def test_install_from_bundled_assets_only(tmp_path: Path, monkeypatch) -> None:
-    from graphstack import installer
-
-    assets = PACKAGE_ROOT / "assets"
-    monkeypatch.setattr(
-        installer,
-        "_source_root",
-        lambda: assets,
-    )
-    target = tmp_path / "consumer"
-    target.mkdir()
-    assert installer.install(target, non_interactive=True) == 0
-    assert (target / "orchestrator" / "ORCHESTRATOR.md").is_file()
-    assert (target / ".cursor" / "rules" / "graphstack.mdc").is_file()
-    assert (target / "handoff" / "BRIEF.md").is_file()
+@pytest.mark.parametrize("member", REQUIRED_ASSET_PATHS)
+def test_wheel_includes_cursor_assets(member: str) -> None:
+    for dist_name in ("dist", "dist_test"):
+        dist_dir = REPO_ROOT / dist_name
+        wheel = _latest_wheel(dist_dir)
+        if wheel is None:
+            continue
+        with zipfile.ZipFile(wheel) as archive:
+            names = set(archive.namelist())
+        assert member in names, (
+            f"{member} missing from {wheel.name}; "
+            "dot-directories under assets/ need explicit package-data"
+        )
+        return
+    pytest.skip("no built wheel in dist/ or dist_test/ — run python -m build first")

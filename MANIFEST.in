@@ -1,0 +1,2 @@
+# Dot-directories under assets/ must be grafted for sdist + wheel discovery.
+graft scripts/graphstack/assets

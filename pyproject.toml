@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "MertCapkin_GraphStack"
-version = "4.5.2"
+version = "4.5.3"
 description = "Graph-first AI development workflow — board, gate, graph queries, one-shot init"
 readme = "README.md"
 license = { text = "MIT" }
@@ -42,8 +42,24 @@ graphstack = "graphstack.cli:main"
 [tool.setuptools.packages.find]
 where = ["scripts"]
 
+[tool.setuptools]
+include-package-data = true
+
+# setuptools ``assets/**/*`` skips dot-directories (``.cursor/``) — list explicitly.
 [tool.setuptools.package-data]
-graphstack = ["assets/**/*", "compact/**/*"]
+graphstack = [
+    "assets/.cursor/rules/graphstack.mdc",
+    "assets/.cursor/commands/graphstack.md",
+    "assets/.cursor/skills/architect/ARCHITECT.md",
+    "assets/.cursor/skills/builder/BUILDER.md",
+    "assets/.cursor/skills/reviewer/REVIEWER.md",
+    "assets/.cursor/skills/qa/QA.md",
+    "assets/.cursor/skills/ship/SHIP.md",
+    "assets/.cursor/skills/bootstrapper/BOOTSTRAPPER.md",
+    "assets/.graphstack-assets-version",
+    "assets/**/*",
+    "compact/**/*",
+]
 
 [tool.pytest.ini_options]
 testpaths = ["scripts/graphstack/tests"]

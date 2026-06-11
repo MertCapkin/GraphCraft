@@ -4,6 +4,14 @@ All notable changes to GraphStack are documented here.
 
 ---
 
+## [v4.5.3] — 2026-06-11
+
+### Fixed
+- **PyPI wheel** — `.cursor/` rules, commands, and skills were omitted from the wheel (setuptools skips dot-directories under `assets/**/*`). Bootstrap `irm … | iex` installed the CLI but `graphstack init` left the project without Cursor rules; doctor exited 1.
+- Explicit `package-data` entries + `MANIFEST.in` graft; wheel asset test added.
+
+---
+
 ## [v4.5.2] — 2026-06-11
 
 ### Changed
