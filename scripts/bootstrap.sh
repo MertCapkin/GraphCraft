@@ -2,7 +2,7 @@
 # GraphStack one-line bootstrap for Cursor terminal (macOS / Linux)
 #
 # Usage (in your project folder):
-#   curl -fsSL https://raw.githubusercontent.com/MertCapkin/GraphStack/main/scripts/bootstrap.sh | bash
+#   curl -fsSL https://raw.githubusercontent.com/MertCapkin/GraphStack/master/scripts/bootstrap.sh | bash
 #
 # Or:  bash scripts/bootstrap.sh
 

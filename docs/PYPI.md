@@ -37,5 +37,5 @@ graphstack init . -y --install-deps
 Or one-liner bootstrap (Cursor terminal):
 
 ```powershell
-irm https://raw.githubusercontent.com/MertCapkin/GraphStack/main/scripts/bootstrap.ps1 | iex
+irm https://raw.githubusercontent.com/MertCapkin/GraphStack/master/scripts/bootstrap.ps1 | iex
 ```

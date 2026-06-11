@@ -2,7 +2,7 @@
 # Installs graphstack + graphify, then initializes the current project.
 #
 # Usage (in your project folder, Cursor terminal):
-#   irm https://raw.githubusercontent.com/MertCapkin/GraphStack/main/scripts/bootstrap.ps1 | iex
+#   irm https://raw.githubusercontent.com/MertCapkin/GraphStack/master/scripts/bootstrap.ps1 | iex
 #
 # Or after PyPI publish:
 #   irm ... | iex

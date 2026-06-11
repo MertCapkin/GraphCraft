@@ -24,12 +24,12 @@ Open your **project folder** in Cursor, open the integrated terminal, and run:
 
 **Windows (PowerShell):**
 ```powershell
-irm https://raw.githubusercontent.com/MertCapkin/GraphStack/main/scripts/bootstrap.ps1 | iex
+irm https://raw.githubusercontent.com/MertCapkin/GraphStack/master/scripts/bootstrap.ps1 | iex
 ```
 
 **macOS / Linux:**
 ```bash
-curl -fsSL https://raw.githubusercontent.com/MertCapkin/GraphStack/main/scripts/bootstrap.sh | bash
+curl -fsSL https://raw.githubusercontent.com/MertCapkin/GraphStack/master/scripts/bootstrap.sh | bash
 ```
 
 **After [PyPI publish](docs/PYPI.md):**
