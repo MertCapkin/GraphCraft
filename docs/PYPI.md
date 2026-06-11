@@ -1,41 +1,48 @@
-# Publishing GraphStack to PyPI
+# PyPI — MertCapkin_GraphStack
 
-## Package name
+**Live:** https://pypi.org/project/MertCapkin_GraphStack/
 
-PyPI distribution: **`MertCapkin_GraphStack`** (the name `graphstack` is taken on PyPI).
+| | |
+|---|---|
+| **Install** | `pip install MertCapkin_GraphStack[graphify]` |
+| **CLI** | `graphstack` (command name unchanged) |
+| **Why not `graphstack`?** | Name already taken on PyPI |
 
-- `pip install MertCapkin_GraphStack[graphify]`
-- CLI command after install: **`graphstack`** (unchanged)
+## User install (recommended)
 
-Pending publisher on PyPI must use project name **`MertCapkin_GraphStack`** — must match `pyproject.toml` `name`.
+Inside **your project folder** (Cursor terminal):
 
-## One-time setup (maintainer)
-
-1. PyPI account → **Publishing** → pending publisher:
-   - Pending project name: `MertCapkin_GraphStack`
-   - Owner: `MertCapkin`
-   - Repository name: `GraphStack`
-   - Workflow: `publish.yml`
-   - Environment: `pypi`
-2. GitHub → Settings → Environments → create **`pypi`**
-3. Trusted Publishing linked to `MertCapkin/GraphStack`
-
-## Release flow
-
-1. Bump version in `pyproject.toml` and `scripts/graphstack/__init__.py`.
-2. `python scripts/sync_assets.py`
-3. Commit, tag, push, **Publish GitHub Release** (triggers `publish.yml`).
-
-## User install (after publish)
+```powershell
+# Windows — one command
+irm https://raw.githubusercontent.com/MertCapkin/GraphStack/master/scripts/bootstrap.ps1 | iex
+```
 
 ```bash
+# macOS / Linux — one command
+curl -fsSL https://raw.githubusercontent.com/MertCapkin/GraphStack/master/scripts/bootstrap.sh | bash
+```
+
+```bash
+# Or PyPI directly
 pip install "MertCapkin_GraphStack[graphify]"
-cd /path/to/your-project
 graphstack init . -y --install-deps
 ```
 
-Or one-liner bootstrap (Cursor terminal):
+Then open Cursor chat and describe your task — GraphStack rules load automatically.
 
-```powershell
-irm https://raw.githubusercontent.com/MertCapkin/GraphStack/master/scripts/bootstrap.ps1 | iex
-```
+---
+
+## Maintainer: publish a new version
+
+1. Bump `version` in `pyproject.toml` and `scripts/graphstack/__init__.py`.
+2. `python scripts/sync_assets.py`
+3. Commit, tag (`vX.Y.Z`), push tag.
+4. **Publish GitHub Release** from the tag → triggers `.github/workflows/publish.yml`.
+
+Trusted publisher (already configured):
+
+- Project: `MertCapkin_GraphStack`
+- Owner: `MertCapkin` · Repository: `GraphStack`
+- Workflow: `publish.yml` · Environment: `pypi`
+
+GitHub environment required: https://github.com/MertCapkin/GraphStack/settings/environments → `pypi`

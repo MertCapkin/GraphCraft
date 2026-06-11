@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "MertCapkin_GraphStack"
-version = "4.5.1"
+version = "4.5.2"
 description = "Graph-first AI development workflow — board, gate, graph queries, one-shot init"
 readme = "README.md"
 license = { text = "MIT" }
@@ -34,6 +34,7 @@ Homepage = "https://github.com/MertCapkin/GraphStack"
 Repository = "https://github.com/MertCapkin/GraphStack"
 Documentation = "https://github.com/MertCapkin/GraphStack#readme"
 "Bug Tracker" = "https://github.com/MertCapkin/GraphStack/issues"
+PyPI = "https://pypi.org/project/MertCapkin_GraphStack/"
 
 [project.scripts]
 graphstack = "graphstack.cli:main"

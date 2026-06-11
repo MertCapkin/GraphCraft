@@ -6,15 +6,15 @@
 One prompt starts the entire lifecycle — from blank repo to production.
 
 [![CI](https://github.com/MertCapkin/graphstack/actions/workflows/ci.yml/badge.svg)](https://github.com/MertCapkin/graphstack/actions)
+[![PyPI](https://img.shields.io/pypi/v/MertCapkin_GraphStack)](https://pypi.org/project/MertCapkin_GraphStack/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-v4.5.1-blue)](CHANGELOG.md)
 [![Platforms](https://img.shields.io/badge/platforms-Windows%20%7C%20macOS%20%7C%20Linux-success)](#compatibility)
 [![Works with Cursor](https://img.shields.io/badge/Works%20with-Cursor-blue)](https://cursor.sh)
 [![Works with Claude Code](https://img.shields.io/badge/Works%20with-Claude%20Code-orange)](https://claude.ai/code)
 
 </div>
 
-> **v4.5 highlights:** One-command bootstrap (`bootstrap.ps1` / `bootstrap.sh`), PyPI-ready packaging, `board reopen` / `list-done`. Plus v4.4 `graph query` + `init`, v4.3 gate. See [CHANGELOG.md](CHANGELOG.md).
+> **v4.5 highlights:** Published on [PyPI](https://pypi.org/project/MertCapkin_GraphStack/) as **`MertCapkin_GraphStack`**, one-command bootstrap, `board reopen` / `list-done`. Plus v4.4 `graph query` + `init`, v4.3 gate. See [CHANGELOG.md](CHANGELOG.md).
 
 ---
 
@@ -22,7 +22,7 @@ One prompt starts the entire lifecycle — from blank repo to production.
 
 Open your **project folder** in Cursor, open the integrated terminal, and run:
 
-**Windows (PowerShell):**
+**Windows (PowerShell) — recommended:**
 ```powershell
 irm https://raw.githubusercontent.com/MertCapkin/GraphStack/master/scripts/bootstrap.ps1 | iex
 ```
@@ -32,12 +32,13 @@ irm https://raw.githubusercontent.com/MertCapkin/GraphStack/master/scripts/boots
 curl -fsSL https://raw.githubusercontent.com/MertCapkin/GraphStack/master/scripts/bootstrap.sh | bash
 ```
 
-**After [PyPI publish](docs/PYPI.md):**
+**Or install from PyPI directly:**
 
-> PyPI package name is **`MertCapkin_GraphStack`** (`graphstack` was already taken). The CLI command is still `graphstack`.
+> Package: **`MertCapkin_GraphStack`** on [PyPI](https://pypi.org/project/MertCapkin_GraphStack/) (`graphstack` name was taken). CLI command: **`graphstack`**.
 
 ```bash
-pip install "MertCapkin_GraphStack[graphify]" && graphstack init . -y --install-deps
+pip install "MertCapkin_GraphStack[graphify]"
+graphstack init . -y --install-deps
 ```
 
 This installs GraphStack + Graphify, copies workflow files into **the current project**, refreshes the code graph, and runs `doctor`. Then describe your task in Cursor chat — rules load automatically.
@@ -46,67 +47,55 @@ This installs GraphStack + Graphify, copies workflow files into **the current pr
 
 ## Quick Start
 
-### Step 1 — Install prerequisites
+### Step 1 — Install GraphStack (PyPI)
 
-**Python 3.8+** and **Git** are required. Check if you have them:
+**Python 3.8+** and **Git** are required.
 
 ```bash
-py -3 --version   # need 3.8 or higher
-git --version       # any recent version is fine
+py -3 --version
+git --version
 ```
 
-**Install Graphify** — the knowledge graph engine GraphStack is built on. The version range is pinned in [`requirements.txt`](requirements.txt):
+Install GraphStack + Graphify from PyPI, then initialize **your project** (run inside your project folder):
 
 ```bash
-pip install -r requirements.txt
-# or, equivalently, install Graphify directly with the same pin:
-pip install "graphifyy>=0.7,<0.9"
-
-# Optional: install GraphStack CLI from a clone (board / validate / doctor / run)
-pip install -e /path/to/graphstack
-# or with Graphify in one step:
-pip install -e "/path/to/graphstack[graphify]"
+pip install "MertCapkin_GraphStack[graphify]"
+graphstack init . -y --install-deps
 ```
 
-After installation, register the Cursor slash command (one-time):
+Or use the [one-command bootstrap](#one-command-cursor-terminal) above (same result; installs from PyPI, falls back to GitHub if needed).
+
+Verify:
 
 ```bash
-graphify cursor install
-```
-
-Verify it worked:
-
-```bash
+graphstack --version
+graphstack doctor
 pip show graphifyy
 ```
 
-If `graphify` is not found after install, try:
+> **PyPI:** [pypi.org/project/MertCapkin_GraphStack](https://pypi.org/project/MertCapkin_GraphStack/)  
+> **CLI name:** `graphstack` (unchanged — only the pip package name differs)
 
-```bash
-pip install --user "graphifyy>=0.7,<0.9"
-# then add ~/.local/bin to your PATH, or use:
-python3 -m graphify --version
-```
-
-> Graphify runs **entirely locally** — no API calls, no data sent anywhere.
-> It uses tree-sitter to parse your code and builds the graph on your machine.
+Graphify runs **entirely locally** — tree-sitter AST, no API calls for code graphs.
 
 ---
 
-### Step 2 — Install GraphStack into your project
+### Step 1 (alternative) — Manual Graphify only
 
-GraphStack now works natively on Windows, macOS, and Linux. The installer runs through Python (which you already have for Graphify), so no shell-specific tooling is required.
-
-#### One command (recommended)
+If you prefer to install Graphify separately first:
 
 ```bash
-git clone https://github.com/MertCapkin/graphstack /path/to/graphstack
-cd /path/to/your-project
-/path/to/graphstack/install.ps1 .          # Windows
-# or: python -m graphstack init . -y       # any OS — install + graph refresh + doctor
+pip install "graphifyy>=0.7,<0.9"
+graphify cursor install
+pip install "MertCapkin_GraphStack[graphify]"
+graphstack init . -y --install-deps
 ```
 
-#### macOS / Linux (bash / zsh)
+---
+
+### Step 2 — Install from source (contributors / offline)
+
+For hacking on GraphStack itself or air-gapped installs, clone the repo instead of PyPI:
 
 ```bash
 git clone https://github.com/MertCapkin/graphstack /tmp/graphstack
@@ -170,7 +159,9 @@ What happens:
 
 Run this once. After that, use `/graphify --update` — it only re-scans changed files and takes a few seconds.
 
-**New project with no code yet?** Skip this step — GraphStack's Bootstrap Mode handles it. Just go to Step 4.
+**New project with no code yet?** Skip this step — GraphStack's Bootstrap Mode handles it.
+
+**Already ran `graphstack init --install-deps`?** You have a code-only graph in `graphify-out/`; run `/graphify .` in Cursor for the full semantic graph when ready.
 
 ---
 
@@ -344,7 +335,7 @@ GraphStack is a **workflow protocol** (markdown + handoff files), not a runtime 
 | Role automation | Prompts alone cannot guarantee discipline. v4.3+ **`graphstack gate`** + v4.4 Cursor **`preToolUse`**. Hooks block commits and (on Cursor/Claude) code writes without a claimed task; `afterFileEdit` on Cursor remains advisory-only backup. |
 | Token savings | The table above is **estimated**, not guaranteed. Small repos or undisciplined sessions may use **more** tokens than unstructured chat. |
 | Knowledge graph | Value appears on **20+ file** codebases with module boundaries. Meta-repos full of markdown produce noisy graphs — use `.graphifyignore` (included in this repo). |
-| Setup | Graphify + GraphStack install + `/graphify` + Cursor — four steps, not zero-config. |
+| Setup | Graphify + `pip install MertCapkin_GraphStack` + `graphstack init` — or one bootstrap command. See [PyPI](https://pypi.org/project/MertCapkin_GraphStack/). |
 
 **v4.1 helpers:** `graphstack doctor` (health report) and `graphstack validate` (exit code for CI). Use `--strict` before Builder handoff; use `--fail-stale-graph` in CI after code changes.
 

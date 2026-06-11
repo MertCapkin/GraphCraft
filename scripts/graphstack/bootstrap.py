@@ -37,8 +37,8 @@ def ensure_graphify(*, install: bool = True) -> bool:
 
 
 def ensure_graphstack_from_git() -> int:
-    """Fallback when PyPI package is not published yet."""
-    echo("Trying GitHub install (PyPI fallback)...")
+    """Fallback when PyPI install fails (network, index delay, etc.)."""
+    echo("Trying GitHub install (PyPI unavailable)...")
     return pip_install(PIP_SPEC_GIT)
 
 

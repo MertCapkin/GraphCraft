@@ -4,6 +4,14 @@ All notable changes to GraphStack are documented here.
 
 ---
 
+## [v4.5.2] — 2026-06-11
+
+### Changed
+- **README / PYPI.md** — PyPI is live (`MertCapkin_GraphStack`); Quick Start leads with pip/bootstrap, clone path moved to contributors.
+- **PyPI badge** and project URL in `pyproject.toml`.
+
+---
+
 ## [v4.5.1] — 2026-06-11
 
 ### Changed

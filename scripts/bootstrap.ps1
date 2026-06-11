@@ -1,11 +1,9 @@
 # GraphStack one-line bootstrap for Cursor terminal (Windows / PowerShell)
-# Installs graphstack + graphify, then initializes the current project.
+# Installs MertCapkin_GraphStack from PyPI (+ graphify), then initializes the project.
 #
 # Usage (in your project folder, Cursor terminal):
 #   irm https://raw.githubusercontent.com/MertCapkin/GraphStack/master/scripts/bootstrap.ps1 | iex
 #
-# Or after PyPI publish:
-#   irm ... | iex
 $Pkg = "MertCapkin_GraphStack[graphify]"
 # Same as:  py -3 -m pip install -U $Pkg ; py -3 -m graphstack init . -y
 
