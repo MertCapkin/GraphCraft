@@ -184,6 +184,58 @@ def test_cursor_shell_hook_allows_safe_command(project_root: Path,
     assert _hook_output(capsys)["permission"] == "allow"
 
 
+def test_cursor_pretool_write_denies_without_task(project_root: Path,
+                                                 monkeypatch: pytest.MonkeyPatch,
+                                                 capsys: pytest.CaptureFixture[str]) -> None:
+    _feed_stdin(monkeypatch, {
+        "hook_event_name": "preToolUse",
+        "tool_name": "Write",
+        "tool_input": {"path": str(project_root / "src" / "app.py")},
+    })
+    assert gate.run(["hook", "cursor"]) == 0
+    out = _hook_output(capsys)
+    assert out["permission"] == "deny"
+    assert "doing" in out["agent_message"]
+
+
+def test_cursor_pretool_write_allowed_with_task(project_root: Path,
+                                                monkeypatch: pytest.MonkeyPatch,
+                                                capsys: pytest.CaptureFixture[str]) -> None:
+    _make_doing_task(project_root)
+    _feed_stdin(monkeypatch, {
+        "hook_event_name": "preToolUse",
+        "tool_name": "Write",
+        "tool_input": {"file_path": str(project_root / "src" / "app.py")},
+    })
+    assert gate.run(["hook", "cursor"]) == 0
+    assert _hook_output(capsys)["permission"] == "allow"
+
+
+def test_cursor_pretool_shell_denies_commit(project_root: Path,
+                                            monkeypatch: pytest.MonkeyPatch,
+                                            capsys: pytest.CaptureFixture[str]) -> None:
+    (project_root / "app.py").write_text("x = 1\n", encoding="utf-8")
+    _feed_stdin(monkeypatch, {
+        "hook_event_name": "preToolUse",
+        "tool_name": "Shell",
+        "tool_input": {"command": "git add app.py && git commit -m wip"},
+    })
+    assert gate.run(["hook", "cursor"]) == 0
+    assert _hook_output(capsys)["permission"] == "deny"
+
+
+def test_cursor_strict_mode_denies_on_internal_error(
+    project_root: Path, monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    monkeypatch.setenv("GRAPHSTACK_GATE", "strict")
+    _feed_stdin(monkeypatch, "not-json")
+    assert gate.run(["hook", "cursor"]) == 0
+    out = _hook_output(capsys)
+    assert out["permission"] == "deny"
+    assert "strict" in out["agent_message"].lower()
+
+
 def test_cursor_after_edit_is_advisory(project_root: Path,
                                        monkeypatch: pytest.MonkeyPatch,
                                        capsys: pytest.CaptureFixture[str]) -> None:
@@ -314,17 +366,23 @@ def test_gate_check_json_output(project_root: Path,
 # ------------------------------------------------------------------ adapters
 
 def test_hook_adapter_files_ship_in_repo() -> None:
-    from graphstack.installer import REPO_ROOT
+    from graphstack.installer import PACKAGE_ROOT
 
-    cursor = REPO_ROOT / ".cursor" / "hooks.json"
-    claude = REPO_ROOT / ".claude" / "settings.json"
+    repo = PACKAGE_ROOT.parent.parent
+    cursor = repo / ".cursor" / "hooks.json"
+    claude = repo / ".claude" / "settings.json"
     assert cursor.is_file() and claude.is_file()
 
     cursor_cfg = json.loads(cursor.read_text(encoding="utf-8"))
     assert cursor_cfg["version"] == 1  # required by Cursor 3.x project hooks
-    assert "beforeShellExecution" in cursor_cfg["hooks"]
-    cursor_cmd = cursor_cfg["hooks"]["beforeShellExecution"][0]["command"]
+    hooks = cursor_cfg["hooks"]
+    assert "beforeShellExecution" in hooks
+    assert "preToolUse" in hooks
+    cursor_cmd = hooks["beforeShellExecution"][0]["command"]
     assert "gate-hook" in cursor_cmd
+    pretool = hooks["preToolUse"][0]
+    assert "gate-hook" in pretool["command"]
+    assert "Write" in pretool.get("matcher", "")
 
     claude_cfg = json.loads(claude.read_text(encoding="utf-8"))
     pre = claude_cfg["hooks"]["PreToolUse"]

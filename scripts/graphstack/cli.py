@@ -1,14 +1,16 @@
 """Top-level CLI dispatcher.
 
-Eight sub-commands:
+Ten sub-commands:
 - ``board``     — GNAP task board manager (replaces ``scripts/board.sh``)
 - ``install``   — install GraphStack into a target project (replaces ``install.sh``)
+- ``init``      — one-shot install + graph refresh + doctor
 - ``hook``      — post-commit graph-update logic (replaces ``scripts/post-commit``)
 - ``validate``  — check handoff layout, brief, board tasks, graph freshness
 - ``doctor``    — human-friendly health report (same checks as validate)
 - ``run``       — execute shell commands with token-safe output compaction
 - ``gate``      — deterministic process gate (check / cursor hook / claude hook)
 - ``state``     — machine-readable session state (handoff/STATE.json)
+- ``graph``     — graphify query wrappers (query / path / explain / update)
 
 Each sub-command parses its own arguments to keep the dispatcher minimal.
 """
@@ -33,12 +35,14 @@ def _build_parser() -> argparse.ArgumentParser:
 
     sub.add_parser("board", help="GNAP board commands", add_help=False)
     sub.add_parser("install", help="Install GraphStack into a project", add_help=False)
+    sub.add_parser("init", help="Install + graph refresh + doctor", add_help=False)
     sub.add_parser("hook", help="Run the post-commit hook logic", add_help=False)
     sub.add_parser("validate", help="Validate handoff and graph layout", add_help=False)
     sub.add_parser("doctor", help="Project health report", add_help=False)
     sub.add_parser("run", help="Run shell command with compact output", add_help=False)
     sub.add_parser("gate", help="Process gate (check / hook adapters)", add_help=False)
     sub.add_parser("state", help="Session state (handoff/STATE.json)", add_help=False)
+    sub.add_parser("graph", help="Graphify query wrappers", add_help=False)
 
     return parser
 
@@ -61,6 +65,9 @@ def main(argv: list[str] | None = None) -> int:
     if cmd == "install":
         from .installer import run as install_run
         return install_run(rest)
+    if cmd == "init":
+        from .init_cmd import run as init_run
+        return init_run(rest)
     if cmd == "hook":
         from .hook import run as hook_run
         return hook_run(rest)
@@ -79,6 +86,9 @@ def main(argv: list[str] | None = None) -> int:
     if cmd == "state":
         from .state import run as state_run
         return state_run(rest)
+    if cmd == "graph":
+        from .graph import run as graph_run
+        return graph_run(rest)
 
     print(f"Unknown command: {cmd}", file=sys.stderr)
     _build_parser().print_help()

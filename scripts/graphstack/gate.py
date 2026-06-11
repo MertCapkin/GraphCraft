@@ -19,6 +19,7 @@ Design constraints (do not weaken):
 - Cursor honors only ``deny`` reliably → rules are deny-or-silent.
 - Claude Code deny requires exit code 0 + ``hookSpecificOutput`` wrapper.
 - Bypass: env ``GRAPHSTACK_GATE=off`` or ``handoff/.gate-off`` file.
+- Strict: env ``GRAPHSTACK_GATE=strict`` — internal hook errors deny instead of fail-open.
 """
 
 from __future__ import annotations
@@ -60,6 +61,21 @@ def gate_disabled() -> bool:
     if os.environ.get("GRAPHSTACK_GATE", "").lower() in ("off", "0", "false"):
         return True
     return GATE_OFF_FILE.exists()
+
+
+def gate_strict() -> bool:
+    """When True, hook internal errors deny instead of fail-open."""
+    return os.environ.get("GRAPHSTACK_GATE", "").lower() in (
+        "strict", "fail-closed", "failclosed",
+    )
+
+
+def _extract_file_path(tool_input: dict) -> str:
+    for key in ("file_path", "path", "target_file"):
+        val = tool_input.get(key)
+        if val:
+            return str(val)
+    return ""
 
 
 def is_code_path(path: str) -> bool:
@@ -156,6 +172,21 @@ def evaluate_file_edit(file_path: str) -> tuple[bool, str | None]:
     return True, None
 
 
+def evaluate_pretooluse(tool_name: str, tool_input: dict) -> tuple[bool, str | None]:
+    """R1 + R2 for generic PreToolUse / preToolUse events."""
+    if gate_disabled():
+        return True, None
+    tool = tool_name.strip()
+    write_tools = {"Write", "Edit", "Delete", "TabWrite", "MultiEdit", "NotebookEdit"}
+    if tool in write_tools:
+        path = _extract_file_path(tool_input)
+        if path:
+            return evaluate_file_edit(path)
+    if tool in ("Shell", "Bash"):
+        return evaluate_command(str(tool_input.get("command", "")))
+    return True, None
+
+
 def evaluate_stop() -> str | None:
     """R4 — advisory only. Returns a warning message or None."""
     if gate_disabled():
@@ -238,6 +269,56 @@ def _emit(payload: dict) -> None:
     print(json.dumps(payload, ensure_ascii=False), flush=True)
 
 
+def _cursor_deny(reason: str) -> None:
+    _emit({
+        "continue": False,
+        "permission": "deny",
+        "user_message": reason,
+        "agent_message": reason,
+    })
+
+
+def _cursor_allow() -> None:
+    _emit({"continue": True, "permission": "allow"})
+
+
+def _cursor_pretool_deny(reason: str) -> None:
+    _emit({"permission": "deny", "user_message": reason, "agent_message": reason})
+
+
+def _cursor_pretool_allow() -> None:
+    _emit({"permission": "allow"})
+
+
+def _handle_gate_error(cursor: bool, *, pretool: bool, exc: Exception) -> int:
+    print(f"graphstack gate: internal error: {exc}", file=sys.stderr)
+    if gate_strict():
+        msg = (
+            "GraphStack gate (strict): internal error — action denied. "
+            "Fix the gate or set GRAPHSTACK_GATE=off temporarily."
+        )
+        if pretool:
+            _cursor_pretool_deny(msg)
+        elif cursor:
+            _cursor_deny(msg)
+        else:
+            _emit({"hookSpecificOutput": {
+                "hookEventName": "PreToolUse",
+                "permissionDecision": "deny",
+                "permissionDecisionReason": msg,
+            }})
+        return 0
+    print("graphstack gate: failing open (default). Use GRAPHSTACK_GATE=strict to deny.",
+          file=sys.stderr)
+    if pretool:
+        _cursor_pretool_allow()
+    elif cursor:
+        _cursor_allow()
+    else:
+        _emit({})
+    return 0
+
+
 def hook_cursor() -> int:
     """Cursor adapter. Responses use snake_case; only deny is load-bearing."""
     try:
@@ -247,10 +328,20 @@ def hook_cursor() -> int:
         if event == "beforeShellExecution":
             allow, reason = evaluate_command(str(data.get("command", "")))
             if not allow:
-                _emit({"continue": False, "permission": "deny",
-                       "user_message": reason, "agent_message": reason})
+                _cursor_deny(reason or MSG_NO_TASK)
                 return 0
-            _emit({"continue": True, "permission": "allow"})
+            _cursor_allow()
+            return 0
+
+        if event == "preToolUse":
+            allow, reason = evaluate_pretooluse(
+                str(data.get("tool_name", "")),
+                data.get("tool_input") or {},
+            )
+            if not allow:
+                _cursor_pretool_deny(reason or MSG_NO_TASK)
+                return 0
+            _cursor_pretool_allow()
             return 0
 
         if event == "afterFileEdit":
@@ -272,13 +363,10 @@ def hook_cursor() -> int:
             _emit({"agent_message": warning} if warning else {})
             return 0
 
-        _emit({"continue": True, "permission": "allow"})
+        _cursor_allow()
         return 0
-    except Exception as exc:  # noqa: BLE001 — fail open by design
-        print(f"graphstack gate: internal error, failing open: {exc}",
-              file=sys.stderr)
-        _emit({"continue": True, "permission": "allow"})
-        return 0
+    except Exception as exc:  # noqa: BLE001
+        return _handle_gate_error(True, pretool=False, exc=exc)
 
 
 def hook_claude() -> int:
@@ -290,11 +378,7 @@ def hook_claude() -> int:
         tool_input = data.get("tool_input") or {}
 
         if event == "PreToolUse":
-            allow, reason = True, None
-            if tool in ("Edit", "Write", "MultiEdit", "NotebookEdit"):
-                allow, reason = evaluate_file_edit(str(tool_input.get("file_path", "")))
-            elif tool == "Bash":
-                allow, reason = evaluate_command(str(tool_input.get("command", "")))
+            allow, reason = evaluate_pretooluse(tool, tool_input)
             if not allow:
                 _emit({"hookSpecificOutput": {
                     "hookEventName": "PreToolUse",
@@ -312,11 +396,8 @@ def hook_claude() -> int:
 
         _emit({})
         return 0
-    except Exception as exc:  # noqa: BLE001 — fail open by design
-        print(f"graphstack gate: internal error, failing open: {exc}",
-              file=sys.stderr)
-        _emit({})
-        return 0
+    except Exception as exc:  # noqa: BLE001
+        return _handle_gate_error(False, pretool=False, exc=exc)
 
 
 # ------------------------------------------------------------------ dispatch
@@ -328,6 +409,7 @@ def run(argv: list[str]) -> int:
         echo("  hook cursor         Cursor hooks adapter (stdin → stdout)")
         echo("  hook claude         Claude Code hooks adapter (stdin → stdout)")
         echo("Bypass: GRAPHSTACK_GATE=off or create handoff/.gate-off")
+        echo("Strict:  GRAPHSTACK_GATE=strict (deny on internal hook errors)")
         return 0
     if argv[0] == "check":
         return run_check(argv[1:])

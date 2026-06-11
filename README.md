@@ -7,14 +7,37 @@ One prompt starts the entire lifecycle — from blank repo to production.
 
 [![CI](https://github.com/MertCapkin/graphstack/actions/workflows/ci.yml/badge.svg)](https://github.com/MertCapkin/graphstack/actions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-v4.3.0-blue)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-v4.5.0-blue)](CHANGELOG.md)
 [![Platforms](https://img.shields.io/badge/platforms-Windows%20%7C%20macOS%20%7C%20Linux-success)](#compatibility)
 [![Works with Cursor](https://img.shields.io/badge/Works%20with-Cursor-blue)](https://cursor.sh)
 [![Works with Claude Code](https://img.shields.io/badge/Works%20with-Claude%20Code-orange)](https://claude.ai/code)
 
 </div>
 
-> **v4.3 highlights:** `graphstack gate` — deterministic handoff enforcement via Cursor + Claude Code hooks (brief + board task required before code changes). Plus v4.2 `graphstack run` (token-safe shell output), v4.1 `validate` / `doctor`. See [CHANGELOG.md](CHANGELOG.md).
+> **v4.5 highlights:** One-command bootstrap (`bootstrap.ps1` / `bootstrap.sh`), PyPI-ready packaging, `board reopen` / `list-done`. Plus v4.4 `graph query` + `init`, v4.3 gate. See [CHANGELOG.md](CHANGELOG.md).
+
+---
+
+## One command (Cursor terminal)
+
+Open your **project folder** in Cursor, open the integrated terminal, and run:
+
+**Windows (PowerShell):**
+```powershell
+irm https://raw.githubusercontent.com/MertCapkin/GraphStack/main/scripts/bootstrap.ps1 | iex
+```
+
+**macOS / Linux:**
+```bash
+curl -fsSL https://raw.githubusercontent.com/MertCapkin/GraphStack/main/scripts/bootstrap.sh | bash
+```
+
+**After [PyPI publish](docs/PYPI.md):**
+```bash
+pip install "graphstack[graphify]" && graphstack init . -y --install-deps
+```
+
+This installs GraphStack + Graphify, copies workflow files into **the current project**, refreshes the code graph, and runs `doctor`. Then describe your task in Cursor chat — rules load automatically.
 
 ---
 
@@ -70,6 +93,15 @@ python3 -m graphify --version
 ### Step 2 — Install GraphStack into your project
 
 GraphStack now works natively on Windows, macOS, and Linux. The installer runs through Python (which you already have for Graphify), so no shell-specific tooling is required.
+
+#### One command (recommended)
+
+```bash
+git clone https://github.com/MertCapkin/graphstack /path/to/graphstack
+cd /path/to/your-project
+/path/to/graphstack/install.ps1 .          # Windows
+# or: python -m graphstack init . -y       # any OS — install + graph refresh + doctor
+```
 
 #### macOS / Linux (bash / zsh)
 
@@ -306,7 +338,7 @@ GraphStack is a **workflow protocol** (markdown + handoff files), not a runtime 
 
 | Topic | Reality |
 |-------|---------|
-| Role automation | Prompts alone cannot guarantee discipline. v4.3 adds **`graphstack gate`** (hook-enforced) + `state set` + `validate`. Hooks block code commits/edits without a claimed board task; turn-end hooks are advisory only. |
+| Role automation | Prompts alone cannot guarantee discipline. v4.3+ **`graphstack gate`** + v4.4 Cursor **`preToolUse`**. Hooks block commits and (on Cursor/Claude) code writes without a claimed task; `afterFileEdit` on Cursor remains advisory-only backup. |
 | Token savings | The table above is **estimated**, not guaranteed. Small repos or undisciplined sessions may use **more** tokens than unstructured chat. |
 | Knowledge graph | Value appears on **20+ file** codebases with module boundaries. Meta-repos full of markdown produce noisy graphs — use `.graphifyignore` (included in this repo). |
 | Setup | Graphify + GraphStack install + `/graphify` + Cursor — four steps, not zero-config. |
@@ -347,24 +379,42 @@ Independent Python implementation (MIT) — inspired by common agent-tooling pat
 
 ---
 
+## Graph Queries (`graphstack graph`)
+
+Graph-first rules mean **query the graph before opening raw files**. v4.4 wraps Graphify's CLI so agents use one consistent command:
+
+```bash
+python -m graphstack graph query "who calls login"
+python -m graphstack graph query "blast radius of crypto.ts" --budget 1500
+python -m graphstack graph path src/auth/login.ts src/utils/crypto.ts
+python -m graphstack graph explain "login()"
+python -m graphstack graph update .     # AST-only refresh after code changes
+```
+
+Requires `graphify` on PATH (`pip install -r requirements.txt`). Agents should prefer `graph query` over reading full `GRAPH_REPORT.md` or grepping source for structural questions.
+
+---
+
 ## Process Gate (`graphstack gate`)
 
-v4.3 adds **mechanical enforcement** so Architect → Builder → Reviewer steps are harder to skip silently.
+v4.3+ adds **mechanical enforcement** so Architect → Builder → Reviewer steps are harder to skip silently. v4.4 extends Cursor with `preToolUse` blocking.
 
-| Rule | What it blocks | Platform |
-|------|----------------|----------|
-| R1 | `git commit` touching code while `handoff/board/doing/` is empty | Cursor + Claude Code |
-| R2 | Edit/Write on code paths while `doing/` is empty | Claude Code (`PreToolUse`) |
-| R3 | Commit while `BRIEF.md` is still the template and a task is in `doing/` | Both |
-| R4 | *(advisory)* `STATE.json` not updated this cycle | Turn-end hooks |
+| Rule | What it blocks | Cursor | Claude Code |
+|------|----------------|--------|-------------|
+| R1 | `git commit` touching code while `doing/` is empty | deny (`beforeShellExecution` + `preToolUse` Shell) | deny (`PreToolUse` Bash) |
+| R2 | Edit/Write on code paths while `doing/` is empty | deny (`preToolUse` Write/Edit) | deny (`PreToolUse` Edit/Write) |
+| R3 | Commit while `BRIEF.md` is still the template | deny | deny |
+| R4 | `STATE.json` not updated this cycle | advisory (`stop`) | advisory (`Stop`) |
+| — | Edit already applied (legacy hook) | advisory only (`afterFileEdit`) | — |
 
 ```bash
 python -m graphstack gate check          # CI / manual — exit 1 on violation
 python -m graphstack state set --role builder --task my-feature
 GRAPHSTACK_GATE=off                      # emergency bypass (one session)
+GRAPHSTACK_GATE=strict                   # fail-closed on hook internal errors
 ```
 
-**Install** writes `.cursor/hooks.json` and `.claude/settings.json` with OS-specific shim commands (`scripts/gate-hook.ps1` on Windows, `scripts/gate-hook.sh` on macOS/Linux). Hooks **fail open** if Python is missing — a crashing gate is worse than no gate.
+**Install** writes `.cursor/hooks.json` and `.claude/settings.json` with OS-specific shim commands (`scripts/gate-hook.ps1` on Windows, `scripts/gate-hook.sh` on macOS/Linux). By default hooks **fail open** if Python is missing — use `GRAPHSTACK_GATE=strict` for teams that prefer blocking over availability.
 
 > **Framework repo note:** This GitHub repo ships `handoff/` as **templates** (empty brief, no `done/` tasks). Your installed project fills those files during real work. Before contributing here, reset handoff — see [CONTRIBUTING.md](CONTRIBUTING.md).
 

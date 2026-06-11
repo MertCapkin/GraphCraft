@@ -111,6 +111,55 @@ def test_help_prints_usage(capsys: pytest.CaptureFixture[str]) -> None:
     assert "claim" in out
 
 
+def test_reopen_done_to_todo(project_root: Path) -> None:
+    board.run(["new", "fix-bug", "Fix", "production", "bug"])
+    board.run(["claim", "fix-bug", "builder"])
+    board.run(["complete", "fix-bug"])
+
+    done = project_root / "handoff" / "board" / "done" / "fix-bug.json"
+    todo = project_root / "handoff" / "board" / "todo" / "fix-bug.json"
+    assert done.is_file()
+
+    assert board.run(["reopen", "fix-bug", "--to", "todo"]) == 0
+    assert not done.exists()
+    assert todo.is_file()
+    data = _read(todo)
+    assert data["status"] == "todo"
+    assert data["assigned_to"] is None
+    assert data["completed_at"] is None
+
+
+def test_reopen_done_to_doing(project_root: Path) -> None:
+    board.run(["new", "hotfix", "Hotfix"])
+    board.run(["claim", "hotfix", "builder"])
+    board.run(["complete", "hotfix"])
+
+    doing = project_root / "handoff" / "board" / "doing" / "hotfix.json"
+    assert board.run(["reopen", "hotfix", "--to", "doing"]) == 0
+    assert doing.is_file()
+    assert _read(doing)["status"] == "doing"
+
+
+def test_list_done_empty(project_root: Path, capsys: pytest.CaptureFixture[str]) -> None:
+    rc = board.run(["list-done"])
+    assert rc == 0
+    assert "(none)" in capsys.readouterr().out
+
+
+def test_list_done_shows_completed(project_root: Path, capsys: pytest.CaptureFixture[str]) -> None:
+    board.run(["new", "a", "Task", "A"])
+    board.run(["claim", "a", "builder"])
+    board.run(["complete", "a"])
+    board.run(["new", "b", "Task", "B"])
+    board.run(["claim", "b", "qa"])
+    board.run(["complete", "b"])
+
+    board.run(["list-done", "--limit", "1"])
+    out = capsys.readouterr().out
+    assert "b" in out
+    assert "Showing 1 task" in out
+
+
 def test_unicode_title_is_preserved(project_root: Path) -> None:
     board.run(["new", "tr", "Türkçe", "başlık", "ışık"])
     task = _read(project_root / "handoff" / "board" / "todo" / "tr.json")

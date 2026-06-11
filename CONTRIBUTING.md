@@ -1,17 +1,19 @@
 # Contributing to GraphStack
 
-GraphStack is intentionally simple: it's markdown files, a bash script, and a shell installer. The barrier to contribution is low by design.
+GraphStack is a **workflow system** backed by a small Python CLI (`scripts/graphstack/`).
+Most files are instruction markdown for AI roles; the Python package provides board,
+validate, gate, graph query wrappers, and cross-platform install.
 
 ---
 
 ## What GraphStack Is (and Isn't)
 
-GraphStack is a **workflow system**, not a code library. Every file in this repo is either:
-- An instruction file that an AI reads (`.md`)
-- A shell script (`board.sh`, `install.sh`, `post-commit`)
-- Documentation
+GraphStack combines:
+- **Instruction files** an AI reads (`.cursor/skills/`, `orchestrator/`)
+- **Handoff files** humans and agents share (`handoff/`)
+- **Python CLI** — `pip install -e .` then `python -m graphstack …`
 
-There is no build step. No package.json. No dependencies to install to contribute.
+There is no Node build step. Python 3.8+ and pytest are required to run tests.
 
 ---
 
@@ -31,11 +33,11 @@ If you think GraphStack is missing a role (e.g., a Security Auditor, a Performan
 2. Get feedback before writing the file
 3. Once approved: add `.cursor/skills/<rolename>/<ROLENAME>.md`, update `ORCHESTRATOR.md` with the transition rule, add a prompt to `docs/CURSOR_PROMPTS.md`, and register the new path in `scripts/graphstack/installer.py`'s `FILE_COPIES`.
 
-### 3. Improve the board script
+### 3. Improve the board / CLI
 
-`scripts/board.sh` is pure bash + python3. If you find a bug or want to add a command (e.g., `board.sh reopen`, `board.sh list-done`), open a PR with:
-- The change
-- A manual test showing it works (paste the terminal output)
+Board logic lives in `scripts/graphstack/board.py` (Python). Shell shims (`board.sh`, `board.ps1`) delegate to it.
+
+For new CLI commands: add a module under `scripts/graphstack/`, register in `cli.py`, copy list in `installer.py`'s `PYTHON_PACKAGE_FILES`, and add tests in `scripts/graphstack/tests/`.
 
 ### 4. Add a demo
 
@@ -74,9 +76,10 @@ Consumer projects keep their handoff history; only this source repo resets.
 
 - **One PR per change.** Don't bundle unrelated edits.
 - **Explain the behavior change**, not just what you edited.
-- **Test the board script** if you touch `board.sh`: run through `new → claim → complete → status` and paste the output.
+- **Test the CLI** if you touch `scripts/graphstack/`: `pytest scripts/graphstack/tests -q`
+- **Test the board** if you touch board commands: run `new → claim → complete → status`
 - **Keep role files under 300 lines.** If yours is longer, it's doing too much.
-- **No new dependencies.** GraphStack requires only bash + python3 + git. Keep it that way.
+- **No new runtime dependencies.** The `graphstack` package uses only the Python stdlib. Optional: `graphifyy` for graph commands.
 
 ---
 

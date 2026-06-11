@@ -1,6 +1,12 @@
 {
   "version": 1,
   "hooks": {
+    "preToolUse": [
+      {
+        "command": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/gate-hook.ps1 cursor",
+        "matcher": "Write|Shell|Delete|Edit"
+      }
+    ],
     "beforeShellExecution": [
       { "command": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/gate-hook.ps1 cursor" }
     ],

@@ -4,6 +4,41 @@ All notable changes to GraphStack are documented here.
 
 ---
 
+## [v4.5.0] — 2026-06-11
+
+### Added
+- **One-command bootstrap** — `scripts/bootstrap.ps1` (Windows) and `scripts/bootstrap.sh` (Unix) for Cursor terminal: pip install + `graphstack init . -y --install-deps`.
+- **PyPI packaging** — workflow files bundled in `graphstack/assets/`; `scripts/sync_assets.py`; `.github/workflows/publish.yml`.
+- **`graphstack init --install-deps`** — auto `pip install graphifyy` + `graphify cursor install` when missing.
+- **`board reopen <id> [--to todo|doing]`** — move completed tasks back to active columns.
+- **`board list-done [--limit N]`** — list completed tasks only.
+- **`docs/PYPI.md`** — maintainer publish guide.
+
+### Changed
+- **Installer** — resolves workflow sources from dev repo or bundled PyPI assets (`install_source_root()`).
+- **README** — prominent one-liner install section for Cursor users.
+
+---
+
+## [v4.4.0] — 2026-06-11
+
+### Added
+- **`graphstack graph`** — graphify wrappers: `query`, `path`, `explain`, `update` (graph-first reads without manual `graph.json` parsing).
+- **`graphstack init`** — one-shot onboarding: install + `graphify update` + `doctor`.
+- **Gate v2 (Cursor)** — `preToolUse` hook blocks `Write`/`Shell`/`Edit`/`Delete` without a claimed board task (before edit, not just advisory).
+- **`GRAPHSTACK_GATE=strict`** — fail-closed on hook internal errors (default remains fail-open).
+
+### Changed
+- **Installer** — Cursor `hooks.json` includes `preToolUse` matcher; ships `graph.py` and `init_cmd.py`.
+- **TOKEN_OPTIMIZER / ARCHITECT** — mandate `graphstack graph query` as the primary graph access path.
+- **validate / doctor** — `graph_ok` check for the graph query module.
+- **CONTRIBUTING** — updated for Python CLI + pytest workflow.
+
+### Fixed
+- **README Process Gate** — platform matrix documents Cursor vs Claude enforcement differences honestly.
+
+---
+
 ## [v4.3.0] — 2026-06-11
 
 ### Added

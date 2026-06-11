@@ -18,6 +18,8 @@ __pycache__/
 .venv/
 venv/
 *.egg-info/
+dist/
+build/
 
 # Node
 node_modules/

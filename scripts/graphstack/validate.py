@@ -347,6 +347,22 @@ def check_compact_module(report: Report, root: Path) -> None:
         )
 
 
+def check_graph_module(report: Report, root: Path) -> None:
+    graph_py = root / "scripts" / "graphstack" / "graph.py"
+    if graph_py.is_file():
+        report.add(
+            "ok",
+            "graph_ok",
+            "Graph query module present (use: python -m graphstack graph query \"…\")",
+        )
+    else:
+        report.add(
+            "warn",
+            "graph_missing",
+            "Graph query module missing — reinstall GraphStack for graph-first queries",
+        )
+
+
 def check_tooling(report: Report, *, doctor: bool) -> None:
     if graphify_available():
         report.add("ok", "graphify_ok", "graphify CLI found on PATH")
@@ -382,6 +398,7 @@ def run_checks(
     check_state(report, root)
     check_graph(report, root, fail_stale=fail_stale)
     check_compact_module(report, root)
+    check_graph_module(report, root)
     check_tooling(report, doctor=doctor)
     return report
 

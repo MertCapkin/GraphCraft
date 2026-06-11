@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# GraphStack — Smart Graph Update Hook (thin shim).
+# Real logic lives in scripts/graphstack/hook.py.
+
+set -uo pipefail
+
+REPO_ROOT="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
+export PYTHONPATH="${REPO_ROOT}/scripts${PYTHONPATH:+:$PYTHONPATH}"
+
+if command -v python3 >/dev/null 2>&1; then
+  PY=python3
+elif command -v python >/dev/null 2>&1; then
+  PY=python
+else
+  echo "⚠️  GraphStack: Python not found — skipping graph update."
+  exit 0
+fi
+
+cd "$REPO_ROOT" || exit 0
+exec "$PY" -m graphstack hook

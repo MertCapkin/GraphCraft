@@ -181,6 +181,87 @@ def cmd_complete(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_list_done(args: argparse.Namespace) -> int:
+    limit = args.limit
+    done = _iter_tasks(DONE_DIR)
+    if not done:
+        echo("")
+        echo("📋 Done tasks: (none)")
+        echo("")
+        return 0
+
+    if limit is not None and limit > 0:
+        done = done[-limit:]
+
+    echo("")
+    echo("📋 Done tasks")
+    echo("=" * 56)
+    echo(f"  {'TASK ID':<32} {'COMPLETED':<22} TITLE")
+    echo("  " + "-" * 54)
+    for path in done:
+        try:
+            data = _load_task(path)
+        except (OSError, json.JSONDecodeError):
+            echo(f"  ! could not read {path.name}")
+            continue
+        completed = _get(data, "completed_at")
+        echo(f"  {_get(data, 'id'):<32} {completed:<22} {_get(data, 'title')}")
+    echo("")
+    echo(f"  Showing {len(done)} task(s)")
+    echo("")
+    return 0
+
+
+def cmd_reopen(args: argparse.Namespace) -> int:
+    task_id: str = args.task_id
+    dest = args.to.lower()
+
+    if dest not in ("todo", "doing"):
+        echo(f"❌ Invalid destination '{dest}'. Use: todo or doing")
+        return 1
+
+    src_done = DONE_DIR / f"{task_id}.json"
+    src_doing = DOING_DIR / f"{task_id}.json"
+    src_todo = TODO_DIR / f"{task_id}.json"
+
+    if src_todo.exists():
+        echo(f"⚠️  Task '{task_id}' is already in todo/")
+        return 0
+
+    if src_doing.exists() and dest == "doing":
+        echo(f"⚠️  Task '{task_id}' is already in doing/")
+        return 0
+
+    src: Path | None = None
+    if src_done.exists():
+        src = src_done
+    elif src_doing.exists() and dest == "todo":
+        src = src_doing
+    else:
+        echo(f"❌ Task '{task_id}' not found in done/ (or doing/ for todo reopen)")
+        echo("   Run: python -m graphstack board list-done")
+        return 1
+
+    data = _load_task(src)
+    data["status"] = dest
+    data["completed_at"] = None
+    if dest == "todo":
+        data["assigned_to"] = None
+        data["started_at"] = None
+    elif data.get("started_at") is None:
+        data["started_at"] = utc_now_iso()
+
+    dst_dir = TODO_DIR if dest == "todo" else DOING_DIR
+    dst_dir.mkdir(parents=True, exist_ok=True)
+    dst = dst_dir / f"{task_id}.json"
+    _save_task(dst, data)
+    src.unlink()
+
+    _git_commit_board(f"board: reopen {task_id} -> {dest}")
+    echo(f"✅ Task '{task_id}' reopened to {dest}/")
+    return 0
+
+
 def cmd_log(_args: argparse.Namespace) -> int:
     echo("")
     echo("📜 Board History")
@@ -213,6 +294,23 @@ def _build_parser() -> argparse.ArgumentParser:
     p_complete = sub.add_parser("complete", help="move task from doing → done")
     p_complete.add_argument("task_id")
 
+    p_reopen = sub.add_parser("reopen", help="move task from done/ back to todo/ or doing/")
+    p_reopen.add_argument("task_id")
+    p_reopen.add_argument(
+        "--to",
+        default="todo",
+        choices=("todo", "doing"),
+        help="destination column (default: todo)",
+    )
+
+    p_list_done = sub.add_parser("list-done", help="list completed tasks only")
+    p_list_done.add_argument(
+        "--limit",
+        type=int,
+        default=None,
+        help="show only the last N completed tasks",
+    )
+
     sub.add_parser("log", help="show git history of board changes")
 
     return p
@@ -225,6 +323,8 @@ def _print_help() -> None:
     echo("  new <id> <title words...>          create task (no quotes needed)")
     echo("  claim <id> <role>                  claim task (builder/reviewer/qa)")
     echo("  complete <id>                      mark done")
+    echo("  reopen <id> [--to todo|doing]      move done task back to todo/doing")
+    echo("  list-done [--limit N]              list completed tasks only")
     echo("  log                                git history of board")
     echo("")
     echo("Examples:")
@@ -239,6 +339,8 @@ _DISPATCH = {
     "new": cmd_new,
     "claim": cmd_claim,
     "complete": cmd_complete,
+    "reopen": cmd_reopen,
+    "list-done": cmd_list_done,
     "log": cmd_log,
 }
 

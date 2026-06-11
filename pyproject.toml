@@ -1,16 +1,16 @@
 [build-system]
-requires = ["setuptools>=61"]
+requires = ["setuptools>=61", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "graphstack"
-version = "4.3.0"
-description = "Graph-first AI development workflow helpers (board, install, validate)"
+version = "4.5.0"
+description = "Graph-first AI development workflow — board, gate, graph queries, one-shot init"
 readme = "README.md"
 license = { text = "MIT" }
 requires-python = ">=3.8"
 authors = [{ name = "GraphStack contributors" }]
-keywords = ["graphstack", "cursor", "graphify", "ai", "workflow"]
+keywords = ["graphstack", "cursor", "graphify", "ai", "workflow", "agent"]
 classifiers = [
     "Development Status :: 4 - Beta",
     "Environment :: Console",
@@ -29,11 +29,20 @@ dependencies = []
 [project.optional-dependencies]
 graphify = ["graphifyy>=0.7,<0.9"]
 
+[project.urls]
+Homepage = "https://github.com/MertCapkin/GraphStack"
+Repository = "https://github.com/MertCapkin/GraphStack"
+Documentation = "https://github.com/MertCapkin/GraphStack#readme"
+"Bug Tracker" = "https://github.com/MertCapkin/GraphStack/issues"
+
 [project.scripts]
 graphstack = "graphstack.cli:main"
 
 [tool.setuptools.packages.find]
 where = ["scripts"]
+
+[tool.setuptools.package-data]
+graphstack = ["assets/**/*", "compact/**/*"]
 
 [tool.pytest.ini_options]
 testpaths = ["scripts/graphstack/tests"]

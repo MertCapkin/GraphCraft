@@ -19,7 +19,25 @@ from pathlib import Path
 from .platform_utils import echo, graphify_available
 
 PACKAGE_ROOT = Path(__file__).resolve().parent
-REPO_ROOT = PACKAGE_ROOT.parent.parent  # scripts/graphstack/ → repo
+
+
+def install_source_root() -> Path:
+    """Workflow files: dev repo checkout, or bundled assets in PyPI wheel."""
+    repo = PACKAGE_ROOT.parent.parent
+    if (repo / "orchestrator" / "ORCHESTRATOR.md").is_file():
+        return repo
+    bundled = PACKAGE_ROOT / "assets"
+    if (bundled / "orchestrator" / "ORCHESTRATOR.md").is_file():
+        return bundled
+    raise FileNotFoundError(
+        "GraphStack workflow files not found. "
+        "Reinstall with: pip install --upgrade graphstack"
+    )
+
+
+# Back-compat alias used throughout this module.
+def _source_root() -> Path:
+    return install_source_root()
 
 DIRS_TO_CREATE = (
     ".cursor/rules",
@@ -83,6 +101,9 @@ PYTHON_PACKAGE_FILES = (
     "run.py",
     "gate.py",
     "state.py",
+    "graph.py",
+    "init_cmd.py",
+    "bootstrap.py",
 )
 
 COMPACT_PACKAGE_FILES = (
@@ -106,8 +127,13 @@ STATE_TEMPLATE = """# GraphStack Session State
 
 
 def _copy_if_exists(src: Path, dst: Path) -> bool:
+    root = _source_root()
     if not src.is_file():
-        echo(f"⚠️  Missing source file: {src.relative_to(REPO_ROOT)}")
+        try:
+            rel = src.relative_to(root)
+        except ValueError:
+            rel = src
+        echo(f"⚠️  Missing source file: {rel}")
         return False
     dst.parent.mkdir(parents=True, exist_ok=True)
     shutil.copy2(src, dst)
@@ -136,7 +162,7 @@ def _install_git_hook(target: Path, non_interactive: bool) -> None:
         non_interactive=non_interactive,
     ):
         return
-    src = REPO_ROOT / "scripts" / "post-commit"
+    src = _source_root() / "scripts" / "post-commit"
     dst = git_dir / "hooks" / "post-commit"
     if _copy_if_exists(src, dst):
         try:
@@ -158,12 +184,14 @@ def _gate_hook_command(platform: str) -> str:
 
 def _cursor_hooks_payload() -> dict:
     cmd = _gate_hook_command("cursor")
+    hook_entry = {"command": cmd}
     return {
         "version": 1,
         "hooks": {
-            "beforeShellExecution": [{"command": cmd}],
-            "afterFileEdit": [{"command": cmd}],
-            "stop": [{"command": cmd}],
+            "preToolUse": [{**hook_entry, "matcher": "Write|Shell|Delete|Edit"}],
+            "beforeShellExecution": [hook_entry],
+            "afterFileEdit": [hook_entry],
+            "stop": [hook_entry],
         },
     }
 
@@ -220,7 +248,7 @@ def _ensure_state_md(target: Path) -> None:
 
 def _install_python_package(target: Path) -> int:
     """Copy ``scripts/graphstack/*.py`` into the target so the shims work."""
-    src_pkg = REPO_ROOT / "scripts" / "graphstack"
+    src_pkg = PACKAGE_ROOT
     dst_pkg = target / "scripts" / "graphstack"
     dst_pkg.mkdir(parents=True, exist_ok=True)
     copied = 0
@@ -246,10 +274,11 @@ def _install_python_package(target: Path) -> int:
 
 def install(target: Path, *, non_interactive: bool = False) -> int:
     target = target.resolve()
+    root = _source_root()
 
     echo("")
-    echo("🧠 GraphStack v4 Installer")
-    echo("===========================")
+    echo("🧠 GraphStack Installer")
+    echo("=====================")
     echo(f"Target: {target}")
     echo("")
 
@@ -259,9 +288,7 @@ def install(target: Path, *, non_interactive: bool = False) -> int:
 
     echo("📋 Installing Cursor rules, orchestrator and role skills...")
     for src_rel, dst_rel in FILE_COPIES:
-        src = REPO_ROOT / src_rel
-        dst = target / dst_rel
-        _copy_if_exists(src, dst)
+        _copy_if_exists(root / src_rel, target / dst_rel)
 
     echo("🐍 Installing Python helper package...")
     package_count = _install_python_package(target)
@@ -279,7 +306,7 @@ def install(target: Path, *, non_interactive: bool = False) -> int:
     if not (target / "handoff" / "BRIEF.md").exists():
         echo("📝 Creating handoff templates...")
         for src_rel, dst_rel in HANDOFF_TEMPLATES:
-            _copy_if_exists(REPO_ROOT / src_rel, target / dst_rel)
+            _copy_if_exists(root / src_rel, target / dst_rel)
     else:
         echo("⏭️  Handoff files already exist — skipping (not overwriting)")
 
