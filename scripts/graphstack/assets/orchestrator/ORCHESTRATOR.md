@@ -55,9 +55,17 @@ Execute this sequence exactly on every session start. Each step has a fallback �
 9. First-turn routing (replaces blind wait):
    a. User message is empty / only greeting → greet (step 8) and wait.
    b. User message contains a task goal (feature, fix, bug) → greet briefly (step 8),
-      then enter ARCHITECT immediately. Do NOT implement code on the first turn.
+      then enter ARCHITECT immediately.
+      → Run `cycle start`, scope the brief, write handoff/BRIEF.md.
+      → Do NOT write/edit code files on turn 1. “Embedded goal” ≠ “build now”.
    c. doing/ has a task + BRIEF Ready for Builder → offer resume Builder:
       `python -m graphstack cycle enter-builder <task-id>` before any code edit.
+
+Misinterpretation guards (never do these):
+   - “User described the fix” → skip Architect and patch code  ❌
+   - “Proceed / devam after greeting” → jump to Builder without BRIEF  ❌
+   - “Graph exists” → skip handoff/board  ❌
+   Correct: embedded goal → ARCHITECT + cycle start + BRIEF only.
 ```
 
 ---

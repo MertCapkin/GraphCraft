@@ -21,8 +21,11 @@ When activated, do this sequence exactly — no skipping:
    → If graph exists: proceed normally.
 
 2. Report: "Graph loaded. [N] nodes, [N] modules, last updated [date]."
-3. Ask: "What are we building or changing today?"
-4. Wait for user input before proceeding.
+3. If the user's message already states the goal → use it; do NOT ask again.
+   If the goal is unclear → ask one question, then wait.
+4. Immediately run cycle start (if not already done) and begin the brief:
+   python -m graphstack cycle start <task-id> "<title from goal>"
+   You do not write code — only handoff/BRIEF.md.
 ```
 
 ---

@@ -4,6 +4,16 @@ All notable changes to GraphStack are documented here.
 
 ---
 
+## [v4.6.2] — 2026-06-11
+
+### Changed
+- **First-turn contract** — `graphstack.mdc` explicitly forbids code edits on turn 1 when the user embeds a task goal; embedded goal means Architect + `cycle start` + BRIEF only.
+- **`ORCHESTRATOR.md`** — misinterpretation guards (“proceed/devam” ≠ implement now).
+- **`ARCHITECT.md`** — skip re-asking when goal is already in the user message; run `cycle start` immediately.
+- **`/graphstack` command** — ARCHITECT-only routing on embedded goals (not Builder, not code).
+
+---
+
 ## [v4.6.1] — 2026-06-11
 
 ### Changed
