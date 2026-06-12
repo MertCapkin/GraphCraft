@@ -5,8 +5,8 @@ implementation that works identically on Windows, macOS, and Linux.
 
 Entry point: ``python -m graphstack <command>``
 Commands: ``board``, ``install``, ``init``, ``hook``, ``validate``, ``doctor``, ``run``,
-``gate``, ``state``, ``graph``
+``gate``, ``state``, ``graph``, ``cycle``
 """
 
-__version__ = "4.5.5"
+__version__ = "4.6.0"
 __all__ = ["__version__"]

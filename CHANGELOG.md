@@ -4,6 +4,21 @@ All notable changes to GraphStack are documented here.
 
 ---
 
+## [v4.6.0] — 2026-06-11
+
+### Added
+- **`graphstack cycle`** — `cycle start <id> "<title>"` and `cycle enter-builder <id>` bind board + `STATE.json` + BRIEF status in one step.
+- **Gate v3** — R2b (role must be `builder` for code edits), R3b (no edits on Draft brief), R5/R6 (ship + review approval required for code commits in strict mode).
+- **`brief_utils.py`** — shared BRIEF/REVIEW helpers for gate, validate, and cycle.
+- **Doctor/validate** — handoff sync warnings (`BRIEF` ready but `doing/` empty, role mismatch) and `.cursor/hooks.json` gate presence checks.
+
+### Changed
+- **`graphstack.mdc` v4.6** — full Activation checklist, role announcements, and cycle commands embedded in `alwaysApply` rules.
+- **`ORCHESTRATOR.md`** — Activation step 9 routes user goals to Architect immediately (no code on first turn).
+- **Installer** — merges GraphStack gate hooks into existing `.cursor/hooks.json` / `.claude/settings.json` instead of skipping.
+
+---
+
 ## [v4.5.5] — 2026-06-11
 
 ### Fixed

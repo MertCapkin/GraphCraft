@@ -11,6 +11,7 @@ Ten sub-commands:
 - ``gate``      — deterministic process gate (check / cursor hook / claude hook)
 - ``state``     — machine-readable session state (handoff/STATE.json)
 - ``graph``     — graphify query wrappers (query / path / explain / update)
+- ``cycle``     — atomic cycle start / enter-builder
 
 Each sub-command parses its own arguments to keep the dispatcher minimal.
 """
@@ -43,6 +44,7 @@ def _build_parser() -> argparse.ArgumentParser:
     sub.add_parser("gate", help="Process gate (check / hook adapters)", add_help=False)
     sub.add_parser("state", help="Session state (handoff/STATE.json)", add_help=False)
     sub.add_parser("graph", help="Graphify query wrappers", add_help=False)
+    sub.add_parser("cycle", help="Cycle lifecycle (start / enter-builder)", add_help=False)
 
     return parser
 
@@ -89,6 +91,9 @@ def main(argv: list[str] | None = None) -> int:
     if cmd == "graph":
         from .graph import run as graph_run
         return graph_run(rest)
+    if cmd == "cycle":
+        from .cycle import run as cycle_run
+        return cycle_run(rest)
 
     print(f"Unknown command: {cmd}", file=sys.stderr)
     _build_parser().print_help()

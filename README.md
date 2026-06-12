@@ -395,17 +395,23 @@ v4.3+ adds **mechanical enforcement** so Architect → Builder → Reviewer step
 
 | Rule | What it blocks | Cursor | Claude Code |
 |------|----------------|--------|-------------|
-| R1 | `git commit` touching code while `doing/` is empty | deny (`beforeShellExecution` + `preToolUse` Shell) | deny (`PreToolUse` Bash) |
-| R2 | Edit/Write on code paths while `doing/` is empty | deny (`preToolUse` Write/Edit) | deny (`PreToolUse` Edit/Write) |
-| R3 | Commit while `BRIEF.md` is still the template | deny | deny |
-| R4 | `STATE.json` not updated this cycle | advisory (`stop`) | advisory (`Stop`) |
-| — | Edit already applied (legacy hook) | advisory only (`afterFileEdit`) | — |
+| R1 | `git commit` touching code while `doing/` is empty | deny | deny |
+| R2 | Edit/Write on code paths while `doing/` is empty | deny | deny |
+| R3 | Template `BRIEF.md` while task in `doing/` | deny | deny |
+| R2b | Code edit while `STATE.json` role ≠ `builder` | deny | deny |
+| R3b | Code edit while `BRIEF.md` status is Draft | deny | deny |
+| R4 | Stale `STATE.json` vs board claim | advisory (`stop`; **deny** in strict) | same |
+| R5 | Code commit while role ≠ `ship` | — | — (**strict** only) |
+| R6 | Code commit without `Verdict: Approved` in `REVIEW.md` | — | — (**strict** only) |
+| — | Edit already applied (legacy hook) | advisory (`afterFileEdit`) | — |
 
 ```bash
+python -m graphstack cycle start my-feature "Add email verification"
+python -m graphstack cycle enter-builder my-feature   # after Architect writes BRIEF
 python -m graphstack gate check          # CI / manual — exit 1 on violation
 python -m graphstack state set --role builder --task my-feature
 GRAPHSTACK_GATE=off                      # emergency bypass (one session)
-GRAPHSTACK_GATE=strict                   # fail-closed on hook internal errors
+GRAPHSTACK_GATE=strict                   # R4–R6 + fail-closed on hook errors
 ```
 
 **Install** writes `.cursor/hooks.json` and `.claude/settings.json` with OS-specific shim commands (`scripts/gate-hook.ps1` on Windows, `scripts/gate-hook.sh` on macOS/Linux). By default hooks **fail open** if Python is missing — use `GRAPHSTACK_GATE=strict` for teams that prefer blocking over availability.

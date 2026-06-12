@@ -52,7 +52,12 @@ Execute this sequence exactly on every session start. Each step has a fallback �
     [Only if STATE.md has entry]: Last session: [ROLE] on [date] — resume?
     What are we working on?"
 
-9. Wait. Do not proceed until user responds.
+9. First-turn routing (replaces blind wait):
+   a. User message is empty / only greeting → greet (step 8) and wait.
+   b. User message contains a task goal (feature, fix, bug) → greet briefly (step 8),
+      then enter ARCHITECT immediately. Do NOT implement code on the first turn.
+   c. doing/ has a task + BRIEF Ready for Builder → offer resume Builder:
+      `python -m graphstack cycle enter-builder <task-id>` before any code edit.
 ```
 
 ---
@@ -148,11 +153,22 @@ Bootstrapper writing Cycle [N+1] brief.
 ### IDLE → ARCHITECT
 **Trigger:** Graph exists with nodes AND user describes a feature, change, or bug fix.
 
+**Mechanical prep (Architect):**
+```bash
+python -m graphstack cycle start <task-id> "<title>"
+# or manually: board new <id> "<title>" + state set --role architect --task <id>
+```
+
 **Action:**
 ```
 [ARCHITECT MODE]
 Reading graph context...
 [execute architect logic from .cursor/skills/architect/ARCHITECT.md]
+```
+
+**Before BUILDER:** brief must be **Ready for Builder**, then:
+```bash
+python -m graphstack cycle enter-builder <task-id>
 ```
 
 ### ARCHITECT → BUILDER

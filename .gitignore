@@ -56,6 +56,9 @@ graphify-out/cache/
 # - graphify-out/GRAPH_REPORT.md
 # - graphify-out/graph.json
 
+# Local wheel/sdist smoke builds (not for release)
+dist_test/
+
 # Test artifacts (board smoke test leftovers)
 handoff/board/todo/smoke-*.json
 handoff/board/doing/smoke-*.json

@@ -104,6 +104,8 @@ PYTHON_PACKAGE_FILES = (
     "graph.py",
     "init_cmd.py",
     "bootstrap.py",
+    "brief_utils.py",
+    "cycle.py",
 )
 
 COMPACT_PACKAGE_FILES = (
@@ -219,21 +221,77 @@ def _claude_settings_payload() -> dict:
     }
 
 
-def _install_hook_adapters(target: Path) -> None:
-    """Write Cursor / Claude Code hook adapters with OS-specific shim commands.
+def _json_has_gate_hook(data: object) -> bool:
+    return "gate-hook" in json.dumps(data)
 
-    Never overwrites an existing adapter — projects may have their own hooks
-    configured and merging JSON automatically is riskier than skipping.
-    """
-    adapters = (
-        (target / ".cursor" / "hooks.json", _cursor_hooks_payload()),
-        (target / ".claude" / "settings.json", _claude_settings_payload()),
-    )
-    for dst, payload in adapters:
-        if dst.exists():
-            echo(f"⏭️  {dst.relative_to(target)} already exists — skipping")
+
+def _hook_command_key(entry: object) -> str:
+    if isinstance(entry, dict):
+        return str(entry.get("command", ""))
+    return ""
+
+
+def _merge_hook_entry_lists(existing: object, new_entries: list) -> list:
+    merged = list(existing) if isinstance(existing, list) else []
+    known = {_hook_command_key(e) for e in merged if isinstance(e, dict)}
+    for entry in new_entries:
+        if not isinstance(entry, dict):
             continue
+        key = _hook_command_key(entry)
+        if key and key not in known:
+            merged.append(entry)
+            known.add(key)
+    return merged
+
+
+def merge_cursor_hooks(existing: dict | None, payload: dict) -> dict:
+    """Merge GraphStack gate entries into an existing Cursor hooks.json."""
+    if not existing:
+        return payload
+    result = dict(existing)
+    if "version" not in result:
+        result["version"] = payload.get("version", 1)
+    hooks = dict(result.get("hooks") or {})
+    for name, new_list in (payload.get("hooks") or {}).items():
+        hooks[name] = _merge_hook_entry_lists(hooks.get(name, []), new_list)
+    result["hooks"] = hooks
+    return result
+
+
+def merge_claude_settings(existing: dict | None, payload: dict) -> dict:
+    """Append GraphStack gate hooks to Claude settings when missing."""
+    if not existing:
+        return payload
+    if _json_has_gate_hook(existing):
+        return existing
+    result = dict(existing)
+    hooks = dict(result.get("hooks") or {})
+    for event, blocks in (payload.get("hooks") or {}).items():
+        hooks[event] = _merge_hook_entry_lists(hooks.get(event, []), blocks)
+    result["hooks"] = hooks
+    return result
+
+
+def _install_hook_adapters(target: Path) -> None:
+    """Write or merge Cursor / Claude Code hook adapters."""
+    adapters = (
+        (target / ".cursor" / "hooks.json", _cursor_hooks_payload(), merge_cursor_hooks),
+        (target / ".claude" / "settings.json", _claude_settings_payload(), merge_claude_settings),
+    )
+    for dst, payload, merge_fn in adapters:
         dst.parent.mkdir(parents=True, exist_ok=True)
+        if dst.exists():
+            try:
+                existing = json.loads(dst.read_text(encoding="utf-8"))
+            except (OSError, json.JSONDecodeError):
+                echo(f"⚠️  {dst.relative_to(target)} unreadable — overwriting")
+                existing = None
+            else:
+                if _json_has_gate_hook(existing):
+                    echo(f"⏭️  {dst.relative_to(target)} already has gate hooks")
+                    continue
+                payload = merge_fn(existing, payload)
+                echo(f"🔀 Merged gate hooks into {dst.relative_to(target)}")
         dst.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
     echo("🛡️  Process-gate hooks installed (.cursor/hooks.json, .claude/settings.json)")
 
@@ -328,7 +386,7 @@ def install(target: Path, *, non_interactive: bool = False) -> int:
         echo("   pip install \"graphifyy>=0.7,<0.9\"")
 
     echo("")
-    echo("🎉 GraphStack v4 installed!")
+    echo("🎉 GraphStack v4.6 installed!")
     echo("")
     echo("Next steps:")
     echo("  1. Build graph:   open Cursor in your project → type: /graphify .")

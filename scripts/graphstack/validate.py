@@ -13,12 +13,14 @@ import sys
 from dataclasses import dataclass, field
 from pathlib import Path
 
+from .brief_utils import BRIEF_READY_STATUSES, brief_is_template, brief_status
 from .constants import (
     BOARD_DIR,
     DOING_DIR,
     DONE_DIR,
     GRAPH_REPORT,
     HANDOFF_DIR,
+    STATE_JSON,
     TASK_REQUIRED_KEYS,
     TODO_DIR,
 )
@@ -26,12 +28,6 @@ from .constants import (
 FRAMEWORK_MARKER = Path(".graphstack-framework")
 from .platform_utils import echo, git_available, graphify_available, run_git
 
-BRIEF_TEMPLATE_MARKERS = (
-    "[Feature/Change Name]",
-    "YYYY-MM-DD",
-    "> One sentence. What outcome does the user want?",
-)
-BRIEF_READY_STATUSES = ("Ready for Builder", "In Review", "Complete")
 GRAPH_COMMIT_RE = re.compile(r"Built from commit:\s*`([0-9a-f]+)`", re.IGNORECASE)
 
 REQUIRED_PATHS = (
@@ -82,17 +78,6 @@ def _iter_board_tasks() -> list[Path]:
     return paths
 
 
-def _brief_is_template(text: str) -> bool:
-    return any(marker in text for marker in BRIEF_TEMPLATE_MARKERS)
-
-
-def _brief_status(text: str) -> str | None:
-    match = re.search(r"\*\*Status:\*\*\s*(.+)", text)
-    if not match:
-        return None
-    return match.group(1).strip()
-
-
 def check_layout(report: Report, root: Path) -> None:
     for rel in REQUIRED_PATHS:
         path = root / rel
@@ -115,7 +100,7 @@ def check_brief(report: Report, root: Path, *, strict: bool) -> None:
         return
 
     text = brief_path.read_text(encoding="utf-8")
-    if _brief_is_template(text):
+    if brief_is_template(text):
         level = "error" if strict else "warn"
         report.add(
             level,
@@ -124,7 +109,7 @@ def check_brief(report: Report, root: Path, *, strict: bool) -> None:
         )
         return
 
-    status = _brief_status(text)
+    status = brief_status(text)
     if status and status.startswith("Draft"):
         report.add("warn", "brief_draft", f"BRIEF.md status is '{status}' (not ready for Builder)")
     elif status and any(s in status for s in BRIEF_READY_STATUSES):
@@ -227,7 +212,7 @@ def check_framework_handoff(report: Report, root: Path) -> None:
     brief_path = root / "handoff" / "BRIEF.md"
     if brief_path.is_file():
         try:
-            if not _brief_is_template(brief_path.read_text(encoding="utf-8")):
+            if not brief_is_template(brief_path.read_text(encoding="utf-8")):
                 report.add(
                     "warn",
                     "framework_brief_dirty",
@@ -269,6 +254,97 @@ def check_state(report: Report, root: Path) -> None:
         report.add("warn", "state_empty", "handoff/STATE.md is empty")
     else:
         report.add("ok", "state_ok", "handoff/STATE.md present")
+
+
+def check_handoff_sync(report: Report, root: Path, *, strict: bool) -> None:
+    """Warn when BRIEF, board, and STATE.json are out of sync."""
+    brief_path = root / "handoff" / "BRIEF.md"
+    doing = sorted((root / "handoff" / "board" / "doing").glob("*.json")) if (
+        root / "handoff" / "board" / "doing"
+    ).is_dir() else []
+
+    if brief_path.is_file():
+        try:
+            text = brief_path.read_text(encoding="utf-8")
+        except OSError:
+            text = ""
+        if not brief_is_template(text):
+            status = brief_status(text) or ""
+            if any(s in status for s in BRIEF_READY_STATUSES) and not doing:
+                report.add(
+                    "warn",
+                    "brief_ready_no_doing",
+                    "BRIEF.md is Ready for Builder but doing/ is empty — "
+                    "run: python -m graphstack cycle enter-builder <task-id>",
+                )
+
+    if doing:
+        state_path = root / STATE_JSON
+        role = "none"
+        if state_path.is_file():
+            try:
+                state = json.loads(state_path.read_text(encoding="utf-8"))
+            except (OSError, json.JSONDecodeError):
+                state = None
+            if state:
+                role = str(state.get("role") or "none")
+        if role not in ("builder", "reviewer", "qa", "ship"):
+            level = "error" if strict else "warn"
+            report.add(
+                level,
+                "doing_role_mismatch",
+                f"doing/ has {len(doing)} task(s) but STATE.json role is '{role}' — "
+                f"run: python -m graphstack cycle enter-builder <task-id>",
+            )
+    elif strict and (root / STATE_JSON).is_file():
+        try:
+            state = json.loads((root / STATE_JSON).read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError):
+            state = None
+        if state and str(state.get("role") or "") == "builder":
+            report.add(
+                "warn",
+                "builder_role_no_doing",
+                "STATE.json role is builder but doing/ is empty",
+            )
+
+
+def check_gate_hooks(report: Report, root: Path, *, strict: bool) -> None:
+    """Verify Cursor process-gate hooks are installed."""
+    hooks_path = root / ".cursor" / "hooks.json"
+    if not hooks_path.is_file():
+        level = "error" if strict else "warn"
+        report.add(
+            level,
+            "hooks_missing",
+            ".cursor/hooks.json not found — process gate inactive in Cursor "
+            "(reinstall GraphStack or merge hooks)",
+        )
+        return
+
+    try:
+        data = json.loads(hooks_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        report.add("error", "hooks_invalid", f".cursor/hooks.json unreadable: {exc}")
+        return
+
+    hooks = data.get("hooks", {})
+    pretool = hooks.get("preToolUse", [])
+    has_gate = any(
+        "gate-hook" in str(entry.get("command", ""))
+        for entry in pretool
+        if isinstance(entry, dict)
+    )
+    if has_gate:
+        report.add("ok", "hooks_ok", "Cursor process-gate hooks configured")
+    else:
+        level = "error" if strict else "warn"
+        report.add(
+            level,
+            "hooks_no_gate",
+            "hooks.json exists but no graphstack gate-hook entry — "
+            "reinstall or run graphstack install to merge hooks",
+        )
 
 
 def check_graph(report: Report, root: Path, *, fail_stale: bool) -> None:
@@ -396,6 +472,8 @@ def run_checks(
     check_board_tasks(report)
     check_framework_handoff(report, root)
     check_state(report, root)
+    check_handoff_sync(report, root, strict=strict)
+    check_gate_hooks(report, root, strict=strict)
     check_graph(report, root, fail_stale=fail_stale)
     check_compact_module(report, root)
     check_graph_module(report, root)

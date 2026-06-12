@@ -44,6 +44,12 @@ def _write_real_brief(root: Path) -> None:
     )
 
 
+def _enable_builder_edits(root: Path, task_id: str = "t1") -> None:
+    _make_doing_task(root, task_id)
+    _write_real_brief(root)
+    state.run(["set", "--role", "builder", "--task", task_id])
+
+
 # ---------------------------------------------------------------- path rules
 
 def test_is_code_path_classification() -> None:
@@ -112,10 +118,29 @@ def test_edit_allowed_for_handoff_files(project_root: Path) -> None:
     assert allow
 
 
-def test_edit_allowed_with_doing_task(project_root: Path) -> None:
+def test_edit_denied_with_doing_task_but_wrong_role(project_root: Path) -> None:
     _make_doing_task(project_root)
+    _write_real_brief(project_root)
+    allow, reason = gate.evaluate_file_edit(str(project_root / "src" / "app.py"))
+    assert not allow
+    assert "builder" in reason
+
+
+def test_edit_allowed_with_builder_role(project_root: Path) -> None:
+    _enable_builder_edits(project_root)
     allow, _ = gate.evaluate_file_edit(str(project_root / "src" / "app.py"))
     assert allow
+
+
+def test_edit_denied_when_brief_is_draft(project_root: Path) -> None:
+    _make_doing_task(project_root)
+    (project_root / "handoff" / "BRIEF.md").write_text(
+        "# Brief: X\n**Status:** Draft\n", encoding="utf-8"
+    )
+    state.run(["set", "--role", "builder", "--task", "t1"])
+    allow, reason = gate.evaluate_file_edit(str(project_root / "src" / "app.py"))
+    assert not allow
+    assert "Draft" in reason
 
 
 def test_edit_outside_project_is_ignored(project_root: Path,
@@ -201,7 +226,7 @@ def test_cursor_pretool_write_denies_without_task(project_root: Path,
 def test_cursor_pretool_write_allowed_with_task(project_root: Path,
                                                 monkeypatch: pytest.MonkeyPatch,
                                                 capsys: pytest.CaptureFixture[str]) -> None:
-    _make_doing_task(project_root)
+    _enable_builder_edits(project_root)
     _feed_stdin(monkeypatch, {
         "hook_event_name": "preToolUse",
         "tool_name": "Write",
@@ -303,7 +328,7 @@ def test_claude_bash_hook_denies_commit(project_root: Path,
 def test_claude_edit_hook_allows_with_task(project_root: Path,
                                            monkeypatch: pytest.MonkeyPatch,
                                            capsys: pytest.CaptureFixture[str]) -> None:
-    _make_doing_task(project_root)
+    _enable_builder_edits(project_root)
     _feed_stdin(monkeypatch, {
         "hook_event_name": "PreToolUse",
         "tool_name": "Edit",
@@ -361,6 +386,39 @@ def test_gate_check_json_output(project_root: Path,
     data = json.loads(capsys.readouterr().out.strip())
     assert data["ok"] is True
     assert data["failures"] == []
+
+
+def test_gate_check_fails_when_doing_without_builder_role(
+    project_root: Path, capsys: pytest.CaptureFixture[str]
+) -> None:
+    _make_doing_task(project_root)
+    assert gate.run(["check"]) == 1
+    assert "builder" in capsys.readouterr().out
+
+
+def test_commit_denied_strict_without_ship_role(
+    project_root: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    monkeypatch.setenv("GRAPHSTACK_GATE", "strict")
+    _enable_builder_edits(project_root)
+    (project_root / "app.py").write_text("x = 1\n", encoding="utf-8")
+    allow, reason = gate.evaluate_command("git add app.py && git commit -m feat")
+    assert not allow
+    assert "ship" in reason
+
+
+def test_commit_allowed_strict_with_ship_and_review(
+    project_root: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    monkeypatch.setenv("GRAPHSTACK_GATE", "strict")
+    _enable_builder_edits(project_root)
+    state.run(["set", "--role", "ship", "--task", "t1"])
+    (project_root / "handoff" / "REVIEW.md").write_text(
+        "## 2026-01-01\n### Verdict: Approved\n", encoding="utf-8"
+    )
+    (project_root / "app.py").write_text("x = 1\n", encoding="utf-8")
+    allow, _ = gate.evaluate_command("git add app.py && git commit -m feat")
+    assert allow
 
 
 # ------------------------------------------------------------------ adapters

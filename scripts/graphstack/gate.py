@@ -1,25 +1,23 @@
 """Deterministic process gate — enforces GraphStack handoff discipline.
 
-Three entry points:
+Entry points:
 
 - ``gate check [--json]``     — CI / manual rule evaluation (exit 0 pass, 1 fail)
 - ``gate hook cursor``        — Cursor hooks adapter (stdin payload → stdout JSON)
 - ``gate hook claude``        — Claude Code hooks adapter (stdin payload → stdout JSON)
 
 Rules:
-  R1  ``git commit`` touching code paths while board doing/ is empty → DENY
-  R2  Edit/Write on a code path (Claude Code PreToolUse) while doing/ empty → DENY
-  R3  doing/ has a task but BRIEF.md is still the template → DENY commit
-  R4  (stop events) doing/ task exists but STATE.json is older than the task
-      claim → advisory warning, never blocks
+  R1  ``git commit`` touching code while doing/ is empty → DENY
+  R2  Edit/Write on code path while doing/ is empty → DENY
+  R3  doing/ + template BRIEF → DENY (commit and code edit)
+  R2b Edit/Write on code path while STATE.role != builder → DENY
+  R3b Edit/Write on code path while BRIEF status is Draft → DENY
+  R4  Stop + stale STATE.json → advisory (DENY when GRAPHSTACK_GATE=strict)
+  R5  ``git commit`` on code paths while role != ship → DENY (strict only)
+  R6  ``git commit`` on code paths without REVIEW Verdict: Approved → DENY (strict only)
 
-Design constraints (do not weaken):
-- FAIL OPEN: any internal error → allow + warning on stderr. A crashing gate
-  that blocks all work is worse than no gate.
-- Cursor honors only ``deny`` reliably → rules are deny-or-silent.
-- Claude Code deny requires exit code 0 + ``hookSpecificOutput`` wrapper.
-- Bypass: env ``GRAPHSTACK_GATE=off`` or ``handoff/.gate-off`` file.
-- Strict: env ``GRAPHSTACK_GATE=strict`` — internal hook errors deny instead of fail-open.
+Bypass: ``GRAPHSTACK_GATE=off`` or ``handoff/.gate-off``
+Strict: ``GRAPHSTACK_GATE=strict`` — R4–R6 enforced, hook errors deny
 """
 
 from __future__ import annotations
@@ -31,29 +29,44 @@ import re
 import sys
 from pathlib import Path
 
-from .constants import DOING_DIR, GATE_OFF_FILE, HANDOFF_DIR, NON_CODE_PREFIXES
+from .brief_utils import brief_is_draft, brief_is_template, review_last_verdict_approved
+from .constants import DOING_DIR, GATE_OFF_FILE, HANDOFF_DIR
 from .platform_utils import echo, git_available, run_git
 from .state import load_state
-from .validate import _brief_is_template
 
 GIT_COMMIT_RE = re.compile(r"\bgit\b[^|&;]*\bcommit\b")
 
 MSG_NO_TASK = (
     "GraphStack gate: no task in handoff/board/doing/. "
-    "Process requires: Architect writes handoff/BRIEF.md, then "
-    "'python -m graphstack board new <id> <title>' and "
-    "'board claim <id> builder' BEFORE changing code. "
+    "Start a cycle: python -m graphstack cycle start <id> \"<title>\" "
+    "then Architect writes BRIEF, then: cycle enter-builder <id>. "
     "(Bypass: GRAPHSTACK_GATE=off)"
 )
 MSG_TEMPLATE_BRIEF = (
-    "GraphStack gate: a task is in doing/ but handoff/BRIEF.md is still the "
-    "template. Architect must write the brief before code is committed. "
+    "GraphStack gate: handoff/BRIEF.md is still the template. "
+    "Architect must write the brief before code changes. "
     "(Bypass: GRAPHSTACK_GATE=off)"
 )
+MSG_WRONG_ROLE = (
+    "GraphStack gate: code changes require role=builder in handoff/STATE.json "
+    "(current: {role}). Run: python -m graphstack cycle enter-builder <task-id> "
+    "or: python -m graphstack state set --role builder --task <id>"
+)
+MSG_BRIEF_DRAFT = (
+    "GraphStack gate: BRIEF.md status is Draft. "
+    "Architect must set **Status:** Ready for Builder before code edits."
+)
 MSG_STALE_STATE = (
-    "GraphStack gate (advisory): task in doing/ but handoff/STATE.json was not "
-    "updated this cycle. Run: python -m graphstack state set --role <role> "
-    "--task <id>"
+    "GraphStack gate: task in doing/ but handoff/STATE.json was not updated this cycle. "
+    "Run: python -m graphstack state set --role <role> --task <id>"
+)
+MSG_NOT_SHIP_ROLE = (
+    "GraphStack gate (strict): code commits require role=ship "
+    "(current: {role}). Complete Reviewer → QA → Ship first."
+)
+MSG_REVIEW_NOT_APPROVED = (
+    "GraphStack gate (strict): handoff/REVIEW.md has no 'Verdict: Approved' "
+    "in the latest cycle. Reviewer must approve before shipping code."
 )
 
 
@@ -64,7 +77,7 @@ def gate_disabled() -> bool:
 
 
 def gate_strict() -> bool:
-    """When True, hook internal errors deny instead of fail-open."""
+    """When True, R4–R6 and hook internal errors deny instead of fail-open."""
     return os.environ.get("GRAPHSTACK_GATE", "").lower() in (
         "strict", "fail-closed", "failclosed",
     )
@@ -85,6 +98,8 @@ def is_code_path(path: str) -> bool:
         p = p[2:]
     if not p:
         return False
+    from .constants import NON_CODE_PREFIXES
+
     if any(p.startswith(prefix) for prefix in NON_CODE_PREFIXES):
         return False
     if "/" not in p and p.endswith(".md"):
@@ -98,12 +113,52 @@ def _doing_tasks() -> list[Path]:
     return sorted(DOING_DIR.glob("*.json"))
 
 
-def _brief_is_unwritten() -> bool:
-    brief = HANDOFF_DIR / "BRIEF.md"
+def _current_role() -> str | None:
+    state = load_state()
+    if state is None:
+        return None
+    role = str(state.get("role") or "").strip().lower()
+    return role or None
+
+
+def _read_brief_text() -> str | None:
     try:
-        return _brief_is_template(brief.read_text(encoding="utf-8"))
+        return (HANDOFF_DIR / "BRIEF.md").read_text(encoding="utf-8")
     except OSError:
+        return None
+
+
+def _brief_is_unwritten() -> bool:
+    text = _read_brief_text()
+    if text is None:
         return True
+    return brief_is_template(text)
+
+
+def _code_edit_checks() -> tuple[bool, str | None]:
+    """Shared R2 / R2b / R3 / R3b checks for code-path mutations."""
+    if not _doing_tasks():
+        return False, MSG_NO_TASK
+    if _brief_is_unwritten():
+        return False, MSG_TEMPLATE_BRIEF
+    if brief_is_draft():
+        return False, MSG_BRIEF_DRAFT
+    role = _current_role()
+    if role != "builder":
+        return False, MSG_WRONG_ROLE.format(role=role or "none")
+    return True, None
+
+
+def _commit_strict_checks() -> tuple[bool, str | None]:
+    """R5 + R6 — only when GRAPHSTACK_GATE=strict."""
+    if not gate_strict():
+        return True, None
+    role = _current_role()
+    if role != "ship":
+        return False, MSG_NOT_SHIP_ROLE.format(role=role or "none")
+    if not review_last_verdict_approved():
+        return False, MSG_REVIEW_NOT_APPROVED
+    return True, None
 
 
 def _changed_files(*git_args: str) -> list[str]:
@@ -116,12 +171,6 @@ def _changed_files(*git_args: str) -> list[str]:
 
 
 def _commit_candidate_files(command: str) -> list[str]:
-    """Files a ``git commit`` command would plausibly commit.
-
-    Staged files, plus modified tracked files for ``-a`` commits, plus any
-    command token that exists on disk (covers ``git add X && git commit``
-    where X is not staged yet when the hook fires).
-    """
     files = _changed_files("diff", "--cached", "--name-only")
     if re.search(r"\s(-a\b|--all\b|-am\b)", command):
         files += _changed_files("diff", "--name-only")
@@ -140,36 +189,42 @@ def _commit_candidate_files(command: str) -> list[str]:
 # ---------------------------------------------------------------- rule logic
 
 def evaluate_command(command: str) -> tuple[bool, str | None]:
-    """R1 + R3 for shell commands. Returns (allow, deny_reason)."""
+    """R1 + R3 + R5 + R6 for shell commands. Returns (allow, deny_reason)."""
     if gate_disabled():
         return True, None
     if not GIT_COMMIT_RE.search(command):
         return True, None
 
-    doing = _doing_tasks()
     candidates = _commit_candidate_files(command)
     touches_code = any(is_code_path(f) for f in candidates)
+    if not touches_code:
+        return True, None
 
-    if not doing and touches_code:
-        return False, MSG_NO_TASK  # R1
-    if doing and touches_code and _brief_is_unwritten():
-        return False, MSG_TEMPLATE_BRIEF  # R3
+    doing = _doing_tasks()
+    if not doing:
+        return False, MSG_NO_TASK
+    if _brief_is_unwritten():
+        return False, MSG_TEMPLATE_BRIEF
+
+    allow, reason = _commit_strict_checks()
+    if not allow:
+        return False, reason
     return True, None
 
 
 def evaluate_file_edit(file_path: str) -> tuple[bool, str | None]:
-    """R2 for Edit/Write tool calls. Returns (allow, deny_reason)."""
+    """R2 + R2b + R3 + R3b for Edit/Write tool calls."""
     if gate_disabled():
         return True, None
     try:
         rel = os.path.relpath(file_path, Path.cwd())
-    except ValueError:  # different drive on Windows
+    except ValueError:
         return True, None
     if rel.startswith(".."):
-        return True, None  # outside this project — not ours to gate
-    if is_code_path(rel) and not _doing_tasks():
-        return False, MSG_NO_TASK
-    return True, None
+        return True, None
+    if not is_code_path(rel):
+        return True, None
+    return _code_edit_checks()
 
 
 def evaluate_pretooluse(tool_name: str, tool_input: dict) -> tuple[bool, str | None]:
@@ -188,7 +243,7 @@ def evaluate_pretooluse(tool_name: str, tool_input: dict) -> tuple[bool, str | N
 
 
 def evaluate_stop() -> str | None:
-    """R4 — advisory only. Returns a warning message or None."""
+    """R4 — advisory by default; deny when strict (handled in hook adapters)."""
     if gate_disabled():
         return None
     doing = _doing_tasks()
@@ -203,7 +258,7 @@ def evaluate_stop() -> str | None:
         return None
     started = task.get("started_at") or ""
     updated = state.get("updated_at") or ""
-    if started and updated < started:  # ISO-8601 strings compare lexically
+    if started and updated < started:
         return MSG_STALE_STATE
     return None
 
@@ -234,13 +289,22 @@ def run_check(argv: list[str]) -> int:
         if not doing and dirty_code:
             failures.append(
                 f"{len(dirty_code)} uncommitted code change(s) but doing/ is "
-                f"empty — claim a board task first (e.g. {dirty_code[0]})"
+                f"empty — run: graphstack cycle start <id> \"<title>\""
             )
         if doing and _brief_is_unwritten():
             failures.append("task in doing/ but handoff/BRIEF.md is still the template")
+        role = _current_role()
+        if doing and role not in ("builder",):
+            failures.append(
+                f"task in doing/ but STATE.json role is '{role or 'none'}' "
+                f"— run: graphstack cycle enter-builder <task-id>"
+            )
         stale = evaluate_stop()
         if stale:
-            warnings.append(stale)
+            if gate_strict():
+                failures.append(stale)
+            else:
+                warnings.append(stale)
 
     if args.json:
         echo(json.dumps({"ok": not failures, "failures": failures,
@@ -288,6 +352,30 @@ def _cursor_pretool_deny(reason: str) -> None:
 
 def _cursor_pretool_allow() -> None:
     _emit({"permission": "allow"})
+
+
+def _handle_stop_event(warning: str | None, *, cursor: bool) -> int:
+    if not warning:
+        if cursor:
+            _emit({})
+        else:
+            _emit({})
+        return 0
+    if gate_strict():
+        if cursor:
+            _cursor_deny(warning)
+        else:
+            _emit({"hookSpecificOutput": {
+                "hookEventName": "Stop",
+                "permissionDecision": "deny",
+                "permissionDecisionReason": warning,
+            }})
+        return 0
+    if cursor:
+        _emit({"agent_message": warning})
+    else:
+        _emit({"systemMessage": warning})
+    return 0
 
 
 def _handle_gate_error(cursor: bool, *, pretool: bool, exc: Exception) -> int:
@@ -345,23 +433,22 @@ def hook_cursor() -> int:
             return 0
 
         if event == "afterFileEdit":
-            # Cursor has no before-edit blocking event — advisory only.
             edited = str(data.get("file_path", ""))
-            if edited and not gate_disabled() and not _doing_tasks():
+            if edited and not gate_disabled():
                 try:
                     rel = os.path.relpath(edited, Path.cwd())
                 except ValueError:
                     rel = edited
                 if not rel.startswith("..") and is_code_path(rel):
-                    _emit({"agent_message": MSG_NO_TASK})
-                    return 0
+                    allow, reason = _code_edit_checks()
+                    if not allow:
+                        _emit({"agent_message": reason or MSG_NO_TASK})
+                        return 0
             _emit({})
             return 0
 
         if event == "stop":
-            warning = evaluate_stop()
-            _emit({"agent_message": warning} if warning else {})
-            return 0
+            return _handle_stop_event(evaluate_stop(), cursor=True)
 
         _cursor_allow()
         return 0
@@ -390,9 +477,7 @@ def hook_claude() -> int:
             return 0
 
         if event == "Stop":
-            warning = evaluate_stop()
-            _emit({"systemMessage": warning} if warning else {})
-            return 0
+            return _handle_stop_event(evaluate_stop(), cursor=False)
 
         _emit({})
         return 0
@@ -409,7 +494,7 @@ def run(argv: list[str]) -> int:
         echo("  hook cursor         Cursor hooks adapter (stdin → stdout)")
         echo("  hook claude         Claude Code hooks adapter (stdin → stdout)")
         echo("Bypass: GRAPHSTACK_GATE=off or create handoff/.gate-off")
-        echo("Strict:  GRAPHSTACK_GATE=strict (deny on internal hook errors)")
+        echo("Strict:  GRAPHSTACK_GATE=strict (R4–R6 + fail-closed on errors)")
         return 0
     if argv[0] == "check":
         return run_check(argv[1:])
