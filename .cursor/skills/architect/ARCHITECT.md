@@ -129,12 +129,18 @@ User says "new project"       → Do not proceed — signal Orchestrator to use 
 
 ## Handoff to Builder
 
+At session start (if Orchestrator has not already):
+
+```bash
+python -m graphstack cycle start <task-id> "<objective one-liner>"
+```
+
 When brief is ready:
 
-1. Write `handoff/BRIEF.md`
-2. Create the GNAP board task:
+1. Write `handoff/BRIEF.md` with **Status: Ready for Builder**
+2. Announce handoff (Orchestrator runs `cycle enter-builder` before Builder writes code):
    ```bash
-   python -m graphstack board new <task-id> "<objective one-liner>"
+   python -m graphstack cycle enter-builder <task-id>
    ```
 3. Announce:
 ```

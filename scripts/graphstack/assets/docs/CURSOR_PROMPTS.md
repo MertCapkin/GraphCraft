@@ -1,4 +1,4 @@
-# GraphStack v4 — Cursor Prompts & Setup Guide
+# GraphStack v4.6 — Cursor Prompts & Setup Guide
 
 ---
 
@@ -89,6 +89,16 @@ Resume from last session.
 
 Architect → Builder → Reviewer → QA → Ship zinciri kullanıcı etkileşimi olmadan yürür.
 
+**v4.6 mekanik handoff (gate ile uyumlu):**
+
+```bash
+python -m graphstack cycle start my-feature "Hedefin tek cümle özeti"
+# Architect handoff/BRIEF.md yazar → Status: Ready for Builder
+python -m graphstack cycle enter-builder my-feature
+```
+
+Kod edit gate'i `role=builder` ve `doing/` task olmadan **engeller**. Takım modu: `GRAPHSTACK_GATE=strict`.
+
 ---
 
 ## 🚀 Sıfırdan Yeni Proje (Bootstrap Modu)
@@ -172,9 +182,18 @@ Run the pre-ship checklist for task [task-id].
 
 ---
 
-## 📋 Board Komutları (Terminal)
+## 📋 Cycle + Board (Terminal)
 
-Üç biçim de eşdeğerdir. Shell tercihinize göre seçin.
+**Önerilen (v4.6)** — board + STATE + BRIEF tek adımda:
+
+```bash
+python -m graphstack cycle start my-feature "OAuth login ekle"
+python -m graphstack cycle enter-builder my-feature
+python -m graphstack doctor
+python -m graphstack validate --strict
+```
+
+**Düşük seviye board** — üç biçim eşdeğerdir:
 
 **macOS / Linux (bash):**
 ```bash
@@ -209,7 +228,9 @@ python -m graphstack board log
 
 - Her Orchestrator döngüsünde mümkünse **yeni bir Cursor chat** aç — context temiz kalır
 - Cursor slash menüsünde **`/graphstack`** kullanarak Orchestrator açılışını netleştir
-- `.cursor/rules/graphstack.mdc` otomatik yüklenir, elle okutman gerekmiyor
+- `.cursor/rules/graphstack.mdc` (v4.6) otomatik yüklenir — Activation checklist içerir
+- Kod yazmadan önce: `cycle enter-builder` veya `doctor` ile handoff senkronunu kontrol et
+- `.cursor/hooks.json` yoksa gate devre dışı — `graphstack install` veya reinstall ile merge et
 - Grafı büyük değişikliklerden sonra güncelle: `/graphify --update`
-- `handoff/STATE.md` dosyasını silme — oturum geçmişin orada
+- `handoff/STATE.md` ve `STATE.json` dosyalarını silme — oturum geçmişi / gate burada
 - `handoff/board/` klasörünü commit'le — ekip arkadaşların board'u görsün

@@ -42,7 +42,7 @@ If a graph already exists, the Orchestrator uses the Architect instead — not y
 6. Wait for approval. Revise if needed.
 
 7. Write the first brief (Cycle 1) to handoff/BRIEF.md.
-   Create the board task: python -m graphstack board new cycle-1-[module] [module name]
+   Create the cycle task: python -m graphstack cycle start cycle-1-[module] "[module name]"
 
 8. Announce handoff:
    "[BOOTSTRAPPER → BUILDER]

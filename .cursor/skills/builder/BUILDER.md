@@ -26,12 +26,12 @@ When activated, execute this sequence exactly:
           python -m graphstack board new [brief-slug] [brief objective]
       → If 2+ matches: list them and ask user which to claim
 
-4. Claim the task:
-   python -m graphstack board claim <task-id> builder
+4. Enter builder role (preferred — sets board claim + STATE.json for gate v3):
+   python -m graphstack cycle enter-builder <task-id>
+   # Fallback if task already in doing/: board claim <task-id> builder
+   #          + state set --role builder --task <task-id>
 
-5. Update machine-readable state (Orchestrator already confirmed the brief —
-   do NOT ask the user again):
-   python -m graphstack state set --role builder --task <task-id>
+5. Verify STATE.json shows role=builder before any code edit (gate denies otherwise)
 
 6. Report once, then start building immediately:
    "[BUILDER MODE] Task: [task-id] | Criteria: [N] | Files: [list]"

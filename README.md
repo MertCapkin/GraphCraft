@@ -14,7 +14,7 @@ One prompt starts the entire lifecycle — from blank repo to production.
 
 </div>
 
-> **v4.5 highlights:** Published on [PyPI](https://pypi.org/project/MertCapkin_GraphStack/) as **`MertCapkin_GraphStack`**, one-command bootstrap, `board reopen` / `list-done`. Plus v4.4 `graph query` + `init`, v4.3 gate. See [CHANGELOG.md](CHANGELOG.md).
+> **v4.6 highlights:** `graphstack cycle` (start / enter-builder), **gate v3** (role=builder for edits, strict ship/review), expanded `alwaysApply` rules, hook **merge** on install. See [CHANGELOG.md](CHANGELOG.md).
 
 ---
 
@@ -255,9 +255,9 @@ Step 2 — every session (minimal typing):
 Example natural-language kickoff:
   "Add rate limiting to login."
 
-  [ARCHITECT]   reads graph (not raw files) → scopes change → writes BRIEF.md
+  [ARCHITECT]   cycle start → reads graph → scopes change → writes BRIEF.md
        ↓ auto
-  [BUILDER]     reads brief → queries graph for deps → builds exactly the brief
+  [BUILDER]     cycle enter-builder → reads brief → builds exactly the brief
        ↓ auto
   [REVIEWER]    checks criteria → inspects graph neighbors for side effects
        ↓ auto   (loops to Builder if rejected, max 3×)
@@ -332,12 +332,12 @@ GraphStack is a **workflow protocol** (markdown + handoff files), not a runtime 
 
 | Topic | Reality |
 |-------|---------|
-| Role automation | Prompts alone cannot guarantee discipline. v4.3+ **`graphstack gate`** + v4.4 Cursor **`preToolUse`**. Hooks block commits and (on Cursor/Claude) code writes without a claimed task; `afterFileEdit` on Cursor remains advisory-only backup. |
+| Role automation | Prompts + **gate v3 (v4.6)**: code edits require `STATE.json role=builder` and a task in `doing/`. **`graphstack cycle`** binds board + state. Strict mode (`GRAPHSTACK_GATE=strict`) also enforces ship/review before code commits. `afterFileEdit` on Cursor remains advisory-only backup. |
 | Token savings | The table above is **estimated**, not guaranteed. Small repos or undisciplined sessions may use **more** tokens than unstructured chat. |
 | Knowledge graph | Value appears on **20+ file** codebases with module boundaries. Meta-repos full of markdown produce noisy graphs — use `.graphifyignore` (included in this repo). |
 | Setup | Graphify + `pip install MertCapkin_GraphStack` + `graphstack init` — or one bootstrap command. See [PyPI](https://pypi.org/project/MertCapkin_GraphStack/). |
 
-**v4.1 helpers:** `graphstack doctor` (health report) and `graphstack validate` (exit code for CI). Use `--strict` before Builder handoff; use `--fail-stale-graph` in CI after code changes.
+**Health checks:** `graphstack doctor` and `graphstack validate` (exit code for CI). v4.6 adds handoff sync + `hooks.json` checks. Use `--strict` before Builder handoff; use `--fail-stale-graph` in CI after code changes.
 
 ```bash
 graphstack doctor
@@ -391,7 +391,7 @@ Requires `graphify` on PATH (`pip install -r requirements.txt`). Agents should p
 
 ## Process Gate (`graphstack gate`)
 
-v4.3+ adds **mechanical enforcement** so Architect → Builder → Reviewer steps are harder to skip silently. v4.4 extends Cursor with `preToolUse` blocking.
+**Gate v3 (v4.6)** adds role-aware enforcement so Architect → Builder → Reviewer steps are harder to skip silently. Cursor `preToolUse` blocks edits before they land; use **`graphstack cycle`** for the mechanical handoff steps.
 
 | Rule | What it blocks | Cursor | Claude Code |
 |------|----------------|--------|-------------|
@@ -414,7 +414,7 @@ GRAPHSTACK_GATE=off                      # emergency bypass (one session)
 GRAPHSTACK_GATE=strict                   # R4–R6 + fail-closed on hook errors
 ```
 
-**Install** writes `.cursor/hooks.json` and `.claude/settings.json` with OS-specific shim commands (`scripts/gate-hook.ps1` on Windows, `scripts/gate-hook.sh` on macOS/Linux). By default hooks **fail open** if Python is missing — use `GRAPHSTACK_GATE=strict` for teams that prefer blocking over availability.
+**Install** writes or **merges** `.cursor/hooks.json` and `.claude/settings.json` with OS-specific shim commands (`scripts/gate-hook.ps1` on Windows, `scripts/gate-hook.sh` on macOS/Linux). By default hooks **fail open** if Python is missing — use `GRAPHSTACK_GATE=strict` for teams that prefer blocking over availability.
 
 > **Framework repo note:** This GitHub repo ships `handoff/` as **templates** (empty brief, no `done/` tasks). Your installed project fills those files during real work. Before contributing here, reset handoff — see [CONTRIBUTING.md](CONTRIBUTING.md).
 
@@ -424,7 +424,8 @@ GRAPHSTACK_GATE=strict                   # R4–R6 + fail-closed on hook errors
 
 ```
 your-project/
-├── .cursor/rules/graphstack.mdc          ← always-active rules (Cursor auto-loads)
+├── .cursor/rules/graphstack.mdc          ← always-active rules v4.6 (Cursor auto-loads)
+├── .cursor/hooks.json                    ← process gate (merged on reinstall)
 ├── .cursor/commands/graphstack.md        ← `/graphstack` Cursor slash-command bootstrapper
 ├── orchestrator/
 │   ├── ORCHESTRATOR.md                   ← state machine: all transitions
@@ -439,7 +440,8 @@ your-project/
 ├── handoff/
 │   ├── BRIEF.md                          ← Architect → Builder
 │   ├── REVIEW.md                         ← Reviewer + QA findings (append-only)
-│   ├── STATE.md                          ← session state for resuming
+│   ├── STATE.md                          ← human session log (append-only)
+│   ├── STATE.json                        ← machine state for gate hooks
 │   ├── BOOTSTRAP.md                      ← cross-cycle project memory
 │   └── board/
 │       ├── todo/                         ← tasks waiting to be claimed
@@ -460,7 +462,12 @@ your-project/
 │       ├── hook.py                       ← post-commit graph-update logic
 │       ├── platform_utils.py             ← OS detection, Python finder, encoding-safe echo
 │       ├── cli.py                        ← entry point dispatcher
-│       ├── validate.py                   ← layout / brief / graph checks
+│       ├── validate.py                   ← layout / brief / graph / hooks checks
+│       ├── gate.py                       ← process gate (R1–R6)
+│       ├── state.py                      ← handoff/STATE.json
+│       ├── cycle.py                      ← cycle start / enter-builder
+│       ├── brief_utils.py                ← shared BRIEF/REVIEW helpers
+│       ├── graph.py                      ← graphify query wrappers
 │       ├── run.py                        ← shell runner with compaction
 │       ├── compact/                      ← git / pytest / generic compactors
 │       └── tests/                        ← pytest suite
@@ -498,6 +505,16 @@ bash scripts/board.sh log
 
 #### Cross-platform (any shell with Python)
 
+**Preferred — full cycle handoff (v4.6):**
+
+```bash
+python -m graphstack cycle start add-oauth "Add OAuth login with GitHub"
+# Architect writes handoff/BRIEF.md → Status: Ready for Builder
+python -m graphstack cycle enter-builder add-oauth
+```
+
+**Low-level board (still supported):**
+
 ```bash
 python -m graphstack board status
 python -m graphstack board new add-oauth Add OAuth login with GitHub
@@ -506,7 +523,7 @@ python -m graphstack board complete add-oauth
 python -m graphstack board log
 python -m graphstack run -- git status
 python -m graphstack doctor
-python -m graphstack validate --fail-stale-graph
+python -m graphstack validate --strict --fail-stale-graph
 ```
 
 Every board operation is a git commit. `git log handoff/board/` shows who did what, when.

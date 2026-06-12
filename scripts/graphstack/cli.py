@@ -1,6 +1,6 @@
 """Top-level CLI dispatcher.
 
-Ten sub-commands:
+Eleven sub-commands:
 - ``board``     — GNAP task board manager (replaces ``scripts/board.sh``)
 - ``install``   — install GraphStack into a target project (replaces ``install.sh``)
 - ``init``      — one-shot install + graph refresh + doctor

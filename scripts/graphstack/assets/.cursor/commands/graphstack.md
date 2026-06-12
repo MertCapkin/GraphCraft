@@ -1,5 +1,5 @@
 # GraphStack — start Orchestrator
 
-1. Execute **Activation** in `orchestrator/ORCHESTRATOR.md` exactly as written (including step **1a**).
-2. Greet using the scripted format from that section.
-3. Wait for user input (`Activation` wait step). If the user already embedded their goal in the same message as this command, proceed with that goal immediately after greeting.
+1. Execute **Activation** in `orchestrator/ORCHESTRATOR.md` exactly (full parallel read batch: TOKEN_OPTIMIZER, GRAPH_REPORT, BRIEF, doing/, STATE).
+2. Greet using the scripted format from step 8.
+3. **First-turn routing (step 9):** If the user already embedded a task goal in this message → greet briefly, enter **[ARCHITECT MODE]** immediately (no code on turn 1). If the message is empty → greet and wait.
