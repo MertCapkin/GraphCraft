@@ -151,8 +151,10 @@ jobs:
       - name: Process gate check (graphstack gate)
         run: python -m graphstack gate check
 
+      # --force: committed graph.json may have more nodes than a clean CI rebuild
+      # (graphify refuses overwrite without --force when counts diverge).
       - name: Refresh knowledge graph (CI)
-        run: graphify update .
+        run: graphify update . --force
 
       - name: Fail if knowledge graph is stale vs HEAD
         run: python -m graphstack validate --fail-stale-graph
