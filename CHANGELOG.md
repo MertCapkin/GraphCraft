@@ -4,6 +4,20 @@ All notable changes to GraphStack are documented here.
 
 ---
 
+## [v4.6.4] — 2026-06-12
+
+### Added
+- **`graphstack cycle close <task-id>`** — `board complete` + BRIEF Complete + `state idle` (requires `Verdict: Approved` unless `--force`).
+- **Doctor `cycle_unclosed` warning** — `doing/` + `role=builder` (or reviewer/qa) without REVIEW Verdict.
+
+### Changed
+- **Close-turn contract** in `graphstack.mdc` — implementation done ≠ cycle done; Ship must run `board complete`.
+- **`ORCHESTRATOR.md`** — close-turn misinterpretation guards; `devam` after brief ≠ close cycle.
+- **`BUILDER.md`** — mandatory `[BUILDER → REVIEWER]` + `state set --role reviewer` after implementation.
+- **Gate `stop` hook** — advisory when task stuck in `doing/` with `role=builder` and no REVIEW Verdict.
+
+---
+
 ## [v4.6.2] — 2026-06-11
 
 ### Changed

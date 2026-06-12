@@ -160,6 +160,13 @@ Out-of-scope notes: [any issues flagged, or "None"]
 Ready for Reviewer.
 ```
 
+**Immediately transition — do NOT end the session here:**
+```bash
+python -m graphstack state set --role reviewer --task <task-id>
+```
+Announce `[BUILDER → REVIEWER]` and execute Reviewer logic in the same session.
+Never leave the task in `doing/` with `role=builder` after implementation.
+
 ---
 
 ## Token Rules (Builder)

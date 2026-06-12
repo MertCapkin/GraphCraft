@@ -408,6 +408,7 @@ Requires `graphify` on PATH (`pip install -r requirements.txt`). Agents should p
 ```bash
 python -m graphstack cycle start my-feature "Add email verification"
 python -m graphstack cycle enter-builder my-feature   # after Architect writes BRIEF
+python -m graphstack cycle close my-feature           # after Reviewer/QA/Ship (or --force)
 python -m graphstack gate check          # CI / manual — exit 1 on violation
 python -m graphstack state set --role builder --task my-feature
 GRAPHSTACK_GATE=off                      # emergency bypass (one session)

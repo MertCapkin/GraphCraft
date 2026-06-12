@@ -184,6 +184,9 @@ python -m graphstack cycle enter-builder <task-id>
 - "looks good", "proceed", "build it", "go ahead", "ok", "evet", "devam"
 - Or user doesn't object within one exchange
 
+**Note:** "devam" here means **brief approved → Builder only**. It does NOT mean
+skip Reviewer/QA/Ship or close the board task.
+
 **Action:**
 ```
 [ARCHITECT → BUILDER]
@@ -205,6 +208,9 @@ Files to review: [list from brief's In Scope section]
 ```
 
 **Never:** Ask the user "should I review now?" or "what should I review?" — use the brief.
+
+**Never:** Stop after Builder with the task still in `doing/` or `STATE.json role=builder`.
+Always run `state set --role reviewer` and enter Reviewer in the same session.
 
 ### REVIEWER → BUILDER (rejection path)
 **Trigger:** Any criterion fails OR unexpected side effect found.
@@ -264,6 +270,13 @@ Switching to Ship.
 ### SHIP → IDLE
 **Trigger:** Commit message generated, checklist complete, graph update assessed.
 
+**Mechanical close (required):**
+```bash
+python -m graphstack board complete <task-id>
+python -m graphstack state set --role idle
+# equivalent: python -m graphstack cycle close <task-id>
+```
+
 **Action:**
 ```
 [SHIP → IDLE]
@@ -272,6 +285,11 @@ Graph: [updated — N new nodes / unchanged — content edits only]
 Board: [task-id] → done
 What's next?
 ```
+
+Misinterpretation guards (close-turn):
+   - "Implementation done" / "bitirdim" → REVIEWER next, NOT idle  ❌
+   - STATE.md log without `state set` + `board complete`  ❌
+   - Task left in doing/ after user says done  ❌
 
 ---
 

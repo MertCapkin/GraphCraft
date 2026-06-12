@@ -12,8 +12,10 @@ from .brief_utils import (
     brief_is_ready_for_builder,
     brief_is_template,
     read_brief_text,
+    review_last_verdict_approved,
     set_brief_status,
 )
+from .constants import DOING_DIR
 from .platform_utils import echo
 from .state import save_state
 
@@ -74,6 +76,31 @@ def cmd_enter_builder(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_close(args: argparse.Namespace) -> int:
+    """Complete board task and reset state after Reviewer/QA/Ship."""
+    task_id: str = args.task_id
+    doing_file = DOING_DIR / f"{task_id}.json"
+    if not doing_file.is_file():
+        echo(f"❌ Task '{task_id}' not found in doing/")
+        echo("   Run: python -m graphstack board status")
+        return 1
+
+    if not args.force and not review_last_verdict_approved():
+        echo("❌ handoff/REVIEW.md has no 'Verdict: Approved' in the latest cycle")
+        echo("   Complete Reviewer → QA → Ship first, or use --force to close anyway")
+        return 1
+
+    rc = board.cmd_complete(argparse.Namespace(task_id=task_id))
+    if rc != 0:
+        return rc
+
+    set_brief_status("Complete")
+    save_state("idle", None, f"cycle close: {task_id}")
+    echo("✅ Cycle closed — task moved to done/, role=idle")
+    echo("   If structural files changed, run: python -m graphstack graph update .")
+    return 0
+
+
 def _build_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(
         prog="graphstack cycle",
@@ -94,10 +121,25 @@ def _build_parser() -> argparse.ArgumentParser:
     )
     p_builder.add_argument("task_id", help="board task id to claim")
 
+    p_close = sub.add_parser(
+        "close",
+        help="board complete + BRIEF Complete + state idle (after Ship)",
+    )
+    p_close.add_argument("task_id", help="board task id in doing/")
+    p_close.add_argument(
+        "--force",
+        action="store_true",
+        help="close even without Verdict: Approved in REVIEW.md",
+    )
+
     return p
 
 
-_DISPATCH = {"start": cmd_start, "enter-builder": cmd_enter_builder}
+_DISPATCH = {
+    "start": cmd_start,
+    "enter-builder": cmd_enter_builder,
+    "close": cmd_close,
+}
 
 
 def run(argv: list[str]) -> int:

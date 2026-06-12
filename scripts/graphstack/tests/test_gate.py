@@ -160,7 +160,18 @@ def test_stop_warns_when_state_missing(project_root: Path) -> None:
 def test_stop_silent_after_state_set(project_root: Path) -> None:
     _make_doing_task(project_root)  # started_at in year 2000
     state.run(["set", "--role", "builder", "--task", "t1"])
+    (project_root / "handoff" / "REVIEW.md").write_text(
+        "## 2026-01-01\n### Verdict: Approved\n", encoding="utf-8"
+    )
     assert gate.evaluate_stop() is None
+
+
+def test_stop_warns_unclosed_builder_cycle(project_root: Path) -> None:
+    _make_doing_task(project_root)
+    state.run(["set", "--role", "builder", "--task", "t1"])
+    msg = gate.evaluate_stop()
+    assert msg is not None
+    assert "cycle close" in msg
 
 
 def test_stop_silent_when_no_doing_task(project_root: Path) -> None:

@@ -1,9 +1,9 @@
 ---
-description: GraphStack v4.6 — Orchestrated, graph-first, GNAP-tracked AI development (cross-platform)
+description: GraphStack v4.6.4 — Orchestrated, graph-first, GNAP-tracked AI development (cross-platform)
 alwaysApply: true
 ---
 
-# GraphStack Core Rules (v4.6)
+# GraphStack Core Rules (v4.6.4)
 
 ## 🎯 Default Mode: Orchestrated
 
@@ -138,3 +138,23 @@ SHIP      → checklist + commit (strict gate: role=ship)
 ```
 
 Never jump from graph exploration directly to implementation.
+
+## ⛔ Close-turn contract (implementation done ≠ cycle done)
+
+When Builder finishes acceptance criteria:
+
+```
+FORBIDDEN: stop with task in doing/, role=builder, or "I'm done" to the user
+FORBIDDEN: append STATE.md without matching state set + board commands
+REQUIRED:  [BUILDER → REVIEWER] → QA → SHIP → board complete → role=idle
+```
+
+After Ship checklist:
+```bash
+python -m graphstack board complete <task-id>
+python -m graphstack state set --role idle
+# or: python -m graphstack cycle close <task-id>
+```
+
+**"devam" / "bitir" after implementation** means advance to **Reviewer**, not close the cycle.
+**"devam" after brief approval** (Architect phase) means enter **Builder** only.

@@ -1,150 +1,337 @@
 {
-  "C:\\Users\\elife\\Desktop\\Mert_Proje\\graphstack\\demo\\src\\api\\types.ts": {
+  "demo/src/api/types.ts": {
     "mtime": 1778918580.9617295,
-    "hash": "802c7d6b60b0bc3691114401280375da"
+    "ast_hash": "802c7d6b60b0bc3691114401280375da",
+    "semantic_hash": ""
   },
-  "C:\\Users\\elife\\Desktop\\Mert_Proje\\graphstack\\demo\\src\\auth\\login.ts": {
+  "demo/src/auth/login.ts": {
     "mtime": 1778918580.9617295,
-    "hash": "2d66387e916d556a5d86e06a7cf579fb"
+    "ast_hash": "2d66387e916d556a5d86e06a7cf579fb",
+    "semantic_hash": ""
   },
-  "C:\\Users\\elife\\Desktop\\Mert_Proje\\graphstack\\demo\\src\\auth\\session.ts": {
+  "demo/src/auth/session.ts": {
     "mtime": 1778918580.9617295,
-    "hash": "5180ee39bd36b900f67ed9c907f4857c"
+    "ast_hash": "5180ee39bd36b900f67ed9c907f4857c",
+    "semantic_hash": ""
   },
-  "C:\\Users\\elife\\Desktop\\Mert_Proje\\graphstack\\demo\\src\\utils\\crypto.ts": {
+  "demo/src/utils/crypto.ts": {
     "mtime": 1778918580.9617295,
-    "hash": "573b85b4ef5de25ee6f428c358282f88"
+    "ast_hash": "573b85b4ef5de25ee6f428c358282f88",
+    "semantic_hash": ""
   },
-  "C:\\Users\\elife\\Desktop\\Mert_Proje\\graphstack\\scripts\\gate-hook.ps1": {
+  "scripts/gate-hook.ps1": {
     "mtime": 1781190265.9424822,
-    "hash": "7549c3a4cecd1af5cffbce2eb8af177c"
+    "ast_hash": "7549c3a4cecd1af5cffbce2eb8af177c",
+    "semantic_hash": ""
   },
-  "C:\\Users\\elife\\Desktop\\Mert_Proje\\graphstack\\scripts\\graphstack\\board.py": {
-    "mtime": 1779032053.2617111,
-    "hash": "1c32f6be29eac71281e2e112ef45fc82"
+  "scripts/graphstack/board.py": {
+    "mtime": 1781194955.2258587,
+    "ast_hash": "25a6ee6271b966d757d23b3aedc78704",
+    "semantic_hash": ""
   },
-  "C:\\Users\\elife\\Desktop\\Mert_Proje\\graphstack\\scripts\\graphstack\\cli.py": {
-    "mtime": 1781194350.8731856,
-    "hash": "98d776958e3d1a9da8738e21db2bfaa6"
+  "scripts/graphstack/cli.py": {
+    "mtime": 1781261021.5581524,
+    "ast_hash": "5def02f3340ddb8dd580656a216756b3",
+    "semantic_hash": ""
   },
-  "C:\\Users\\elife\\Desktop\\Mert_Proje\\graphstack\\scripts\\graphstack\\constants.py": {
+  "scripts/graphstack/constants.py": {
     "mtime": 1781188499.235243,
-    "hash": "ccffe378124d13ce5b2ae0f7444507b6"
+    "ast_hash": "ccffe378124d13ce5b2ae0f7444507b6",
+    "semantic_hash": ""
   },
-  "C:\\Users\\elife\\Desktop\\Mert_Proje\\graphstack\\scripts\\graphstack\\gate.py": {
-    "mtime": 1781194373.5370343,
-    "hash": "3f4269ca4b6aabc327faf2c8eadaa1ca"
+  "scripts/graphstack/gate.py": {
+    "mtime": 1781255796.0248868,
+    "ast_hash": "737215addeafc7d84a246bf9d21f40b0",
+    "semantic_hash": ""
   },
-  "C:\\Users\\elife\\Desktop\\Mert_Proje\\graphstack\\scripts\\graphstack\\graph.py": {
+  "scripts/graphstack/graph.py": {
     "mtime": 1781194317.1202605,
-    "hash": "e33dea657b2a9a50ed9645ab897c99b7"
+    "ast_hash": "e33dea657b2a9a50ed9645ab897c99b7",
+    "semantic_hash": ""
   },
-  "C:\\Users\\elife\\Desktop\\Mert_Proje\\graphstack\\scripts\\graphstack\\hook.py": {
+  "scripts/graphstack/hook.py": {
     "mtime": 1778951715.9025033,
-    "hash": "8f6624bd7c3bcb0f8ba92d28b43bcd89"
+    "ast_hash": "8f6624bd7c3bcb0f8ba92d28b43bcd89",
+    "semantic_hash": ""
   },
-  "C:\\Users\\elife\\Desktop\\Mert_Proje\\graphstack\\scripts\\graphstack\\init_cmd.py": {
-    "mtime": 1781194340.8070495,
-    "hash": "98de71ffbe1d88db5a3dafa0bf6ae216"
+  "scripts/graphstack/init_cmd.py": {
+    "mtime": 1781204008.301081,
+    "ast_hash": "da7bedadd594ff5f1e923b1d8add6b38",
+    "semantic_hash": ""
   },
-  "C:\\Users\\elife\\Desktop\\Mert_Proje\\graphstack\\scripts\\graphstack\\installer.py": {
-    "mtime": 1781194376.7879775,
-    "hash": "0ff79adf1dcaf6d596567e5c1ff93086"
+  "scripts/graphstack/installer.py": {
+    "mtime": 1781265681.001335,
+    "ast_hash": "4f51d5affc51d07c25bf805369a50547",
+    "semantic_hash": ""
   },
-  "C:\\Users\\elife\\Desktop\\Mert_Proje\\graphstack\\scripts\\graphstack\\platform_utils.py": {
+  "scripts/graphstack/platform_utils.py": {
     "mtime": 1778951848.462769,
-    "hash": "d16cf15fb6a8023ab1b4c7a05ba42c73"
+    "ast_hash": "d16cf15fb6a8023ab1b4c7a05ba42c73",
+    "semantic_hash": ""
   },
-  "C:\\Users\\elife\\Desktop\\Mert_Proje\\graphstack\\scripts\\graphstack\\run.py": {
+  "scripts/graphstack/run.py": {
     "mtime": 1779042877.7413025,
-    "hash": "59c658f57b33a7897452d5e1c44bcc5e"
+    "ast_hash": "59c658f57b33a7897452d5e1c44bcc5e",
+    "semantic_hash": ""
   },
-  "C:\\Users\\elife\\Desktop\\Mert_Proje\\graphstack\\scripts\\graphstack\\state.py": {
+  "scripts/graphstack/state.py": {
     "mtime": 1781188517.2686574,
-    "hash": "0d2e4082b03641f46a85ae0b6255d0a7"
+    "ast_hash": "0d2e4082b03641f46a85ae0b6255d0a7",
+    "semantic_hash": ""
   },
-  "C:\\Users\\elife\\Desktop\\Mert_Proje\\graphstack\\scripts\\graphstack\\validate.py": {
-    "mtime": 1781194448.8862135,
-    "hash": "09172af1d8a58d4e299632b509e36923"
+  "scripts/graphstack/validate.py": {
+    "mtime": 1781255856.385722,
+    "ast_hash": "d9c9cfac8ede0c500a3e84509a176c32",
+    "semantic_hash": ""
   },
-  "C:\\Users\\elife\\Desktop\\Mert_Proje\\graphstack\\scripts\\graphstack\\__init__.py": {
-    "mtime": 1781194486.860437,
-    "hash": "0329c2b5b27ef62b3e388349dcca1f0b"
+  "scripts/graphstack/__init__.py": {
+    "mtime": 1781265679.9148793,
+    "ast_hash": "aa4daf551f56704f01fc0838d525b146",
+    "semantic_hash": ""
   },
-  "C:\\Users\\elife\\Desktop\\Mert_Proje\\graphstack\\scripts\\graphstack\\__main__.py": {
+  "scripts/graphstack/__main__.py": {
     "mtime": 1778951586.1178832,
-    "hash": "f8f4484b7c02dadb2736d3f86f18f3a2"
+    "ast_hash": "f8f4484b7c02dadb2736d3f86f18f3a2",
+    "semantic_hash": ""
   },
-  "C:\\Users\\elife\\Desktop\\Mert_Proje\\graphstack\\scripts\\graphstack\\compact\\base.py": {
+  "scripts/graphstack/compact/base.py": {
     "mtime": 1779042762.5159256,
-    "hash": "7b362b83d247ccd311b9a4e2c9567671"
+    "ast_hash": "7b362b83d247ccd311b9a4e2c9567671",
+    "semantic_hash": ""
   },
-  "C:\\Users\\elife\\Desktop\\Mert_Proje\\graphstack\\scripts\\graphstack\\compact\\generic.py": {
+  "scripts/graphstack/compact/generic.py": {
     "mtime": 1779042782.6314025,
-    "hash": "8b55282603c783997b487c7d6f9364e1"
+    "ast_hash": "8b55282603c783997b487c7d6f9364e1",
+    "semantic_hash": ""
   },
-  "C:\\Users\\elife\\Desktop\\Mert_Proje\\graphstack\\scripts\\graphstack\\compact\\git.py": {
+  "scripts/graphstack/compact/git.py": {
     "mtime": 1779042798.5800974,
-    "hash": "e2ac55271234c43b77a274eadf9a229e"
+    "ast_hash": "e2ac55271234c43b77a274eadf9a229e",
+    "semantic_hash": ""
   },
-  "C:\\Users\\elife\\Desktop\\Mert_Proje\\graphstack\\scripts\\graphstack\\compact\\registry.py": {
+  "scripts/graphstack/compact/registry.py": {
     "mtime": 1779042787.4329345,
-    "hash": "a9e5aa818f6c3a66bbd026d35b6b0f01"
+    "ast_hash": "a9e5aa818f6c3a66bbd026d35b6b0f01",
+    "semantic_hash": ""
   },
-  "C:\\Users\\elife\\Desktop\\Mert_Proje\\graphstack\\scripts\\graphstack\\compact\\__init__.py": {
+  "scripts/graphstack/compact/__init__.py": {
     "mtime": 1779042753.6001005,
-    "hash": "d6faf73e36798b551ac3780dc5108261"
+    "ast_hash": "d6faf73e36798b551ac3780dc5108261",
+    "semantic_hash": ""
   },
-  "C:\\Users\\elife\\Desktop\\Mert_Proje\\graphstack\\scripts\\graphstack\\tests\\conftest.py": {
+  "scripts/graphstack/tests/conftest.py": {
     "mtime": 1778952018.6105912,
-    "hash": "b3b4fe001bc4561eb7f6cbd6fb608094"
+    "ast_hash": "b3b4fe001bc4561eb7f6cbd6fb608094",
+    "semantic_hash": ""
   },
-  "C:\\Users\\elife\\Desktop\\Mert_Proje\\graphstack\\scripts\\graphstack\\tests\\test_board.py": {
-    "mtime": 1778952033.679693,
-    "hash": "265d9c35394562ed092616f96b44d42f"
+  "scripts/graphstack/tests/test_board.py": {
+    "mtime": 1781194998.4114666,
+    "ast_hash": "45d330cfd283b839ac96fe985153d88f",
+    "semantic_hash": ""
   },
-  "C:\\Users\\elife\\Desktop\\Mert_Proje\\graphstack\\scripts\\graphstack\\tests\\test_compact.py": {
+  "scripts/graphstack/tests/test_compact.py": {
     "mtime": 1779042811.4957619,
-    "hash": "53a1bb8fae07a22c465fabaa312aecfa"
+    "ast_hash": "53a1bb8fae07a22c465fabaa312aecfa",
+    "semantic_hash": ""
   },
-  "C:\\Users\\elife\\Desktop\\Mert_Proje\\graphstack\\scripts\\graphstack\\tests\\test_gate.py": {
-    "mtime": 1781194456.0583372,
-    "hash": "fff6c4b2bd015048beea312527c8915a"
+  "scripts/graphstack/tests/test_gate.py": {
+    "mtime": 1781255941.3855393,
+    "ast_hash": "3ebe552f18feada344d0711210e287b0",
+    "semantic_hash": ""
   },
-  "C:\\Users\\elife\\Desktop\\Mert_Proje\\graphstack\\scripts\\graphstack\\tests\\test_graph.py": {
+  "scripts/graphstack/tests/test_graph.py": {
     "mtime": 1781194450.418578,
-    "hash": "73189bb63af7dce58a03d489f1d58ea4"
+    "ast_hash": "73189bb63af7dce58a03d489f1d58ea4",
+    "semantic_hash": ""
   },
-  "C:\\Users\\elife\\Desktop\\Mert_Proje\\graphstack\\scripts\\graphstack\\tests\\test_hook.py": {
+  "scripts/graphstack/tests/test_hook.py": {
     "mtime": 1778952067.6273427,
-    "hash": "c39ea56b57813beb6150b9581e081fcf"
+    "ast_hash": "c39ea56b57813beb6150b9581e081fcf",
+    "semantic_hash": ""
   },
-  "C:\\Users\\elife\\Desktop\\Mert_Proje\\graphstack\\scripts\\graphstack\\tests\\test_init.py": {
-    "mtime": 1781194452.6766386,
-    "hash": "3e7c06b4ca8b25ec12c4705dac20ee3b"
+  "scripts/graphstack/tests/test_init.py": {
+    "mtime": 1781204057.6484666,
+    "ast_hash": "34bf8b27b033eaa33a0548cbd6ff3799",
+    "semantic_hash": ""
   },
-  "C:\\Users\\elife\\Desktop\\Mert_Proje\\graphstack\\scripts\\graphstack\\tests\\test_installer.py": {
+  "scripts/graphstack/tests/test_installer.py": {
     "mtime": 1779032843.7053974,
-    "hash": "50deeae9a81c72095e8c28fdd7030066"
+    "ast_hash": "50deeae9a81c72095e8c28fdd7030066",
+    "semantic_hash": ""
   },
-  "C:\\Users\\elife\\Desktop\\Mert_Proje\\graphstack\\scripts\\graphstack\\tests\\test_platform_utils.py": {
+  "scripts/graphstack/tests/test_platform_utils.py": {
     "mtime": 1778952045.643568,
-    "hash": "7b7b0060eae778aeca4a01193fd92b8e"
+    "ast_hash": "7b7b0060eae778aeca4a01193fd92b8e",
+    "semantic_hash": ""
   },
-  "C:\\Users\\elife\\Desktop\\Mert_Proje\\graphstack\\scripts\\graphstack\\tests\\test_state.py": {
+  "scripts/graphstack/tests/test_state.py": {
     "mtime": 1781189113.2957845,
-    "hash": "208195f8945aed2bd76981500ef4cc31"
+    "ast_hash": "208195f8945aed2bd76981500ef4cc31",
+    "semantic_hash": ""
   },
-  "C:\\Users\\elife\\Desktop\\Mert_Proje\\graphstack\\scripts\\graphstack\\tests\\test_validate.py": {
+  "scripts/graphstack/tests/test_validate.py": {
     "mtime": 1781190400.139212,
-    "hash": "806b0e2e92f857a71cab32f2935d129d"
+    "ast_hash": "806b0e2e92f857a71cab32f2935d129d",
+    "semantic_hash": ""
   },
-  "C:\\Users\\elife\\Desktop\\Mert_Proje\\graphstack\\scripts\\graphstack\\tests\\__init__.py": {
+  "scripts/graphstack/tests/__init__.py": {
     "mtime": 1778952011.811597,
-    "hash": "d41d8cd98f00b204e9800998ecf8427e"
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": ""
   },
-  "C:\\Users\\elife\\Desktop\\Mert_Proje\\graphstack\\requirements.txt": {
+  "requirements.txt": {
     "mtime": 1778959224.6762686,
-    "hash": "b5a471c9f1424bd7407cd03d81398f7a"
+    "ast_hash": "b5a471c9f1424bd7407cd03d81398f7a",
+    "semantic_hash": ""
+  },
+  ".claude/settings.json": {
+    "mtime": 1781190267.8148463,
+    "ast_hash": "7e0260cd1fa598542a5ab60209875973",
+    "semantic_hash": ""
+  },
+  ".cursor/hooks.json": {
+    "mtime": 1781194443.4231448,
+    "ast_hash": "85ec7a06685b6a585befe27659f98dd6",
+    "semantic_hash": ""
+  },
+  "scripts/bootstrap.ps1": {
+    "mtime": 1781205181.1588132,
+    "ast_hash": "07b259a46f7f82ff0d0543462604c4b0",
+    "semantic_hash": ""
+  },
+  "scripts/bootstrap.sh": {
+    "mtime": 1781205112.0957844,
+    "ast_hash": "19870d8fc64786dc905052be089e195b",
+    "semantic_hash": ""
+  },
+  "scripts/gate-hook.sh": {
+    "mtime": 1781190263.5710602,
+    "ast_hash": "aea101e3405e5864dba6d9fd4434e951",
+    "semantic_hash": ""
+  },
+  "scripts/graphstack/assets/scripts/board.ps1": {
+    "mtime": 1778951987.1481488,
+    "ast_hash": "fbdbdc314cef308f5b6edd827765ab61",
+    "semantic_hash": ""
+  },
+  "scripts/graphstack/assets/scripts/board.sh": {
+    "mtime": 1778951744.8185241,
+    "ast_hash": "14adab5ab251855c8950e96bc53915d5",
+    "semantic_hash": ""
+  },
+  "scripts/graphstack/assets/scripts/gate-hook.ps1": {
+    "mtime": 1781190265.9424822,
+    "ast_hash": "7549c3a4cecd1af5cffbce2eb8af177c",
+    "semantic_hash": ""
+  },
+  "scripts/graphstack/assets/scripts/gate-hook.sh": {
+    "mtime": 1781190263.5710602,
+    "ast_hash": "aea101e3405e5864dba6d9fd4434e951",
+    "semantic_hash": ""
+  },
+  "scripts/graphstack/assets/scripts/post-commit": {
+    "mtime": 1778951775.373314,
+    "ast_hash": "576cdbbe3350e099a9df622d00b13bb1",
+    "semantic_hash": ""
+  },
+  "scripts/graphstack/assets/scripts/post-commit.ps1": {
+    "mtime": 1778951998.5793893,
+    "ast_hash": "8367e1ff83f10a33c38cef1e2adaadbe",
+    "semantic_hash": ""
+  },
+  "scripts/graphstack/bootstrap.py": {
+    "mtime": 1781198211.4861186,
+    "ast_hash": "7404d61879b53311805b0fc2c7988410",
+    "semantic_hash": ""
+  },
+  "scripts/graphstack/brief_utils.py": {
+    "mtime": 1781255696.167233,
+    "ast_hash": "1a89306a2db99a652731c33aebb40a67",
+    "semantic_hash": ""
+  },
+  "scripts/graphstack/cycle.py": {
+    "mtime": 1781255970.4142437,
+    "ast_hash": "7e9d92702c19420aa0ac10cc253f6d39",
+    "semantic_hash": ""
+  },
+  "scripts/graphstack/tests/test_assets.py": {
+    "mtime": 1781203204.8294635,
+    "ast_hash": "a2b34ae701472ce0b9bd3f8769a302b1",
+    "semantic_hash": ""
+  },
+  "scripts/graphstack/tests/test_cycle.py": {
+    "mtime": 1781255986.450704,
+    "ast_hash": "1306107a2f975f7ac675dbec9081cc74",
+    "semantic_hash": ""
+  },
+  "scripts/graphstack/tests/test_installer_hooks.py": {
+    "mtime": 1781255968.4927528,
+    "ast_hash": "d7e60c3faa895a5c78357058b77e7c6b",
+    "semantic_hash": ""
+  },
+  "scripts/sync_assets.py": {
+    "mtime": 1781194909.8683412,
+    "ast_hash": "348a10730c47118a212fb412bd62b133",
+    "semantic_hash": ""
+  },
+  "scripts/graphstack/assets/.cursor/commands/graphstack.md": {
+    "mtime": 1781265319.2173223,
+    "ast_hash": "7977480ca0ebde77e83debfc7306e33d",
+    "semantic_hash": ""
+  },
+  "scripts/graphstack/assets/.cursor/skills/architect/ARCHITECT.md": {
+    "mtime": 1781265318.2341015,
+    "ast_hash": "25fc91ccd76a45e5503699a0bc1bc1cc",
+    "semantic_hash": ""
+  },
+  "scripts/graphstack/assets/.cursor/skills/bootstrapper/BOOTSTRAPPER.md": {
+    "mtime": 1781261021.3609364,
+    "ast_hash": "7755a443ebfe23ff3c518c574616650f",
+    "semantic_hash": ""
+  },
+  "scripts/graphstack/assets/.cursor/skills/builder/BUILDER.md": {
+    "mtime": 1781261020.0415814,
+    "ast_hash": "88ee5c9de0388f60f068482e3aa36375",
+    "semantic_hash": ""
+  },
+  "scripts/graphstack/assets/.cursor/skills/qa/QA.md": {
+    "mtime": 1779042838.543111,
+    "ast_hash": "c8625e65ab8950803f3b4ed6969767b7",
+    "semantic_hash": ""
+  },
+  "scripts/graphstack/assets/.cursor/skills/reviewer/REVIEWER.md": {
+    "mtime": 1778955575.9212823,
+    "ast_hash": "a9582e672b4eacff5b57d3dd07081a48",
+    "semantic_hash": ""
+  },
+  "scripts/graphstack/assets/.cursor/skills/ship/SHIP.md": {
+    "mtime": 1778955583.3035445,
+    "ast_hash": "89a0b2b195c79b305f73231c29f6a5da",
+    "semantic_hash": ""
+  },
+  "scripts/graphstack/assets/docs/CURSOR_PROMPTS.md": {
+    "mtime": 1781261013.5652583,
+    "ast_hash": "67fd7ce89c9b945b00a1dddd2faf3888",
+    "semantic_hash": ""
+  },
+  "scripts/graphstack/assets/handoff/BOOTSTRAP.md": {
+    "mtime": 1778918580.9617295,
+    "ast_hash": "81b9d8961f870227cecc1a7cda765670",
+    "semantic_hash": ""
+  },
+  "scripts/graphstack/assets/handoff/BRIEF.md": {
+    "mtime": 1781190256.2540479,
+    "ast_hash": "ff7e7ef2eda3708b75ab7e7edcf92df6",
+    "semantic_hash": ""
+  },
+  "scripts/graphstack/assets/handoff/REVIEW.md": {
+    "mtime": 1781190256.709747,
+    "ast_hash": "24978c7e8dda82bac7407d9577b94ca7",
+    "semantic_hash": ""
+  },
+  "scripts/graphstack/assets/orchestrator/ORCHESTRATOR.md": {
+    "mtime": 1781265315.630505,
+    "ast_hash": "9975cb3e873b9301578ec1ea15d188c1",
+    "semantic_hash": ""
   }
 }

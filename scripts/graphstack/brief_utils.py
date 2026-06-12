@@ -70,14 +70,24 @@ def set_brief_status(new_status: str) -> bool:
     return True
 
 
-def review_last_verdict_approved() -> bool:
-    """True when the latest ## section in REVIEW.md contains Verdict: Approved."""
+def _review_last_section() -> str:
     try:
         text = REVIEW_PATH.read_text(encoding="utf-8")
     except OSError:
-        return False
+        return ""
     sections = re.split(r"^## ", text, flags=re.MULTILINE)
     if len(sections) <= 1:
-        return False
-    last = sections[-1]
+        return ""
+    return sections[-1]
+
+
+def review_last_has_verdict() -> bool:
+    """True when the latest ## section in REVIEW.md contains a Verdict line."""
+    last = _review_last_section()
+    return bool(last) and "Verdict:" in last
+
+
+def review_last_verdict_approved() -> bool:
+    """True when the latest ## section in REVIEW.md contains Verdict: Approved."""
+    last = _review_last_section()
     return "Verdict: Approved" in last

@@ -13,7 +13,12 @@ import sys
 from dataclasses import dataclass, field
 from pathlib import Path
 
-from .brief_utils import BRIEF_READY_STATUSES, brief_is_template, brief_status
+from .brief_utils import (
+    BRIEF_READY_STATUSES,
+    brief_is_template,
+    brief_status,
+    review_last_has_verdict,
+)
 from .constants import (
     BOARD_DIR,
     DOING_DIR,
@@ -295,6 +300,21 @@ def check_handoff_sync(report: Report, root: Path, *, strict: bool) -> None:
                 "doing_role_mismatch",
                 f"doing/ has {len(doing)} task(s) but STATE.json role is '{role}' — "
                 f"run: python -m graphstack cycle enter-builder <task-id>",
+            )
+        elif role == "builder" and not review_last_has_verdict():
+            report.add(
+                "warn",
+                "cycle_unclosed",
+                f"doing/ has task(s) with role=builder but no REVIEW Verdict — "
+                f"if implementation is done, run Reviewer→QA→Ship then "
+                f"'python -m graphstack cycle close <task-id>'",
+            )
+        elif role in ("reviewer", "qa") and not review_last_has_verdict():
+            report.add(
+                "warn",
+                "cycle_unclosed",
+                f"doing/ has task(s) with role={role} but no REVIEW Verdict yet — "
+                f"finish the cycle through Ship",
             )
     elif strict and (root / STATE_JSON).is_file():
         try:

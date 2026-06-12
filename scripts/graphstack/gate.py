@@ -29,7 +29,12 @@ import re
 import sys
 from pathlib import Path
 
-from .brief_utils import brief_is_draft, brief_is_template, review_last_verdict_approved
+from .brief_utils import (
+    brief_is_draft,
+    brief_is_template,
+    review_last_has_verdict,
+    review_last_verdict_approved,
+)
 from .constants import DOING_DIR, GATE_OFF_FILE, HANDOFF_DIR
 from .platform_utils import echo, git_available, run_git
 from .state import load_state
@@ -59,6 +64,11 @@ MSG_BRIEF_DRAFT = (
 MSG_STALE_STATE = (
     "GraphStack gate: task in doing/ but handoff/STATE.json was not updated this cycle. "
     "Run: python -m graphstack state set --role <role> --task <id>"
+)
+MSG_UNCLOSED_CYCLE = (
+    "GraphStack gate (advisory): task still in doing/ with role=builder but no REVIEW "
+    "Verdict. Implementation done ≠ cycle done — run Reviewer→QA→Ship, then "
+    "'python -m graphstack cycle close <task-id>'"
 )
 MSG_NOT_SHIP_ROLE = (
     "GraphStack gate (strict): code commits require role=ship "
@@ -243,7 +253,7 @@ def evaluate_pretooluse(tool_name: str, tool_input: dict) -> tuple[bool, str | N
 
 
 def evaluate_stop() -> str | None:
-    """R4 — advisory by default; deny when strict (handled in hook adapters)."""
+    """R4 + unclosed-cycle advisory. Deny when strict (handled in hook adapters)."""
     if gate_disabled():
         return None
     doing = _doing_tasks()
@@ -260,6 +270,9 @@ def evaluate_stop() -> str | None:
     updated = state.get("updated_at") or ""
     if started and updated < started:
         return MSG_STALE_STATE
+    role = str(state.get("role") or "").lower()
+    if role == "builder" and not review_last_has_verdict():
+        return MSG_UNCLOSED_CYCLE
     return None
 
 
