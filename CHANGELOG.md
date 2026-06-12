@@ -4,6 +4,16 @@ All notable changes to GraphStack are documented here.
 
 ---
 
+## [v4.6.1] — 2026-06-11
+
+### Changed
+- **README** — v4.6 highlights, gate v3 limitations, install tree (`cycle`, `gate`, `STATE.json`, `hooks.json`), preferred `cycle` workflow in GNAP section.
+- **`docs/CURSOR_PROMPTS.md`** — v4.6 cycle handoff, strict gate, doctor/validate tips.
+- **Role skills** — Architect, Builder, Bootstrapper use `cycle start` / `cycle enter-builder` (aligned with gate v3).
+- **`/graphstack` command** — Activation step 9 matches `ORCHESTRATOR.md` (Architect on first goal, no code on turn 1).
+
+---
+
 ## [v4.6.0] — 2026-06-11
 
 ### Added

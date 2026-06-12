@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "MertCapkin_GraphStack"
-version = "4.6.0"
+version = "4.6.1"
 description = "Graph-first AI development workflow — board, gate, graph queries, one-shot init"
 readme = "README.md"
 license = { text = "MIT" }

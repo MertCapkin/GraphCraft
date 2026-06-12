@@ -386,7 +386,7 @@ def install(target: Path, *, non_interactive: bool = False) -> int:
         echo("   pip install \"graphifyy>=0.7,<0.9\"")
 
     echo("")
-    echo("🎉 GraphStack v4.6 installed!")
+    echo("🎉 GraphStack v4.6.1 installed!")
     echo("")
     echo("Next steps:")
     echo("  1. Build graph:   open Cursor in your project → type: /graphify .")
