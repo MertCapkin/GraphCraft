@@ -18,6 +18,8 @@ from .brief_utils import (
     brief_is_template,
     brief_status,
     review_last_has_verdict,
+    review_last_qa_shippable,
+    review_last_verdict_approved,
 )
 from .constants import (
     BOARD_DIR,
@@ -306,15 +308,31 @@ def check_handoff_sync(report: Report, root: Path, *, strict: bool) -> None:
                 "warn",
                 "cycle_unclosed",
                 f"doing/ has task(s) with role=builder but no REVIEW Verdict — "
-                f"if implementation is done, run Reviewer→QA→Ship then "
-                f"'python -m graphstack cycle close <task-id>'",
+                f"run: python -m graphstack cycle enter-reviewer <task-id>",
             )
-        elif role in ("reviewer", "qa") and not review_last_has_verdict():
+        elif role == "reviewer" and not review_last_verdict_approved():
             report.add(
                 "warn",
                 "cycle_unclosed",
-                f"doing/ has task(s) with role={role} but no REVIEW Verdict yet — "
-                f"finish the cycle through Ship",
+                "role=reviewer but no Verdict: Approved — finish Reviewer, then "
+                "cycle enter-qa <task-id>",
+            )
+        elif role == "qa":
+            from .brief_utils import review_last_qa_shippable
+
+            if not review_last_qa_shippable():
+                report.add(
+                    "warn",
+                    "cycle_unclosed",
+                    "role=qa but no shippable QA Report — finish QA, then "
+                    "cycle enter-ship <task-id>",
+                )
+        elif role == "ship":
+            report.add(
+                "warn",
+                "cycle_unclosed",
+                "role=ship but task still in doing/ — run: "
+                "python -m graphstack cycle close <task-id>",
             )
     elif strict and (root / STATE_JSON).is_file():
         try:

@@ -4,6 +4,23 @@ All notable changes to GraphStack are documented here.
 
 ---
 
+## [v4.7.0] — 2026-06-12
+
+### Added
+- **`graphstack cycle enter-reviewer|enter-qa|enter-ship <task-id>`** — mechanical phase
+  handoffs with prerequisite checks (Review Approved, QA PASS/PARTIAL).
+- **Gate v4 (R5–R8)** — code commits and `board complete` / `cycle close` blocked until
+  `role=ship` and REVIEW has Verdict: Approved + shippable QA Report (default when gate on).
+
+### Changed
+- **`cycle close`** — also requires shippable QA Report (unless `--force`).
+- **`graphstack.mdc` / `ORCHESTRATOR.md`** — full-cycle mechanical handoffs; removed
+  “skip review” / “just ship” shortcuts.
+- **Role skills** — Builder/Reviewer/QA/Ship use `cycle enter-*` instead of ad-hoc `state set`.
+- **Gate hook** — malformed hook stdin no longer crashes strict mode (`_read_stdin_json`).
+
+---
+
 ## [v4.6.4] — 2026-06-12
 
 ### Added

@@ -50,6 +50,21 @@ def _enable_builder_edits(root: Path, task_id: str = "t1") -> None:
     state.run(["set", "--role", "builder", "--task", task_id])
 
 
+def _write_shippable_review(root: Path) -> None:
+    (root / "handoff" / "REVIEW.md").write_text(
+        "## Review: Gate — 2026-01-01\n### Verdict: Approved\n\n"
+        "## QA Report: Gate — 2026-01-01\n### Overall: ✅ PASS\n",
+        encoding="utf-8",
+    )
+
+
+def _enable_ship_commit(root: Path, task_id: str = "t1") -> None:
+    _make_doing_task(root, task_id)
+    _write_real_brief(root)
+    _write_shippable_review(root)
+    state.run(["set", "--role", "ship", "--task", task_id])
+
+
 # ---------------------------------------------------------------- path rules
 
 def test_is_code_path_classification() -> None:
@@ -90,9 +105,16 @@ def test_commit_denied_when_brief_is_template(project_root: Path) -> None:
     assert "template" in reason
 
 
-def test_commit_allowed_with_task_and_real_brief(project_root: Path) -> None:
-    _make_doing_task(project_root)
-    _write_real_brief(project_root)
+def test_commit_denied_without_ship_role_even_with_brief(project_root: Path) -> None:
+    _enable_builder_edits(project_root)
+    (project_root / "app.py").write_text("x = 1\n", encoding="utf-8")
+    allow, reason = gate.evaluate_command("git add app.py && git commit -m feat")
+    assert not allow
+    assert "ship" in reason
+
+
+def test_commit_allowed_after_full_lifecycle(project_root: Path) -> None:
+    _enable_ship_commit(project_root)
     (project_root / "app.py").write_text("x = 1\n", encoding="utf-8")
     allow, _ = gate.evaluate_command("git add app.py && git commit -m feat")
     assert allow
@@ -260,16 +282,16 @@ def test_cursor_pretool_shell_denies_commit(project_root: Path,
     assert _hook_output(capsys)["permission"] == "deny"
 
 
-def test_cursor_strict_mode_denies_on_internal_error(
+def test_cursor_strict_mode_allows_on_malformed_hook_stdin(
     project_root: Path, monkeypatch: pytest.MonkeyPatch,
     capsys: pytest.CaptureFixture[str],
 ) -> None:
+    """Malformed hook JSON must not lock the session (even in strict mode)."""
     monkeypatch.setenv("GRAPHSTACK_GATE", "strict")
     _feed_stdin(monkeypatch, "not-json")
     assert gate.run(["hook", "cursor"]) == 0
     out = _hook_output(capsys)
-    assert out["permission"] == "deny"
-    assert "strict" in out["agent_message"].lower()
+    assert out["permission"] == "allow"
 
 
 def test_cursor_after_edit_is_advisory(project_root: Path,
@@ -294,7 +316,6 @@ def test_cursor_hook_fails_open_on_garbage_stdin(
     captured = capsys.readouterr()
     out = json.loads(captured.out.strip().splitlines()[-1])
     assert out["permission"] == "allow"
-    assert "failing open" in captured.err
 
 
 def test_cursor_hook_empty_stdin_allows(project_root: Path,
@@ -357,7 +378,6 @@ def test_claude_hook_fails_open_on_garbage_stdin(
     assert gate.run(["hook", "claude"]) == 0
     captured = capsys.readouterr()
     assert json.loads(captured.out.strip().splitlines()[-1]) == {}
-    assert "failing open" in captured.err
 
 
 def test_claude_stop_hook_emits_system_message(project_root: Path,
@@ -422,14 +442,31 @@ def test_commit_allowed_strict_with_ship_and_review(
     project_root: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     monkeypatch.setenv("GRAPHSTACK_GATE", "strict")
-    _enable_builder_edits(project_root)
-    state.run(["set", "--role", "ship", "--task", "t1"])
-    (project_root / "handoff" / "REVIEW.md").write_text(
-        "## 2026-01-01\n### Verdict: Approved\n", encoding="utf-8"
-    )
+    _enable_ship_commit(project_root)
     (project_root / "app.py").write_text("x = 1\n", encoding="utf-8")
     allow, _ = gate.evaluate_command("git add app.py && git commit -m feat")
     assert allow
+
+
+def test_board_complete_denied_before_ship(project_root: Path) -> None:
+    _enable_builder_edits(project_root)
+    allow, reason = gate.evaluate_command(
+        "python -m graphstack board complete t1"
+    )
+    assert not allow
+    assert "ship" in reason.lower() or "board complete" in reason.lower()
+
+
+def test_cycle_close_denied_without_qa(project_root: Path) -> None:
+    _enable_builder_edits(project_root)
+    (project_root / "handoff" / "REVIEW.md").write_text(
+        "## Review\n### Verdict: Approved\n", encoding="utf-8"
+    )
+    allow, reason = gate.evaluate_command(
+        "python -m graphstack cycle close t1"
+    )
+    assert not allow
+    assert "qa" in reason.lower()
 
 
 # ------------------------------------------------------------------ adapters

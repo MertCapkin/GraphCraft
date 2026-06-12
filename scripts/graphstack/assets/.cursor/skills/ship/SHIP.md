@@ -37,9 +37,9 @@ Code Hygiene
   [ ] No hardcoded secrets, keys, or localhost URLs
 
 Board
-  [ ] Task moved to done/:
-      python -m graphstack board complete <task-id>
-  [ ] board/doing/ is empty after this commit
+  [ ] Cycle closed (moves task to done/):
+      python -m graphstack cycle close <task-id>
+  [ ] board/doing/ is empty after close
 
 Handoff Files
   [ ] handoff/BRIEF.md has final status noted

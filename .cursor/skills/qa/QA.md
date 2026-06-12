@@ -140,6 +140,12 @@ Entry: [node] → [node] → [node] → Output: [node]
 [Ship / Return to Builder with specific failures / Needs Architect review]
 ```
 
+After a PASS or acceptable PARTIAL, run:
+```bash
+python -m graphstack cycle enter-ship <task-id>
+```
+Announce `[QA → SHIP]` and execute Ship in the same session.
+
 ---
 
 ## QA Decision Rules

@@ -6,6 +6,7 @@
 $ErrorActionPreference = 'Stop'
 
 $scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
+
 $env:PYTHONPATH = if ($env:PYTHONPATH) {
     "$scriptDir;$env:PYTHONPATH"
 } else {

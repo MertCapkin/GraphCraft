@@ -11,7 +11,7 @@ Eleven sub-commands:
 - ``gate``      — deterministic process gate (check / cursor hook / claude hook)
 - ``state``     — machine-readable session state (handoff/STATE.json)
 - ``graph``     — graphify query wrappers (query / path / explain / update)
-- ``cycle``     — cycle start / enter-builder / close
+- ``cycle``     — cycle start / enter-builder / enter-reviewer / enter-qa / enter-ship / close
 
 Each sub-command parses its own arguments to keep the dispatcher minimal.
 """
@@ -44,7 +44,11 @@ def _build_parser() -> argparse.ArgumentParser:
     sub.add_parser("gate", help="Process gate (check / hook adapters)", add_help=False)
     sub.add_parser("state", help="Session state (handoff/STATE.json)", add_help=False)
     sub.add_parser("graph", help="Graphify query wrappers", add_help=False)
-    sub.add_parser("cycle", help="Cycle lifecycle (start / enter-builder / close)", add_help=False)
+    sub.add_parser(
+        "cycle",
+        help="Cycle lifecycle (start / enter-* / close)",
+        add_help=False,
+    )
 
     return parser
 

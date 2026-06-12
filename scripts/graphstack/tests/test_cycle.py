@@ -54,6 +54,55 @@ def test_cycle_close_requires_review_verdict(project_root: Path) -> None:
     assert (project_root / "handoff" / "board" / "doing" / "feat-c.json").is_file()
 
 
+def test_enter_reviewer_sets_role(project_root: Path) -> None:
+    cycle.run(["start", "feat-r", "Feature", "R"])
+    (project_root / "handoff" / "BRIEF.md").write_text(
+        "# Brief: R\n**Status:** Ready for Builder\n", encoding="utf-8"
+    )
+    cycle.run(["enter-builder", "feat-r"])
+    assert cycle.run(["enter-reviewer", "feat-r"]) == 0
+    st = json.loads((project_root / "handoff" / "STATE.json").read_text(encoding="utf-8"))
+    assert st["role"] == "reviewer"
+
+
+def test_enter_qa_requires_approved_review(project_root: Path) -> None:
+    cycle.run(["start", "feat-q", "Feature", "Q"])
+    (project_root / "handoff" / "BRIEF.md").write_text(
+        "# Brief: Q\n**Status:** Ready for Builder\n", encoding="utf-8"
+    )
+    cycle.run(["enter-builder", "feat-q"])
+    cycle.run(["enter-reviewer", "feat-q"])
+    assert cycle.run(["enter-qa", "feat-q"]) == 1
+    (project_root / "handoff" / "REVIEW.md").write_text(
+        "## Review: Q\n### Verdict: Approved\n", encoding="utf-8"
+    )
+    assert cycle.run(["enter-qa", "feat-q"]) == 0
+    st = json.loads((project_root / "handoff" / "STATE.json").read_text(encoding="utf-8"))
+    assert st["role"] == "qa"
+
+
+def test_enter_ship_requires_qa_pass(project_root: Path) -> None:
+    cycle.run(["start", "feat-s", "Feature", "S"])
+    (project_root / "handoff" / "BRIEF.md").write_text(
+        "# Brief: S\n**Status:** Ready for Builder\n", encoding="utf-8"
+    )
+    cycle.run(["enter-builder", "feat-s"])
+    cycle.run(["enter-reviewer", "feat-s"])
+    (project_root / "handoff" / "REVIEW.md").write_text(
+        "## Review: S\n### Verdict: Approved\n", encoding="utf-8"
+    )
+    cycle.run(["enter-qa", "feat-s"])
+    assert cycle.run(["enter-ship", "feat-s"]) == 1
+    (project_root / "handoff" / "REVIEW.md").write_text(
+        "## Review: S\n### Verdict: Approved\n\n"
+        "## QA Report: S\n### Overall: PASS\n",
+        encoding="utf-8",
+    )
+    assert cycle.run(["enter-ship", "feat-s"]) == 0
+    st = json.loads((project_root / "handoff" / "STATE.json").read_text(encoding="utf-8"))
+    assert st["role"] == "ship"
+
+
 def test_cycle_close_moves_task_to_done(project_root: Path) -> None:
     cycle.run(["start", "feat-d", "Feature", "D"])
     (project_root / "handoff" / "BRIEF.md").write_text(
@@ -61,7 +110,9 @@ def test_cycle_close_moves_task_to_done(project_root: Path) -> None:
     )
     cycle.run(["enter-builder", "feat-d"])
     (project_root / "handoff" / "REVIEW.md").write_text(
-        "## 2026-06-12\n### Verdict: Approved\n", encoding="utf-8"
+        "## Review: D — 2026-06-12\n### Verdict: Approved\n\n"
+        "## QA Report: D — 2026-06-12\n### Overall: ✅ PASS\n",
+        encoding="utf-8",
     )
     assert cycle.run(["close", "feat-d"]) == 0
     assert (project_root / "handoff" / "board" / "done" / "feat-d.json").is_file()

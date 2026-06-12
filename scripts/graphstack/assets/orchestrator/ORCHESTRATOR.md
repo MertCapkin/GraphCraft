@@ -199,6 +199,8 @@ Brief locked. Switching to Builder.
 ### BUILDER → REVIEWER
 **Trigger:** All acceptance criteria in BRIEF.md have been implemented.
 
+**Mechanical:** `python -m graphstack cycle enter-reviewer <task-id>`.
+
 **Action:**
 ```
 [BUILDER → REVIEWER]
@@ -210,7 +212,8 @@ Files to review: [list from brief's In Scope section]
 **Never:** Ask the user "should I review now?" or "what should I review?" — use the brief.
 
 **Never:** Stop after Builder with the task still in `doing/` or `STATE.json role=builder`.
-Always run `state set --role reviewer` and enter Reviewer in the same session.
+Always run `python -m graphstack cycle enter-reviewer <task-id>` and enter Reviewer
+in the same session (do not only `state set`).
 
 ### REVIEWER → BUILDER (rejection path)
 **Trigger:** Any criterion fails OR unexpected side effect found.
@@ -235,6 +238,8 @@ Options: (1) Simplify scope, (2) Manual intervention, (3) Continue cycling"
 ### REVIEWER → QA (approval path)
 **Trigger:** All criteria pass, no blocking side effects.
 
+**Mechanical:** `python -m graphstack cycle enter-qa <task-id>` (requires Verdict: Approved).
+
 **Action:**
 ```
 [REVIEWER → QA]
@@ -257,7 +262,9 @@ Switching to Builder.
 ```
 
 ### QA → SHIP (pass path)
-**Trigger:** All criteria PASS.
+**Trigger:** All criteria PASS (or acceptable PARTIAL).
+
+**Mechanical:** `python -m graphstack cycle enter-ship <task-id>` (requires QA Report in REVIEW.md).
 
 **Action:**
 ```
@@ -272,9 +279,8 @@ Switching to Ship.
 
 **Mechanical close (required):**
 ```bash
-python -m graphstack board complete <task-id>
-python -m graphstack state set --role idle
-# equivalent: python -m graphstack cycle close <task-id>
+python -m graphstack cycle enter-ship <task-id>   # if not already ship role
+python -m graphstack cycle close <task-id>
 ```
 
 **Action:**
@@ -302,8 +308,7 @@ The user can interrupt at any time. Handle naturally:
 | "stop" / "dur" | Pause. Report current state. Ask what to do. |
 | "change the brief" | Return to ARCHITECT (or BOOTSTRAPPER if in bootstrap mode). Revise. Re-confirm before resuming. |
 | "change the plan" | Return to BOOTSTRAPPER. Revise BOOTSTRAP.md. Re-confirm before resuming. |
-| "skip review" | Warn once ("Review catches graph side effects — skip anyway?"). If confirmed, go to QA directly. |
-| "just ship it" | Warn once. If confirmed, run SHIP checklist and skip QA. |
+| "skip review" / "just ship" | Refuse. Full cycle is mandatory. Use `cycle close --force` only for human recovery. |
 | "start over" | Clear state. Return to IDLE. |
 | "what cycle are we on?" | Report cycle N/Total from BOOTSTRAP.md. |
 | "what state are we in?" | Report current role + progress summary. |

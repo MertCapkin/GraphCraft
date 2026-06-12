@@ -162,10 +162,11 @@ Ready for Reviewer.
 
 **Immediately transition — do NOT end the session here:**
 ```bash
-python -m graphstack state set --role reviewer --task <task-id>
+python -m graphstack cycle enter-reviewer <task-id>
 ```
 Announce `[BUILDER → REVIEWER]` and execute Reviewer logic in the same session.
 Never leave the task in `doing/` with `role=builder` after implementation.
+Never `git commit` or `board complete` — gate requires full Reviewer→QA→Ship first.
 
 ---
 

@@ -120,7 +120,13 @@ Append to `handoff/REVIEW.md` with a date header:
 **Notes for next cycle:**
 - [Optional: observations that aren't blocking]
 
-**Handoff:** Ready for QA or ship.
+**Handoff:** Ready for QA.
+
+After appending this section, run:
+```bash
+python -m graphstack cycle enter-qa <task-id>
+```
+Announce `[REVIEWER → QA]` and execute QA in the same session.
 ```
 
 ### If Rejected:

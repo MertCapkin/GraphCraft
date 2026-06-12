@@ -12,6 +12,7 @@ from .brief_utils import (
     brief_is_ready_for_builder,
     brief_is_template,
     read_brief_text,
+    review_last_qa_shippable,
     review_last_verdict_approved,
     set_brief_status,
 )
@@ -76,6 +77,64 @@ def cmd_enter_builder(args: argparse.Namespace) -> int:
     return 0
 
 
+def _require_doing(task_id: str) -> int | None:
+    if not (DOING_DIR / f"{task_id}.json").is_file():
+        echo(f"❌ Task '{task_id}' not found in doing/")
+        echo("   Run: python -m graphstack board status")
+        return 1
+    return None
+
+
+def cmd_enter_reviewer(args: argparse.Namespace) -> int:
+    """Hand off Builder → Reviewer after implementation."""
+    if (err := _require_doing(args.task_id)) is not None:
+        return err
+    rc = board.cmd_claim(argparse.Namespace(task_id=args.task_id, role="reviewer"))
+    if rc != 0:
+        return rc
+    set_brief_status("In Review")
+    save_state("reviewer", args.task_id, "cycle enter-reviewer")
+    echo("✅ Reviewer role active — append handoff/REVIEW.md with Verdict")
+    echo(f"   Next: python -m graphstack cycle enter-qa {args.task_id}")
+    return 0
+
+
+def cmd_enter_qa(args: argparse.Namespace) -> int:
+    """Hand off Reviewer → QA after Verdict: Approved."""
+    if (err := _require_doing(args.task_id)) is not None:
+        return err
+    if not review_last_verdict_approved():
+        echo("❌ handoff/REVIEW.md has no 'Verdict: Approved' in the latest cycle")
+        echo("   Complete Reviewer first")
+        return 1
+    rc = board.cmd_claim(argparse.Namespace(task_id=args.task_id, role="qa"))
+    if rc != 0:
+        return rc
+    save_state("qa", args.task_id, "cycle enter-qa")
+    echo("✅ QA role active — trace call paths and append QA Report to REVIEW.md")
+    echo(f"   Next: python -m graphstack cycle enter-ship {args.task_id}")
+    return 0
+
+
+def cmd_enter_ship(args: argparse.Namespace) -> int:
+    """Hand off QA → Ship after QA PASS/PARTIAL."""
+    if (err := _require_doing(args.task_id)) is not None:
+        return err
+    if not review_last_verdict_approved():
+        echo("❌ Reviewer must approve before Ship")
+        return 1
+    if not review_last_qa_shippable():
+        echo("❌ handoff/REVIEW.md has no shippable QA Report (Overall: PASS or PARTIAL)")
+        echo("   Complete QA first")
+        return 1
+    rc = board.cmd_claim(argparse.Namespace(task_id=args.task_id, role="ship"))
+    if rc != 0:
+        return rc
+    save_state("ship", args.task_id, "cycle enter-ship")
+    echo("✅ Ship role active — run checklist, then: cycle close <task-id>")
+    return 0
+
+
 def cmd_close(args: argparse.Namespace) -> int:
     """Complete board task and reset state after Reviewer/QA/Ship."""
     task_id: str = args.task_id
@@ -88,6 +147,10 @@ def cmd_close(args: argparse.Namespace) -> int:
     if not args.force and not review_last_verdict_approved():
         echo("❌ handoff/REVIEW.md has no 'Verdict: Approved' in the latest cycle")
         echo("   Complete Reviewer → QA → Ship first, or use --force to close anyway")
+        return 1
+    if not args.force and not review_last_qa_shippable():
+        echo("❌ handoff/REVIEW.md has no shippable QA Report (Overall: PASS or PARTIAL)")
+        echo("   Complete QA → Ship first, or use --force to close anyway")
         return 1
 
     rc = board.cmd_complete(argparse.Namespace(task_id=task_id))
@@ -121,6 +184,24 @@ def _build_parser() -> argparse.ArgumentParser:
     )
     p_builder.add_argument("task_id", help="board task id to claim")
 
+    p_reviewer = sub.add_parser(
+        "enter-reviewer",
+        help="hand off Builder → Reviewer after implementation",
+    )
+    p_reviewer.add_argument("task_id", help="board task id in doing/")
+
+    p_qa = sub.add_parser(
+        "enter-qa",
+        help="hand off Reviewer → QA after Verdict: Approved",
+    )
+    p_qa.add_argument("task_id", help="board task id in doing/")
+
+    p_ship = sub.add_parser(
+        "enter-ship",
+        help="hand off QA → Ship after QA PASS/PARTIAL",
+    )
+    p_ship.add_argument("task_id", help="board task id in doing/")
+
     p_close = sub.add_parser(
         "close",
         help="board complete + BRIEF Complete + state idle (after Ship)",
@@ -138,6 +219,9 @@ def _build_parser() -> argparse.ArgumentParser:
 _DISPATCH = {
     "start": cmd_start,
     "enter-builder": cmd_enter_builder,
+    "enter-reviewer": cmd_enter_reviewer,
+    "enter-qa": cmd_enter_qa,
+    "enter-ship": cmd_enter_ship,
     "close": cmd_close,
 }
 

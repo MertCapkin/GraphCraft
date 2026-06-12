@@ -12,12 +12,14 @@ Rules:
   R3  doing/ + template BRIEF → DENY (commit and code edit)
   R2b Edit/Write on code path while STATE.role != builder → DENY
   R3b Edit/Write on code path while BRIEF status is Draft → DENY
-  R4  Stop + stale STATE.json → advisory (DENY when GRAPHSTACK_GATE=strict)
-  R5  ``git commit`` on code paths while role != ship → DENY (strict only)
-  R6  ``git commit`` on code paths without REVIEW Verdict: Approved → DENY (strict only)
+  R4  Stop + stale STATE.json / unclosed builder → advisory (DENY when strict)
+  R5  Code ``git commit`` while role != ship → DENY (default when gate on)
+  R6  Code commit without REVIEW Verdict: Approved → DENY (default when gate on)
+  R7  Code commit without shippable QA Report → DENY (default when gate on)
+  R8  ``board complete`` / ``cycle close`` without ship prerequisites → DENY
 
 Bypass: ``GRAPHSTACK_GATE=off`` or ``handoff/.gate-off``
-Strict: ``GRAPHSTACK_GATE=strict`` — R4–R6 enforced, hook errors deny
+Strict: ``GRAPHSTACK_GATE=strict`` — R4 + hook internal errors deny (fail-closed)
 """
 
 from __future__ import annotations
@@ -33,6 +35,7 @@ from .brief_utils import (
     brief_is_draft,
     brief_is_template,
     review_last_has_verdict,
+    review_last_qa_shippable,
     review_last_verdict_approved,
 )
 from .constants import DOING_DIR, GATE_OFF_FILE, HANDOFF_DIR
@@ -40,6 +43,12 @@ from .platform_utils import echo, git_available, run_git
 from .state import load_state
 
 GIT_COMMIT_RE = re.compile(r"\bgit\b[^|&;]*\bcommit\b")
+BOARD_CLOSE_RE = re.compile(
+    r"\b(graphstack|python\s+-m\s+graphstack)\b[^|&;]*\bboard\b[^|&;]*\bcomplete\b"
+)
+CYCLE_CLOSE_RE = re.compile(
+    r"\b(graphstack|python\s+-m\s+graphstack)\b[^|&;]*\bcycle\b[^|&;]*\bclose\b"
+)
 
 MSG_NO_TASK = (
     "GraphStack gate: no task in handoff/board/doing/. "
@@ -71,12 +80,21 @@ MSG_UNCLOSED_CYCLE = (
     "'python -m graphstack cycle close <task-id>'"
 )
 MSG_NOT_SHIP_ROLE = (
-    "GraphStack gate (strict): code commits require role=ship "
-    "(current: {role}). Complete Reviewer → QA → Ship first."
+    "GraphStack gate: code commits require role=ship "
+    "(current: {role}). Run cycle enter-reviewer → enter-qa → enter-ship first."
 )
 MSG_REVIEW_NOT_APPROVED = (
-    "GraphStack gate (strict): handoff/REVIEW.md has no 'Verdict: Approved' "
-    "in the latest cycle. Reviewer must approve before shipping code."
+    "GraphStack gate: handoff/REVIEW.md has no 'Verdict: Approved' "
+    "in the latest cycle. Run Reviewer, then: cycle enter-qa <task-id>"
+)
+MSG_QA_NOT_SHIPPABLE = (
+    "GraphStack gate: handoff/REVIEW.md has no shippable QA Report "
+    "(Overall: PASS or PARTIAL). Run QA, then: cycle enter-ship <task-id>"
+)
+MSG_EARLY_BOARD_CLOSE = (
+    "GraphStack gate: board complete / cycle close require role=ship and "
+    "completed Reviewer→QA phases. Run: cycle enter-reviewer → enter-qa → "
+    "enter-ship, then cycle close <task-id>"
 )
 
 
@@ -159,15 +177,15 @@ def _code_edit_checks() -> tuple[bool, str | None]:
     return True, None
 
 
-def _commit_strict_checks() -> tuple[bool, str | None]:
-    """R5 + R6 — only when GRAPHSTACK_GATE=strict."""
-    if not gate_strict():
-        return True, None
+def _lifecycle_close_checks() -> tuple[bool, str | None]:
+    """R5–R7 for commits and R8 for board/cycle close (default when gate on)."""
     role = _current_role()
     if role != "ship":
         return False, MSG_NOT_SHIP_ROLE.format(role=role or "none")
     if not review_last_verdict_approved():
         return False, MSG_REVIEW_NOT_APPROVED
+    if not review_last_qa_shippable():
+        return False, MSG_QA_NOT_SHIPPABLE
     return True, None
 
 
@@ -199,10 +217,25 @@ def _commit_candidate_files(command: str) -> list[str]:
 # ---------------------------------------------------------------- rule logic
 
 def evaluate_command(command: str) -> tuple[bool, str | None]:
-    """R1 + R3 + R5 + R6 for shell commands. Returns (allow, deny_reason)."""
+    """R1 + R3 + R5–R8 for shell commands. Returns (allow, deny_reason)."""
     if gate_disabled():
         return True, None
-    if not GIT_COMMIT_RE.search(command):
+
+    is_commit = bool(GIT_COMMIT_RE.search(command))
+    is_board_close = bool(BOARD_CLOSE_RE.search(command))
+    is_cycle_close = bool(CYCLE_CLOSE_RE.search(command))
+    if not is_commit and not is_board_close and not is_cycle_close:
+        return True, None
+
+    if is_board_close or is_cycle_close:
+        if is_cycle_close and re.search(r"\b--force\b", command):
+            return True, None
+        doing = _doing_tasks()
+        if not doing:
+            return False, MSG_NO_TASK
+        allow, reason = _lifecycle_close_checks()
+        if not allow:
+            return False, reason if not is_board_close else MSG_EARLY_BOARD_CLOSE
         return True, None
 
     candidates = _commit_candidate_files(command)
@@ -216,7 +249,7 @@ def evaluate_command(command: str) -> tuple[bool, str | None]:
     if _brief_is_unwritten():
         return False, MSG_TEMPLATE_BRIEF
 
-    allow, reason = _commit_strict_checks()
+    allow, reason = _lifecycle_close_checks()
     if not allow:
         return False, reason
     return True, None
@@ -307,7 +340,8 @@ def run_check(argv: list[str]) -> int:
         if doing and _brief_is_unwritten():
             failures.append("task in doing/ but handoff/BRIEF.md is still the template")
         role = _current_role()
-        if doing and role not in ("builder",):
+        active_roles = ("architect", "builder", "reviewer", "qa", "ship")
+        if doing and role not in active_roles:
             failures.append(
                 f"task in doing/ but STATE.json role is '{role or 'none'}' "
                 f"— run: graphstack cycle enter-builder <task-id>"
@@ -338,7 +372,10 @@ def _read_stdin_json() -> dict:
     raw = sys.stdin.read()
     if not raw.strip():
         return {}
-    data = json.loads(raw)
+    try:
+        data = json.loads(raw)
+    except json.JSONDecodeError:
+        return {}
     return data if isinstance(data, dict) else {}
 
 
