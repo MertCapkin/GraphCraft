@@ -24,10 +24,10 @@ When activated, execute this sequence exactly:
    → If board has no matching task: skip board step silently, continue
 
 5. Determine what to review:
-   a. If called from Orchestrator (Builder just completed): review the files
-      listed in handoff/BRIEF.md "In Scope" section — no need to ask.
-   b. If activated manually: ask once — "Which files or diff should I review?"
-      then wait for the answer before proceeding.
+   a. Read handoff/BRIEF.md **In Scope** file list — this is the default scope.
+   b. If In Scope is empty or ambiguous: ask once — "Which files or diff should I review?"
+      then wait before proceeding.
+   (Do not infer "called from Orchestrator" vs manual — BRIEF scope always wins.)
 
 6. Run the review checklist below.
 ```
@@ -55,6 +55,8 @@ For every changed file, do this:
 graph.json → node[changed_file].edges (both directions)
 ```
 For each neighbor: does the change break any assumption they make?
+
+**Neighbor read budget:** graph-list all neighbors (free). Raw file reads for neighbors: **max 3** per review — see `orchestrator/TOKEN_OPTIMIZER.md`. If more inspection is needed, flag Architect in REVIEW.md instead of reading all files.
 
 **2. Check god nodes** — does the change affect any high-degree node?
 ```
@@ -121,20 +123,24 @@ Append to `handoff/REVIEW.md` with a date header:
 - [Optional: observations that aren't blocking]
 
 **Handoff:** Ready for QA.
+```
 
 After appending this section, run:
 ```bash
 python -m graphstack cycle enter-qa <task-id>
 ```
 Announce `[REVIEWER → QA]` and execute QA in the same session.
-```
 
 ### If Rejected:
 
 ```markdown
+## Loop count: [N]
+
 ## Review: [Feature Name] — [YYYY-MM-DD] — ❌ REJECTED
 
 ### Verdict: Rejected — Send back to Builder
+
+**Criteria status:** [M] of [N] met — failed: [list numbers]; passed: [list numbers if partial]
 
 **Failed criteria:**
 - [ ] Criterion [N]: [what's wrong, what's expected]
@@ -147,10 +153,25 @@ Announce `[REVIEWER → QA]` and execute QA in the same session.
 2. [Specific, actionable fix #2]
 
 **Not required (defer):**
-- [Out-of-scope observations]
+- [Out-of-scope observations — or see ## Deferred debt below]
 
-**Handoff:** Return to Builder with these specific fixes.
+**Handoff:** Return to Builder with these specific fixes only.
 ```
+
+Increment **Loop count** on every rejection (read previous value from REVIEW.md first).
+
+### Deferred debt (non-blocking style / follow-up)
+
+Minor style issues → **Approve with note**, not reject. Record in REVIEW.md:
+
+```markdown
+## Deferred debt — [YYYY-MM-DD]
+- [file:line]: [style/nit] — not blocking; optional follow-up task
+```
+
+Ship may ask user: "Open a follow-up board task for deferred debt?"
+
+After appending rejection or approval, run the appropriate `cycle enter-*` command.
 
 ---
 
@@ -162,7 +183,7 @@ Any criterion failed                  → Reject with specific fix required
 Out-of-scope change found             → Reject if risky, note if harmless
 God node affected unexpectedly        → Reject, flag to Architect
 Test missing for new behavior         → Reject
-Minor style issue only                → Approve with note, don't reject
+Minor style issue only                → Approve with note in ## Deferred debt, don't reject
 ```
 
 ---

@@ -14,7 +14,7 @@ One prompt starts the entire lifecycle — from blank repo to production.
 
 </div>
 
-> **v4.6 highlights:** `graphstack cycle` (start / enter-builder), **gate v3** (role=builder for edits, strict ship/review), expanded `alwaysApply` rules, hook **merge** on install. See [CHANGELOG.md](CHANGELOG.md).
+> **v4.7 highlights:** Full-cycle **`cycle enter-reviewer|enter-qa|enter-ship`**, **gate v4** (ship + QA before commit/close), protocol hardening in **v4.7.1** (resume matrix, handoff conventions, token budgets). See [CHANGELOG.md](CHANGELOG.md).
 
 ---
 
@@ -332,12 +332,12 @@ GraphStack is a **workflow protocol** (markdown + handoff files), not a runtime 
 
 | Topic | Reality |
 |-------|---------|
-| Role automation | Prompts + **gate v3 (v4.6)**: code edits require `STATE.json role=builder` and a task in `doing/`. **`graphstack cycle`** binds board + state. Strict mode (`GRAPHSTACK_GATE=strict`) also enforces ship/review before code commits. `afterFileEdit` on Cursor remains advisory-only backup. |
+| Role automation | Prompts + **gate v4 (v4.7)**: code edits require `STATE.json role=builder` and a task in `doing/`; commits/close require **Reviewer + QA + Ship**. **`graphstack cycle`** binds board + state + phase handoffs. Strict mode (`GRAPHSTACK_GATE=strict`) fail-closes on hook errors. `afterFileEdit` on Cursor remains advisory-only backup. |
 | Token savings | The table above is **estimated**, not guaranteed. Small repos or undisciplined sessions may use **more** tokens than unstructured chat. |
 | Knowledge graph | Value appears on **20+ file** codebases with module boundaries. Meta-repos full of markdown produce noisy graphs — use `.graphifyignore` (included in this repo). |
 | Setup | Graphify + `pip install MertCapkin_GraphStack` + `graphstack init` — or one bootstrap command. See [PyPI](https://pypi.org/project/MertCapkin_GraphStack/). |
 
-**Health checks:** `graphstack doctor` and `graphstack validate` (exit code for CI). v4.6 adds handoff sync + `hooks.json` checks. Use `--strict` before Builder handoff; use `--fail-stale-graph` in CI after code changes.
+**Health checks:** `graphstack doctor` and `graphstack validate` (exit code for CI). v4.7 adds framework handoff checks (`framework_*` warnings). Use `--strict` before Builder handoff; use `--fail-stale-graph` in CI after code changes.
 
 ```bash
 graphstack doctor
@@ -391,7 +391,7 @@ Requires `graphify` on PATH (`pip install -r requirements.txt`). Agents should p
 
 ## Process Gate (`graphstack gate`)
 
-**Gate v3 (v4.6)** adds role-aware enforcement so Architect → Builder → Reviewer steps are harder to skip silently. Cursor `preToolUse` blocks edits before they land; use **`graphstack cycle`** for the mechanical handoff steps.
+**Gate v4 (v4.7)** adds role-aware enforcement and full-cycle prerequisites before code commits and `cycle close`. Cursor `preToolUse` blocks edits before they land; use **`graphstack cycle enter-*`** for mechanical phase handoffs.
 
 | Rule | What it blocks | Cursor | Claude Code |
 |------|----------------|--------|-------------|
@@ -401,18 +401,23 @@ Requires `graphify` on PATH (`pip install -r requirements.txt`). Agents should p
 | R2b | Code edit while `STATE.json` role ≠ `builder` | deny | deny |
 | R3b | Code edit while `BRIEF.md` status is Draft | deny | deny |
 | R4 | Stale `STATE.json` vs board claim | advisory (`stop`; **deny** in strict) | same |
-| R5 | Code commit while role ≠ `ship` | — | — (**strict** only) |
-| R6 | Code commit without `Verdict: Approved` in `REVIEW.md` | — | — (**strict** only) |
+| R5 | Code commit while role ≠ `ship` | deny (gate on) | deny (gate on) |
+| R6 | Code commit without `Verdict: Approved` in `REVIEW.md` | deny (gate on) | deny (gate on) |
+| R7 | Code commit without shippable QA Report | deny (gate on) | deny (gate on) |
+| R8 | `board complete` / `cycle close` without ship prerequisites | deny (gate on) | deny (gate on) |
 | — | Edit already applied (legacy hook) | advisory (`afterFileEdit`) | — |
 
 ```bash
 python -m graphstack cycle start my-feature "Add email verification"
-python -m graphstack cycle enter-builder my-feature   # after Architect writes BRIEF
-python -m graphstack cycle close my-feature           # after Reviewer/QA/Ship (or --force)
+python -m graphstack cycle enter-builder my-feature    # after Architect writes BRIEF
+python -m graphstack cycle enter-reviewer my-feature   # after Builder finishes
+python -m graphstack cycle enter-qa my-feature         # after Reviewer approves
+python -m graphstack cycle enter-ship my-feature         # after QA PASS/PARTIAL
+python -m graphstack cycle close my-feature              # after Ship checklist (or --force)
 python -m graphstack gate check          # CI / manual — exit 1 on violation
 python -m graphstack state set --role builder --task my-feature
 GRAPHSTACK_GATE=off                      # emergency bypass (one session)
-GRAPHSTACK_GATE=strict                   # R4–R6 + fail-closed on hook errors
+GRAPHSTACK_GATE=strict                   # R4 fail-closed + hook errors deny
 ```
 
 **Install** writes or **merges** `.cursor/hooks.json` and `.claude/settings.json` with OS-specific shim commands (`scripts/gate-hook.ps1` on Windows, `scripts/gate-hook.sh` on macOS/Linux). By default hooks **fail open** if Python is missing — use `GRAPHSTACK_GATE=strict` for teams that prefer blocking over availability.
@@ -425,7 +430,7 @@ GRAPHSTACK_GATE=strict                   # R4–R6 + fail-closed on hook errors
 
 ```
 your-project/
-├── .cursor/rules/graphstack.mdc          ← always-active rules v4.6 (Cursor auto-loads)
+├── .cursor/rules/graphstack.mdc          ← always-active rules v4.7.1 (Cursor auto-loads)
 ├── .cursor/hooks.json                    ← process gate (merged on reinstall)
 ├── .cursor/commands/graphstack.md        ← `/graphstack` Cursor slash-command bootstrapper
 ├── orchestrator/
@@ -506,12 +511,13 @@ bash scripts/board.sh log
 
 #### Cross-platform (any shell with Python)
 
-**Preferred — full cycle handoff (v4.6):**
+**Preferred — full cycle handoff (v4.7):**
 
 ```bash
 python -m graphstack cycle start add-oauth "Add OAuth login with GitHub"
 # Architect writes handoff/BRIEF.md → Status: Ready for Builder
 python -m graphstack cycle enter-builder add-oauth
+# … implement → enter-reviewer → enter-qa → enter-ship → cycle close
 ```
 
 **Low-level board (still supported):**

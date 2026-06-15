@@ -4,6 +4,20 @@ All notable changes to GraphStack are documented here.
 
 ---
 
+## [v4.7.1] — 2026-06-14
+
+### Changed — Protocol hardening (documentation)
+
+- **ORCHESTRATOR** — Resume matrix uses `STATE.json` role + BRIEF status (step 9c); explicit-only brief approval; Reviewer loop count persisted in `REVIEW.md`; bootstrap graphify hard stop before next cycle brief; **Hotfix Path**; QA→Architect escalation interrupt.
+- **TOKEN_OPTIMIZER** — Manual `graph.json` patterns marked conceptual (use `graph query`); replaced ~80% context rule with 5+ file read STATE.md checkpoint; **Reviewer neighbor budget** (max 3 raw reads).
+- **ARCHITECT** — BRIEF status transition table; god nodes via graph query (removed fixed `degree > 10`); multi-cycle split rule for large features on existing codebases (not Bootstrapper).
+- **BUILDER** — Out-of-scope notes append to `REVIEW.md` ## Builder Notes; large-file targeted read; gate fail → `cycle enter-builder` recovery.
+- **REVIEWER** — BRIEF In Scope always default; loop count + partial criteria in reject template; ## Deferred debt for non-blocking nits.
+- **QA** — No test runner fallback (manual path trace); honest concurrency candidate wording; ## Escalation: Architect required block.
+- **SHIP** — Debug log check via git diff; commit types `chore` / `ci` / `style`; hotfix flow documented.
+
+---
+
 ## [v4.7.0] — 2026-06-12
 
 ### Added

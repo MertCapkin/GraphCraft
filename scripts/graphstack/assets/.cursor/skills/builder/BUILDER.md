@@ -31,7 +31,8 @@ When activated, execute this sequence exactly:
    # Fallback if task already in doing/: board claim <task-id> builder
    #          + state set --role builder --task <task-id>
 
-5. Verify STATE.json shows role=builder before any code edit (gate denies otherwise)
+5. If gate denies a code edit: run `cycle enter-builder <task-id>` (wrong/missing role).
+   Do not manually "verify" STATE.json on every edit — the gate enforces it.
 
 6. Report once, then start building immediately:
    "[BUILDER MODE] Task: [task-id] | Criteria: [N] | Files: [list]"
@@ -95,7 +96,8 @@ Never jump ahead. Never batch unrelated changes.
 
 ```
 Need to understand a file's structure?    → Check graph node first
-Need to understand a function?            → Read only that function
+Need to understand a function?            → Read only that function (offset/limit)
+Large file (1000+ lines)?                 → graph explain/path to find line range; never read whole file for one edit
 Need to understand a whole module?        → Read GRAPH_REPORT.md cluster
 Need to read 3+ files?                    → Read them in parallel (one tool call)
 Already read a file this session?         → Use existing context, don't re-read
@@ -132,11 +134,15 @@ Do not ask multiple questions. Do not proceed with an assumption on ambiguous po
 If you notice something out of scope while building:
 
 ```
-Note for Reviewer: [File] has [issue] that is outside this brief's scope.
-Recommend addressing in next cycle.
-```
+Append to handoff/REVIEW.md (create if missing):
+
+## Builder Notes — [YYYY-MM-DD]
+
+- [File]: [issue] — outside brief scope. Recommend follow-up cycle.
 
 Then continue building what the brief says. Do not fix it now.
+Do not rely on chat-only notes — they drop from context on long sessions.
+```
 
 ---
 

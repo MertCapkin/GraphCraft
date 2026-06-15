@@ -32,8 +32,11 @@ Documentation
   [ ] Any known limitations documented
 
 Code Hygiene
-  [ ] No debug logs, console.log, or print statements left in
-  [ ] No TODO comments added (or filed as issues)
+  [ ] No debug logs left in changed lines — check via diff, not full file re-read:
+      python -m graphstack run -- git diff
+      python -m graphstack run -- git diff --name-only | then grep debug patterns on diff hunks only
+      (Ship does not re-read source files; inspect staged/changed hunks only)
+  [ ] No TODO comments added (or filed as issues / ## Deferred debt in REVIEW.md)
   [ ] No hardcoded secrets, keys, or localhost URLs
 
 Board
@@ -95,7 +98,22 @@ Tested:
 Graph updated: yes — [N new nodes] / no — content edits only
 ```
 
-Types: `feat` / `fix` / `refactor` / `perf` / `docs` / `test`
+Types: `feat` / `fix` / `refactor` / `perf` / `docs` / `test` / `chore` / `ci` / `style`
+
+---
+
+## Hotfix After Ship
+
+If QA PASS was wrong and production needs an urgent fix:
+
+```
+1. board new hotfix-<slug> "Hotfix: …"  OR  board reopen <task-id> --to doing
+2. cycle start hotfix-<slug> "Hotfix: …"
+3. Minimal brief → full Builder → Reviewer → QA → Ship
+4. cycle close (avoid --force unless human emergency)
+```
+
+See ORCHESTRATOR **Hotfix Path** for full flow.
 
 ---
 

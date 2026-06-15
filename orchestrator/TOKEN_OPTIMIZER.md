@@ -14,14 +14,14 @@ GraphStack's token optimization layer. These rules are enforced across ALL roles
 
 ## Session Budget Tracker
 
-At session start, initialize mentally:
+At session start, track raw file reads mentally. Optionally mirror counts in the latest `handoff/STATE.md` entry under **Token Usage Notes** when you checkpoint (see Context Window Rules).
 
 ```
 SESSION BUDGET
 ──────────────
 Graph reads:    1 allowed (GRAPH_REPORT.md) — FREE
 Brief reads:    1 allowed (BRIEF.md) — FREE  
-Raw file reads: track each one
+Raw file reads: track each one (count distinct source files)
 Re-reads:       0 allowed
 Speculative:    0 allowed
 ```
@@ -110,6 +110,9 @@ For targeted questions, **always query first** — never grep or read raw files 
 
 ### Manual graph.json patterns (fallback only)
 
+> **Not executable code.** These are conceptual lookup patterns. Prefer
+> `python -m graphstack graph query "…"` — do not paste pseudo-code into a shell.
+
 These answer common questions WITHOUT reading files when `graph query` is unavailable:
 
 ### "What does this module import?"
@@ -195,10 +198,34 @@ Rule: If you know you need N files, request all N in one call.
 - Rejected alternatives
 - Verbose error messages (summarize to one line)
 
-### When context is getting full:
+### When to checkpoint to handoff/STATE.md
+
+LLMs cannot measure context fill percentage. Use this **measurable** trigger instead:
+
 ```
-"Context at ~80% capacity. Summarizing intermediate state to handoff/STATE.md.
- Continuing from current role."
+IF you have read 5+ distinct source files this session
+AND you still need to read more files to finish the current role
+AND you have not appended a STATE.md block this session yet
+→ Append a checkpoint block to handoff/STATE.md:
+    current role, task-id, criteria progress, files touched, resume point
+→ Then continue from the same role.
+```
+
+Do not checkpoint after every single read — only when crossing the 5+ file threshold mid-task.
+
+---
+
+## Reviewer Neighbor Budget
+
+When checking side effects (Reviewer role):
+
+```
+1. List ALL neighbors via graph query or GRAPH_REPORT — FREE, no limit
+2. Raw file reads for neighbor inspection: MAX 3 per review pass
+   → Prioritize: public API surfaces, shared state, god-node adjacency
+3. If >3 neighbors need inspection → do NOT read them all
+   → Append to REVIEW.md: "Architect flag: blast radius wider than review budget"
+   → Reject or approve with documented residual risk — do not expand scope
 ```
 
 ---

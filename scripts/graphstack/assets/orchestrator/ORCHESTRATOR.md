@@ -58,8 +58,16 @@ Execute this sequence exactly on every session start. Each step has a fallback �
       then enter ARCHITECT immediately.
       → Run `cycle start`, scope the brief, write handoff/BRIEF.md.
       → Do NOT write/edit code files on turn 1. “Embedded goal” ≠ “build now”.
-   c. doing/ has a task + BRIEF Ready for Builder → offer resume Builder:
-      `python -m graphstack cycle enter-builder <task-id>` before any code edit.
+   c. doing/ has a task → read handoff/STATE.json role + BRIEF.md status, then offer resume:
+      | STATE.json role | BRIEF status        | Resume command / action                          |
+      |-----------------|---------------------|--------------------------------------------------|
+      | architect       | Draft               | Continue Architect — finish brief                  |
+      | architect       | Ready for Builder   | `cycle enter-builder <task-id>` after user confirms |
+      | builder         | Ready for Builder   | `cycle enter-builder <task-id>` before code edit   |
+      | reviewer        | In Review / Ready   | `cycle enter-reviewer <task-id>`                   |
+      | qa              | In Review           | `cycle enter-qa <task-id>` (needs Verdict: Approved)|
+      | ship            | any                 | `cycle enter-ship <task-id>` or finish Ship checklist |
+      If STATE.json missing: infer from BRIEF status + last STATE.md block.
 
 Misinterpretation guards (never do these):
    - “User described the fix” → skip Architect and patch code  ❌
@@ -150,13 +158,15 @@ Switching to Builder.
 ```
 [SHIP → BOOTSTRAPPER]
 Cycle [N] complete. [N] cycles remaining.
+**HARD STOP:** Do NOT write Cycle [N+1] brief until graphify completes and user confirms.
 Running /graphify --update to capture new modules...
-[wait for graph update]
+[wait for graph update — user must type 'done' or confirm]
 Bootstrapper writing Cycle [N+1] brief.
 [execute bootstrapper inter-cycle logic]
 ```
 
 **This is the critical loop.** Each new brief is written with the updated graph — the Bootstrapper sees what was actually built, not just what was planned.
+**Never** skip the graphify wait step — a brief written on a stale graph wastes the next cycle.
 
 ### IDLE → ARCHITECT
 **Trigger:** Graph exists with nodes AND user describes a feature, change, or bug fix.
@@ -180,9 +190,10 @@ python -m graphstack cycle enter-builder <task-id>
 ```
 
 ### ARCHITECT → BUILDER
-**Trigger:** Brief is written AND user says any of:
-- "looks good", "proceed", "build it", "go ahead", "ok", "evet", "devam"
-- Or user doesn't object within one exchange
+**Trigger:** Brief is written AND user gives **explicit approval** — any of:
+- "looks good", "proceed", "build it", "go ahead", "ok", "evet", "devam", "tamam", "onaylıyorum"
+
+**Not a trigger:** silence, "hmm", questions ("ne zaman biter?"), or ambiguous replies → ask once, wait.
 
 **Note:** "devam" here means **brief approved → Builder only**. It does NOT mean
 skip Reviewer/QA/Ship or close the board task.
@@ -227,6 +238,10 @@ Required fix: [exact change needed]
 Switching back to Builder.
 [execute builder logic for the specific fix only]
 ```
+
+**Loop counter (persist in handoff/REVIEW.md):**
+- On each REJECTED review, set or increment: `## Loop count: N` (N = Reviewer→Builder round trips this task).
+- Read existing count before rejecting; do not rely on chat memory or session restarts.
 
 **Max cycles:** 3 Reviewer→Builder loops before escalating to user:
 ```
@@ -309,6 +324,8 @@ The user can interrupt at any time. Handle naturally:
 | "change the brief" | Return to ARCHITECT (or BOOTSTRAPPER if in bootstrap mode). Revise. Re-confirm before resuming. |
 | "change the plan" | Return to BOOTSTRAPPER. Revise BOOTSTRAP.md. Re-confirm before resuming. |
 | "skip review" / "just ship" | Refuse. Full cycle is mandatory. Use `cycle close --force` only for human recovery. |
+| QA reports integration break | Read REVIEW.md `## Escalation: Architect required`. Return to ARCHITECT; revise brief or split scope. |
+| "hotfix" / production bug after ship | See **Hotfix Path** below — do not patch without a new cycle. |
 | "start over" | Clear state. Return to IDLE. |
 | "what cycle are we on?" | Report cycle N/Total from BOOTSTRAP.md. |
 | "what state are we in?" | Report current role + progress summary. |
@@ -377,23 +394,42 @@ python -m graphstack board complete <task-id>       # on ship
 - Builder claims the task before writing any code
 - If a `doing/` task exists on activation → offer to resume it
 - If multiple `todo/` tasks exist → ask user which to tackle first
-- `done/` tasks are never re-opened; start a new task for follow-ups
+- `done/` tasks are normally not re-opened; use **Hotfix Path** for urgent production fixes
+- Follow-up features (non-urgent) → new `board new` task
+
+---
+
+## Hotfix Path
+
+When a critical bug is found **after Ship** (production or merged):
+
+```
+1. python -m graphstack board reopen <original-task-id> --to doing
+   OR board new hotfix-<slug> "Hotfix: [one-line]" for a clean audit trail
+2. python -m graphstack cycle start hotfix-<slug> "Hotfix: [description]"
+3. Architect writes a **minimal** brief (1–3 criteria, narrow blast radius)
+4. Full cycle: Builder → Reviewer → QA → Ship (no skipping)
+5. cycle close — prefer new hotfix task over --force unless emergency recovery
+```
+
+**Never:** silent patch on `main` without brief; `cycle close --force` except human-declared emergency.
 
 ---
 
 ## Resuming a Session
 
-If `handoff/STATE.md` exists on activation:
+If `handoff/STATE.md` or `handoff/STATE.json` exists on activation:
 
 ```
-1. Read handoff/STATE.md (last entry only)
+1. Read handoff/STATE.md (last entry only) + handoff/STATE.json (role, task_id)
 2. Read graphify-out/GRAPH_REPORT.md
-3. Report:
+3. Apply step 9c resume matrix (role + BRIEF status → suggested cycle enter-* command)
+4. Report:
    "Previous session found.
-    Last state: [ROLE] — [date]
-    Status: [summary]
-    Resume from [ROLE]? Or start fresh?"
-4. Wait for user confirmation.
+    Last state: [ROLE] — [date] | Task: [task-id]
+    Suggested resume: [command or action]
+    Or start fresh?"
+5. Wait for user confirmation before code edits.
 ```
 
 ---

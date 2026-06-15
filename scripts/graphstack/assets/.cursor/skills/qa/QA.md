@@ -25,10 +25,9 @@ When activated, execute this sequence exactly:
    → If no board task found: skip silently
 
 5. Determine what to trace:
-   a. If called from Orchestrator (Reviewer just approved): trace files from
-      the brief's "In Scope" list — no need to ask.
-   b. If activated manually: announce the call paths you plan to trace,
-      then proceed without waiting for confirmation.
+   a. Read handoff/BRIEF.md **In Scope** — default entry points for tracing.
+   b. If In Scope is empty: derive paths from changed files in git diff, announce plan, proceed.
+   (Do not infer Orchestrator vs manual activation.)
 
 6. Run the QA verification process below.
 ```
@@ -43,7 +42,7 @@ When activated, execute this sequence exactly:
 | Test boundary conditions and failure modes | Rewrite implementation |
 | Verify integration between modules (via graph edges) | Invent new test requirements |
 | Confirm acceptance criteria pass in real execution | Approve based on code reading alone |
-| Flag flaky paths (race conditions, unchecked returns) | Ignore async or concurrent code |
+| Flag async/shared-state paths as race **candidates** | Claim guaranteed race-condition detection |
 
 ---
 
@@ -85,6 +84,18 @@ python -m graphstack run -- git status
 ```
 
 Do not use raw `pytest` / `git` in Shell unless `graphstack run` is unavailable.
+
+### When no test runner exists
+
+If `pytest`, `npm test`, or project test command is missing or not configured:
+
+```
+1. Do NOT mark criteria PASS from code reading alone
+2. Manual path trace: entry → each graph node → output; document every step in REVIEW.md QA Report
+3. Run smoke commands if available (curl, CLI --help, import check)
+4. Mark criterion PARTIAL or FAIL with explicit "no test runner" note
+5. Recommend adding tests in a follow-up brief — do not invent a full test suite in QA
+```
 
 ---
 
@@ -133,12 +144,24 @@ Entry: [node] → [node] → [node] → Output: [node]
 - Null/undefined: [result]
 - Max value: [result]
 
-**Flaky paths found:**
-- [description, if any — or "None"]
+**Flaky / concurrency candidates:**
+- [async edges or shared mutable state on path — potential race candidate, not proven — or "None"]
 
 ### Recommendation
 [Ship / Return to Builder with specific failures / Needs Architect review]
 ```
+
+If integration architecture is broken (not a Builder typo), append:
+
+```markdown
+## Escalation: Architect required
+
+**Reason:** [integration edge / scope mismatch / blast radius]
+**Evidence:** [graph path or QA trace]
+**Suggested action:** Revise brief or split into new cycle — do not patch blindly
+```
+
+Orchestrator returns to ARCHITECT when this section exists.
 
 After a PASS or acceptable PARTIAL, run:
 ```bash
@@ -155,7 +178,7 @@ All criteria PASS                     → Recommend ship
 Any criterion FAIL                    → Return to Builder with exact failure
 PARTIAL on non-critical criterion     → Ship with documented known limitation
 Flaky path found                      → Return to Builder regardless of criteria
-Integration edge broken               → Escalate to Architect
+Integration edge broken               → Append ## Escalation: Architect required; do not ship
 ```
 
 ---

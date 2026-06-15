@@ -54,9 +54,11 @@ python -m graphstack graph path <changed-file> <suspected-consumer>
 ```
 
 **1. God nodes** — high-connectivity modules that the change might touch:
+```bash
+python -m graphstack graph query "god nodes near [module]"
+python -m graphstack graph query "highest connectivity nodes in [cluster]"
 ```
-From graph.json: nodes with degree > 10 near the change area
-```
+Use GRAPH_REPORT.md **Community Hubs** for navigation. Do not use a fixed degree threshold (e.g. `> 10`) — connectivity is relative to project size.
 
 **2. Surprising connections** — modules that seem unrelated but share edges:
 ```
@@ -75,6 +77,37 @@ Only read raw files if the graph lacks detail for a specific function or type.
 ## Writing the Brief
 
 Save to `handoff/BRIEF.md`. Structure:
+
+### BRIEF status transitions
+
+| Phase | Status in BRIEF.md | Gate behavior |
+|-------|-------------------|---------------|
+| `cycle start` / drafting | **Draft** | Code edits denied |
+| Brief written, awaiting user OK | **Draft** (or keep Draft until explicit approval) | Code edits denied |
+| User explicitly approved brief | **Ready for Builder** | `cycle enter-builder` allowed |
+| Reviewer active | **In Review** | — |
+| Cycle closed | **Complete** | — |
+
+`cycle start` sets **Draft** automatically. Only set **Ready for Builder** after the user explicitly approves (see ORCHESTRATOR ARCHITECT→BUILDER triggers).
+
+### When to split into multiple cycles
+
+On an **existing codebase** (graph exists), do **not** route to Bootstrapper for large features. Instead plan multiple Architect cycles:
+
+```
+Trigger split when ANY of:
+  - >8 acceptance criteria in one brief
+  - >5 distinct modules in In Scope
+  - User describes a multi-week / multi-surface feature
+
+Action:
+  1. Tell user: "This needs [N] cycles — proposing order: …"
+  2. cycle start <task-id-phase-1> for phase 1 only
+  3. Ship phase 1 before starting phase 2 brief
+  4. Repeat — each phase gets its own BRIEF.md overwrite + board task
+```
+
+Bootstrapper remains for **no graph / new project** only — not for large features on existing repos.
 
 ```markdown
 # Brief: [Feature/Change Name]

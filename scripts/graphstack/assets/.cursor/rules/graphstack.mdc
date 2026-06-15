@@ -1,9 +1,9 @@
 ---
-description: GraphStack v4.6.4 — Orchestrated, graph-first, GNAP-tracked AI development (cross-platform)
+description: GraphStack v4.7.1 — Orchestrated, graph-first, GNAP-tracked AI development (cross-platform)
 alwaysApply: true
 ---
 
-# GraphStack Core Rules (v4.7.0)
+# GraphStack Core Rules (v4.7.1)
 
 ## 🎯 Default Mode: Orchestrated
 
@@ -54,8 +54,8 @@ Required sequence before any code file changes:
 
 **Never interpret “proceed”, “devam”, or “goal embedded” as permission to code.**
 
-**If doing/ has a task and BRIEF is Ready for Builder:** offer resume Builder or
-`python -m graphstack cycle enter-builder <task-id>` before code edits.
+**If doing/ has a task:** read `STATE.json` role + BRIEF status → offer the matching
+`cycle enter-*` resume (see ORCHESTRATOR step 9c matrix) before code edits.
 
 ## 🧠 Rule 1: Graph First (Most Important)
 
