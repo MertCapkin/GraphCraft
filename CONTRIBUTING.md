@@ -64,7 +64,7 @@ This repository **is** GraphStack (marker: `.graphstack-framework`). The `handof
 
 Before pushing framework changes to GitHub:
 
-1. Restore `handoff/BRIEF.md`, `handoff/REVIEW.md`, and `handoff/STATE.md` to their templates (no real task content).
+1. Restore `handoff/BRIEF.md`, `handoff/REVIEW.md`, and `handoff/STATE.md` to their templates (no real task content). `REVIEW.md` keeps HTML-comment section templates — do not paste live cycle output into the comment block.
 2. Remove any `handoff/board/done/*.json` and `handoff/STATE.json`.
 3. Run `python -m graphstack validate` — warnings `framework_*` should be zero.
 

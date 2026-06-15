@@ -15,6 +15,7 @@ All notable changes to GraphStack are documented here.
 - **REVIEWER** — BRIEF In Scope always default; loop count + partial criteria in reject template; ## Deferred debt for non-blocking nits.
 - **QA** — No test runner fallback (manual path trace); honest concurrency candidate wording; ## Escalation: Architect required block.
 - **SHIP** — Debug log check via git diff; commit types `chore` / `ci` / `style`; hotfix flow documented.
+- **`handoff/REVIEW.md`** — Rich HTML-comment section templates (Builder Notes, Review, QA, Escalation); gate-required fields documented in header table.
 
 ---
 
