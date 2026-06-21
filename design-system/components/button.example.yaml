@@ -3,6 +3,7 @@ label: Button Primary
 collection: buttons
 style_compatibility:
   - style:minimal-dark
+  - style:warm-light
 uses_tokens:
   - color.action.primary
   - spacing.button.padding

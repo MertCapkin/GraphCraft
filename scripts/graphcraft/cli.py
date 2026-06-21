@@ -21,6 +21,11 @@ def _build_parser() -> argparse.ArgumentParser:
     sub.add_parser("doctor", help="GraphCraft + GraphStack health check", add_help=False)
     sub.add_parser("design", help="Design graph commands", add_help=False)
     sub.add_parser("stitch", help="Stitch import commands", add_help=False)
+    sub.add_parser("aesthetic", help="Aesthetic engine commands", add_help=False)
+    sub.add_parser("visual", help="Visual review commands", add_help=False)
+    sub.add_parser("ui", help="UI library commands", add_help=False)
+    sub.add_parser("cycle", help="Design-aware cycle commands", add_help=False)
+    sub.add_parser("gate", help="Design gate check/hook", add_help=False)
     return parser
 
 
@@ -55,6 +60,21 @@ def main(argv: list[str] | None = None) -> int:
     if cmd == "stitch":
         from .stitch.cli import run as stitch_run
         return stitch_run(rest)
+    if cmd == "aesthetic":
+        from .aesthetic.cli import run as aesthetic_run
+        return aesthetic_run(rest)
+    if cmd == "visual":
+        from .visual.cli import run as visual_run
+        return visual_run(rest)
+    if cmd == "ui":
+        from .ui.cli import run as ui_run
+        return ui_run(rest)
+    if cmd == "cycle":
+        from .cycle.cli import run as cycle_run
+        return cycle_run(rest)
+    if cmd == "gate":
+        from .gate_cmd import run as gate_run
+        return gate_run(rest)
 
     return _delegate_graphstack([cmd, *rest])
 

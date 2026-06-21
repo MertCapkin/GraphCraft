@@ -104,7 +104,11 @@
       "source": "C:\\Users\\elife\\Desktop\\Mert_Proje\\graphcraft\\design\\screens\\login.example.yaml",
       "_origin": "designed",
       "platform": "mobile-app",
-      "status": "example"
+      "status": "example",
+      "acceptance": {
+        "touch_target_min": 44,
+        "safe_area": true
+      }
     },
     {
       "id": "style:minimal-dark",
@@ -118,6 +122,19 @@
         "readable"
       ],
       "priority": "balanced"
+    },
+    {
+      "id": "style:warm-light",
+      "type": "style",
+      "label": "Warm Light",
+      "source": "C:\\Users\\elife\\Desktop\\Mert_Proje\\graphcraft\\packs\\styles\\warm-light\\style.yaml",
+      "_origin": "designed",
+      "mood": [
+        "friendly",
+        "approachable",
+        "energetic"
+      ],
+      "priority": "marketing"
     },
     {
       "id": "component:button-secondary",
@@ -148,9 +165,23 @@
       "_origin": "inferred"
     },
     {
+      "id": "packages/ui-core/rn/src/screens/LoginScreen.tsx",
+      "type": "component",
+      "label": "packages/ui-core/rn/src/screens/LoginScreen.tsx",
+      "source": "",
+      "_origin": "inferred"
+    },
+    {
       "id": "assets:icons-minimal",
       "type": "asset",
       "label": "icons-minimal",
+      "source": "",
+      "_origin": "inferred"
+    },
+    {
+      "id": "assets:icons-rounded",
+      "type": "asset",
+      "label": "icons-rounded",
       "source": "",
       "_origin": "inferred"
     }
@@ -188,6 +219,12 @@
     },
     {
       "source": "component:button-primary",
+      "target": "style:warm-light",
+      "type": "style_compatible",
+      "_origin": "designed"
+    },
+    {
+      "source": "component:button-primary",
       "target": "component:card-elevated",
       "type": "harmonizes_with",
       "_origin": "designed",
@@ -218,6 +255,12 @@
       "_origin": "designed"
     },
     {
+      "source": "screen:login",
+      "target": "packages/ui-core/rn/src/screens/LoginScreen.tsx",
+      "type": "implements",
+      "_origin": "bridge"
+    },
+    {
       "source": "style:minimal-dark",
       "target": "component:button-primary",
       "type": "style_compatible",
@@ -226,6 +269,18 @@
     {
       "source": "style:minimal-dark",
       "target": "assets:icons-minimal",
+      "type": "uses_asset",
+      "_origin": "designed"
+    },
+    {
+      "source": "style:warm-light",
+      "target": "component:button-primary",
+      "type": "style_compatible",
+      "_origin": "designed"
+    },
+    {
+      "source": "style:warm-light",
+      "target": "assets:icons-rounded",
       "type": "uses_asset",
       "_origin": "designed"
     }

@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "MertCapkin_GraphCraft"
-version = "0.1.1"
+version = "2.0.0"
 description = "Mobile game/app design layer on GraphStack — design graph, style packs, aesthetic engine"
 readme = "README.md"
 license = { text = "MIT" }
@@ -24,8 +24,9 @@ dependencies = ["pyyaml>=6"]
 [project.optional-dependencies]
 graphstack = ["MertCapkin_GraphStack[graphify]>=4.7,<5"]
 graphify = ["graphifyy>=0.7,<0.9"]
+visual = ["pillow>=9"]
 dev = ["pytest>=7"]
-full = ["MertCapkin_GraphCraft[graphstack,graphify,dev]"]
+full = ["MertCapkin_GraphCraft[graphstack,graphify,visual,dev]"]
 
 [project.urls]
 Homepage = "https://github.com/MertCapkin/GraphCraft"

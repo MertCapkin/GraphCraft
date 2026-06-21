@@ -23,6 +23,7 @@ COPY_DIRS = (
     "design-system/components",
     "design/screens",
     "packs/styles/minimal-dark",
+    "packs/styles/warm-light",
     "packs/mobile-app",
     "packs/mobile-game",
     "packs/stitch",
@@ -70,7 +71,7 @@ def sync() -> int:
             dst.parent.mkdir(parents=True, exist_ok=True)
             shutil.copy2(src, dst)
 
-    (ASSETS / ".graphcraft-assets-version").write_text("0.1.1\n", encoding="utf-8")
+    (ASSETS / ".graphcraft-assets-version").write_text("2.0.0\n", encoding="utf-8")
     print(f"Synced GraphCraft overlay assets -> {ASSETS}")
     print("  (GraphStack files excluded - installed via dependency)")
     return 0

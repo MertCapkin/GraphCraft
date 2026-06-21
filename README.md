@@ -26,16 +26,22 @@ GraphCraft   → design layer      (graphcraft-out/, design-system/)
 
 **Requirements:** Python 3.8+, Git, [Cursor](https://cursor.sh)
 
-### Install (PyPI — after v0.1.1 release)
+### Install (PyPI)
 
 ```powershell
 pip install "MertCapkin_GraphCraft[graphstack]"
 ```
 
-### Install (GitHub — works now)
+For visual review and aesthetic PNG checks, add the `visual` extra:
 
 ```powershell
-pip install "MertCapkin_GraphCraft[graphstack] @ git+https://github.com/MertCapkin/GraphCraft.git@v0.1.1"
+pip install "MertCapkin_GraphCraft[graphstack,visual]"
+```
+
+### Install (GitHub)
+
+```powershell
+pip install "MertCapkin_GraphCraft[graphstack] @ git+https://github.com/MertCapkin/GraphCraft.git@v2.0.0"
 ```
 
 GraphStack + Graphify install automatically via the `[graphstack]` extra from PyPI.
@@ -126,7 +132,14 @@ Full detail: [docs/FLOW.md](docs/FLOW.md) · [orchestrator/GRAPHCRAFT.md](orches
 | `graphcraft design query "screens"` | GraphCraft | Query design graph |
 | `graphcraft design validate` | GraphCraft | Validate design graph |
 | `graphcraft design harmony` | GraphCraft | Component harmony check |
+| `graphcraft design evaluate` | GraphCraft | Aesthetic rubric (contrast, touch targets) |
+| `graphcraft design bridge` | GraphCraft | Design ↔ code bridge map |
 | `graphcraft stitch import .` | GraphCraft | Import Stitch prototype |
+| `graphcraft stitch mcp install` | GraphCraft | Stitch MCP for Cursor |
+| `graphcraft visual review` | GraphCraft | PNG reference vs implementation |
+| `graphcraft ui validate all` | GraphCraft | Validate UI lib vs design tokens |
+| `graphcraft cycle status` | GraphCraft | Design phase + GraphStack role |
+| `graphcraft gate check` | GraphCraft | Design gate before ui-core edits |
 | `python -m graphstack cycle start …` | GraphStack | Start dev cycle |
 | `python -m graphstack graph query "…"` | GraphStack | Query code graph |
 

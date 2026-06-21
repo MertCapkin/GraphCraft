@@ -2,6 +2,8 @@ id: screen:login
 title: Login
 platform: mobile-app
 status: example
+# Declared code mapping (also picked up by graphcraft design bridge)
+implements: packages/ui-core/rn/src/screens/LoginScreen.tsx
 components:
   - component:button-primary
 tokens:

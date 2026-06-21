@@ -1,20 +1,21 @@
 # Design Graph Report
 
-- 17 nodes · 12 edges
+- 20 nodes · 16 edges
 
 ## Node types
-- asset: 1
-- component: 3
+- asset: 2
+- component: 4
 - screen: 3
-- style: 1
+- style: 2
 - token: 9
 
 ## Edge types
 - alternative: 1
 - harmonizes_with: 1
+- implements: 1
 - navigates_to: 2
-- style_compatible: 2
-- uses_asset: 1
+- style_compatible: 4
+- uses_asset: 2
 - uses_component: 1
 - uses_token: 4
 
@@ -25,3 +26,4 @@
 
 ## Styles
 - `style:minimal-dark` — Minimal Dark
+- `style:warm-light` — Warm Light

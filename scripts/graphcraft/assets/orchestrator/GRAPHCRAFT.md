@@ -38,20 +38,24 @@ Non-UI tasks: skip GraphCraft phases → GraphStack only.
 ## Mechanical commands
 
 ```bash
-# GraphCraft
+# GraphCraft design cycle (UI tasks — use instead of raw graphstack enter-builder)
+python -m graphcraft cycle start <id> "<title>"
+python -m graphcraft cycle enter-design-strategist <id>
+python -m graphcraft cycle enter-designer <id>
+python -m graphcraft cycle enter-design-audit <id>    # sets DESIGN_BRIEF Ready for Builder
+python -m graphcraft cycle enter-builder <id>         # design gate + graphstack builder
+python -m graphcraft cycle enter-visual-review <id>
+python -m graphcraft cycle status
+
 python -m graphcraft design update .
 python -m graphcraft design validate
-python -m graphcraft design harmony
-python -m graphcraft stitch import .
-python -m graphcraft doctor .
+python -m graphcraft gate check
 
-# GraphStack (dependency — unchanged)
-python -m graphstack cycle start <id> "<title>"
-python -m graphstack cycle enter-builder <id>
+# GraphStack (review / ship — unchanged)
 python -m graphstack cycle enter-reviewer <id>
 python -m graphstack cycle enter-qa <id>
 python -m graphstack cycle enter-ship <id>
-python -m graphstack cycle close <id>
+python -m graphcraft cycle close <id>   # delegates to graphstack cycle close
 ```
 
 ---

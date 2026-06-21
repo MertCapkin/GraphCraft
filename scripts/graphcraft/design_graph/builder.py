@@ -103,7 +103,7 @@ def _parse_screen(path: Path, graph: dict[str, Any]) -> None:
             label=data.get("title", path.stem),
             source=str(path),
             origin="designed",
-            extra={"platform": data.get("platform"), "status": data.get("status", "draft")},
+            extra={"platform": data.get("platform"), "status": data.get("status", "draft"), "acceptance": data.get("acceptance")},
         )
     )
     for comp in data.get("components") or []:

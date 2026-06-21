@@ -1,7 +1,7 @@
 # Design Brief
 
 **Date:** YYYY-MM-DD  
-**Status:** Draft | Ready for Builder | In Review
+**Status:** Ready for Builder
 
 ---
 

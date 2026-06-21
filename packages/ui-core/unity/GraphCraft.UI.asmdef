@@ -1,0 +1,14 @@
+{
+    "name": "GraphCraft.UI",
+    "rootNamespace": "GraphCraft.UI",
+    "references": [
+        "UnityEngine.UI"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

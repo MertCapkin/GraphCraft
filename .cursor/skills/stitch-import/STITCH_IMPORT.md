@@ -6,17 +6,26 @@ Import Google Stitch prototypes into GraphCraft design graph.
 
 `graphcraft.config.yaml` → `design_source: stitch|hybrid`
 
-## Steps
+## Manual steps
 
 1. Export from Stitch: DESIGN.md + screens → `.stitch/designs/` (PNG/HTML)
 2. Copy/fill `.stitch/metadata.json` from `metadata.template.json`
-3. `python -m graphcraft stitch import .`
-4. `python -m graphcraft stitch report`
-5. Curator approves screens in design specs
+3. `graphcraft stitch validate .`
+4. `graphcraft stitch import .`
+5. `graphcraft stitch report`
+6. Curator approves screens in design specs
 
-## MCP (optional)
+## MCP workflow (recommended)
 
-Configure `@keeponfirst/kof-stitch-mcp` for automated fetch.
+1. Set `stitch.project_id` in `graphcraft.config.yaml` (Google Cloud project)
+2. `graphcraft stitch mcp install` → merges `.mcp.json` for `@keeponfirst/kof-stitch-mcp`
+3. `graphcraft stitch mcp doctor` — verify npx + GOOGLE_CLOUD_PROJECT
+4. Authenticate: `gcloud auth application-default login`
+5. In Cursor: use Stitch MCP tools to fetch/export designs
+6. `graphcraft stitch fetch --export-dir /path/to/export` → copies into `.stitch/`
+7. `graphcraft stitch import .`
+
+Print-only config: `graphcraft stitch mcp print`
 
 ## Rules
 

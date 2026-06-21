@@ -15,6 +15,178 @@
 
 ---
 
+## Review: GraphCraft v0.7 Design cycle + gate — 2026-06-21 — APPROVED
+
+### Verdict: Approved
+
+**Criteria met:** cycle design phases, gated enter-builder, gate check/hook chain, 37 tests, graphstack untouched.
+
+**Handoff:** Ready for QA.
+
+---
+
+## QA Report: GraphCraft v0.7 — 2026-06-21
+
+### Overall: PASS
+
+| Criterion | Result |
+|-----------|--------|
+| graphcraft cycle commands | PASS |
+| design gate | PASS |
+| gate-hook.ps1 chain | PASS |
+| pytest | PASS 37/37 |
+
+### Recommendation
+Ship
+
+---
+
+## Review: GraphCraft v0.6 Flutter Unity Godot UI — 2026-06-21 — APPROVED
+
+### Verdict: Approved
+
+**Criteria met:** 4 stacks with ButtonPrimary + LoginScreen, tokens emit, validate all PASS, 32 tests.
+**Handoff:** Ready for QA.
+
+---
+
+## QA Report: GraphCraft v0.6 — 2026-06-21
+
+### Overall: PASS
+
+| Criterion | Result |
+|-----------|--------|
+| flutter/unity/godot packages | PASS |
+| ui validate all | PASS |
+| ui tokens emit x4 | PASS |
+| pytest | PASS |
+
+### Recommendation
+Ship
+
+---
+
+## Review: GraphCraft v0.5 RN UI lib — 2026-06-21 — APPROVED
+
+### Verdict: Approved
+
+**Criteria met:** ButtonPrimary, LoginScreen, ui validate/tokens emit, bridge to LoginScreen.tsx, 24 tests pass.
+**Side effects:** RN package is source-only until linked into Expo app (Faz 7).
+**Tests:** 24/24 graphcraft tests pass.
+
+**Handoff:** Ready for QA.
+
+---
+
+## QA Report: GraphCraft v0.5 — 2026-06-21
+
+### Overall: PASS
+
+| Criterion | Result | Notes |
+|-----------|--------|-------|
+| ButtonPrimary | PASS | tokens, TOUCH_TARGET_MIN, marker |
+| LoginScreen | PASS | SafeAreaView, implements marker |
+| ui validate rn | PASS | |
+| ui tokens emit rn | PASS | |
+| bridge | PASS | declared LoginScreen.tsx |
+| pytest | PASS | 24/24 |
+
+### Recommendation
+Ship
+
+---
+
+## Review: GraphCraft v0.4 Stitch MCP + Visual Review — 2026-06-21 — APPROVED
+
+### Verdict: Approved
+
+**Criteria met:** mcp print/install/doctor, validate, fetch, visual review/diff, 21 tests pass.
+**Side effects:** MCP requires gcloud ADC + npx at runtime — doctor warns appropriately.
+**Tests:** 21/21 graphcraft tests pass.
+
+**Handoff:** Ready for QA.
+
+---
+
+## QA Report: GraphCraft v0.4 — 2026-06-21
+
+### Overall: PASS
+
+| Criterion | Result | Notes |
+|-----------|--------|-------|
+| stitch mcp print | PASS | valid kof-stitch-mcp JSON |
+| stitch validate/fetch | PASS | fixture tests |
+| visual review/diff | PASS | dimension + optional Pillow |
+| pytest | PASS | 21/21 |
+| graphstack untouched | PASS | |
+
+### Recommendation
+Ship
+
+---
+
+## Review: GraphCraft v0.3 Aesthetic Engine v1 — 2026-06-21 — APPROVED
+
+### Verdict: Approved
+
+**Criteria met:** evaluate rubric, research scaffold, warm-light pack, 13 tests pass, graphstack untouched.
+**Side effects:** WARN on inferred screens without acceptance — expected advisory behavior.
+**Tests:** 13/13 graphcraft tests pass.
+
+**Handoff:** Ready for QA.
+
+---
+
+## QA Report: GraphCraft v0.3 — 2026-06-21
+
+### Overall: PASS
+
+| Criterion | Result | Notes |
+|-----------|--------|-------|
+| design evaluate | PASS | WARN on placeholder screens |
+| contrast floor | PASS | FAIL detected in unit test |
+| research init | PASS | INSPIRATION.md scaffold |
+| warm-light pack | PASS | 20 nodes in design graph |
+| pytest | PASS | 13/13 |
+| graphstack untouched | PASS | |
+
+### Recommendation
+Ship
+
+---
+
+## Review: GraphCraft v0.2 Design Graph D2-D3 — 2026-06-21 — APPROVED
+
+### Verdict: Approved
+
+**Criteria met:** All 6 acceptance criteria verified (path, explain, bridge, unified, tests, no graphstack changes).
+**Side effects:** GraphStack core untouched. Bridge heuristic may match demo/login.ts — confidence labeled.
+**Tests:** 8/8 graphcraft tests pass.
+
+**Handoff:** Ready for QA.
+
+---
+
+## QA Report: GraphCraft v0.2 D2-D3 — 2026-06-21
+
+### Overall: PASS
+
+| Criterion | Result | Notes |
+|-----------|--------|-------|
+| design path | PASS | login → home via navigates_to |
+| design explain | PASS | components, tokens, implements listed |
+| design bridge | PASS | bridge.json + declared/heuristic rows |
+| design unified | PASS | merges design + bridge for "login" |
+| pytest | PASS | 8/8 |
+| graphstack untouched | PASS | no scripts/graphstack edits |
+
+**Integration:** `design update --bridge` chains graph + bridge rebuild.
+
+### Recommendation
+Ship
+
+---
+
 ## Review: GraphCraft v1 Mobile Platform Foundation — 2026-06-21 — APPROVED
 
 ### Verdict: Approved

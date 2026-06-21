@@ -54,12 +54,13 @@ After Architect BRIEF, before Builder:
 
 1. **Design Strategist** → `handoff/AESTHETIC_BRIEF.md` + `research/INSPIRATION.md`
 2. **Designer** → `design/`, `design-system/`, run `python -m graphcraft design update .`
-3. **Design Audit** → `design validate` + `design harmony` → `DESIGN_BRIEF.md` **Ready for Builder**
-4. GraphStack **`cycle enter-builder`** (only after design ready)
+3. **Design Audit** → `graphcraft cycle enter-design-audit <task>` → `DESIGN_BRIEF.md` **Ready for Builder**
+4. **`graphcraft cycle enter-builder <task>`** (design gate + GraphStack builder)
 
 After Builder, before Code Reviewer:
 
-5. **Visual Review** → `.cursor/skills/visual-review/VISUAL_REVIEW.md`
+5. **`graphcraft cycle enter-visual-review <task>`** → `graphcraft visual review`
+6. GraphStack **`cycle enter-reviewer`**
 
 Announce: `[GRAPHCRAFT]` when entering design phases. Announce GraphStack roles as usual.
 

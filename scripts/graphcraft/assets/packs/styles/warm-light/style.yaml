@@ -1,0 +1,18 @@
+id: style:warm-light
+label: Warm Light
+mood:
+  - friendly
+  - approachable
+  - energetic
+priority: marketing
+tokens:
+  extends: design-system/tokens.json
+harmony:
+  contrast_min: 4.5
+  max_accent_colors: 3
+components:
+  preferred:
+    - component:button-primary
+  discouraged: []
+assets:
+  icon_set: assets:icons-rounded
