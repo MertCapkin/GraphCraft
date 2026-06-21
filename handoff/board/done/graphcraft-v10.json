@@ -7,9 +7,9 @@
   "graph_nodes": [],
   "criteria_count": 0,
   "priority": "normal",
-  "status": "doing",
+  "status": "done",
   "assigned_to": "builder",
   "started_at": "2026-06-21T18:01:32+00:00",
-  "completed_at": null,
+  "completed_at": "2026-06-21T18:05:59+00:00",
   "notes": ""
 }
