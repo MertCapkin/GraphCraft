@@ -1,32 +1,32 @@
-# Brief: GraphCraft v2.1 — Stitch pull (official SDK)
+# Brief: GraphCraft v2.2 — Aesthetic web research automation
 
 **Date:** 2026-06-21  
 **Architect:** Composer  
 **Status:** Complete
-**Task ID:** graphcraft-v8
+**Task ID:** graphcraft-v9
 
 ---
 
 ## Objective
 
-`graphcraft stitch pull` — one command to fetch screens from Stitch API into `.stitch/`, then import into design graph.
+`graphcraft aesthetic research run` — auto-generate queries, fetch web results, synthesize patterns into `research/INSPIRATION.md`.
 
 ## Scope
 
-1. Node helper `pull_export.mjs` using `@google/stitch-sdk` (via `npx -p`)
-2. Python `pull.py` — auth doctor, subprocess orchestration, `fetch_export`, optional import
-3. CLI: `graphcraft stitch pull [root] [--project-id] [--force] [--no-import]`
-4. CLI: `graphcraft stitch doctor` — pull auth + MCP readiness
-5. Tests with mocked subprocess; update STITCH_IMPORT skill + CHANGELOG
+1. **Query builder** — from `graphcraft.config.yaml` (profile, stack, priority) + optional `AESTHETIC_BRIEF.md`
+2. **Web search** — DuckDuckGo HTML (stdlib urllib); `--offline` for tests/CI
+3. **Synthesis** — rule-based pattern buckets + style pack scoring
+4. **CLI** — `research run`, `research doctor`; keep `init`/`validate`
+5. Tests with mocked/offline search; update DESIGN_STRATEGIST skill
 
 ## Out of scope
 
-- Replacing kof-stitch-mcp for Cursor MCP workflow
-- Automatic flow/navigation inference from Stitch
+- LLM summarization in CLI (Cursor agent refines INSPIRATION)
+- Paid search APIs
 
 ## Acceptance
 
-- [ ] `stitch doctor` reports missing `STITCH_API_KEY` clearly
-- [ ] `stitch pull` with mock export produces valid `.stitch/` + design graph ingest
-- [ ] Existing `stitch fetch` unchanged
+- [ ] `research run --offline` writes valid INSPIRATION.md passing validate
+- [ ] `research doctor` checks network + config
+- [ ] `aesthetic.research_enabled: false` blocks run unless `--force`
 - [ ] Tests pass

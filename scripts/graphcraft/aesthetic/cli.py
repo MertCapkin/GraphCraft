@@ -9,7 +9,12 @@ from pathlib import Path
 from ..constants import DESIGN_GRAPH_JSON
 from ..design_graph.query import load_graph
 from .evaluate import format_evaluate_summary, run_evaluate, write_aesthetic_report
-from .research import init_inspiration, validate_inspiration
+from .research import (
+    doctor_research,
+    init_inspiration,
+    run_research,
+    validate_inspiration,
+)
 
 
 def run(argv: list[str]) -> int:
@@ -44,13 +49,18 @@ def run(argv: list[str]) -> int:
 
     if cmd == "research":
         if not rest or rest[0] in ("-h", "--help"):
-            print("Usage: graphcraft aesthetic research <init|validate> [root]")
+            print(
+                "Usage: graphcraft aesthetic research "
+                "<init|validate|run|doctor> [root]"
+            )
             return 0
         action = rest[0]
         sub_rest = rest[1:]
         p = argparse.ArgumentParser(prog=f"graphcraft aesthetic research {action}")
         p.add_argument("root", nargs="?", default=".")
-        p.add_argument("--force", action="store_true", help="overwrite INSPIRATION.md (init only)")
+        p.add_argument("--force", action="store_true", help="overwrite INSPIRATION.md")
+        p.add_argument("--offline", action="store_true", help="use offline fixture results")
+        p.add_argument("--max-queries", type=int, default=5)
         args = p.parse_args(sub_rest)
         root = Path(args.root).resolve()
 
@@ -60,6 +70,37 @@ def run(argv: list[str]) -> int:
             return 0
 
         if action == "validate":
+            issues = validate_inspiration(root)
+            if issues:
+                for i in issues:
+                    print(f"  ISSUE: {i}")
+                return 1
+            print("INSPIRATION validation: PASS")
+            return 0
+
+        if action == "doctor":
+            issues = doctor_research(root, offline=args.offline)
+            if issues:
+                for i in issues:
+                    print(f"  ISSUE: {i}")
+                return 1
+            print("Aesthetic research doctor: PASS")
+            return 0
+
+        if action == "run":
+            try:
+                path, warnings = run_research(
+                    root,
+                    force=args.force,
+                    offline=args.offline,
+                    max_queries=args.max_queries,
+                )
+            except (RuntimeError, FileExistsError) as exc:
+                print(f"Research failed: {exc}")
+                return 1
+            print(f"Research complete -> {path}")
+            for w in warnings:
+                print(f"  WARN: {w}")
             issues = validate_inspiration(root)
             if issues:
                 for i in issues:

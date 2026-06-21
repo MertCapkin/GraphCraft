@@ -1,5 +1,11 @@
 # GraphCraft changelog
 
+## v2.2.0 — Aesthetic web research automation (2026-06-21)
+
+- **`graphcraft aesthetic research run`** — query builder, DuckDuckGo search, pattern synthesis → `INSPIRATION.md`
+- **`graphcraft aesthetic research doctor`** — network + config preflight
+- `--offline` fixture mode for CI; `aesthetic.max_research_queries` config
+
 ## v2.1.0 — Stitch pull via official SDK (2026-06-21)
 
 - **`graphcraft stitch pull`** — fetch screens from Stitch API into `.stitch/` + design graph import

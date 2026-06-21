@@ -133,6 +133,7 @@ Full detail: [docs/FLOW.md](docs/FLOW.md) · [orchestrator/GRAPHCRAFT.md](orches
 | `graphcraft design validate` | GraphCraft | Validate design graph |
 | `graphcraft design harmony` | GraphCraft | Component harmony check |
 | `graphcraft design evaluate` | GraphCraft | Aesthetic rubric (contrast, touch targets) |
+| `graphcraft aesthetic research run` | GraphCraft | Auto web research → INSPIRATION.md |
 | `graphcraft design bridge` | GraphCraft | Design ↔ code bridge map |
 | `graphcraft stitch import .` | GraphCraft | Import Stitch prototype |
 | `graphcraft stitch pull .` | GraphCraft | Pull from Stitch API (official SDK) |

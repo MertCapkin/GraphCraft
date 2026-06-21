@@ -9,7 +9,10 @@ import pytest
 
 from graphcraft.aesthetic.contrast import contrast_ratio, passes_contrast
 from graphcraft.aesthetic.evaluate import run_evaluate
-from graphcraft.aesthetic.research import init_inspiration, validate_inspiration
+from graphcraft.aesthetic.query_builder import build_research_queries
+from graphcraft.aesthetic.research import init_inspiration, run_research, validate_inspiration
+from graphcraft.aesthetic.synthesize import synthesize_patterns
+from graphcraft.aesthetic.web_search import SearchResult, parse_ddg_html
 from graphcraft.design_graph.builder import build_design_graph
 
 
@@ -112,3 +115,48 @@ def test_research_init_and_validate(tmp_path: Path) -> None:
     filled = filled.replace("1. \n", "1. mobile onboarding patterns 2026\n", 1)
     path.write_text(filled, encoding="utf-8")
     assert validate_inspiration(tmp_path) == []
+
+
+def test_build_research_queries(aesthetic_root: Path) -> None:
+    (aesthetic_root / "graphcraft.config.yaml").write_text(
+        "profile: mobile-app\nactive_stack: flutter\n"
+        "aesthetic:\n  priority: marketing\n",
+        encoding="utf-8",
+    )
+    queries = build_research_queries(aesthetic_root, max_queries=3)
+    assert len(queries) == 3
+    assert any("flutter" in q for q in queries)
+
+
+def test_parse_ddg_html() -> None:
+    html = """
+    <div class="result results_links">
+      <a class="result__a" href="https://example.com/a">Mobile Cards</a>
+      <a class="result__snippet">Card layout patterns for mobile apps</a>
+    </div>
+    """
+    results = parse_ddg_html(html, "mobile cards", max_results=2)
+    assert len(results) == 1
+    assert results[0].url == "https://example.com/a"
+
+
+def test_synthesize_patterns() -> None:
+    results = [
+        SearchResult(
+            title="Typography scale",
+            url="https://example.com/t",
+            snippet="Clear heading hierarchy and readable body text.",
+            query="q",
+        )
+    ]
+    patterns = synthesize_patterns(results)
+    assert patterns["typography"]
+    assert any("hierarchy" in b.lower() or "heading" in b.lower() for b in patterns["typography"])
+
+
+def test_research_run_offline(aesthetic_root: Path) -> None:
+    path, warnings = run_research(aesthetic_root, force=True, offline=True, max_queries=2)
+    assert path.is_file()
+    text = path.read_text(encoding="utf-8")
+    assert "https://example.com" in text
+    assert validate_inspiration(aesthetic_root) == []

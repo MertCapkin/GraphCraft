@@ -33,6 +33,7 @@ design:
 aesthetic:
   priority: balanced           # marketing | usability | balanced
   research_enabled: true
+  max_research_queries: 5
   max_style_directions: 3
   hard_floors:
     contrast_min: 4.5
