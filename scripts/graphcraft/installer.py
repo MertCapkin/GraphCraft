@@ -46,6 +46,9 @@ DIRS_TO_CREATE = (
     "packages/assets",
     "graphcraft-out",
     "research",
+    "handoff/board/todo",
+    "handoff/board/doing",
+    "handoff/board/done",
     "scripts/graphcraft",
     ".stitch/designs",
 )
@@ -85,6 +88,13 @@ TEMPLATE_COPIES = (
     ("packs/styles/minimal-dark/style.yaml", "packs/styles/minimal-dark/style.yaml"),
     ("handoff/AESTHETIC_BRIEF.md", "handoff/AESTHETIC_BRIEF.md"),
     ("handoff/DESIGN_BRIEF.md", "handoff/DESIGN_BRIEF.md"),
+    ("handoff/BRIEF.md", "handoff/BRIEF.md"),
+    ("handoff/REVIEW.md", "handoff/REVIEW.md"),
+    ("handoff/STATE.json", "handoff/STATE.json"),
+    ("handoff/DESIGN_STATE.json", "handoff/DESIGN_STATE.json"),
+    ("handoff/board/README.md", "handoff/board/README.md"),
+    ("research/INSPIRATION.template.md", "research/INSPIRATION.template.md"),
+    ("graphcraft-out/.gitkeep", "graphcraft-out/.gitkeep"),
     (".stitch/metadata.template.json", ".stitch/metadata.template.json"),
 )
 

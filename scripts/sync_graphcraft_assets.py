@@ -43,6 +43,12 @@ COPY_FILES = (
     ("design/screens/login.example.yaml", "design/screens/login.example.yaml"),
     ("handoff/AESTHETIC_BRIEF.md", "handoff/AESTHETIC_BRIEF.md"),
     ("handoff/DESIGN_BRIEF.md", "handoff/DESIGN_BRIEF.md"),
+    ("handoff/BRIEF.md", "handoff/BRIEF.md"),
+    ("handoff/REVIEW.md", "handoff/REVIEW.md"),
+    ("handoff/STATE.json", "handoff/STATE.json"),
+    ("handoff/DESIGN_STATE.json", "handoff/DESIGN_STATE.json"),
+    ("handoff/board/README.md", "handoff/board/README.md"),
+    ("research/INSPIRATION.template.md", "research/INSPIRATION.template.md"),
     (".stitch/metadata.template.json", ".stitch/metadata.template.json"),
     ("packs/mobile-app/STACKS.md", "packs/mobile-app/STACKS.md"),
     ("packs/mobile-game/STACKS.md", "packs/mobile-game/STACKS.md"),
@@ -50,6 +56,13 @@ COPY_FILES = (
     ("packs/styles/minimal-dark/style.yaml", "packs/styles/minimal-dark/style.yaml"),
     ("packages/ui-core/README.md", "packages/ui-core/README.md"),
     ("packages/assets/README.md", "packages/assets/README.md"),
+    ("graphcraft-out/.gitkeep", "graphcraft-out/.gitkeep"),
+)
+
+BOARD_GITKEEP = (
+    "handoff/board/todo/.gitkeep",
+    "handoff/board/doing/.gitkeep",
+    "handoff/board/done/.gitkeep",
 )
 
 
@@ -71,7 +84,14 @@ def sync() -> int:
             dst.parent.mkdir(parents=True, exist_ok=True)
             shutil.copy2(src, dst)
 
-    (ASSETS / ".graphcraft-assets-version").write_text("2.0.0\n", encoding="utf-8")
+    for rel in BOARD_GITKEEP:
+        src = ROOT / rel
+        dst = ASSETS / rel
+        if src.is_file():
+            dst.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(src, dst)
+
+    (ASSETS / ".graphcraft-assets-version").write_text("2.4.0\n", encoding="utf-8")
     print(f"Synced GraphCraft overlay assets -> {ASSETS}")
     print("  (GraphStack files excluded - installed via dependency)")
     return 0

@@ -63,3 +63,11 @@ dist_test/
 handoff/board/todo/smoke-*.json
 handoff/board/doing/smoke-*.json
 handoff/board/done/smoke-*.json
+
+# GraphCraft — generated per-project (not for version control)
+graphcraft-out/*
+!graphcraft-out/.gitkeep
+research/INSPIRATION.md
+handoff/board/todo/*.json
+handoff/board/doing/*.json
+handoff/board/done/*.json

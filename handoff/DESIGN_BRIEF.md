@@ -1,7 +1,7 @@
 # Design Brief
 
 **Date:** YYYY-MM-DD  
-**Status:** Ready for Builder
+**Status:** Draft | Ready for Builder | Complete
 
 ---
 
@@ -9,39 +9,40 @@
 
 | Screen ID | Title | Status | Source |
 |-----------|-------|--------|--------|
-| screen:login | Login | approved | native / stitch |
+| | | draft | native / stitch |
 
 ---
 
 ## Style pack
 
-- Active: `style:minimal-dark`
+- Active: `style:minimal-dark` (update in `graphcraft.config.yaml`)
 - Tokens: `design-system/tokens.json`
 
 ---
 
 ## Component collections
 
-- buttons: component:button-primary (alternatives documented in design graph)
+- (list components used across screens)
 
 ---
 
 ## Design graph
 
 - Last update: YYYY-MM-DD
-- `graphcraft design validate` → PASS
-- `graphcraft design harmony` → PASS
+- `graphcraft design validate` → 
+- `graphcraft design harmony` → 
+- `graphcraft design evaluate` → 
 
 ---
 
 ## Visual ground truth
 
-- Stitch PNG: `.stitch/designs/` (if applicable)
+- Stitch PNG: `.stitch/designs/` (if `design_source: stitch|hybrid`)
 
 ---
 
 ## Acceptance (Design Audit)
 
 - [ ] All in-scope screens in design graph
-- [ ] No unresolved clashes_with edges on approved screens
+- [ ] `graphcraft cycle enter-design-audit` PASS
 - [ ] DESIGN_BRIEF status → Ready for Builder
