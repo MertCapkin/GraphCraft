@@ -9,6 +9,8 @@ import pytest
 
 from graphcraft.aesthetic.contrast import contrast_ratio, passes_contrast
 from graphcraft.aesthetic.evaluate import run_evaluate
+from graphcraft.aesthetic.distill import run_distill
+from graphcraft.aesthetic.originality import detect_generic_phrases, run_originality_evaluate
 from graphcraft.aesthetic.query_builder import build_research_queries
 from graphcraft.aesthetic.research import init_inspiration, run_research, validate_inspiration
 from graphcraft.aesthetic.synthesize import synthesize_patterns
@@ -160,3 +162,28 @@ def test_research_run_offline(aesthetic_root: Path) -> None:
     text = path.read_text(encoding="utf-8")
     assert "https://example.com" in text
     assert validate_inspiration(aesthetic_root) == []
+
+
+def test_detect_generic_phrases() -> None:
+    hits = detect_generic_phrases("A clean and modern card grid with bottom navigation")
+    assert "clean and modern" in hits
+    assert "card grid" in hits
+
+
+def test_research_distill(aesthetic_root: Path) -> None:
+    run_research(aesthetic_root, force=True, offline=True, max_queries=2)
+    result = run_distill(aesthetic_root, write=True)
+    assert result["overall"] in ("PASS", "WARN", "FAIL")
+    text = (aesthetic_root / "research" / "INSPIRATION.md").read_text(encoding="utf-8")
+    assert "## Differentiation thesis" in text
+    assert (aesthetic_root / "graphcraft-out" / "DISTILL_REPORT.md").is_file()
+
+
+def test_originality_evaluate_includes_score(aesthetic_root: Path) -> None:
+    run_research(aesthetic_root, force=True, offline=True, max_queries=2)
+    run_distill(aesthetic_root, write=True)
+    graph = build_design_graph(aesthetic_root)
+    result = run_evaluate(aesthetic_root, graph)
+    assert "originality" in result["scores"]
+    assert "originality" in result
+    assert result["originality"]["score"] >= 0.0

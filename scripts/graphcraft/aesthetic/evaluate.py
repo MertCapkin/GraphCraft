@@ -15,41 +15,13 @@ from .config_loader import (
     load_config,
     load_style_pack,
 )
+from .graph_utils import flatten_tokens, index_graph, load_tokens, screen_components
 from .contrast import contrast_ratio, passes_contrast
-
-
-def _index_graph(graph: dict[str, Any]) -> tuple[dict[str, dict], list[dict]]:
-    nodes = {n["id"]: n for n in graph.get("nodes") or [] if "id" in n}
-    return nodes, list(graph.get("edges") or [])
-
-
-def _load_tokens(root: Path) -> dict[str, Any]:
-    for name in ("tokens.json", "tokens.base.json"):
-        path = root / DESIGN_SYSTEM_DIR / name
-        if path.is_file():
-            return json.loads(path.read_text(encoding="utf-8"))
-    return {}
-
-
-def _flatten_tokens(obj: Any, prefix: str = "") -> dict[str, str]:
-    out: dict[str, str] = {}
-    if not isinstance(obj, dict):
-        return out
-    if "$value" in obj or "value" in obj:
-        val = obj.get("$value") or obj.get("value")
-        if isinstance(val, str) and val.startswith("#"):
-            out[prefix] = val
-        return out
-    for key, child in obj.items():
-        if key.startswith("$"):
-            continue
-        child_prefix = f"{prefix}.{key}" if prefix else key
-        out.update(_flatten_tokens(child, child_prefix))
-    return out
+from .originality import run_originality_evaluate
 
 
 def _screen_token_ids(graph: dict[str, Any], screen_id: str) -> list[str]:
-    _, edges = _index_graph(graph)
+    _, edges = index_graph(graph)
     ids: list[str] = []
     for e in edges:
         if e.get("source") == screen_id and e.get("type") == "uses_token":
@@ -59,12 +31,7 @@ def _screen_token_ids(graph: dict[str, Any], screen_id: str) -> list[str]:
 
 
 def _screen_components(graph: dict[str, Any], screen_id: str) -> list[str]:
-    _, edges = _index_graph(graph)
-    return [
-        str(e["target"])
-        for e in edges
-        if e.get("source") == screen_id and e.get("type") == "uses_component"
-    ]
+    return screen_components(graph, screen_id)
 
 
 def _check_contrast(
@@ -126,7 +93,7 @@ def _check_style_fit(
     screen_id: str,
     component_ids: list[str],
 ) -> tuple[list[str], list[str], float]:
-    nodes, edges = _index_graph(graph)
+    nodes, edges = index_graph(graph)
     warnings: list[str] = []
     passed: list[str] = []
     preferred = set(style_pack.get("components", {}).get("preferred") or [])
@@ -249,8 +216,8 @@ def run_evaluate(
     contrast_min = float((aesthetic.get("hard_floors") or {}).get("contrast_min", 4.5))
     priority = str(aesthetic.get("priority", "balanced"))
 
-    token_map = _flatten_tokens(_load_tokens(root))
-    nodes, _ = _index_graph(graph)
+    token_map = flatten_tokens(load_tokens(root))
+    nodes, _ = index_graph(graph)
     screens = [
         n
         for n in nodes.values()
@@ -301,6 +268,10 @@ def run_evaluate(
         all_warnings.extend(harmony["warnings"])
     all_passed.extend(harmony["passed"])
 
+    originality = run_originality_evaluate(root, graph)
+    all_warnings.extend(originality.get("warnings") or [])
+    all_passed.extend(originality.get("passed") or [])
+
     def _avg(values: list[float]) -> float:
         return sum(values) / len(values) if values else 0.0
 
@@ -310,6 +281,7 @@ def run_evaluate(
         "touch_target": round(_avg(touch_scores), 3),
         "priority_alignment": round(_avg(priority_scores), 3),
         "harmony": 1.0 if harmony["overall"] == "PASS" else 0.0,
+        "originality": originality.get("score", 0.0),
     }
 
     overall = _overall_from_scores(
@@ -319,6 +291,10 @@ def run_evaluate(
         scores["touch_target"],
         harmony["overall"] == "PASS",
     )
+    if originality.get("overall") == "FAIL":
+        overall = "FAIL"
+    elif originality.get("overall") == "WARN" and overall == "PASS":
+        overall = "WARN"
 
     return {
         "overall": overall,
@@ -329,6 +305,7 @@ def run_evaluate(
         "warnings": all_warnings,
         "passed": all_passed,
         "screens_evaluated": [s["id"] for s in screens],
+        "originality": originality,
     }
 
 

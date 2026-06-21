@@ -59,6 +59,28 @@
 
 ---
 
+## Differentiation thesis
+
+<!-- graphcraft-distill: FAIL -->
+
+> A distinct mobile app experience that avoids generic mobile UI templates; differentiation through intentional constraints, not trend copying.
+
+### We will NOT
+- Default card-grid dashboards without a signature layout
+- Stock bottom-nav shell with no brand-specific nav pattern
+- Trend-only warm-minimal palette without token customization
+
+### Generic phrases flagged
+- `card grid`
+- `bottom navigation`
+- `warm minimal`
+- `friendly warm`
+- `clear heading`
+- `scanability`
+
+**Distill:** FAIL (2026-06-21)
+
+---
 ## Accessibility floors
 
 - Contrast minimum: 4.5:1 (WCAG AA body text)

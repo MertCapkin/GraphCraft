@@ -1,5 +1,11 @@
 # GraphCraft changelog
 
+## v2.3.0 — Originality engine (2026-06-21)
+
+- **`graphcraft aesthetic research distill`** — anti-slop filter, differentiation thesis in INSPIRATION.md
+- **`originality` score** in `aesthetic evaluate` (token, layout, reference, signature, distill)
+- **Design audit** blocks on originality FAIL; `originality_min` / `originality_warn` config floors
+
 ## v2.2.0 — Aesthetic web research automation (2026-06-21)
 
 - **`graphcraft aesthetic research run`** — query builder, DuckDuckGo search, pattern synthesis → `INSPIRATION.md`

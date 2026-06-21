@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "MertCapkin_GraphCraft"
-version = "2.2.0"
+version = "2.3.0"
 description = "Mobile game/app design layer on GraphStack — design graph, style packs, aesthetic engine"
 readme = "README.md"
 license = { text = "MIT" }

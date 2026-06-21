@@ -40,8 +40,14 @@ def run_design_audit(root: Path) -> dict[str, Any]:
 
     aesthetic = run_evaluate(root, graph)
     results["checks"]["aesthetic_evaluate"] = aesthetic["overall"]
+    originality = aesthetic.get("originality") or {}
+    results["checks"]["originality"] = originality.get("overall", "WARN")
     if aesthetic["overall"] == "FAIL":
         results["issues"].extend(aesthetic.get("warnings") or [])
+    if originality.get("overall") == "FAIL":
+        results["issues"].extend(
+            [w for w in (originality.get("warnings") or []) if w.startswith("FAIL")]
+        )
 
     config = load_config(root)
     stack = str(config.get("active_stack", "react-native"))

@@ -37,6 +37,10 @@ aesthetic:
   max_style_directions: 3
   hard_floors:
     contrast_min: 4.5
+    originality_min: 0.45
+    originality_warn: 0.65
+  originality:
+    require_distill: true
 
 stitch:
   enabled: false

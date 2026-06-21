@@ -11,6 +11,12 @@
 
 ---
 
+## Signature element
+
+- One distinctive UI/brand detail this project must have (layout, nav, color accent, motion).
+
+---
+
 ## Research scope
 
 ### Queries (max 5)
@@ -48,5 +54,7 @@
 ## Acceptance
 
 - [ ] Research saved to `research/INSPIRATION.md`
+- [ ] `graphcraft aesthetic research distill` PASS or WARN
 - [ ] Style pack chosen in `graphcraft.config.yaml`
+- [ ] `graphcraft design evaluate` originality >= floor
 - [ ] Ready for Designer

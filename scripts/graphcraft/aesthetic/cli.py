@@ -6,9 +6,10 @@ import argparse
 import sys
 from pathlib import Path
 
-from ..constants import DESIGN_GRAPH_JSON
+from ..constants import DESIGN_GRAPH_JSON, RESEARCH_INSPIRATION
 from ..design_graph.query import load_graph
 from .evaluate import format_evaluate_summary, run_evaluate, write_aesthetic_report
+from .distill import format_distill_summary, run_distill
 from .research import (
     doctor_research,
     init_inspiration,
@@ -51,7 +52,7 @@ def run(argv: list[str]) -> int:
         if not rest or rest[0] in ("-h", "--help"):
             print(
                 "Usage: graphcraft aesthetic research "
-                "<init|validate|run|doctor> [root]"
+                "<init|validate|run|distill|doctor> [root]"
             )
             return 0
         action = rest[0]
@@ -107,7 +108,19 @@ def run(argv: list[str]) -> int:
                     print(f"  ISSUE: {i}")
                 return 1
             print("INSPIRATION validation: PASS")
+            print("Next: graphcraft aesthetic research distill .")
             return 0
+
+        if action == "distill":
+            try:
+                result = run_distill(root, write=True)
+            except FileNotFoundError as exc:
+                print(f"Distill failed: {exc}")
+                return 1
+            print(format_distill_summary(result))
+            print(f"  -> {root / RESEARCH_INSPIRATION}")
+            print(f"  -> {root / 'graphcraft-out' / 'DISTILL_REPORT.md'}")
+            return 0 if result["overall"] != "FAIL" else 1
 
         print(f"Unknown research action: {action}")
         return 1

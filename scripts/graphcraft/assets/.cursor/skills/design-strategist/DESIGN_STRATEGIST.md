@@ -16,6 +16,7 @@ You research, brainstorm, and select aesthetic direction before Designer works.
 ```powershell
 graphcraft aesthetic research doctor .
 graphcraft aesthetic research run . --force
+graphcraft aesthetic research distill .
 graphcraft aesthetic research validate .
 ```
 

@@ -1,32 +1,26 @@
-# Brief: GraphCraft v2.2 — Aesthetic web research automation
+# Brief: GraphCraft v2.3 — Originality Engine
 
 **Date:** 2026-06-21  
-**Architect:** Composer  
 **Status:** Complete
-**Task ID:** graphcraft-v9
+**Task ID:** graphcraft-v10
 
 ---
 
 ## Objective
 
-`graphcraft aesthetic research run` — auto-generate queries, fetch web results, synthesize patterns into `research/INSPIRATION.md`.
+Anti-slop **originality** layer: `research distill` + `originality` evaluate score + design-audit gate.
 
 ## Scope
 
-1. **Query builder** — from `graphcraft.config.yaml` (profile, stack, priority) + optional `AESTHETIC_BRIEF.md`
-2. **Web search** — DuckDuckGo HTML (stdlib urllib); `--offline` for tests/CI
-3. **Synthesis** — rule-based pattern buckets + style pack scoring
-4. **CLI** — `research run`, `research doctor`; keep `init`/`validate`
-5. Tests with mocked/offline search; update DESIGN_STRATEGIST skill
-
-## Out of scope
-
-- LLM summarization in CLI (Cursor agent refines INSPIRATION)
-- Paid search APIs
+1. **`aesthetic/distill.py`** — generic phrase detection, overlap, thesis injection → INSPIRATION.md
+2. **`aesthetic/originality.py`** — token distance, layout diversity, reference independence, signature, distill quality
+3. **`evaluate`** — add `originality` score; FAIL/WARN thresholds
+4. **`design_audit`** — originality FAIL blocks audit
+5. AESTHETIC_BRIEF differentiation fields; tests; v2.3.0
 
 ## Acceptance
 
-- [ ] `research run --offline` writes valid INSPIRATION.md passing validate
-- [ ] `research doctor` checks network + config
-- [ ] `aesthetic.research_enabled: false` blocks run unless `--force`
+- [ ] `research distill` updates INSPIRATION with `## Differentiation thesis`
+- [ ] `evaluate` reports `originality` score
+- [ ] `design-audit` fails when originality < floor
 - [ ] Tests pass
