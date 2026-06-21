@@ -1,0 +1,18 @@
+id: style:minimal-dark
+label: Minimal Dark
+mood:
+  - calm
+  - premium
+  - readable
+priority: balanced
+tokens:
+  extends: design-system/tokens.json
+harmony:
+  contrast_min: 4.5
+  max_accent_colors: 2
+components:
+  preferred:
+    - component:button-primary
+  discouraged: []
+assets:
+  icon_set: assets:icons-minimal

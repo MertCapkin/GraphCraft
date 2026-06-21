@@ -1,0 +1,20 @@
+id: component:button-primary
+label: Button Primary
+collection: buttons
+style_compatibility:
+  - style:minimal-dark
+uses_tokens:
+  - color.action.primary
+  - spacing.button.padding
+  - radius.default
+alternatives:
+  - component:button-secondary
+when_to_use: Primary CTA, max one per screen
+when_not_to_use: Secondary actions, destructive flows
+harmony_score_with:
+  component:card-elevated: 0.9
+states:
+  - default
+  - pressed
+  - disabled
+  - loading

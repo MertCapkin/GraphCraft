@@ -1,5 +1,24 @@
 <div align="center">
 
+# GraphCraft 🎨📱
+
+**Mobile game & app design layer on GraphStack.**  
+Design graph, style packs, aesthetic engine, Stitch import — wide mobile stack support.
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Works with Cursor](https://img.shields.io/badge/Works%20with-Cursor-blue)](https://cursor.sh)
+
+**→ Full GraphCraft docs: [README_GRAPHCRAFT.md](README_GRAPHCRAFT.md)**
+
+</div>
+
+> This repository ships **GraphCraft v0.1** (mobile design layer) **and** bundles **GraphStack v4.7** (orchestration core).  
+> GraphCraft depends on GraphStack; install with: `pip install "MertCapkin_GraphCraft[graphstack]"` or `graphcraft init . -y --install-deps`
+
+---
+
+<div align="center">
+
 # GraphStack 🧠⚡
 
 **Graph-first, automatically orchestrated AI development workflow.**  

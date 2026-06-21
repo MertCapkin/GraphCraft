@@ -1,0 +1,47 @@
+# GraphCraft configuration
+# Docs: README_GRAPHCRAFT.md
+
+profile: mobile-app          # mobile-app | mobile-game
+design_source: native        # native | stitch | hybrid
+
+stacks:
+  mobile_app:
+    - react-native
+    - expo
+    - flutter
+    - swiftui
+    - jetpack-compose
+    - kotlin-multiplatform
+    - ionic
+    - capacitor
+  mobile_game:
+    - unity-ugui
+    - unity-ui-toolkit
+    - godot
+    - unreal-umg
+    - defold
+    - cocos
+
+active_stack: react-native    # pick one from lists above
+
+design:
+  style: style:minimal-dark
+  token_file: design-system/tokens.json
+  touch_target_min: 44
+  safe_area: true
+
+aesthetic:
+  priority: balanced           # marketing | usability | balanced
+  research_enabled: true
+  max_style_directions: 3
+  hard_floors:
+    contrast_min: 4.5
+
+stitch:
+  enabled: false
+  project_id: ""
+  reference_mode: visual       # visual | code
+
+gates:
+  require_design_approval: true
+  require_visual_qa: true

@@ -1,0 +1,53 @@
+---
+description: GraphCraft mobile design layer — extends GraphStack with design graph, style packs, aesthetic engine
+globs:
+alwaysApply: true
+---
+
+# GraphCraft Rules (v0.1)
+
+GraphCraft extends GraphStack. Both rule sets are active in this project.
+
+## Activation
+
+On session start, also read (once):
+- `orchestrator/GRAPHCRAFT.md`
+- `graphcraft-out/DESIGN_REPORT.md` (if exists)
+- `graphcraft.config.yaml`
+- `handoff/AESTHETIC_BRIEF.md` (if design task active)
+
+## Graph layers
+
+| Layer | Query |
+|-------|-------|
+| Code | `python -m graphstack graph query "..."` |
+| Design | `python -m graphcraft design query "..."` |
+
+## Role extensions
+
+| Role | Skill |
+|------|-------|
+| Design Strategist | `.cursor/skills/design-strategist/DESIGN_STRATEGIST.md` |
+| Designer | `.cursor/skills/designer/DESIGNER.md` |
+| Stitch import | `.cursor/skills/stitch-import/STITCH_IMPORT.md` |
+| Visual Review | `.cursor/skills/visual-review/VISUAL_REVIEW.md` |
+| Mobile app | `.cursor/skills/mobile-app/MOBILE_APP.md` |
+| Mobile game | `.cursor/skills/mobile-game/MOBILE_GAME.md` |
+
+## Before UI code edits
+
+1. `python -m graphcraft design update .` if design files changed
+2. Confirm screen exists in design graph
+3. GraphStack builder role + task in doing/ still required
+
+## Profiles
+
+Check `graphcraft.config.yaml`:
+- `profile: mobile-app` → app stacks
+- `profile: mobile-game` → game meta-UI focus
+
+## Stitch mode
+
+When `design_source: stitch|hybrid`:
+- `.stitch/designs/*.png` = visual ground truth
+- Run `python -m graphcraft stitch import .` after Stitch export

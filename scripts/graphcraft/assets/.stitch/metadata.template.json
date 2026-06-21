@@ -1,0 +1,20 @@
+{
+  "project_id": "your-stitch-project-id",
+  "screens": {
+    "login": {
+      "id": "screen:login",
+      "title": "Login",
+      "png": "login.png",
+      "status": "imported"
+    },
+    "home": {
+      "id": "screen:home",
+      "title": "Home",
+      "png": "home.png",
+      "status": "imported"
+    }
+  },
+  "flows": [
+    { "from": "screen:login", "to": "screen:home", "trigger": "login_success" }
+  ]
+}

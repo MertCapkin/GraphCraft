@@ -1,0 +1,14 @@
+id: screen:login
+title: Login
+platform: mobile-app
+status: example
+components:
+  - component:button-primary
+tokens:
+  - spacing.screen.padding
+navigation:
+  success: screen:home
+  forgot_password: screen:forgot-password
+acceptance:
+  touch_target_min: 44
+  safe_area: true

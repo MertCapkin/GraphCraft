@@ -15,45 +15,6 @@
 
 ---
 
-## Review: GraphCraft v1 Mobile Platform Foundation — 2026-06-21 — APPROVED
-
-### Verdict: Approved
-
-**Criteria met:** All 7 acceptance criteria verified.
-**Side effects:** GraphStack tests still pass (121 total). No graphstack core modifications.
-**Tests:** 3 graphcraft tests + full suite green.
-
-**Notes for next cycle:**
-- UI lib per-stack implementation (RN, Unity, etc.)
-- Aesthetic web research automation
-- GraphCraft design gate hook chaining
-- PyPI publish to MertCapkin/GraphCraft
-
-**Handoff:** Ready for QA.
-
----
-
-## QA Report: GraphCraft v1 — 2026-06-21
-
-### Overall: PASS
-
-| Criterion | Result | Notes |
-|-----------|--------|-------|
-| graphcraft CLI | PASS | v0.1.0 |
-| design update | PASS | 17 nodes, 12 edges |
-| design validate | PASS | |
-| design harmony | PASS | |
-| doctor | PASS | |
-| pytest graphcraft | PASS | 3/3 |
-| README/docs | PASS | README_GRAPHCRAFT.md + README banner |
-
-**Integration:** graphcraft init delegates to graphstack init; overlay installs without overwriting handoff.
-
-### Recommendation
-Ship (commit/push deferred per user preference)
-
----
-
 <!-- Real cycle output is appended below, newest first. -->
 
 <!--

@@ -1,0 +1,27 @@
+{
+  "color": {
+    "action": {
+      "primary": { "$value": "#6366F1", "$type": "color" },
+      "secondary": { "$value": "#8B5CF6", "$type": "color" }
+    },
+    "bg": {
+      "default": { "$value": "#0F172A", "$type": "color" },
+      "elevated": { "$value": "#1E293B", "$type": "color" }
+    },
+    "text": {
+      "primary": { "$value": "#F8FAFC", "$type": "color" },
+      "muted": { "$value": "#94A3B8", "$type": "color" }
+    }
+  },
+  "spacing": {
+    "screen": {
+      "padding": { "$value": "16px", "$type": "dimension" }
+    },
+    "button": {
+      "padding": { "$value": "12px", "$type": "dimension" }
+    }
+  },
+  "radius": {
+    "default": { "$value": "8px", "$type": "dimension" }
+  }
+}

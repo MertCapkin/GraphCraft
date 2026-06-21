@@ -3,40 +3,37 @@ requires = ["setuptools>=61", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "MertCapkin_GraphStack"
-version = "4.7.1"
-description = "Graph-first AI development workflow — board, gate, graph queries, one-shot init"
-readme = "README.md"
+name = "MertCapkin_GraphCraft"
+version = "0.1.0"
+description = "Mobile game/app design layer on GraphStack — design graph, style packs, aesthetic engine"
+readme = "README_GRAPHCRAFT.md"
 license = { text = "MIT" }
 requires-python = ">=3.8"
-authors = [{ name = "GraphStack contributors" }]
-keywords = ["graphstack", "cursor", "graphify", "ai", "workflow", "agent"]
+authors = [{ name = "GraphCraft contributors" }]
+keywords = ["graphcraft", "graphstack", "mobile", "ui", "design-system", "cursor", "ai"]
 classifiers = [
     "Development Status :: 4 - Beta",
     "Environment :: Console",
     "Intended Audience :: Developers",
     "License :: OSI Approved :: MIT License",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.8",
-    "Programming Language :: Python :: 3.9",
-    "Programming Language :: Python :: 3.10",
-    "Programming Language :: Python :: 3.11",
-    "Programming Language :: Python :: 3.12",
     "Topic :: Software Development :: Build Tools",
 ]
-dependencies = []
+dependencies = ["pyyaml>=6"]
 
 [project.optional-dependencies]
+graphstack = ["MertCapkin_GraphStack[graphify]>=4.7,<5"]
 graphify = ["graphifyy>=0.7,<0.9"]
+dev = ["pytest>=7"]
+full = ["MertCapkin_GraphCraft[graphstack,graphify,dev]"]
 
 [project.urls]
-Homepage = "https://github.com/MertCapkin/GraphStack"
-Repository = "https://github.com/MertCapkin/GraphStack"
-Documentation = "https://github.com/MertCapkin/GraphStack#readme"
-"Bug Tracker" = "https://github.com/MertCapkin/GraphStack/issues"
-PyPI = "https://pypi.org/project/MertCapkin_GraphStack/"
+Homepage = "https://github.com/MertCapkin/GraphCraft"
+Repository = "https://github.com/MertCapkin/GraphCraft"
+Documentation = "https://github.com/MertCapkin/GraphCraft#readme"
 
 [project.scripts]
+graphcraft = "graphcraft.cli:main"
 graphstack = "graphstack.cli:main"
 
 [tool.setuptools.packages.find]
@@ -45,8 +42,19 @@ where = ["scripts"]
 [tool.setuptools]
 include-package-data = true
 
-# setuptools ``assets/**/*`` skips dot-directories (``.cursor/``) — list explicitly.
 [tool.setuptools.package-data]
+graphcraft = [
+    "assets/.cursor/rules/graphcraft.mdc",
+    "assets/.cursor/commands/graphcraft.md",
+    "assets/.cursor/skills/designer/DESIGNER.md",
+    "assets/.cursor/skills/design-strategist/DESIGN_STRATEGIST.md",
+    "assets/.cursor/skills/stitch-import/STITCH_IMPORT.md",
+    "assets/.cursor/skills/visual-review/VISUAL_REVIEW.md",
+    "assets/.cursor/skills/mobile-app/MOBILE_APP.md",
+    "assets/.cursor/skills/mobile-game/MOBILE_GAME.md",
+    "assets/.graphcraft-assets-version",
+    "assets/**/*",
+]
 graphstack = [
     "assets/.cursor/rules/graphstack.mdc",
     "assets/.cursor/commands/graphstack.md",
@@ -62,5 +70,5 @@ graphstack = [
 ]
 
 [tool.pytest.ini_options]
-testpaths = ["scripts/graphstack/tests"]
+testpaths = ["scripts/graphstack/tests", "scripts/graphcraft/tests"]
 pythonpath = ["scripts"]
