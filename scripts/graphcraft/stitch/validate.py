@@ -9,14 +9,21 @@ from typing import Any
 from ..constants import STITCH_DIR
 
 
+def validate_stitch_export(export_dir: Path) -> list[str]:
+    """Validate a Stitch export directory (pre-copy layout)."""
+    return _validate_stitch_tree(export_dir.resolve())
+
+
 def validate_stitch_dir(root: Path) -> list[str]:
     root = root.resolve()
     stitch = root / STITCH_DIR
-    issues: list[str] = []
-
     if not stitch.is_dir():
-        issues.append(f"Missing {STITCH_DIR}/ directory")
-        return issues
+        return [f"Missing {STITCH_DIR}/ directory"]
+    return _validate_stitch_tree(stitch)
+
+
+def _validate_stitch_tree(stitch: Path) -> list[str]:
+    issues: list[str] = []
 
     meta_path = stitch / "metadata.json"
     if not meta_path.is_file():

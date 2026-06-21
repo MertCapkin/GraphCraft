@@ -6,26 +6,54 @@ Import Google Stitch prototypes into GraphCraft design graph.
 
 `graphcraft.config.yaml` → `design_source: stitch|hybrid`
 
-## Manual steps
+## One-command pull (recommended)
+
+Uses official `@google/stitch-sdk` via Node (`npx`).
+
+1. Get a Stitch API key from Google Stitch / AI Studio
+2. Set environment variable:
+
+```powershell
+$env:STITCH_API_KEY = "your-key"
+```
+
+3. Set Stitch project id in `graphcraft.config.yaml`:
+
+```yaml
+stitch:
+  enabled: true
+  project_id: "4044680601076201931"   # numeric Stitch project id
+```
+
+4. Preflight:
+
+```powershell
+graphcraft stitch doctor .
+```
+
+5. Pull + import into design graph:
+
+```powershell
+graphcraft stitch pull . --force
+```
+
+Options: `--project-id`, `--html`, `--no-import`, `--skip-doctor`
+
+OAuth alternative: `STITCH_ACCESS_TOKEN` + `GOOGLE_CLOUD_PROJECT` (no API key).
+
+## Manual export workflow
 
 1. Export from Stitch: DESIGN.md + screens → `.stitch/designs/` (PNG/HTML)
-2. Copy/fill `.stitch/metadata.json` from `metadata.template.json`
-3. `graphcraft stitch validate .`
-4. `graphcraft stitch import .`
-5. `graphcraft stitch report`
-6. Curator approves screens in design specs
+2. `graphcraft stitch fetch --export-dir /path/to/export`
+3. `graphcraft stitch import .`
 
-## MCP workflow (recommended)
+## MCP workflow (Cursor agent)
 
-1. Set `stitch.project_id` in `graphcraft.config.yaml` (Google Cloud project)
-2. `graphcraft stitch mcp install` → merges `.mcp.json` for `@keeponfirst/kof-stitch-mcp`
-3. `graphcraft stitch mcp doctor` — verify npx + GOOGLE_CLOUD_PROJECT
-4. Authenticate: `gcloud auth application-default login`
-5. In Cursor: use Stitch MCP tools to fetch/export designs
-6. `graphcraft stitch fetch --export-dir /path/to/export` → copies into `.stitch/`
-7. `graphcraft stitch import .`
+1. `graphcraft stitch mcp install` → `.mcp.json` for `@keeponfirst/kof-stitch-mcp`
+2. `graphcraft stitch mcp doctor`
+3. In Cursor: use Stitch MCP tools, then `graphcraft stitch fetch` or `pull`
 
-Print-only config: `graphcraft stitch mcp print`
+Print-only MCP config: `graphcraft stitch mcp print`
 
 ## Rules
 

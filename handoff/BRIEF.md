@@ -1,36 +1,32 @@
-# Brief: GraphCraft v0.7 — Design Cycle + Gate Hooks
+# Brief: GraphCraft v2.1 — Stitch pull (official SDK)
 
 **Date:** 2026-06-21  
-**Architect:** Composer (Architect role)  
+**Architect:** Composer  
 **Status:** Complete
-**Task ID:** graphcraft-v6
+**Task ID:** graphcraft-v8
 
 ---
 
 ## Objective
 
-Mechanical **design phase** commands and **design gate** for UI implementation paths — overlay only, GraphStack core untouched.
-
----
+`graphcraft stitch pull` — one command to fetch screens from Stitch API into `.stitch/`, then import into design graph.
 
 ## Scope
 
-1. **`handoff/DESIGN_STATE.json`** — design phase machine (`design-strategist` → `designer` → `design-audit` → `ready` → `visual-review`)
-2. **`graphcraft cycle`** commands:
-   - `enter-design-strategist|designer|design-audit|visual-review <task-id>`
-   - `enter-builder <task-id>` — design gate then delegate to `graphstack cycle enter-builder`
-   - `status` — role + design phase
-   - Delegate `start|enter-reviewer|enter-qa|enter-ship|close` to graphstack
-3. **`graphcraft gate`** — `check`, `hook cursor`; blocks `packages/ui-core/` edits until design `ready`
-4. **`scripts/gate-hook.ps1`** — GraphCraft projects call `graphcraft gate hook` (chains graphstack)
-5. **`design-audit`** runs validate + harmony + evaluate + ui validate (active stack)
-6. Tests + docs update
+1. Node helper `pull_export.mjs` using `@google/stitch-sdk` (via `npx -p`)
+2. Python `pull.py` — auth doctor, subprocess orchestration, `fetch_export`, optional import
+3. CLI: `graphcraft stitch pull [root] [--project-id] [--force] [--no-import]`
+4. CLI: `graphcraft stitch doctor` — pull auth + MCP readiness
+5. Tests with mocked subprocess; update STITCH_IMPORT skill + CHANGELOG
 
----
+## Out of scope
+
+- Replacing kof-stitch-mcp for Cursor MCP workflow
+- Automatic flow/navigation inference from Stitch
 
 ## Acceptance
 
-- [ ] `cycle enter-design-audit` sets DESIGN_BRIEF Ready for Builder on PASS
-- [ ] `cycle enter-builder` blocked until design ready (when gate on)
-- [ ] `gate check` denies ui-core edit when phase != ready
-- [ ] GraphStack `scripts/graphstack/` unchanged
+- [ ] `stitch doctor` reports missing `STITCH_API_KEY` clearly
+- [ ] `stitch pull` with mock export produces valid `.stitch/` + design graph ingest
+- [ ] Existing `stitch fetch` unchanged
+- [ ] Tests pass

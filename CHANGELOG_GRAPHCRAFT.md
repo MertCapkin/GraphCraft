@@ -1,5 +1,12 @@
 # GraphCraft changelog
 
+## v2.1.0 — Stitch pull via official SDK (2026-06-21)
+
+- **`graphcraft stitch pull`** — fetch screens from Stitch API into `.stitch/` + design graph import
+- Node helper `pull_export.mjs` via `npx -p @google/stitch-sdk`
+- Auth: `STITCH_API_KEY` (recommended) or OAuth env vars
+- **`graphcraft stitch doctor`** — combined pull + MCP readiness
+
 ## v2.0.0 — Design intelligence milestone (2026-06-21)
 
 Major release bundling design graph bridge, aesthetic engine, multi-stack UI lib,

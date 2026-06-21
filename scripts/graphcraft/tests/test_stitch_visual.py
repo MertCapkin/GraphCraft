@@ -11,6 +11,7 @@ import pytest
 from graphcraft.design_graph.builder import build_design_graph, update_design_graph
 from graphcraft.stitch.fetch import fetch_export
 from graphcraft.stitch.mcp import build_mcp_config, doctor_mcp, install_mcp_config
+from graphcraft.stitch.pull import doctor_pull, run_pull
 from graphcraft.stitch.validate import validate_stitch_dir
 from graphcraft.visual.png_utils import pixel_similarity, png_dimensions
 from graphcraft.visual.review import run_visual_review
@@ -113,3 +114,65 @@ def test_visual_review_warn_without_candidates(stitch_project: Path) -> None:
     result = run_visual_review(stitch_project)
     assert result["overall"] in ("WARN", "FAIL")
     assert result["screens"] or result["warnings"]
+
+
+def test_doctor_pull_missing_api_key(tmp_path: Path, monkeypatch) -> None:
+    monkeypatch.delenv("STITCH_API_KEY", raising=False)
+    monkeypatch.delenv("STITCH_ACCESS_TOKEN", raising=False)
+    (tmp_path / "graphcraft.config.yaml").write_text(
+        "stitch:\n  project_id: proj-1\n", encoding="utf-8"
+    )
+    issues = doctor_pull(tmp_path)
+    assert any("STITCH_API_KEY" in i for i in issues)
+
+
+def test_doctor_pull_with_api_key(tmp_path: Path, monkeypatch) -> None:
+    monkeypatch.setenv("STITCH_API_KEY", "test-key")
+    (tmp_path / "graphcraft.config.yaml").write_text(
+        "stitch:\n  project_id: proj-1\n", encoding="utf-8"
+    )
+    issues = doctor_pull(tmp_path)
+    assert not any("STITCH_API_KEY" in i for i in issues)
+
+
+def test_stitch_pull_mocked(
+    tmp_path: Path, stitch_export: Path, monkeypatch
+) -> None:
+    project = tmp_path / "project"
+    project.mkdir()
+    (project / "graphcraft.config.yaml").write_text(
+        "stitch:\n  project_id: test-proj\n", encoding="utf-8"
+    )
+    monkeypatch.setenv("STITCH_API_KEY", "test-key")
+
+    def fake_run(cmd, **kwargs):
+        out_dir = None
+        for i, part in enumerate(cmd):
+            if part == "--out" and i + 1 < len(cmd):
+                out_dir = Path(cmd[i + 1])
+                break
+        assert out_dir is not None
+        import shutil
+
+        shutil.copytree(stitch_export, out_dir, dirs_exist_ok=True)
+        summary = '{"ok": true, "project_id": "test-proj", "screens": 1}'
+        class Result:
+            returncode = 0
+            stdout = summary + "\n"
+            stderr = ""
+
+        return Result()
+
+    monkeypatch.setattr("graphcraft.stitch.pull.subprocess.run", fake_run)
+    code = run_pull(project, skip_doctor=True)
+    assert code == 0
+    assert (project / ".stitch" / "metadata.json").is_file()
+    assert (project / ".stitch" / "designs" / "login.png").is_file()
+
+
+def test_stitch_pull_fails_without_project_id(tmp_path: Path, monkeypatch) -> None:
+    monkeypatch.setenv("STITCH_API_KEY", "test-key")
+    project = tmp_path / "project"
+    project.mkdir()
+    code = run_pull(project, skip_doctor=True)
+    assert code == 1

@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "MertCapkin_GraphCraft"
-version = "2.0.0"
+version = "2.1.0"
 description = "Mobile game/app design layer on GraphStack — design graph, style packs, aesthetic engine"
 readme = "README.md"
 license = { text = "MIT" }
@@ -46,6 +46,7 @@ include-package-data = true
 
 [tool.setuptools.package-data]
 graphcraft = [
+    "stitch/pull_export.mjs",
     "assets/.cursor/rules/graphcraft.mdc",
     "assets/.cursor/commands/graphcraft.md",
     "assets/.cursor/skills/designer/DESIGNER.md",

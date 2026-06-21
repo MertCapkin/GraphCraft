@@ -135,7 +135,8 @@ Full detail: [docs/FLOW.md](docs/FLOW.md) · [orchestrator/GRAPHCRAFT.md](orches
 | `graphcraft design evaluate` | GraphCraft | Aesthetic rubric (contrast, touch targets) |
 | `graphcraft design bridge` | GraphCraft | Design ↔ code bridge map |
 | `graphcraft stitch import .` | GraphCraft | Import Stitch prototype |
-| `graphcraft stitch mcp install` | GraphCraft | Stitch MCP for Cursor |
+| `graphcraft stitch pull .` | GraphCraft | Pull from Stitch API (official SDK) |
+| `graphcraft stitch doctor` | GraphCraft | Stitch pull + MCP readiness |
 | `graphcraft visual review` | GraphCraft | PNG reference vs implementation |
 | `graphcraft ui validate all` | GraphCraft | Validate UI lib vs design tokens |
 | `graphcraft cycle status` | GraphCraft | Design phase + GraphStack role |
