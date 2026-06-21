@@ -1,13 +1,24 @@
 # GraphCraft slash command
 
-Read `orchestrator/GRAPHCRAFT.md` and `orchestrator/ORCHESTRATOR.md`.
+You are in a **GraphCraft** project. GraphStack is the **dependency** (cycle/gate).
 
-GraphCraft = mobile game/app design layer on GraphStack.
+## Read first (parallel)
 
-Quick commands:
-- `python -m graphcraft design update .`
-- `python -m graphcraft doctor .`
-- `python -m graphstack cycle start <id> "<title>"`
+- `orchestrator/GRAPHCRAFT.md` — design lifecycle (primary)
+- `orchestrator/ORCHESTRATOR.md` — GraphStack cycle (dependency, unchanged)
+- `graphcraft.config.yaml`
+- `docs/FLOW.md` — who runs first
 
-Profiles: mobile-app | mobile-game
-Design sources: native | stitch | hybrid
+## Greet
+
+`GraphCraft ready.` — not GraphStack ready.
+
+## Quick commands
+
+```bash
+graphcraft doctor .
+graphcraft design update .
+python -m graphstack cycle start <id> "<title>"
+```
+
+UI tasks: Architect → Design Strategist → Designer → Design Audit → Builder → Visual Review → Reviewer → QA → Ship

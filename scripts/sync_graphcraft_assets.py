@@ -1,4 +1,8 @@
-"""Sync repo-root GraphCraft assets into scripts/graphcraft/assets for PyPI wheels."""
+"""Sync repo-root GraphCraft overlay assets into scripts/graphcraft/assets for PyPI wheels.
+
+IMPORTANT: GraphStack files are NOT copied. GraphStack comes from the
+MertCapkin_GraphStack dependency via graphstack init.
+"""
 
 from __future__ import annotations
 
@@ -8,30 +12,43 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 ASSETS = ROOT / "scripts" / "graphcraft" / "assets"
 
+# GraphCraft-only directories (no graphstack skills, no full handoff state)
 COPY_DIRS = (
-    ".cursor/rules",
-    ".cursor/commands",
     ".cursor/skills/designer",
     ".cursor/skills/design-strategist",
     ".cursor/skills/stitch-import",
     ".cursor/skills/visual-review",
     ".cursor/skills/mobile-app",
     ".cursor/skills/mobile-game",
-    "orchestrator",
+    "design-system/components",
+    "design/screens",
+    "packs/styles/minimal-dark",
     "packs/mobile-app",
     "packs/mobile-game",
     "packs/stitch",
-    "packs/styles/minimal-dark",
     "packages/ui-core",
     "packages/assets",
-    "design-system",
-    "design/screens",
-    "handoff",
     ".stitch",
 )
 
 COPY_FILES = (
-    "graphcraft.config.yaml",
+    (".cursor/rules/graphcraft.mdc", ".cursor/rules/graphcraft.mdc"),
+    (".cursor/commands/graphcraft.md", ".cursor/commands/graphcraft.md"),
+    ("orchestrator/GRAPHCRAFT.md", "orchestrator/GRAPHCRAFT.md"),
+    ("graphcraft.config.yaml", "graphcraft.config.yaml"),
+    ("design-system/tokens.base.json", "design-system/tokens.base.json"),
+    ("design-system/tokens.json", "design-system/tokens.json"),
+    ("design-system/components/button.example.yaml", "design-system/components/button.example.yaml"),
+    ("design/screens/login.example.yaml", "design/screens/login.example.yaml"),
+    ("handoff/AESTHETIC_BRIEF.md", "handoff/AESTHETIC_BRIEF.md"),
+    ("handoff/DESIGN_BRIEF.md", "handoff/DESIGN_BRIEF.md"),
+    (".stitch/metadata.template.json", ".stitch/metadata.template.json"),
+    ("packs/mobile-app/STACKS.md", "packs/mobile-app/STACKS.md"),
+    ("packs/mobile-game/STACKS.md", "packs/mobile-game/STACKS.md"),
+    ("packs/stitch/README.md", "packs/stitch/README.md"),
+    ("packs/styles/minimal-dark/style.yaml", "packs/styles/minimal-dark/style.yaml"),
+    ("packages/ui-core/README.md", "packages/ui-core/README.md"),
+    ("packages/assets/README.md", "packages/assets/README.md"),
 )
 
 
@@ -45,19 +62,17 @@ def sync() -> int:
         dst = ASSETS / rel
         if src.is_dir():
             shutil.copytree(src, dst)
-        elif src.is_file():
-            dst.parent.mkdir(parents=True, exist_ok=True)
-            shutil.copy2(src, dst)
 
-    for rel in COPY_FILES:
-        src = ROOT / rel
+    for src_rel, dst_rel in COPY_FILES:
+        src = ROOT / src_rel
+        dst = ASSETS / dst_rel
         if src.is_file():
-            dst = ASSETS / rel
             dst.parent.mkdir(parents=True, exist_ok=True)
             shutil.copy2(src, dst)
 
-    (ASSETS / ".graphcraft-assets-version").write_text("0.1.0\n", encoding="utf-8")
-    print(f"Synced GraphCraft assets -> {ASSETS}")
+    (ASSETS / ".graphcraft-assets-version").write_text("0.1.1\n", encoding="utf-8")
+    print(f"Synced GraphCraft overlay assets -> {ASSETS}")
+    print("  (GraphStack files excluded - installed via dependency)")
     return 0
 
 

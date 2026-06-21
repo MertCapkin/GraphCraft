@@ -1,90 +1,86 @@
 # GRAPHCRAFT Orchestrator Extension
 
-GraphCraft extends GraphStack with **design-first mobile production**. Load this after `orchestrator/ORCHESTRATOR.md`.
+**GraphCraft overlay on GraphStack (dependency).**  
+GraphStack's `orchestrator/ORCHESTRATOR.md` is **not modified** — read it for cycle/gate mechanics.  
+This file extends the lifecycle for **mobile game/app design**.
 
----
-
-## When GraphCraft Is Active
-
-If `.graphcraft-framework` exists or `graphcraft.config.yaml` is present → apply GraphCraft lifecycle extensions.
+Load order: `TOKEN_OPTIMIZER.md` → `GRAPHCRAFT.md` (this file) → `ORCHESTRATOR.md`
 
 Announce: `[GRAPHCRAFT]` when entering design phases.
 
 ---
 
-## Extended Lifecycle
+## Primary greeting (overrides GraphStack step 8)
 
 ```
-ARCHITECT          → BRIEF.md (functional)
-DESIGN STRATEGIST  → AESTHETIC_BRIEF.md + research/INSPIRATION.md
-DESIGNER/CURATOR   → design/, design-system/, optional .stitch/
-DESIGN AUDIT       → design validate + harmony + DESIGN_BRIEF Ready for Builder
-BUILDER            → uses design graph + UI/asset packages
-VISUAL REVIEW      → PNG reference vs implementation
-REVIEWER → QA → SHIP   (GraphStack unchanged)
+GraphCraft ready.
+Profile: … | Design graph: … | Code graph: … | Board: …
 ```
-
-Mechanical commands (GraphCraft):
-
-```bash
-python -m graphcraft design update .
-python -m graphcraft design validate
-python -m graphcraft design harmony
-python -m graphcraft stitch import .    # when design_source: stitch|hybrid
-python -m graphcraft doctor .
-```
-
-State roles (handoff/STATE.json): `design-strategist`, `designer`, `design-audit`, `visual-review`
 
 ---
 
-## Design Graph First
+## Extended Lifecycle (UI/mobile tasks)
 
-Before UI implementation, query design graph:
+```
+ARCHITECT          → BRIEF.md (functional)              [GraphStack]
+DESIGN STRATEGIST  → AESTHETIC_BRIEF.md                 [GraphCraft]
+DESIGNER/CURATOR   → design/, design-system/, .stitch/  [GraphCraft]
+DESIGN AUDIT       → validate + harmony → DESIGN_BRIEF  [GraphCraft]
+BUILDER            → design graph + UI packages         [GraphStack + GraphCraft context]
+VISUAL REVIEW      → PNG reference vs code              [GraphCraft]
+REVIEWER → QA → SHIP                                     [GraphStack unchanged]
+```
+
+Non-UI tasks: skip GraphCraft phases → GraphStack only.
+
+---
+
+## Mechanical commands
+
+```bash
+# GraphCraft
+python -m graphcraft design update .
+python -m graphcraft design validate
+python -m graphcraft design harmony
+python -m graphcraft stitch import .
+python -m graphcraft doctor .
+
+# GraphStack (dependency — unchanged)
+python -m graphstack cycle start <id> "<title>"
+python -m graphstack cycle enter-builder <id>
+python -m graphstack cycle enter-reviewer <id>
+python -m graphstack cycle enter-qa <id>
+python -m graphstack cycle enter-ship <id>
+python -m graphstack cycle close <id>
+```
+
+---
+
+## Design Graph First (UI tasks)
 
 ```bash
 python -m graphcraft design query "screens"
 python -m graphcraft design query "tokens"
+python -m graphstack graph query "…"    # code structure
 ```
 
-Code structure: `python -m graphstack graph query "..."`
+---
+
+## Profiles & packs
+
+| Profile | Config | Pack doc |
+|---------|--------|----------|
+| mobile-app | `profile: mobile-app` | `packs/mobile-app/STACKS.md` |
+| mobile-game | `profile: mobile-game` | `packs/mobile-game/STACKS.md` |
+
+`graphcraft.config.yaml` → `design_source`, `active_stack`, `aesthetic`, `stitch`
 
 ---
 
-## Profiles
+## Integration principle
 
-| Profile | Pack | Stacks |
-|---------|------|--------|
-| mobile-app | packs/mobile-app/ | RN, Flutter, SwiftUI, Compose… |
-| mobile-game | packs/mobile-game/ | Unity, Godot, Unreal… |
-
-Read `graphcraft.config.yaml` for `active_stack`.
-
----
-
-## Design Source Modes
-
-| Mode | Behavior |
-|------|----------|
-| native | Designer writes YAML specs |
-| stitch | Import `.stitch/`, Curator approves screens |
-| hybrid | Stitch reference + native overrides |
-
----
-
-## Gate Extensions (advisory v0.1)
-
-- Builder should not implement screens absent from design graph
-- `design_source: stitch` → prefer `.stitch/designs/*.png` as visual ground truth
-- Visual Review before Code Reviewer when `gates.require_visual_qa: true`
-
----
-
-## Token Discipline
-
-- DESIGN_REPORT.md — read once per session (like GRAPH_REPORT.md)
-- design graph query before opening design YAML files
-- research/INSPIRATION.md for aesthetic research corpus
+GraphCraft **never patches GraphStack**. Overlay files only.  
+See `docs/ARCHITECTURE.md` · `docs/FLOW.md` · `docs/GRAPHSTACK.md`
 
 ---
 

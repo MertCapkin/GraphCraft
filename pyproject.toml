@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "MertCapkin_GraphCraft"
 version = "0.1.0"
 description = "Mobile game/app design layer on GraphStack — design graph, style packs, aesthetic engine"
-readme = "README_GRAPHCRAFT.md"
+readme = "README.md"
 license = { text = "MIT" }
 requires-python = ">=3.8"
 authors = [{ name = "GraphCraft contributors" }]

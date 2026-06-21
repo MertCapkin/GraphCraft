@@ -62,9 +62,13 @@ def run(argv: list[str]) -> int:
         return 1
 
     print("")
-    print("Ready. Describe your mobile app/game in Cursor — GraphCraft rules load automatically.")
+    print("Ready — GraphCraft project initialized.")
+    print("  GraphStack (dependency): cycle, gate, code graph")
+    print("  GraphCraft (overlay):    design graph, style packs, mobile profiles")
+    print("")
     print("  graphcraft design update .")
     print("  python -m graphstack graph query \"...\"")
+    print("  Describe your mobile app/game in Cursor chat.")
     print("")
     return rc
 

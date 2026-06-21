@@ -1,29 +1,80 @@
 ---
-description: GraphCraft mobile design layer — extends GraphStack with design graph, style packs, aesthetic engine
+description: GraphCraft primary orchestrator overlay — mobile design layer on GraphStack (dependency). Loads WITH graphstack.mdc; overrides greeting and design routing only.
 globs:
 alwaysApply: true
 ---
 
-# GraphCraft Rules (v0.1)
+# GraphCraft Rules (v0.1) — Primary Orchestrator Overlay
 
-GraphCraft extends GraphStack. Both rule sets are active in this project.
+This project is **GraphCraft**. GraphStack is a **dependency** (orchestration only).  
+GraphStack rules (`graphstack.mdc`) remain active for cycle, gate, and token discipline.  
+**Do not skip GraphCraft design phases for UI/mobile tasks.**
 
-## Activation
+---
 
-On session start, also read (once):
-- `orchestrator/GRAPHCRAFT.md`
-- `graphcraft-out/DESIGN_REPORT.md` (if exists)
-- `graphcraft.config.yaml`
-- `handoff/AESTHETIC_BRIEF.md` (if design task active)
+## Activation (GraphCraft projects — run WITH GraphStack activation)
 
-## Graph layers
+After GraphStack reads `TOKEN_OPTIMIZER.md` and `GRAPH_REPORT.md`, also read (same session, once):
 
-| Layer | Query |
-|-------|-------|
-| Code | `python -m graphstack graph query "..."` |
-| Design | `python -m graphcraft design query "..."` |
+```
+- orchestrator/GRAPHCRAFT.md          ← design lifecycle (GraphCraft)
+- graphcraft-out/DESIGN_REPORT.md     ← if exists
+- graphcraft.config.yaml              ← profile, design_source, stack
+- handoff/AESTHETIC_BRIEF.md          ← if design task active
+- handoff/DESIGN_BRIEF.md             ← if design task active
+```
 
-## Role extensions
+Then greet with **GraphCraft format** (replaces GraphStack step-8 greeting):
+
+```
+GraphCraft ready.
+Profile: [mobile-app|mobile-game] | Stack: [active_stack] | Design: [native|stitch|hybrid]
+Design graph: [N nodes] | Code graph: [N nodes] | Board: [N todo / N doing / N done]
+[If doing/]: In progress: [task-id] — resume?
+What are we building?
+```
+
+---
+
+## First-turn routing (GraphCraft override)
+
+| User intent | Action |
+|-------------|--------|
+| Greeting only | GraphCraft greet → wait |
+| Task with **UI, screens, design, mobile UX, Stitch, style** | GraphCraft greet → GraphStack `cycle start` + ARCHITECT → **then Design Strategist** (do not jump to Builder) |
+| Task **without UI** (API, scripts, docs) | GraphStack flow only — skip design phases |
+
+**Embedded goal ≠ build now.** Architect writes BRIEF first (GraphStack contract unchanged).
+
+---
+
+## Design phases (GraphCraft — required for UI tasks)
+
+After Architect BRIEF, before Builder:
+
+1. **Design Strategist** → `handoff/AESTHETIC_BRIEF.md` + `research/INSPIRATION.md`
+2. **Designer** → `design/`, `design-system/`, run `python -m graphcraft design update .`
+3. **Design Audit** → `design validate` + `design harmony` → `DESIGN_BRIEF.md` **Ready for Builder**
+4. GraphStack **`cycle enter-builder`** (only after design ready)
+
+After Builder, before Code Reviewer:
+
+5. **Visual Review** → `.cursor/skills/visual-review/VISUAL_REVIEW.md`
+
+Announce: `[GRAPHCRAFT]` when entering design phases. Announce GraphStack roles as usual.
+
+---
+
+## Graph queries
+
+| Question type | Command |
+|---------------|---------|
+| Code structure | `python -m graphstack graph query "…"` |
+| Design (screens, tokens, style) | `python -m graphcraft design query "…"` |
+
+---
+
+## Role skills (GraphCraft)
 
 | Role | Skill |
 |------|-------|
@@ -34,20 +85,22 @@ On session start, also read (once):
 | Mobile app | `.cursor/skills/mobile-app/MOBILE_APP.md` |
 | Mobile game | `.cursor/skills/mobile-game/MOBILE_GAME.md` |
 
+GraphStack role skills (Architect, Builder, etc.) unchanged.
+
+---
+
 ## Before UI code edits
 
 1. `python -m graphcraft design update .` if design files changed
-2. Confirm screen exists in design graph
-3. GraphStack builder role + task in doing/ still required
+2. Screen must exist in design graph
+3. GraphStack: `role=builder` + task in `doing/` (gate unchanged)
 
-## Profiles
+---
 
-Check `graphcraft.config.yaml`:
-- `profile: mobile-app` → app stacks
-- `profile: mobile-game` → game meta-UI focus
+## Forbidden
 
-## Stitch mode
+- Editing `orchestrator/ORCHESTRATOR.md` or `graphstack.mdc` for GraphCraft features
+- Skipping design phases when task touches UI/mobile screens
+- Greeting with "GraphStack ready" in GraphCraft projects
 
-When `design_source: stitch|hybrid`:
-- `.stitch/designs/*.png` = visual ground truth
-- Run `python -m graphcraft stitch import .` after Stitch export
+See `docs/FLOW.md` and `docs/ARCHITECTURE.md`.
