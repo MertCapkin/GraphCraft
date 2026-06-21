@@ -1,48 +1,74 @@
-# PyPI — MertCapkin_GraphStack
+# PyPI — MertCapkin_GraphCraft
 
-**Live:** https://pypi.org/project/MertCapkin_GraphStack/
+**Target:** https://pypi.org/project/MertCapkin_GraphCraft/
 
 | | |
 |---|---|
-| **Install** | `pip install MertCapkin_GraphStack[graphify]` |
-| **CLI** | `graphstack` (command name unchanged) |
-| **Why not `graphstack`?** | Name already taken on PyPI |
+| **Install** | `pip install "MertCapkin_GraphCraft[graphstack]"` |
+| **CLI** | `graphcraft` |
+| **Dependency** | `MertCapkin_GraphStack[graphify]` (PyPI, separate package) |
 
-## User install (recommended)
+GraphCraft wheel ships **overlay only** (design layer). GraphStack is **not** bundled — it installs from PyPI via the `[graphstack]` extra.
 
-Inside **your project folder** (Cursor terminal):
+---
+
+## User install
+
+Inside **your mobile app/game project folder**:
 
 ```powershell
-# Windows — one command
-irm https://raw.githubusercontent.com/MertCapkin/GraphStack/master/scripts/bootstrap.ps1 | iex
+pip install "MertCapkin_GraphCraft[graphstack]"
+graphcraft init . -y --install-deps
+graphcraft design update .
+graphcraft doctor .
 ```
 
-```bash
-# macOS / Linux — one command
-curl -fsSL https://raw.githubusercontent.com/MertCapkin/GraphStack/master/scripts/bootstrap.sh | bash
+Until PyPI is live, install from GitHub:
+
+```powershell
+pip install "MertCapkin_GraphCraft[graphstack] @ git+https://github.com/MertCapkin/GraphCraft.git@v0.1.1"
 ```
 
-```bash
-# Or PyPI directly
-pip install "MertCapkin_GraphStack[graphify]"
-graphstack init . -y --install-deps
-```
-
-Then open Cursor chat and describe your task — GraphStack rules load automatically.
+GraphStack dependency still resolves from PyPI automatically.
 
 ---
 
 ## Maintainer: publish a new version
 
-1. Bump `version` in `pyproject.toml` and `scripts/graphstack/__init__.py`.
-2. `python scripts/sync_assets.py`
-3. Commit, tag (`vX.Y.Z`), push tag.
-4. **Publish GitHub Release** from the tag → triggers `.github/workflows/publish.yml`.
+1. Bump `version` in `pyproject.toml` and `scripts/graphcraft/__init__.py`.
+2. Update `CHANGELOG_GRAPHCRAFT.md`.
+3. `python scripts/sync_graphcraft_assets.py`
+4. Commit, tag (`vX.Y.Z`), push tag.
+5. **Publish GitHub Release** from the tag → triggers `.github/workflows/publish.yml`.
 
-Trusted publisher (already configured):
+### PyPI trusted publisher (one-time setup)
 
-- Project: `MertCapkin_GraphStack`
-- Owner: `MertCapkin` · Repository: `GraphStack`
-- Workflow: `publish.yml` · Environment: `pypi`
+On [pypi.org](https://pypi.org):
 
-GitHub environment required: https://github.com/MertCapkin/GraphStack/settings/environments → `pypi`
+1. Create project `MertCapkin_GraphCraft`
+2. Publishing → Add trusted publisher:
+   - Owner: `MertCapkin`
+   - Repository: `GraphCraft`
+   - Workflow: `publish.yml`
+   - Environment: `pypi`
+
+On GitHub → Settings → Environments → `pypi` (optional protection rules).
+
+### Local dry run
+
+```bash
+python scripts/sync_graphcraft_assets.py
+python -m pip install build
+python -m build
+python -m twine check dist/*
+```
+
+Do **not** upload manually if trusted publishing is configured — use GitHub Release.
+
+---
+
+## GraphStack dependency (separate)
+
+GraphStack remains on PyPI as `MertCapkin_GraphStack`: https://pypi.org/project/MertCapkin_GraphStack/
+
+See [GRAPHSTACK.md](GRAPHSTACK.md).

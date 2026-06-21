@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "MertCapkin_GraphCraft"
-version = "0.1.0"
+version = "0.1.1"
 description = "Mobile game/app design layer on GraphStack — design graph, style packs, aesthetic engine"
 readme = "README.md"
 license = { text = "MIT" }
@@ -34,10 +34,11 @@ Documentation = "https://github.com/MertCapkin/GraphCraft#readme"
 
 [project.scripts]
 graphcraft = "graphcraft.cli:main"
-graphstack = "graphstack.cli:main"
 
 [tool.setuptools.packages.find]
 where = ["scripts"]
+include = ["graphcraft*"]
+exclude = ["graphcraft.tests*"]
 
 [tool.setuptools]
 include-package-data = true
@@ -54,19 +55,6 @@ graphcraft = [
     "assets/.cursor/skills/mobile-game/MOBILE_GAME.md",
     "assets/.graphcraft-assets-version",
     "assets/**/*",
-]
-graphstack = [
-    "assets/.cursor/rules/graphstack.mdc",
-    "assets/.cursor/commands/graphstack.md",
-    "assets/.cursor/skills/architect/ARCHITECT.md",
-    "assets/.cursor/skills/builder/BUILDER.md",
-    "assets/.cursor/skills/reviewer/REVIEWER.md",
-    "assets/.cursor/skills/qa/QA.md",
-    "assets/.cursor/skills/ship/SHIP.md",
-    "assets/.cursor/skills/bootstrapper/BOOTSTRAPPER.md",
-    "assets/.graphstack-assets-version",
-    "assets/**/*",
-    "compact/**/*",
 ]
 
 [tool.pytest.ini_options]

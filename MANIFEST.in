@@ -1,2 +1,2 @@
-# Dot-directories under assets/ must be grafted for sdist + wheel discovery.
-graft scripts/graphstack/assets
+# GraphCraft overlay assets for PyPI wheels (GraphStack comes from dependency).
+graft scripts/graphcraft/assets

@@ -22,20 +22,23 @@ GraphCraft   → design layer      (graphcraft-out/, design-system/)
 
 ---
 
-## Quick Start (GitHub / PyPI)
+## Quick Start
 
 **Requirements:** Python 3.8+, Git, [Cursor](https://cursor.sh)
 
-### 1. Install GraphCraft (+ GraphStack + Graphify)
+### Install (PyPI — after v0.1.1 release)
 
 ```powershell
 pip install "MertCapkin_GraphCraft[graphstack]"
 ```
 
-This installs:
-- `graphcraft` CLI — design layer
-- `graphstack` CLI — orchestration (dependency)
-- `graphify` — code graph engine (via GraphStack extra)
+### Install (GitHub — works now)
+
+```powershell
+pip install "MertCapkin_GraphCraft[graphstack] @ git+https://github.com/MertCapkin/GraphCraft.git@v0.1.1"
+```
+
+GraphStack + Graphify install automatically via the `[graphstack]` extra from PyPI.
 
 ### 2. Initialize your project
 
@@ -193,6 +196,7 @@ your-project/
 | [docs/FLOW.md](docs/FLOW.md) | Orchestrator overlay — who runs first |
 | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | Layer model — why GraphStack is untouched |
 | [CHANGELOG_GRAPHCRAFT.md](CHANGELOG_GRAPHCRAFT.md) | GraphCraft releases |
+| [docs/PYPI.md](docs/PYPI.md) | PyPI publish + install |
 
 ---
 
